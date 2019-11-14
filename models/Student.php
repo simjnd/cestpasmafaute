@@ -1,5 +1,5 @@
 <?php
-namesapce CPMF\Models;
+namespace CPMF\Models;
 class Student extends User
 {
 	private $frame;
