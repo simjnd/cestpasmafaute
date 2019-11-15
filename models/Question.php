@@ -1,7 +1,8 @@
 <?php
 namespace CPMF\Models;
 
-abstract class Question {
+abstract class Question 
+{
 	private $id;
 	private $sentence;
 

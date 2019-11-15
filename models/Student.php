@@ -1,5 +1,6 @@
 <?php
 namespace CPMF\Models;
+
 class Student extends User
 {
 	private $frame;
@@ -9,7 +10,7 @@ class Student extends User
 	private $lastConnection;
 	private $timeSpent;
 
-	public function __construct($frame, $accessories, $portrait, $finishedExercises, $lastConnection, $timeSpent)
+	public function __construct(Frame $frame, array $accessories, Portrait $portrait, array $finishedExercises, string $lastConnection, int $timeSpent)
 	{
 		$this->frame = $frame;
 		$this->accessories = $accessories;
@@ -39,7 +40,7 @@ class Student extends User
 		return $this->finishedExercises;
 	}
 
-	public function getLastConnection(): String
+	public function getLastConnection(): string
 	{
 		return $this->lastConnection;
 	}

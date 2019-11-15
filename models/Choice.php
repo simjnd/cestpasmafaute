@@ -1,24 +1,24 @@
 <?php
-	namespace CPMF\Models;
+namespace CPMF\Models;
 
-	class Choice
+class Choice
+{
+	private $id;
+	private $label;
+
+	public function __construct(int $id, string $label)
 	{
-		private $id;
-		private $label;
-
-		public __construct(int $id, string $label)
-		{
-			$this->id = $id;
-			$this->label = $label;
-		}
-
-		public getId(): int
-		{
-			return $this->id;
-		}
-
-		public getLabel(): string
-		{
-			return $this->label;
-		}
+		$this->id = $id;
+		$this->label = $label;
 	}
+
+	public function getId(): int
+	{
+		return $this->id;
+	}
+
+	public function getLabel(): string
+	{
+		return $this->label;
+	}
+}

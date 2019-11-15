@@ -1,42 +1,42 @@
 <?php
-	namespace CPMF\Models;
+namespace CPMF\Models;
 
-	class Step
+class Step
+{
+	private $id;
+	private $name;
+	private $lesson;
+	private $exercices;
+
+	public function __construct(int $id, string $name, string $lesson)
 	{
-		private $id;
-		private $name;
-		private $lesson;
-		private $exercices;
-
-		public __construct(int $id, string $name, string $lesson)
-		{
-			$this->id = $id;
-			$this->name = $name;
-			$this->lesson = $lesson;
-		}
-
-		public getId(): int
-		{
-			return $this->id;
-		}
-
-		public getName(): string
-		{
-			return $this->name;
-		}
-
-		public getLesson(): string
-		{
-			return $this->lesson;
-		}
-
-		public getExercices(): array
-		{
-			return $this->exercices;
-		}
-
-		public setExercices(array $exercices): void
-		{
-			$this->exercices = $exercices;
-		}
+		$this->id = $id;
+		$this->name = $name;
+		$this->lesson = $lesson;
 	}
+
+	public function getId(): int
+	{
+		return $this->id;
+	}
+
+	public function getName(): string
+	{
+		return $this->name;
+	}
+
+	public function getLesson(): string
+	{
+		return $this->lesson;
+	}
+
+	public function getExercices(): array
+	{
+		return $this->exercices;
+	}
+
+	public function setExercices(array $exercices): void
+	{
+		$this->exercices = $exercices;
+	}
+}

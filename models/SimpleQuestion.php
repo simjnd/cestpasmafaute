@@ -1,25 +1,25 @@
 <?php
-	namespace CPMF\Models;
+namespace CPMF\Models;
 
-	class SimpleQuestion extends Question
+class SimpleQuestion extends Question
+{
+	private $correctAnswer;
+	private $word;
+
+	public function __construct(int $id, string $sentence, string $correctAnswer, string $word)
 	{
-		private $correctAnswer;
-		private $word;
-
-		public __construct(int $id, string $sentence, string $correctAnswer, string $word)
-		{
-			parent::__construct($id,$sentence);
-			$this->correctAnswer = $correctAnswer;
-			$this->word = $word;
-		}
-
-		public getCorrectAnswer(): string
-		{
-			return $this->correctAnswer;
-		}
-
-		public getWord(): string
-		{
-			return $this->word;
-		}
+		parent::__construct($id, $sentence);
+		$this->correctAnswer = $correctAnswer;
+		$this->word = $word;
 	}
+
+	public function getCorrectAnswer(): string
+	{
+		return $this->correctAnswer;
+	}
+
+	public function getWord(): string
+	{
+		return $this->word;
+	}
+}

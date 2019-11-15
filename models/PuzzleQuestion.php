@@ -1,17 +1,22 @@
 <?php
-	namespace CPMF\Models;
+namespace CPMF\Models;
 
-	class PuzzleQuestion extends Question
+class PuzzleQuestion extends Question
+{
+	private $choices;
+
+	public function __construct(int $id, string $sentence)
 	{
-		private $choices;
-
-		public getChoices(): array
-		{
-			return $this->choices;
-		}
-
-		public setChoices(array $choices): void 
-		{
-			$this->choices = $choices;
-		}
+		parent::__construct($id, $sentence);
 	}
+
+	public function getChoices(): array
+	{
+		return $this->choices;
+	}
+
+	public function setChoices(array $choices): void 
+	{
+		$this->choices = $choices;
+	}
+}

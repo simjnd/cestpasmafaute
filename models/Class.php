@@ -1,7 +1,8 @@
 <?php
 namespace CPMF\Models;
 
-class Class {
+class Class 
+{
 	private $name;
 	private $students;
 	private $course;

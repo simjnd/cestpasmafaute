@@ -1,5 +1,6 @@
 <?php
 namespace CPMF\Models;
+
 class Difficulty
 {
 	private $id;

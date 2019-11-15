@@ -1,5 +1,6 @@
 <?php
 namespace CPMF\Models;
+
 class Teacher extends User 
 {
 	private $classes;
