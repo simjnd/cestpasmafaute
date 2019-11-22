@@ -1,5 +1,5 @@
 <?php
-namespace App\Router;
+namespace CPMF\Router;
 
 class Route
 {
@@ -56,7 +56,7 @@ class Route
 	{
 		if(is_string($this->callable)){
 			$params = explode('@', $this->callable);
-			$controller = 'App\\Controller\\'. $params[0] .'Controller';
+			$controller = 'CPMF\\Controller\\'. $params[0] .'Controller';
 			$controller = new $controller();
 			if (count($params) > 1) {
                 return call_user_func_array(array($controller, $params[1]), $this->matches);

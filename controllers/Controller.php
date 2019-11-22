@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace CPMF\Controller;
 
 abstract class Controller
 {	

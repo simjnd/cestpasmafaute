@@ -1,5 +1,5 @@
 <?php
-namespace App\Model;
+namespace CPMF\Models;
 
 use \PDO;
 

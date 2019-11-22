@@ -1,6 +1,6 @@
 <?php
-namespace App;
-use App\Router\Router;
+namespace CPMF;
+use CPMF\Router\Router;
 
 spl_autoload_register(function($name) {
 	$exploded = explode('\\', $name);
@@ -12,7 +12,7 @@ spl_autoload_register(function($name) {
 		case 'Controller':
 			$subdir = 'controllers/';
 			break;
-		case 'Model':
+		case 'Models':
 			$subdir = 'models/';
 			break;
 	}
@@ -24,13 +24,6 @@ Router::init();
 
 Router::setDefault('NotFound');
 
-Router::get('/', 'Main');
-
-Router::get('/items', 'Item@getItems');
-Router::get('/item/{id}', 'Item@getItem');
-
-Router::get('/@{user}', 'Profile');
-
-Router::view('/function', 'function');
+Router::view('/', 'hello');
 
 Router::run();

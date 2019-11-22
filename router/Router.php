@@ -1,5 +1,5 @@
 <?php
-namespace App\Router;
+namespace CPMF\Router;
 
 class Router
 {

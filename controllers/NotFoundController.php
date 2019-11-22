@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace CPMF\Controller;
 
 class NotFoundController extends Controller
 {
