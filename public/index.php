@@ -25,5 +25,8 @@ Router::init();
 Router::setDefault('NotFound');
 
 Router::view('/', 'hello');
+Router::view('/login', 'login');
+Router::post('/login', 'Login@postLogin');
+Router::get('/connected', 'Connected@connectedPage');
 
 Router::run();

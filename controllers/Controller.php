@@ -8,4 +8,9 @@ abstract class Controller
 		extract($data);
 		require '../views/'. $view. '.php';
 	}	
+
+	public function redirect(string $url): void
+	{
+		header('location: '.$url);
+	}
 }

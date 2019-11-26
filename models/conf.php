@@ -4,6 +4,6 @@
 
 $dbType = 'mysql';
 $dbHost = 'localhost';
-$dbName = 'objets';
-$dbUsername = 'voydstack';
-$dbPassword = 'V0ydst4cK$';
+$dbName = 'cestpasmafaute';
+$dbUsername = 'gasp';
+$dbPassword = 'gasp';

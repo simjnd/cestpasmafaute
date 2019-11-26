@@ -2,7 +2,7 @@
     
 namespace CPMF\Models;
     
-abstract class User
+abstract class User extends Model
 {
     private $email;
     private $password;
@@ -10,15 +10,18 @@ abstract class User
     private $lastName;
     private $id;
     
-    public function __construct(string $email, string $password, string $firstName, string $lastName, int $id)
+    public function __construct(array $data) 
     {
-        $this->email = $email;
-        $this->password = $password;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->id = $id;
+        parent::__construct($data);
     }
-    
+
+    protected function callFunction(string $methodName, string $value = ""): void
+    {
+        if(method_exists($this, $methodName)) {
+            $this->$methodName($value);
+        }   
+    }
+
     public function getEmail(): string
     {
         return $this->email;
@@ -42,5 +45,30 @@ abstract class User
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    public function setFirstName(string $firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    public function setLastName(string $lastName): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 }
