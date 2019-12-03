@@ -22,15 +22,15 @@ class Student extends User
         }   
     }
 
-	public function __construct(Frame $frame, array $accessories, Portrait $portrait, array $finishedExercises, string $lastConnection, int $timeSpent)
-	{
-		$this->frame = $frame;
-		$this->accessories = $accessories;
-		$this->portrait = $portrait;
-		$this->finishedExercises = $finishedExercises;
-		$this->lastConnection = $lastConnection;
-		$this->timeSpent = $timeSpent;
-	}
+	// public function __construct(Frame $frame, array $accessories, Portrait $portrait, array $finishedExercises, string $lastConnection, int $timeSpent)
+	// {
+	// 	$this->frame = $frame;
+	// 	$this->accessories = $accessories;
+	// 	$this->portrait = $portrait;
+	// 	$this->finishedExercises = $finishedExercises;
+	// 	$this->lastConnection = $lastConnection;
+	// 	$this->timeSpent = $timeSpent;
+	// }
 
 	public function getFrame(): Frame
 	{

@@ -4,11 +4,12 @@ namespace CPMF\Models;
     
 abstract class User extends Model
 {
+    private $idLogin;
     private $email;
     private $password;
     private $firstName;
     private $lastName;
-    private $id;
+    
     
     public function __construct(array $data) 
     {
@@ -67,8 +68,8 @@ abstract class User extends Model
         $this->lastName = $lastName;
     }
 
-    public function setId(int $id): void
+    public function setIdLogin(int $idLogin): void
     {
-        $this->id = $id;
+        $this->idLogin = $idLogin;
     }
 }
