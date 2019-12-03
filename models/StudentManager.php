@@ -83,34 +83,62 @@ class StudentManager extends Manager
 		));
 	}
 
-	public function getLastConnexion(int $idLogin): int
+	public function getLastConnection(int $idLogin): int
 	{
-		$req = $this->db->prepare('SELECT lastConnexion FROM Student WHERE idLogin = :idLogin');
+		$req = $this->db->prepare('SELECT lastConnection FROM Student WHERE idLogin = :idLogin');
 		$req->execute(array('idLogin' => $idLogin));
-		return intval($req->fetch()['lastConnexion']);
+		return intval($req->fetch()['lastConnection']);
 	}
 
-	public function setLastConnexion(int $idLogin): void
+	public function setLastConnection(int $idLogin): void
 	{
-		$req = $this->db->prepare('UPDATE Student SET lastConnexion = NOW() WHERE idLogin = :idLogin');
+		$req = $this->db->prepare('UPDATE Student SET lastConnection = NOW() WHERE idLogin = :idLogin');
 		$req->execute(array('idLogin' => $idLogin));
 	}
 
-	public function setTotalTimeConnexion(int $idLogin): void
+	public function setTotalTimeConnection(int $idLogin): void
 	{
 		$date = new DateTime();
-		$timeConnexion = $date->getTimestamp() - $this->getLastConnexion($idLogin);
-		$req = $this->db->prepare('UPDATE Student SET totalTimeConnexion = totalTimeConnexion + :timeConnexion WHERE idLogin = :idLogin');
+		$timeConnection = $date->getTimestamp() - $this->getLastConnection($idLogin);
+		$req = $this->db->prepare('UPDATE Student SET totalTimeConnection = totalTimeConnection + :timeConnection WHERE idLogin = :idLogin');
 		$req->execute(array(
-			'totalTimeConnexion' => $totalTimeConnexion,
+			'timeConnection' => $timeConnection,
 			'idLogin' => $idLogin
 		));
 	}
 
-	public function getPoints(int $idLogin): int
+	public function getTotalPoints(int $idLogin): int
 	{
-		$req = $this->db->prepare('SELECT SUM(points) AS nbTotalPoints FROM Student_Exercise WHERE idLogin = :idLogin GROUP BY idLogin');
+		$req = $this->db->prepare('SELECT SUM(points) AS totalPoints FROM Student_Exercise WHERE idLogin = :idLogin GROUP BY idLogin');
 		$req->execute(array('idLogin' => $idLogin));
-		return intval($req->fetch()['nbTotalPoints']);
+		return intval($req->fetch()['totalPoints']);
 	}
+	
+	public function getGlobalAverage(int $idLogin): float
+	{
+    	$req = $this->db->prepare('SELECT ROUND(AVG(pointsLastTry), 2) AS globalAverage FROM Student_Exercise WHERE idLogin = :idLogin GROUP BY idLogin');
+    	$req->execute(array('idLogin' => $idLogin));
+    	return $req->fetch()['globalAverage'];
+	}
+	
+	public function getStepAverage(int $idLogin, int $idStep): float
+	{
+    	$req = $this->db->prepare('SELECT ROUND(AVG(pointsLastTry), 2) AS stepAverage FROM Student_Exercise, Step_Exercise WHERE Step_Exercise.idExercise = Student_Exercise.idExercise AND idLogin = :idLogin AND idStep = :idStep');
+    	$req->execute(array(
+    	    'idLogin' => $idLogin,
+    	    'idStep' => $idStep
+        ));
+    	return $req->fetch()['stepAverage'];
+	}
+	
+	public function getPointsLastTry(int $idLogin, int $idExercise): int
+	{
+    	$req = $this->db->prepare('SELECT pointsLastTry FROM Student_Exercise WHERE idLogin = :idLogin AND idExercise = :idExercise');
+    	$req->execute(array(
+        	'idLogin' => $idLogin,
+        	'idExercise' => $idExercise
+    	));
+    	return intval($req->fetch()['pointsLastTry']);
+	}
+	
 }
