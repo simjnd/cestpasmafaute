@@ -48,30 +48,30 @@ abstract class DecorationManager extends Manager
 		return intval($req->fetch()[$id]);
 	}
 
-	public abstract setIdDecoration(int $idDecoration): void
+	/*public function setIdDecoration(int $idDecoration): void
 	{
 		$id = 'id' . $this->tableName;
 
-		$req = $this->db->prepare("SELECT pointsRequired FROM $this->tableName WHERE $id = :idDecoration");
+		$req = $this->db->prepare("UPDATE $this->tableName SET $id = :idDecoration");
 		$req->execute(['idDecoration' => $idDecoration]);
 		return intval($req->fetch()[$id]);
-	}
+	}*/
 
 	public function setLabelDecoration(string $label, int $idDecoration): void
 	{
 		$id = 'id' . $this->tableName;
 
-		$req = $this->db->prepare("UPDATE $this->tableName SET label = $label WHERE $id = $idDecoration");
-		$req->execute(['idDecoration' => $idDecoration]);
+		$req = $this->db->prepare("UPDATE $this->tableName SET label = :label WHERE $id = :idDecoration");
+		$req->execute(['idDecoration' => $idDecoration, 'label' => $label]);
 		return intval($req->fetch()[$id]);
 	}
 
-	public function setFilePathDecoration(string $path, int $idDecoration): void
+	public function setFilePathDecoration(string $filePath, int $idDecoration): void
 	{
 		$id = 'id' . $this->tableName;
 
-		$req = $this->db->prepare("UPDATE $this->tableName SET filePath = $path WHERE $id = $idDecoration");
-		$req->execute(['idDecoration' => $idDecoration]);
+		$req = $this->db->prepare("UPDATE $this->tableName SET filePath = :filePath WHERE $id = :idDecoration");
+		$req->execute(['idDecoration' => $idDecoration, 'filePath' => $filePath]);
 		return intval($req->fetch()[$id]);
 	}
 
@@ -79,8 +79,8 @@ abstract class DecorationManager extends Manager
 	{
 		$id = 'id' . $this->tableName;
 
-		$req = $this->db->prepare("UPDATE $this->tableName SET pointsRequired = $points WHERE $id = $idDecoration");
-		$req->execute(['idDecoration' => $idDecoration]);
+		$req = $this->db->prepare("UPDATE $this->tableName SET pointsRequired = :points WHERE $id = :idDecoration");
+		$req->execute(['idDecoration' => $idDecoration, 'points' => $points]);
 		return intval($req->fetch()[$id]);
 	}
 }
