@@ -8,12 +8,12 @@ class Decoration
 	private $findPath;
 	private $pointsRequired;
 
-	public function __construct(int $id, string $label, string $findPath, int $pointsRecquired)
+	public function __construct(int $id, string $label, string $findPath, int $pointsRequired)
 	{
 		$this->id = $id;
 		$this->label = $label;
 		$this->findPath = $findPath;
-		$this->pointsRecquired = $pointsRecquired;
+		$this->pointsRequired = $pointsRequired;
 	}
 
 	public function getId(): int
