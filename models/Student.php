@@ -10,6 +10,18 @@ class Student extends User
 	private $lastConnection;
 	private $timeSpent;
 
+	public function __construct(array $data) 
+    {
+        parent::__construct($data);
+    }
+
+    protected function callFunction(string $methodName, string $value = ""): void
+    {
+        if(method_exists($this, $methodName)) {
+            $this->$methodName($value);
+        }   
+    }
+
 	public function __construct(Frame $frame, array $accessories, Portrait $portrait, array $finishedExercises, string $lastConnection, int $timeSpent)
 	{
 		$this->frame = $frame;
