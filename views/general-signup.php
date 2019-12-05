@@ -12,8 +12,7 @@
 			<p>Erreur: <?= $error ?></p>
 		</p>
 		<?php } ?>
-		<a href="/signup">S'inscrire</a>
-		<form action="/login" method="post">
+		<form action="/signup" method="post">
 			<p>
 				<label for="firstName">Prénom: </label>
 				<input type="text" name="firstName">
