@@ -9,10 +9,13 @@ class StudentManager
         $loginQuery->execute(['idLogin' => $idLogin]);
 
         $loginData = $loginQuery->fetch();
+        $loginQuery->closeCursor();
 
         $studentQuery = Manager::getDatabase()->prepare('SELECT * FROM Student WHERE idLogin = :idLogin');
         $studentQuery->execute(['idLogin' => $idLogin]);
+        
         $studentData = $studentQuery->fetch();
+		$studentQuery->closeCursor();
 
         $studentData = array_merge($loginData, $studentData);
 
