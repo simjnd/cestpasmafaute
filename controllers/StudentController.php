@@ -22,9 +22,12 @@ class StudentController extends Controller
         $student = StudentManager::getById($_SESSION['idLogin']);
         //$class = ClassManager::getById($student->getIdClass());
         $class = NULL;
-        $frames = DecorationManager::unlockedFrame($student->getIdLogin());
-        $portraits = DecorationManager::unlockedPortrait($student->getIdLogin());
-        $accessories = DecorationManager::unlockedAccessory($student->getIdLogin());
+        // $frames = DecorationManager::unlockedFrame($student->getIdLogin());
+        // $portraits = DecorationManager::unlockedPortrait($student->getIdLogin());
+        // $accessories = DecorationManager::unlockedAccessory($student->getIdLogin());
+        $frames = NULL;
+        $portraits = NULL;
+        $accessories = NULL;
 
         parent::view('student-profile', ['student' => $student, 'class' => $class, 'frames' => $frames, 'protraits' => $portraits, 'accessories' => $accessories]);
     }
