@@ -1,16 +1,11 @@
 <?php
 namespace CPMF\Models;
 
-class UserManager extends Manager
+class UserManager
 {
-	public function __construct() 
+	public static function getUser(int $idLogin): User
 	{
-		parent::__construct();
-	}
-
-	public function getUser(int $idLogin): User
-	{
-		$userRequest = $this->db->prepare('select idLogin, email, password, firstName, lastName, type from Login where idLogin = :idLogin');
+		$userRequest = Manager::getDatabase()->prepare('select idLogin, email, password, firstName, lastName, type from Login where idLogin = :idLogin');
 		$userRequest->execute(['idLogin' => $idLogin]);
 		$userData = $userRequest->fetch();
 		if ($userData == 'S') 
@@ -24,53 +19,65 @@ class UserManager extends Manager
 		return NULL;
 	}
 
-
-	public function getEmailAddress(int $idLogin): string
+	public static function getEmailAddress(int $idLogin): string
 	{
-		$emailRequest = $this->db->prepare('select email from Login where idLogin = :idLogin');
+		$emailRequest = Manager::getDatabase()->prepare('select email from Login where idLogin = :idLogin');
 		$emailRequest->execute(['idLogin' => $idLogin]);
 		return $emailRequest->fetch()['email'];
 	}
 
-	public function getPassword(int $idLogin): string
+	public static function getPassword(int $idLogin): string
 	{
-		$passwordRequest = $this->db->prepare('select password from Login where idLogin = :idLogin');
+		$passwordRequest = Manager::getDatabase()->prepare('select password from Login where idLogin = :idLogin');
 		$passwordRequest->execute(['idLogin' => $idLogin]);
 		return $passwordRequest->fetch()['password'];
 	}
 
-	public function getFirstName(int $idLogin): string
+	public static function getFirstName(int $idLogin): string
 	{
-		$firstNameRequest = $this->db->prepare('select firstName from Login where idLogin = :idLogin');
+		$firstNameRequest = Manager::getDatabase()->prepare('select firstName from Login where idLogin = :idLogin');
 		$firstNameRequest->execute(['idLogin' => $idLogin]);
 		return $firstNameRequest->fetch()['firstName'];
 	}
 
-	public function getLastName(int $idLogin): string
+	public static function getLastName(int $idLogin): string
 	{
-		$lastNameRequest = $this->db->prepare('select lastName from Login where idLogin = :idLogin');
+		$lastNameRequest = Manager::getDatabase()->prepare('select lastName from Login where idLogin = :idLogin');
 		$lastNameRequest->execute(['idLogin' => $idLogin]);
 		return $lastNameRequest->fetch()['lastName'];
 	}
 
-	public function getType(int $idLogin): string
+	public static function getType(int $idLogin): string
 	{
-		$typeRequest = $this->db->prepare('select type from Login where idLogin = :idLogin');
+		$typeRequest = Manager::getDatabase()->prepare('select type from Login where idLogin = :idLogin');
 		$typeRequest->execute(['idLogin' => $idLogin]);
 		return $typeRequest->fetch()['type'];
 	}
 
-	public function userExists(string $email, string $password): int
+	public static function userExists(string $email, string $password): int
 	{
-		$hashRequest = $this->db->prepare('select idLogin, password from Login where email = :email');
+		$hashRequest = Manager::getDatabase()->prepare('select idLogin, password from Login where email = :email');
 		$hashRequest->execute(['email' => $email]);
 
-		if($hashRequest->rowCount() == 0) return -1;
+		if ($hashRequest->rowCount() == 0) return -1;
 
 		$hashedPassword = $hashRequest->fetch()['password'];
 
-		if(password_verify($password, $hashedPassword)) return intval($hashRequest->fetch()['idLogin']);
+		if (password_verify($password, $hashedPassword)) return intval($hashRequest->fetch()['idLogin']);
 
 		return -2;
+	}
+
+	public static function addStudent(array $informations): int
+	{
+		$addRequest = Manager::getDatabase()->prepare('insert into Login values(NULL, :email, :password, :firstName, :lastName, "S")');
+		if (!$addRequest) return -1;
+		$addRequest->execute([
+			'email' => $informations['email'],
+			'password' => password_hash($informations['password'], PASSWORD_DEFAULT),
+			'firstName' => $informations['firstName'],
+			'lastName' => $informations['lastName'];
+		]);
+		return $addRequest->lastInsertId;
 	}
 }

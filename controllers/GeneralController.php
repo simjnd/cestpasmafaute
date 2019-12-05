@@ -28,9 +28,7 @@ class GeneralController extends Controller
 
 	public function postSignin(): void
 	{
-		$userManager = new UserManager();
-		extract($_POST);
-		$id = $userManager->userExists($_POST['email'], $_POST['password']);
+		$id = UserManager::userExists($_POST['email'], $_POST['password']);
 
 		if($id == -1) {
 			parent::view('login', ['error' => 'Compte inexistant']);
@@ -40,12 +38,29 @@ class GeneralController extends Controller
 			session_start();
 			$_SESSION['connected'] = true;
 			$_SESSION['email'] = $_POST['email'];
-			parent::redirect('/connected');
+			parent::redirect('/');
 		}
 	}
 
 	public function postSignup(): void
 	{
-		parent::view('general-signup');	
+		// TODO: Check de la validation des informations
+
+		// firstName
+		// lastName
+		// email
+		// password
+
+		$informations = $_POST;
+		$resultCode = UserManager::addStudent($informations);
+		if($resultCode === -1) {
+			// ERROR
+			die('Erreur lors de l\'ajout');
+		} else {
+			session_start();
+			$_SESSION['idLogin'] = intval($resultCode);
+			$_SESSION['type'] = 'T';
+			parent::redirect('/');
+		}
 	}
 }

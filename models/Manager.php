@@ -2,13 +2,19 @@
 namespace CPMF\Models;
 use \PDO;
 
-abstract class Manager
+class Manager
 {
-	protected $db;
+	private $db;
 
-	public function __construct() 
+	private function __construct() {}
+
+	public static function getDatabase(): PDO
 	{
-        require '../conf.php';
-		$this->db = new PDO($dbType.':host='.$dbHost.';dbname='.$dbName, $dbUsername, $dbPassword);
+    	if (is_null($this->db)) {
+        	require 'conf.php';
+            $this->db = new PDO(DBTYPE.':host='.DBHOST.';dbname='.DBNAME, DBUSERNAME, DBPASSWORD);
+    	}
+    	
+    	return $this->db;
 	}
 }
