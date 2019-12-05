@@ -7,8 +7,6 @@ class GeneralController extends Controller
 {
 	public function homePage(): void
 	{
-		session_start();
-		
 		$type = $_SESSION['type'] ?? NULL;
 
 		if(isset($_SESSION['type'])) 
@@ -47,7 +45,6 @@ class GeneralController extends Controller
 		} elseif($id == -2) {
 			parent::view('general-signin', ['error' => 'Email / Mot de passe incorrect']);
 		} else {
-			session_start();
 			$_SESSION['connected'] = true;
 			$_SESSION['email'] = $_POST['email'];
 			parent::redirect('/');
@@ -71,7 +68,6 @@ class GeneralController extends Controller
 			// ERROR
 			die('Erreur lors de l\'ajout');
 		} else {
-			session_start();
 			$_SESSION['idLogin'] = $resultCode;
 			$_SESSION['type'] = 'S';
 			$_SESSION['validated'] = false;

@@ -23,6 +23,8 @@ spl_autoload_register(function($name) {
     require '../'. $subdir . end($exploded) .'.php';
 });
 
+session_start();
+
 Router::init();
 
 Router::setDefault('NotFound');
