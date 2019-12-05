@@ -1,6 +1,9 @@
 <?php
 namespace CPMF\Models;
 
+use \CPMF\Models\Entities\User;
+use \CPMF\Models\Entities\Student;
+
 class StudentManager
 {
     public static function getByID(int $idLogin): Student
@@ -11,7 +14,7 @@ class StudentManager
         $loginData = $loginQuery->fetch();
         $loginQuery->closeCursor();
 
-        $studentQuery = Manager::getDatabase()->prepare('SELECT * FROM Student WHERE idLogin = :idLogin');
+        $studentQuery = Manager::getDatabase()->prepare('select * from Student where idLogin = :idLogin');
         $studentQuery->execute(['idLogin' => $idLogin]);
         
         $studentData = $studentQuery->fetch();
