@@ -1,7 +1,9 @@
 <!doctype html>
 <html>
 	<head>	
-		<link rel="stylesheet" href="assets/css/styles.css" />
+		<title>C'est pas ma faute</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="assets/css/styles.css">
 	</head>
 	<body>
 		<h1>C'est pas ma faute.</h1>
