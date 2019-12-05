@@ -16,7 +16,7 @@
 
     <?php foreach ($steps as $step) { ?>
     <!-- Step's image -->
-    <a href="#"><?= $step->getName() ?></a>
+    <a href="step/<?= $step->getIdStep() ?>"><?= $step->getName() ?></a>
     <?php } ?>
     
     <?php foreach ($endlessModes as $endlessMode) { ?>

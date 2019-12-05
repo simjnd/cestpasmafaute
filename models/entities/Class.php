@@ -1,16 +1,33 @@
 <?php
 namespace CPMF\Models\Entities;
 
-class Class 
+class Class extends Model
 {
 	private $name;
 	private $students;
 	private $course;
 
-	public function __construct(string $name) 
-	{
-		$this->name = $name;
-	}
+	protected function callFunction(string $methodName, string $value = ""): void
+    {
+        if(method_exists($this, $methodName)) {
+            $this->$methodName($value);
+        }   
+    }
+    
+    private function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+    
+    private function setStudents(array $students): void
+    {
+        $this->students = $students;
+    }
+    
+    private function setCourse(Course $course): void
+    {
+        $this->course = $course;
+    }
 
 	public function getName(): string
 	{

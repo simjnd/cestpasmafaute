@@ -92,5 +92,26 @@ class DecorationManager
 		$req = Manager::getDatabase()->prepare("UPDATE $this->tableName SET pointsRequired = :points WHERE $id = :idDecoration");
 		$req->execute(['idDecoration' => $idDecoration, 'points' => $points]);
 	}
+
+	public function unlockedAccessory(int $studentID): Decoration
+	{
+		$req = Manager::getDatabase()->prepare('SELECT * FROM Accessory, Student WHERE Accessory.idAccessory = Student.idStudent AND Accessory.pointsRequired < :nbPoints');
+		$req->execute(['nbPoints' => StudentManager::getTotalPoints($studentID)]);
+		return new Accessory($req->fetch());
+	}
+
+	public function unlockedFrame(int $studentID): Decoration
+	{
+		$req = Manager::getDatabase()->prepare('SELECT * FROM Frame, Student WHERE Frame.idFrame = Student.idStudent AND Frame.pointsRequired < :nbPoints');
+		$req->execute(['nbPoints' => StudentManager::getTotalPoints($studentID)]);
+		return new Frame($req->fetch());
+	}
+
+	public function unlockedPortrait(int $studentID): Decoration
+	{
+		$req = Manager::getDatabase()->prepare('SELECT * FROM Portrait, Student WHERE Portrait.idPortrait = Student.idStudent AND Portrait.pointsRequired < :nbPoints');
+		$req->execute(['nbPoints' => StudentManager::getTotalPoints($studentID)]);
+		return new Portrait($req->fetch());
+	}
 }
 
