@@ -6,33 +6,33 @@ class DecorationManager
 
 	private $tableName;
 
-	public static function __construct(string $tabname)
+	public function __construct(string $tabname)
 	{
 		$this->tableName = $tabname;
 	}
 
-	public static function getAccessory(int $idAccessory): Decoration
+	public function getAccessory(int $idAccessory): Decoration
 	{
 		$req = Manager::getDatabase()->prepare("SELECT * FROM Accessory WHERE  $id = :idAccessory");
 		$req->execute(['idAccessory' => $idAccessory]);
 		return new Accessory($req->fetch());
 	}
 
-	public static function getFrame(int $idFrame): Decoration
+	public function getFrame(int $idFrame): Decoration
 	{
 		$req = Manager::getDatabase()->prepare("SELECT * FROM Frame WHERE  $id = :idFrame");
 		$req->execute(['idFrame' => $idFrame]);
 		return new Frame($req->fetch());
 	}
 
-	public static function getPortrait(int $idPortrait): Decoration
+	public function getPortrait(int $idPortrait): Decoration
 	{
 		$req = Manager::getDatabase()->prepare("SELECT * FROM Portrait WHERE  $id = :idPortrait");
 		$req->execute(['idPortrait' => $idPortrait]);
 		return new Portrait($req->fetch());
 	}
 
-	public static function getLabelDecoration(int $idDecoration): string
+	public function getLabelDecoration(int $idDecoration): string
 	{
 		$id = 'id' . $this->tableName;
 
@@ -41,7 +41,7 @@ class DecorationManager
 		return $req->fetch()['label'];
 
 	}
-	public static function getFilePathDecoration(int $idDecoration): string
+	public function getFilePathDecoration(int $idDecoration): string
 	{
 		$id = 'id' . $this->tableName;
 
@@ -51,7 +51,7 @@ class DecorationManager
 
 	}
 
-	public static function getPointsRequiredDecoration(int $idDecoration): int
+	public function getPointsRequiredDecoration(int $idDecoration): int
 	{
 		$id = 'id' . $this->tableName;
 
@@ -60,7 +60,7 @@ class DecorationManager
 		return intval($req->fetch()['pointsRequired']);
 	}
 
-	public static function setIdDecoration(int $idDecoration): void
+	public function setIdDecoration(int $idDecoration): void
 	{
 		$id = 'id' . $this->tableName;
 
@@ -68,7 +68,7 @@ class DecorationManager
 		$req->execute(['idDecoration' => $idDecoration]);
 	}
 
-	public static function setLabelDecoration(string $label, int $idDecoration): void
+	public function setLabelDecoration(string $label, int $idDecoration): void
 	{
 		$id = 'id' . $this->tableName;
 
@@ -77,7 +77,7 @@ class DecorationManager
 
 	}
 
-	public static function setFilePathDecoration(string $filePath, int $idDecoration): void
+	public function setFilePathDecoration(string $filePath, int $idDecoration): void
 	{
 		$id = 'id' . $this->tableName;
 
@@ -85,7 +85,7 @@ class DecorationManager
 		$req->execute(['idDecoration' => $idDecoration, 'filePath' => $filePath]);
 	}
 
-	public static function setPointsRequiredDecoration(int $points, int $idDecoration): void
+	public function setPointsRequiredDecoration(int $points, int $idDecoration): void
 	{
 		$id = 'id' . $this->tableName;
 
