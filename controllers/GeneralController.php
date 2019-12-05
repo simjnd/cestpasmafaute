@@ -7,22 +7,32 @@ class GeneralController extends Controller
 {
 	public function homePage(): void
 	{
-		$user = "student";
-		$validated = false;
-		if ($user === "student") 
+		session_start();
+		
+		$type = $_SESSION['type'] ?? NULL;
+
+		if(isset($_SESSION['type'])) 
 		{
-			if ($validated) 
+			if($_SESSION['type'] === 'S') // Cas d'un étudiant
 			{
-				parent::view('student-home');
+				$validated = $_SESSION['validated'] ?? NULL;
+				if ($validated) // Étudiant validé
+				{
+					parent::view('student-home');
+				}
+				else // Étudiant en attente de validation
+				{
+					parent::view('student-home-validation');	
+				}		
 			}
-			else
+			elseif ($_SESSION['type'] === 'T') // Cas d'un professeur
 			{
-				parent::view('student-home-validation');	
-			}		
-		}
+				parent::view('teacher-home');
+			}
+		} 
 		else
 		{
-			parent::view($user . '-home');
+			parent::view('general-home');
 		}
 	}
 
@@ -60,6 +70,7 @@ class GeneralController extends Controller
 			session_start();
 			$_SESSION['idLogin'] = intval($resultCode);
 			$_SESSION['type'] = 'T';
+			$_SESSION['validated'] = false;
 			parent::redirect('/');
 		}
 	}
