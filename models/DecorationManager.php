@@ -11,13 +11,25 @@ class DecorationManager
 		$this->tableName = $tabname;
 	}
 
-	public static function getIdDecoration(int $idDecoration): int
+	public static function getAccessory(int $idAccessory): Decoration
 	{
-		$id = 'id' . $this->tableName;
+		$req = Manager::getDatabase()->prepare("SELECT * FROM Accessory WHERE  $id = :idAccessory");
+		$req->execute(['idAccessory' => $idAccessory]);
+		return new Accessory($req->fetch());
+	}
 
-		$req = Manager::getDatabase()->prepare("SELECT $id FROM $this->tableName WHERE  $id = :idDecoration");
-		$req->execute(['idDecoration' => $idDecoration]);
-		return $req->fetch()[$id];
+	public static function getFrame(int $idFrame): Decoration
+	{
+		$req = Manager::getDatabase()->prepare("SELECT * FROM Frame WHERE  $id = :idFrame");
+		$req->execute(['idFrame' => $idFrame]);
+		return new Frame($req->fetch());
+	}
+
+	public static function getPortrait(int $idPortrait): Decoration
+	{
+		$req = Manager::getDatabase()->prepare("SELECT * FROM Portrait WHERE  $id = :idPortrait");
+		$req->execute(['idPortrait' => $idPortrait]);
+		return new Portrait($req->fetch());
 	}
 
 	public static function getLabelDecoration(int $idDecoration): string
