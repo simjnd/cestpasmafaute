@@ -7,7 +7,7 @@ class GeneralController extends Controller
 {
 	public function homePage(): void
 	{
-		$user = "general";
+		$user = "student";
 		$validated = false;
 		if ($user === "student") 
 		{
