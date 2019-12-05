@@ -5,14 +5,14 @@ class Decoration
 {
 	private $id;
 	private $label;
-	private $findPath;
+	private $filePath;
 	private $pointsRequired;
 
-	public function __construct(int $id, string $label, string $findPath, int $pointsRequired)
+	public function __construct(int $id, string $label, string $filePath, int $pointsRequired)
 	{
 		$this->id = $id;
 		$this->label = $label;
-		$this->findPath = $findPath;
+		$this->filePath = $filePath;
 		$this->pointsRequired = $pointsRequired;
 	}
 
@@ -26,9 +26,9 @@ class Decoration
 		return $this->label;
 	}
 
-	public function getFindPath(): string
+	public function getFilePath(): string
 	{
-		return $this->findPath;
+		return $this->filePath;
 	}
 
 	public function getPointsRequired(): int

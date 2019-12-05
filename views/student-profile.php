@@ -10,14 +10,32 @@
 	<img src="<?= $avatar ?>">
 	<img src="<?= $avatar ?>">
 
-	<p>Nom : <?= $Name ?></p>
-	<p>Prénom : <?= $firstName ?></p>
-	<p>email : <?= $email ?></p>
-	<p>Classe : <?= $class ?></p>
+	<p>Nom : <?= $student->getLastName() ?></p>
+	<p>Prénom : <?= $student->getFirstName() ?></p>
+	<p>email : <?= $student->getEmail() ?></p>
+	<p>Classe : <?= $class->getName() ?></p>
 
-	<?php foreach ($posssibilities as $possibility): ?>
-		<div>Resultat</div>
-	<?php endforeach ?>
+	<a href="#">Cadres</a>
+	<a href="#">Portraits</a>
+	<a href="#">Accessoires</a>
+
+	<div id="Frame">
+		<?php foreach ($frames as $frame) { ?>
+			<img src="<?= $frame->getFilePath() ?>">
+		<?php } ?>
+	</div>
+
+	<div id="Portrait">
+		<?php foreach ($frames as $frame) { ?>
+			<img src="<?= $frame->getFilePath() ?>">
+		<?php } ?>
+	</div>
+
+	<div id="Accessory">
+		<?php foreach ($frames as $frame) { ?>
+			<img src="<?= $frame->getFilePath() ?>">
+		<?php } ?>
+	</div>
 
 	<a href="#">Modifier mot de passe</a>
 </body>
