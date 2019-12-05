@@ -65,7 +65,7 @@ class UserManager
 		$hashedPassword = $result['password'];
 
 		if (password_verify($password, $hashedPassword)) {
-			$id = $result['idLogin'];
+			$idLogin = $result['idLogin'];
 			$type = $result['type'];
 			return 0;
 		} 
