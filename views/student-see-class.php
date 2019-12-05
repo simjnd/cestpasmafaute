@@ -17,16 +17,16 @@
 		</header>
 
 		
-		<?php foreach $student = $class->getStudents(); { ?>
+		<?php foreach($class->getStudents() as $student){ ?>
 			<p>
-				Logo = <?php $student->getIcon(); ?>
+				<?php $student->getIcon(); ?>
 			</p>
 			<p>
-				Nom = <?php $student->getLastName(); ?>
+				<?php $student->getLastName(); ?>
 			</p>
 				
 			<p>
-				Prenom = <?php $student->getFirstName(); ?>
+				<?php $student->getFirstName(); ?>
 			</p>
 			
 		<?php } ?>
