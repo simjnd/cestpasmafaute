@@ -31,9 +31,9 @@ class GeneralController extends Controller
 		$id = UserManager::userExists($_POST['email'], $_POST['password']);
 
 		if($id == -1) {
-			parent::view('login', ['error' => 'Compte inexistant']);
+			parent::view('general-signin', ['error' => 'Compte inexistant']);
 		} elseif($id == -2) {
-			parent::view('login', ['error' => 'Email / Mot de passe incorrect']);
+			parent::view('general-signin', ['error' => 'Email / Mot de passe incorrect']);
 		} else {
 			session_start();
 			$_SESSION['connected'] = true;

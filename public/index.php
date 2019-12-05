@@ -35,7 +35,7 @@ Router::get('/', 'General@homePage');
 
 // SIGNIN
 
-Router::view('/signin', 'general-connection');
+Router::view('/signin', 'general-signin');
 Router::post('/signin', 'General@postSignin');
 
 // SIGNUP

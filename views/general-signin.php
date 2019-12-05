@@ -14,7 +14,7 @@
 		<?php } ?>
 		<a href="/signup">S'inscrire</a>
 		<h2>J'ai un compte</h2>
-		<form action="/login" method="post">
+		<form action="/signin" method="post">
 			<p>
 				<label for="email">Adresse E-mail: </label>
 				<input type="email" name="email">

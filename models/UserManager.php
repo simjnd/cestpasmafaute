@@ -78,6 +78,6 @@ class UserManager
 			'firstName' => $informations['firstName'],
 			'lastName' => $informations['lastName']
 		]);
-		return $addRequest->lastInsertId();
+		return Manager::getDatabase()->lastInsertId();
 	}
 }
