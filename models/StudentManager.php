@@ -25,13 +25,6 @@ class StudentManager
         return $students;
         
     }
-    
-	public static function getIdClass(int $idLogin): int
-	{
-		$query = Manager::getDatabase()->prepare('SELECT idClass FROM Student WHERE idLogin = :idLogin');
-		$query->execute(array('idLogin' => $idLogin));
-		return $query->fetch()['idClass'];
-	}
 
 	public static function setIdClass(int $idLogin, int $idClass): void
 	{
@@ -40,13 +33,6 @@ class StudentManager
 			'idClass' => $idClass,
 			'idLogin' => $idLogin
 		));
-	}
-
-	public static function getIdAccessory(int $idLogin): int
-	{
-		$query = Manager::getDatabase()->prepare('SELECT idAccessory FROM Student WHERE idLogin = :idLogin');
-		$query->execute(array('idLogin' => $idLogin));
-		return $query->fetch()['idAccessory'];
 	}
 
 	public static function setIdAccessory(int $idLogin, int $idAccessory): void
@@ -58,13 +44,6 @@ class StudentManager
 		));
 	}
 
-	public static function getIdPortrait(int $idLogin): int
-	{
-		$query = Manager::getDatabase()->prepare('SELECT idPortrait FROM Student WHERE idLogin = :idLogin');
-		$query->execute(array('idLogin' => $idLogin));
-		return $query->fetch()['idPortrait'];
-	}
-
 	public static function setIdPortrait(int $idLogin, int $idPortrait): void
 	{
 		$query = Manager::getDatabase()->prepare('UPDATE Student SET idPortrait = :idPortrait WHERE idLogin = idLogin');
@@ -72,13 +51,6 @@ class StudentManager
 			'idPortrait' => $idPortrait,
 			'idLogin' => $idLogin
 		));
-	}
-
-	public static function getIdFrame(int $idLogin): int
-	{
-		$query = Manager::getDatabase()->prepare('SELECT idFrame FROM Student WHERE idLogin = :idLogin');
-		$query->execute(array('idLogin' => $idLogin));
-		return $query->fetch()['idFrame'];
 	}
 
 	public static function setIdFrame(int $idLogin, int $idFrame): void
@@ -90,13 +62,6 @@ class StudentManager
 		));
 	}
 
-	public static function getVerified(int $idLogin): boolean
-	{
-		$query = Manager::getDatabase()->prepare('SELECT verified FROM Student WHERE idLogin = :idLogin');
-		$query->execute(array('idLogin' => $idLogin));
-		return $query->fetch()['verified'];
-	}
-
 	public static function setIdClass(int $idLogin, boolean $verified): void
 	{
 		$query = Manager::getDatabase()->prepare('UPDATE Student SET verified = :verified WHERE idLogin = idLogin');
@@ -104,13 +69,6 @@ class StudentManager
 			'verified' => $verified,
 			'idLogin' => $idLogin
 		));
-	}
-
-	public static function getLastConnection(int $idLogin): int
-	{
-		$query = Manager::getDatabase()->prepare('SELECT lastConnection FROM Student WHERE idLogin = :idLogin');
-		$query->execute(array('idLogin' => $idLogin));
-		return $query->fetch()['lastConnection'];
 	}
 
 	public static function setLastConnection(int $idLogin): void
