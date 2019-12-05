@@ -14,11 +14,12 @@ class ClassManager
 	public static function getStudents(int $idClass): array
 	{
 		$students = [];
-		$studentsRequest = Manager::getDatabase()->prepare('select idLogin from Student where idClass = :idClass');
-		$studentsRequest->execute(['idClass' => $idClass]);
+		
+		$query = Manager::getDatabase()->prepare('SELECT * from Student where idClass = :idClass');
+		$query->execute(['idClass' => $idClass]);
 
-		foreach($studentsRequest->fetchAll() as $rawStudent) {
-			$students[] = StudentManager::getStudent($rawStudent);
+		foreach($query->fetchAll() as $rawStudent) {
+			$students[] = new Student($rawStudent);
 		}
 
 		return $students;
