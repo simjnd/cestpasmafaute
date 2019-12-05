@@ -55,8 +55,9 @@ class Route
 	public function call()
 	{
 		if(is_string($this->callable)){
+    		require_once '../conf.php';
 			$params = explode('@', $this->callable);
-			$controller = 'CPMF\\Controller\\'. $params[0] .'Controller';
+			$controller = APPNAME.'\\Controller\\'. $params[0] .'Controller';
 			$controller = new $controller();
 			if (count($params) > 1) {
                 return call_user_func_array(array($controller, $params[1]), $this->matches);

@@ -8,7 +8,7 @@ abstract class Manager
 
 	public function __construct() 
 	{
-        require '../conf.php';
-		$this->db = new PDO($dbType.':host='.$dbHost.';dbname='.$dbName, $dbUsername, $dbPassword);
+        require_once '../conf.php';
+		$this->db = new PDO(DBTYPE.':host='.DBHOST.';dbname='.DBNAME, DBUSERNAME, DBPASSWORD);
 	}
 }
