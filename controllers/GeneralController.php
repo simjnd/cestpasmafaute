@@ -47,7 +47,7 @@ class GeneralController extends Controller
 		} elseif($id == -2) {
 			parent::view('general-signin', ['error' => 'Email / Mot de passe incorrect']);
 		} else {
-			$_SESSION['idLogin'] = $idLogin;
+			$_SESSION['idLogin'] = intval($idLogin);
 			$_SESSION['type'] = $type;
 			if ($type === 'S')
 			{
@@ -74,7 +74,7 @@ class GeneralController extends Controller
 			// ERROR
 			die('Erreur lors de l\'ajout');
 		} else {
-			$_SESSION['idLogin'] = $resultCode;
+			$_SESSION['idLogin'] = intval($resultCode);
 			$_SESSION['type'] = 'S';
 			$_SESSION['validated'] = false;
 			parent::redirect('/');
