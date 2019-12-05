@@ -9,6 +9,7 @@ class Student extends User
 	private $finishedExercises;
 	private $lastConnection;
 	private $totalTimeConnected;
+	private $idClass;
 
     protected function callFunction(string $methodName, string $value = ""): void
     {
@@ -40,6 +41,11 @@ class Student extends User
     private function setTotalTimeConnected(string $totalTimeConnected): void
     {
         $this->totalTimeConnected = $totalTimeConnected;
+    }
+    
+    private function setIdClass(int $idClass): void
+    {
+        $this->idClass = $idClass;
     }
 
 	public function getFrame(): Frame
