@@ -1,6 +1,5 @@
 <?php
 namespace CPMF\Models;
-
 use \PDO;
 
 abstract class Manager
@@ -9,7 +8,7 @@ abstract class Manager
 
 	public function __construct() 
 	{
-        require 'conf.php';
+        require '../conf.php';
 		$this->db = new PDO($dbType.':host='.$dbHost.';dbname='.$dbName, $dbUsername, $dbPassword);
 	}
 }
