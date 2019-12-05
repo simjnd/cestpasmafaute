@@ -95,7 +95,7 @@ class StudentManager
 	{
 		$query = Manager::getDatabase()->prepare('SELECT SUM(points) AS totalPoints FROM Student_Exercise WHERE idLogin = :idLogin GROUP BY idLogin');
 		$query->execute(array('idLogin' => $idLogin));
-		return $query->fetch()['totalPoints'];
+		return $query->fetch()['totalPoints'] ?? 0;
 	}
 	
 	public static function getGlobalAverage(int $idLogin): float
