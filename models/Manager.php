@@ -11,7 +11,7 @@ class Manager
 	public static function getDatabase(): PDO
 	{
     	if (is_null(self::$db)) {
-        	require '../conf.php';
+        	require_once '../conf.php';
             self::$db = new PDO(DBTYPE.':host='.DBHOST.';dbname='.DBNAME, DBUSERNAME, DBPASSWORD);
     	}
     	
