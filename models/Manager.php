@@ -11,10 +11,10 @@ class Manager
 	public static function getDatabase(): PDO
 	{
     	if (is_null($this->db)) {
-        	require 'conf.php';
+        	require '../conf.php';
             $this->db = new PDO(DBTYPE.':host='.DBHOST.';dbname='.DBNAME, DBUSERNAME, DBPASSWORD);
     	}
     	
     	return $this->db;
-	}
+    }
 }

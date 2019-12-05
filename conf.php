@@ -1,9 +1,11 @@
 <?php
+    
+define('APPNAME', 'CPMF');
 
 // Use this file to configure access to your databse
 
-$dbType = 'mysql';
-$dbHost = 'localhost';
-$dbName = 'cestpasmafaute';
-$dbUsername = 'gasp';
-$dbPassword = 'gasp';
+define('DBTYPE', 'mysql');
+define('DBHOST', 'localhost');
+define('DBNAME', 'cestpasmafaute');
+define('DBUSERNAME', 'gasp');
+define('DBPASSWORD', 'gasp');
