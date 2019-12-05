@@ -61,12 +61,13 @@ class UserManager
 
 		if ($hashRequest->rowCount() == 0) return -1;
 
-		$hashedPassword = $hashRequest->fetch()['password'];
+		$result = $hashRequest->fetch();
+		$hashedPassword = $result['password'];
 
 		if (password_verify($password, $hashedPassword)) {
 			return [
-				'idLogin' => $hashRequest->fetch()['idLogin'],
-				'type' => $hashRequest->fetch()['type']
+				'idLogin' => $result['idLogin'],
+				'type' => $result['type']
 			];
 		} 
 
