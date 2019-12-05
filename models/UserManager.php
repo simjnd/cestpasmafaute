@@ -76,7 +76,7 @@ class UserManager
 			'email' => $informations['email'],
 			'password' => password_hash($informations['password'], PASSWORD_DEFAULT),
 			'firstName' => $informations['firstName'],
-			'lastName' => $informations['lastName'];
+			'lastName' => $informations['lastName']
 		]);
 		return $addRequest->lastInsertId;
 	}
