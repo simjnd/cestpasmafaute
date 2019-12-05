@@ -54,7 +54,7 @@ class UserManager
 		return $typeRequest->fetch()['type'];
 	}
 
-	public static function userExists(string $email, string $password, &$id, &$type): int
+	public static function userExists(string $email, string $password)
 	{
 		$hashRequest = Manager::getDatabase()->prepare('select idLogin, password, type from Login where email = :email');
 		$hashRequest->execute(['email' => $email]);
@@ -64,8 +64,10 @@ class UserManager
 		$hashedPassword = $hashRequest->fetch()['password'];
 
 		if (password_verify($password, $hashedPassword)) {
-			$id = $hashRequest->fetch()['idLogin'];
-			$type = $hashRequest->fetch()['type'];
+			return [
+				'idLogin' => $hashRequest->fetch()['idLogin'],
+				'type' => $hashRequest->fetch()['type']
+			];
 		} 
 
 		return -2;

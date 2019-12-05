@@ -38,18 +38,19 @@ class GeneralController extends Controller
 
 	public function postSignin(): void
 	{
-		$id = 0;
-		$type = "";
-		UserManager::userExists($_POST['email'], $_POST['password'], $id, $type);
+		$result = UserManager::userExists($_POST['email'], $_POST['password']);
 
 		if($id == -1) {
 			parent::view('general-signin', ['error' => 'Compte inexistant']);
 		} elseif($id == -2) {
 			parent::view('general-signin', ['error' => 'Email / Mot de passe incorrect']);
 		} else {
-			$_SESSION['idLogin'] = $id;
-			$_SESSION['type'] = $type;
-			$_SESSION['validated'] = false;
+			$_SESSION['idLogin'] = $result['idLogin'];
+			$_SESSION['type'] = $result['type'];
+			if ($result['type'] === 'S')
+			{
+				$_SESSION['validated'] = false;
+			}
 			parent::redirect('/');
 		}
 	}
