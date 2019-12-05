@@ -23,8 +23,6 @@ spl_autoload_register(function($name) {
     require '../'. $subdir . end($exploded) .'.php';
 });
 
-session_start();
-
 Router::init();
 
 Router::setDefault('NotFound');
@@ -57,5 +55,6 @@ Router::post('/profile', 'Student@saveProfileChanges');
 Router::get('/approval', 'Teacher@seeWaitingStudents');
 Router::get('/approval', 'Teacher@seeWaitingStudents');
 
+session_start();
 
 Router::run();

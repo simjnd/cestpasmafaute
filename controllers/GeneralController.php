@@ -7,6 +7,7 @@ class GeneralController extends Controller
 {
 	public function homePage(): void
 	{
+		session_start();
 		$type = $_SESSION['type'] ?? NULL;
 
 		if(isset($_SESSION['type'])) 
