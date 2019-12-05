@@ -30,9 +30,5 @@
     <p><?= $student->getEmail() ?></p>
     <a href="#">Afficher menu contextuel (Déplacer / Supprimer)</a>
     <?php } ?>
-    
-    <a href="#">Move <?= $student->getFirstName() ?> to a different class</a>
-    <a href="#">Remove from this class</a>
-    
 </body>
 </html>
