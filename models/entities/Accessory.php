@@ -1,8 +1,7 @@
 <?php
+namespace CPMF\Models\Entities;
 
-namespace CPMF\Models;
-
-class Portrait extends Decoration
+class Accessory extends Decoration
 {
     public function __construct(int $id, string $label, string $filePath, int $pointsRequired)
     {

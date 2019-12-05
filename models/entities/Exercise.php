@@ -1,6 +1,5 @@
 <?php
-
-namespace CPMF\Models;
+namespace CPMF\Models\Entities;
 
 class Exercise
 {

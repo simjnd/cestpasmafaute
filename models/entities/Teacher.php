@@ -1,5 +1,5 @@
 <?php
-namespace CPMF\Models;
+namespace CPMF\Models\Entities;
 
 class Teacher extends User 
 {

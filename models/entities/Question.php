@@ -1,5 +1,5 @@
 <?php
-namespace CPMF\Models;
+namespace CPMF\Models\Entities;
 
 abstract class Question 
 {

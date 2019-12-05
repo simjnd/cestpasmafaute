@@ -1,5 +1,5 @@
 <?php
-namespace CPMF\models;
+namespace CPMF\Models\Entities;
 
 class Role
 {

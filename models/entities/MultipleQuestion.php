@@ -1,5 +1,5 @@
 <?php
-namespace CPMF\Models;
+namespace CPMF\Models\Entities;
 
 class MultipleQuestion extends Question
 {
