@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title> Question Type 1 </title>	
+		<title> Simple Question </title>	
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="assets/css/styles.css">
 	</head>
@@ -18,13 +18,9 @@
 
 		<div>
 			<h3> <?php $question->getInstruction(); ?> </h3>
-			<h2> <?php $question->getSentence(); ?> </h2>
-		</div> <br>
-
-		<div>
-			<?php foreach ($multipleQuestions as $mQuestion) { ?>
-				<p> <?php $mQuestion->getAnswer(); ?></p>
-			<?php } ?>
-		</div>
+			<h2> <?php $simpleQuestion->getFirstHalf(); ?> </h2>
+			<input type="text" name="">
+			<h2> <?php $simpleQuestion->getSecondHalf(); ?> </h2>
+		</div> 
 	</body>
 </html>
