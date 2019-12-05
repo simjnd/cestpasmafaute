@@ -1,6 +1,9 @@
 <?php
 namespace CPMF\Controller;
 
+use \CPMF\Models\StudentManager;
+use \CPMF\Models\StepManager;
+
 class StudentController extends Controller
 {
     public function seeClass(): void
