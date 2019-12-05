@@ -15,6 +15,7 @@ class GeneralController extends Controller
 		{
 			if($_SESSION['type'] === 'S') // Cas d'un étudiant
 			{
+				$idStudent = $_SESSION['idStudent'] ?? NULL;
 				$validated = $_SESSION['validated'] ?? NULL;
 				if ($validated) // Étudiant validé
 				{
@@ -27,6 +28,7 @@ class GeneralController extends Controller
 			}
 			elseif ($_SESSION['type'] === 'T') // Cas d'un professeur
 			{
+				$idTeacher = $_SESSION['idLogin'] ?? NULL;
 				parent::view('teacher-home');
 			}
 		} 
@@ -62,14 +64,16 @@ class GeneralController extends Controller
 		// password
 
 		$informations = $_POST;
+
 		$resultCode = UserManager::addStudent($informations);
+		
 		if($resultCode === -1) {
 			// ERROR
 			die('Erreur lors de l\'ajout');
 		} else {
 			session_start();
-			$_SESSION['idLogin'] = intval($resultCode);
-			$_SESSION['type'] = 'T';
+			$_SESSION['idLogin'] = $resultCode;
+			$_SESSION['type'] = 'S';
 			$_SESSION['validated'] = false;
 			parent::redirect('/');
 		}
