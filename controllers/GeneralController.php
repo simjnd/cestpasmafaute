@@ -7,37 +7,50 @@ class GeneralController extends Controller
 {
 	public function homePage(): void
 	{
-		$user = "student";
-		$validated = false;
-		if ($user === "student") 
+		$type = $_SESSION['type'] ?? NULL;
+
+		if (isset($_SESSION['type'])) 
 		{
-			if ($validated) 
+			if ($_SESSION['type'] === 'S') // Cas d'un étudiant
 			{
-				parent::view('student-home');
+				$idStudent = $_SESSION['idLogin'] ?? NULL;
+				$validated = $_SESSION['validated'] ?? NULL;
+				if ($validated) // Étudiant validé
+				{
+					parent::view('student-home');
+				}
+				else // Étudiant en attente de validation
+				{
+					parent::view('student-home-validation');	
+				}		
 			}
-			else
+			elseif ($_SESSION['type'] === 'T') // Cas d'un professeur
 			{
-				parent::view('student-home-validation');	
-			}		
-		}
+				$idTeacher = $_SESSION['idLogin'] ?? NULL;
+				parent::view('teacher-home');
+			}
+		} 
 		else
 		{
-			parent::view($user . '-home');
+			parent::view('general-home');
 		}
 	}
 
 	public function postSignin(): void
 	{
-		$id = UserManager::userExists($_POST['email'], $_POST['password']);
+		$result = UserManager::userExists($_POST['email'], $_POST['password']);
 
 		if($id == -1) {
 			parent::view('general-signin', ['error' => 'Compte inexistant']);
 		} elseif($id == -2) {
 			parent::view('general-signin', ['error' => 'Email / Mot de passe incorrect']);
 		} else {
-			session_start();
-			$_SESSION['connected'] = true;
-			$_SESSION['email'] = $_POST['email'];
+			$_SESSION['idLogin'] = $result['idLogin'];
+			$_SESSION['type'] = $result['type'];
+			if ($result['type'] === 'S')
+			{
+				$_SESSION['validated'] = false;
+			}
 			parent::redirect('/');
 		}
 	}
@@ -52,14 +65,16 @@ class GeneralController extends Controller
 		// password
 
 		$informations = $_POST;
+
 		$resultCode = UserManager::addStudent($informations);
+		
 		if($resultCode === -1) {
 			// ERROR
 			die('Erreur lors de l\'ajout');
 		} else {
-			session_start();
-			$_SESSION['idLogin'] = intval($resultCode);
-			$_SESSION['type'] = 'T';
+			$_SESSION['idLogin'] = $resultCode;
+			$_SESSION['type'] = 'S';
+			$_SESSION['validated'] = false;
 			parent::redirect('/');
 		}
 	}

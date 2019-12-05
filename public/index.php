@@ -55,5 +55,6 @@ Router::post('/profile', 'Student@saveProfileChanges');
 Router::get('/approval', 'Teacher@seeWaitingStudents');
 Router::get('/approval', 'Teacher@seeWaitingStudents');
 
+session_start();
 
 Router::run();
