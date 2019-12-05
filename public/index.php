@@ -29,9 +29,17 @@ Router::setDefault('NotFound');
 Router::get('/signout', 'Global@signOut');
 
 Router::view('/', 'hello');
-Router::view('/login', 'login');
-Router::post('/login', 'Login@postLogin');
+
+// SIGNIN
+
+Router::view('/signin', 'general-connection');
+Router::post('/signin', 'Login@postLogin');
 Router::get('/connected', 'Connected@connectedPage');
+
+// SIGNUP
+
+Router::view('/signup', 'general-signup');
+Router::post('/signup', 'Signup@postSignup');
 
 // STUDENT PAGES
 
