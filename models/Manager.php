@@ -4,17 +4,17 @@ use \PDO;
 
 class Manager
 {
-	private $db;
+	private static $db;
 
 	private function __construct() {}
 
 	public static function getDatabase(): PDO
 	{
-    	if (is_null($this->db)) {
+    	if (is_null(self::$db)) {
         	require '../conf.php';
-            $this->db = new PDO(DBTYPE.':host='.DBHOST.';dbname='.DBNAME, DBUSERNAME, DBPASSWORD);
+            self::$db = new PDO(DBTYPE.':host='.DBHOST.';dbname='.DBNAME, DBUSERNAME, DBPASSWORD);
     	}
     	
-    	return $this->db;
+    	return self::$db;
     }
 }
