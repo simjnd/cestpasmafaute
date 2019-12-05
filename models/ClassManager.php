@@ -1,6 +1,8 @@
 <?php
 namespace CPMF\Models;
 
+use \CPMF\Models\Entities\Class;
+
 class ClassManager
 {
     public static function getByID(int $idClass): Class
