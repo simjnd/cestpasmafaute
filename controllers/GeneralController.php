@@ -7,12 +7,11 @@ class GeneralController extends Controller
 {
 	public function homePage(): void
 	{
-		session_start();
 		$type = $_SESSION['type'] ?? NULL;
 
-		if(isset($_SESSION['type'])) 
+		if (isset($_SESSION['type'])) 
 		{
-			if($_SESSION['type'] === 'S') // Cas d'un étudiant
+			if ($_SESSION['type'] === 'S') // Cas d'un étudiant
 			{
 				$idStudent = $_SESSION['idStudent'] ?? NULL;
 				$validated = $_SESSION['validated'] ?? NULL;
