@@ -22,7 +22,7 @@
 		<table>
 			<tr> Mes classes </tr>
 			<div> Ajouter </div>
-			<?php foreach $teacher->getNumberOfClass() { ?>
+			<?php foreach ($classes as $class) { ?>
 				<tr>
 					<p>
 						<?php $class->getName(); ?>
