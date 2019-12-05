@@ -15,7 +15,7 @@ spl_autoload_register(function($name) {
 		case 'Models':
 			$subdir = 'models/';
 			if ($exploded[2] === 'Entities') {
-    		    $subdir = $subdir . 'entities/'
+    		    $subdir = $subdir . 'entities/';
 		    }
 			break;
 	}
