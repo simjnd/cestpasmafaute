@@ -1,6 +1,11 @@
 <?php
 namespace CPMF\Models;
 
+use \CPMF\Models\Entities\Accessory;
+use \CPMF\Models\Entities\Frame;
+use \CPMF\Models\Entities\Portrait;
+use \CPMF\Models\Entities\Decoration;
+
 class DecorationManager 
 {
 

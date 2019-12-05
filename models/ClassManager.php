@@ -3,6 +3,8 @@ namespace CPMF\Models;
 
 use \CPMF\Models\Entities\Class;
 
+// Le mot Class est réservé
+
 class ClassManager
 {
     public static function getByID(int $idClass): Class

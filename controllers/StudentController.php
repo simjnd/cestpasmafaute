@@ -20,7 +20,8 @@ class StudentController extends Controller
      public function seeProfile(): void
     {
         $student = StudentManager::getById($_SESSION['idLogin']);
-        $class = ClassManager::getById($student->getIdClass());
+        //$class = ClassManager::getById($student->getIdClass());
+        $class = NULL;
         $frames = DecorationManager::unlockedFrame($student->getIdLogin());
         $portraits = DecorationManager::unlockedPortrait($student->getIdLogin());
         $accessories = DecorationManager::unlockedAccessory($student->getIdLogin());
