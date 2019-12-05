@@ -1,16 +1,21 @@
 <?php
 namespace CPMF\Models\Entities;
 
-class Course
+class Course extends Model
 {
-	private $id;
+	private $idCourse;
 	private $label;
-	private $steps;
 
-	public function __construct(int $id, string $label)
+	public function __construct(array $data)
 	{
-		$this->id = $id;
-		$this->label = $label;
+		parent::__construct($data);
+	}
+
+	protected function callFunction(string $methodName, string $value = ""): void 
+	{
+		if(method_exists($this, $methodName)) {
+			$this->$methodName($value);
+		}
 	}
 
 	public function getId(): int
@@ -23,13 +28,8 @@ class Course
 		return $this->label;
 	}
 
-	public function getSteps(): array
+	private function setLabel(string $label): void
 	{
-		return $this->steps;
-	}
-
-	public function setSteps(array $steps): void 
-	{
-		$this->steps = $steps;
+		$this->label = $label;
 	}
 }

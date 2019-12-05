@@ -9,9 +9,14 @@ abstract class User extends Model
     private $firstName;
     private $lastName;
 
+    public function __construct(array $data)
+    {
+        parent::__construct($data);
+    }    
+
     protected function callFunction(string $methodName, string $value = ""): void
     {
-        if(method_exists($this, $methodName)) {
+        if (method_exists($this, $methodName)) {
             $this->$methodName($value);
         }   
     }
@@ -36,9 +41,9 @@ abstract class User extends Model
         return $this->lastName;
     }
     
-    public function getId(): int
+    public function getIdLogin(): int
     {
-        return $this->id;
+        return $this->idLogin;
     }
 
     public function setEmail(string $email): void

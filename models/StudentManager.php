@@ -5,10 +5,18 @@ class StudentManager
 {
     public static function getByID(int $idLogin): Student
     {
-        $query = Manager::getDatabase()->prepare('SELECT * FROM Student WHERE idLogin = :idLogin');
-        $query->execute(['idLogin' => $idLogin]);
-        $rawData = $query->fetch();
-        return new Student($rawData);
+        $loginQuery = Manager::getDatabase()->prepare('select * from Login where idLogin = :idLogin');
+        $loginQuery->execute(['idLogin' => $idLogin]);
+
+        $loginData = $loginQuery->fetch();
+
+        $studentQuery = Manager::getDatabase()->prepare('SELECT * FROM Student WHERE idLogin = :idLogin');
+        $studentQuery->execute(['idLogin' => $idLogin]);
+        $studentData = $studentQuery->fetch();
+
+        $studentData = array_merge($loginData, $studentData);
+
+        return new Student($studentData);
     }
 
     public static function getStudentsByClass(int $idClass): array

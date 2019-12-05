@@ -8,9 +8,10 @@ class StudentController extends Controller
         parent::view('student-see-class');
     }
     
-    public function seeProfile(): void
+    public function seeProfile(int $idLogin): void
     {
-        
+        $student = StudentManager::getById($idLogin);
+        parent::view('teacher-see-student', ['student' => $student]);
     }
     
     public function seeHomepage(): void

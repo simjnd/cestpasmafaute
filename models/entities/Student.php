@@ -11,6 +11,11 @@ class Student extends User
 	private $totalTimeConnected;
 	private $idClass;
 
+	public function __construct(array $data)
+	{
+		parent::__construct($data);
+	}
+
     protected function callFunction(string $methodName, string $value = ""): void
     {
         if(method_exists($this, $methodName)) {
