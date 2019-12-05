@@ -4,16 +4,11 @@ namespace CPMF\Models\Entities;
 class Student extends User
 {
 	private $frame;
-	private $accessories;
+	private $accessory;
 	private $portrait;
 	private $finishedExercises;
 	private $lastConnection;
-	private $timeSpent;
-
-	public function __construct(array $data) 
-    {
-        parent::__construct($data);
-    }
+	private $totalTimeConnected;
 
     protected function callFunction(string $methodName, string $value = ""): void
     {
@@ -21,16 +16,31 @@ class Student extends User
             $this->$methodName($value);
         }   
     }
-
-	// public function __construct(Frame $frame, array $accessories, Portrait $portrait, array $finishedExercises, string $lastConnection, int $timeSpent)
-	// {
-	// 	$this->frame = $frame;
-	// 	$this->accessories = $accessories;
-	// 	$this->portrait = $portrait;
-	// 	$this->finishedExercises = $finishedExercises;
-	// 	$this->lastConnection = $lastConnection;
-	// 	$this->timeSpent = $timeSpent;
-	// }
+    
+    private function setFrame(Frame $frame): void
+    {
+        $this->frame = $frame;
+    }
+    
+    private function setAccessory(Accessory $accessory): void
+    {
+        $this->accessory = $accessory;
+    }
+    
+    private function setPortrait(Portrait $portrait): void
+    {
+        $this->portrait = $portrait;
+    }
+    
+    private function setLastConnection(string $lastConnection): void
+    {
+        $this->lastConnection = $lastConnection;
+    }
+    
+    private function setTotalTimeConnected(string $totalTimeConnected): void
+    {
+        $this->totalTimeConnected = $totalTimeConnected;
+    }
 
 	public function getFrame(): Frame
 	{
@@ -57,8 +67,8 @@ class Student extends User
 		return $this->lastConnection;
 	}
 
-	public function getTimeSpent(): int
+	public function getTotalTimeConnected(): int
 	{
-		return $this->timeSpent;
+		return $this->totalTimeConnected;
 	}
 }

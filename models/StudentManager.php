@@ -3,6 +3,14 @@ namespace CPMF\Models;
 
 class StudentManager
 {
+    public static function getByID(int $idLogin): void
+    {
+        $query = Manager::getDatabase()->prepare('SELECT * FROM Student WHERE idLogin = :idLogin');
+        $query->execute(['idLogin' => $idLogin]);
+        $rawData = $query->fetch();
+        return new Student($rawData);
+    }
+    
 	public static function getIdClass(int $idLogin): int
 	{
 		$req = Manager::getDatabase()->prepare('SELECT idClass FROM Student WHERE idLogin = :idLogin');

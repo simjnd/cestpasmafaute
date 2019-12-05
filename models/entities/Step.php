@@ -3,19 +3,51 @@ namespace CPMF\Models\Entities;
 
 class Step
 {
-	private $id;
+	private $idStep;
 	private $name;
-	private $lesson;
+	private $lessonEasy;
+	private $lessonMedium;
+	private $lessonHard;
 	private $exercices;
 
-	public function __construct(int $id, string $name, string $lesson)
+	protected function callFunction(string $methodName, string $value = ""): void
+    {
+        if(method_exists($this, $methodName)) {
+            $this->$methodName($value);
+        }   
+    }
+    
+    private function setIdStep(int $idStep): void
+    {
+        $this->idStep = $idStep;
+    }
+    
+    private function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+    
+    private function setLessonEasy(): void
+    {
+        $this->lessonEasy = $lessonEasy;
+    }
+    
+    private function setLessonMedium(): void
+    {
+        $this->lessonMedium = $lessonMedium;
+    }
+    
+    private function setLessonHard(): void
+    {
+        $this->lessonHard = $lessonHard;
+    }
+    
+    private function setExercices(array $exercices): void
 	{
-		$this->id = $id;
-		$this->name = $name;
-		$this->lesson = $lesson;
+		$this->exercices = $exercices;
 	}
 
-	public function getId(): int
+	public function getIdStep(): int
 	{
 		return $this->id;
 	}
@@ -34,9 +66,5 @@ class Step
 	{
 		return $this->exercices;
 	}
-
-	public function setExercices(array $exercices): void
-	{
-		$this->exercices = $exercices;
-	}
+	
 }

@@ -8,12 +8,6 @@ abstract class User extends Model
     private $password;
     private $firstName;
     private $lastName;
-    
-    
-    public function __construct(array $data) 
-    {
-        parent::__construct($data);
-    }
 
     protected function callFunction(string $methodName, string $value = ""): void
     {
