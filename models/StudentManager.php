@@ -70,15 +70,6 @@ class StudentManager
 		));
 	}
 
-	public static function setIdClass(int $idLogin, boolean $verified): void
-	{
-		$query = Manager::getDatabase()->prepare('UPDATE Student SET verified = :verified WHERE idLogin = idLogin');
-		$query->execute(array(
-			'verified' => $verified,
-			'idLogin' => $idLogin
-		));
-	}
-
 	public static function setLastConnection(int $idLogin): void
 	{
 		$query = Manager::getDatabase()->prepare('UPDATE Student SET lastConnection = NOW() WHERE idLogin = :idLogin');
