@@ -13,7 +13,7 @@ class GeneralController extends Controller
 		{
 			if ($_SESSION['type'] === 'S') // Cas d'un étudiant
 			{
-				$idStudent = $_SESSION['idStudent'] ?? NULL;
+				$idStudent = $_SESSION['idLogin'] ?? NULL;
 				$validated = $_SESSION['validated'] ?? NULL;
 				if ($validated) // Étudiant validé
 				{
