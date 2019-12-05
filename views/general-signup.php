@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="assets/css/styles.css">
 	</head>
 	<body>
-		<h1>Connexion</h1>
+		<h1>Inscription</h1>
 		<?php if (isset($error)) { ?>
 		<p>
 			<p>Erreur: <?= $error ?></p>
