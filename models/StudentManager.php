@@ -5,10 +5,21 @@ class StudentManager
 {
     public static function getByID(int $idLogin): Student
     {
-        $query = Manager::getDatabase()->prepare('SELECT * FROM Student WHERE idLogin = :idLogin');
-        $query->execute(['idLogin' => $idLogin]);
-        $rawData = $query->fetch();
-        return new Student($rawData);
+        $loginQuery = Manager::getDatabase()->prepare('select * from Login where idLogin = :idLogin');
+        $loginQuery->execute(['idLogin' => $idLogin]);
+
+        $loginData = $loginQuery->fetch();
+        $loginQuery->closeCursor();
+
+        $studentQuery = Manager::getDatabase()->prepare('SELECT * FROM Student WHERE idLogin = :idLogin');
+        $studentQuery->execute(['idLogin' => $idLogin]);
+        
+        $studentData = $studentQuery->fetch();
+		$studentQuery->closeCursor();
+
+        $studentData = array_merge($loginData, $studentData);
+
+        return new Student($studentData);
     }
 
     public static function getStudentsByClass(int $idClass): array
@@ -58,15 +69,6 @@ class StudentManager
 		$query = Manager::getDatabase()->prepare('UPDATE Student SET idFrame = :idFrame WHERE idLogin = idLogin');
 		$query->execute(array(
 			'idFrame' => $idFrame,
-			'idLogin' => $idLogin
-		));
-	}
-
-	public static function setIdClass(int $idLogin, boolean $verified): void
-	{
-		$query = Manager::getDatabase()->prepare('UPDATE Student SET verified = :verified WHERE idLogin = idLogin');
-		$query->execute(array(
-			'verified' => $verified,
 			'idLogin' => $idLogin
 		));
 	}

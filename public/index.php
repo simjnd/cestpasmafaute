@@ -47,7 +47,7 @@ Router::post('/signup', 'General@postSignup');
 
 Router::get('/class', 'Student@seeClass');
 
-Router::get('/profile', 'Student@seeProfile');
+Router::get('/profile/{idLogin}', 'Student@seeProfile');
 Router::post('/profile', 'Student@saveProfileChanges');
 
 // TEACHER PAGES

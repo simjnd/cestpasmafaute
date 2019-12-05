@@ -1,15 +1,23 @@
 <?php
 namespace CPMF\Models\Entities;
 
-class Choice
+class Choice extends Model
 {
-	private $id;
+	private $idChoice;
 	private $label;
+	private $isCorrectAnswer;
+	private $idMultipleQuestion;
 
-	public function __construct(int $id, string $label)
+	public function __construct(array $data) 
 	{
-		$this->id = $id;
-		$this->label = $label;
+		parent::__construct($data);
+	}
+
+	protected function callFunction(string $methodName, string $value = ""): void 
+	{
+		if(method_exists($this, $methodName)) {
+			$this->$methodName($value);
+		}
 	}
 
 	public function getId(): int
@@ -20,5 +28,35 @@ class Choice
 	public function getLabel(): string
 	{
 		return $this->label;
+	}
+
+	public function isCorrectAnswer(): bool
+	{
+		return $this->isCorrectAnswer;
+	}
+
+	public function getIdMultipleQuestion(): int
+	{
+		return $this->idMultipleQuestion;
+	}
+
+	private function setIdChoice(int $idChoice): void
+	{
+		$this->idChoice = $idChoice;
+	}
+
+	private function setLabel(string $label): void
+	{
+		$this->label = $label;
+	}
+
+	private function setIsCorrectAnswer(bool $isCorrectAnswer): void
+	{
+		$this->isCorrectAnswer = $isCorrectAnswer;
+	}
+
+	private function setIdMultipleQuestion(int $idMultipleQuestion): void
+	{
+		$this->idMultipleQuestion = $idMultipleQuestion;
 	}
 }

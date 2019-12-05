@@ -7,6 +7,6 @@ class NotFoundController extends Controller
 	{
 		header("HTTP/1.0 404 Not Found");
 		$data = array('url' => $_SERVER['REQUEST_URI']);
-		parent::view('not-found', $data);
+		parent::view('general-not-found', $data);
 	}
 }

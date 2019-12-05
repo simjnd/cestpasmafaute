@@ -6,21 +6,33 @@ class DecorationManager
 
 	private $tableName;
 
-	public static function __construct(string $tabname)
+	public function __construct(string $tabname)
 	{
 		$this->tableName = $tabname;
 	}
 
-	public static function getIdDecoration(int $idDecoration): int
+	public function getAccessory(int $idAccessory): Decoration
 	{
-		$id = 'id' . $this->tableName;
-
-		$req = Manager::getDatabase()->prepare("SELECT $id FROM $this->tableName WHERE  $id = :idDecoration");
-		$req->execute(['idDecoration' => $idDecoration]);
-		return $req->fetch()[$id];
+		$req = Manager::getDatabase()->prepare("SELECT * FROM Accessory WHERE  $id = :idAccessory");
+		$req->execute(['idAccessory' => $idAccessory]);
+		return new Accessory($req->fetch());
 	}
 
-	public static function getLabelDecoration(int $idDecoration): string
+	public function getFrame(int $idFrame): Decoration
+	{
+		$req = Manager::getDatabase()->prepare("SELECT * FROM Frame WHERE  $id = :idFrame");
+		$req->execute(['idFrame' => $idFrame]);
+		return new Frame($req->fetch());
+	}
+
+	public function getPortrait(int $idPortrait): Decoration
+	{
+		$req = Manager::getDatabase()->prepare("SELECT * FROM Portrait WHERE  $id = :idPortrait");
+		$req->execute(['idPortrait' => $idPortrait]);
+		return new Portrait($req->fetch());
+	}
+
+	public function getLabelDecoration(int $idDecoration): string
 	{
 		$id = 'id' . $this->tableName;
 
@@ -29,7 +41,7 @@ class DecorationManager
 		return $req->fetch()['label'];
 
 	}
-	public static function getFilePathDecoration(int $idDecoration): string
+	public function getFilePathDecoration(int $idDecoration): string
 	{
 		$id = 'id' . $this->tableName;
 
@@ -39,7 +51,7 @@ class DecorationManager
 
 	}
 
-	public static function getPointsRequiredDecoration(int $idDecoration): int
+	public function getPointsRequiredDecoration(int $idDecoration): int
 	{
 		$id = 'id' . $this->tableName;
 
@@ -48,7 +60,7 @@ class DecorationManager
 		return intval($req->fetch()['pointsRequired']);
 	}
 
-	public static function setIdDecoration(int $idDecoration): void
+	public function setIdDecoration(int $idDecoration): void
 	{
 		$id = 'id' . $this->tableName;
 
@@ -56,7 +68,7 @@ class DecorationManager
 		$req->execute(['idDecoration' => $idDecoration]);
 	}
 
-	public static function setLabelDecoration(string $label, int $idDecoration): void
+	public function setLabelDecoration(string $label, int $idDecoration): void
 	{
 		$id = 'id' . $this->tableName;
 
@@ -65,7 +77,7 @@ class DecorationManager
 
 	}
 
-	public static function setFilePathDecoration(string $filePath, int $idDecoration): void
+	public function setFilePathDecoration(string $filePath, int $idDecoration): void
 	{
 		$id = 'id' . $this->tableName;
 
@@ -73,12 +85,33 @@ class DecorationManager
 		$req->execute(['idDecoration' => $idDecoration, 'filePath' => $filePath]);
 	}
 
-	public static function setPointsRequiredDecoration(int $points, int $idDecoration): void
+	public function setPointsRequiredDecoration(int $points, int $idDecoration): void
 	{
 		$id = 'id' . $this->tableName;
 
 		$req = Manager::getDatabase()->prepare("UPDATE $this->tableName SET pointsRequired = :points WHERE $id = :idDecoration");
 		$req->execute(['idDecoration' => $idDecoration, 'points' => $points]);
+	}
+
+	public function unlockedAccessory(int $studentID): Decoration
+	{
+		$req = Manager::getDatabase()->prepare('SELECT * FROM Accessory, Student WHERE Accessory.idAccessory = Student.idStudent AND Accessory.pointsRequired < :nbPoints');
+		$req->execute(['nbPoints' => StudentManager::getTotalPoints($studentID)]);
+		return new Accessory($req->fetch());
+	}
+
+	public function unlockedFrame(int $studentID): Decoration
+	{
+		$req = Manager::getDatabase()->prepare('SELECT * FROM Frame, Student WHERE Frame.idFrame = Student.idStudent AND Frame.pointsRequired < :nbPoints');
+		$req->execute(['nbPoints' => StudentManager::getTotalPoints($studentID)]);
+		return new Frame($req->fetch());
+	}
+
+	public function unlockedPortrait(int $studentID): Decoration
+	{
+		$req = Manager::getDatabase()->prepare('SELECT * FROM Portrait, Student WHERE Portrait.idPortrait = Student.idStudent AND Portrait.pointsRequired < :nbPoints');
+		$req->execute(['nbPoints' => StudentManager::getTotalPoints($studentID)]);
+		return new Portrait($req->fetch());
 	}
 }
 
