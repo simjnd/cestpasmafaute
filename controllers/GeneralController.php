@@ -3,9 +3,30 @@ namespace CPMF\Controller;
 
 use CPMF\Models\UserManager;
 
-class LoginController extends Controller
+class GeneralController extends Controller
 {
-	public function postLogin(): void
+	public function homePage(): void
+	{
+		$user = "student";
+		$validated = false;
+		if ($user === "student") 
+		{
+			if ($validated) 
+			{
+				parent::view('student-home');
+			}
+			else
+			{
+				parent::view('student-home-validation');	
+			}		
+		}
+		else
+		{
+			parent::view($user . '-home');
+		}
+	}
+
+	public function postSignin(): void
 	{
 		$userManager = new UserManager();
 		extract($_POST);
@@ -21,6 +42,10 @@ class LoginController extends Controller
 			$_SESSION['email'] = $_POST['email'];
 			parent::redirect('/connected');
 		}
-		
+	}
+
+	public function postSignup(): void
+	{
+		parent::view('general-signup');	
 	}
 }

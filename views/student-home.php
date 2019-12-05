@@ -4,7 +4,7 @@
 		<link rel="stylesheet" href="assets/css/styles.css" />
 	</head>
 	<body>
-		<h1>Vous êtes connecté</h1>
-		<p>Bienvenue <?=$email;?>
+		<h1>Dashboard student</h1>
+		<p>TODO liste des exos et compagnie</p>
 	</body>
 </html>
