@@ -49,7 +49,7 @@ class GeneralController extends Controller
 		} else {
 			$_SESSION['idLogin'] = $idLogin;
 			$_SESSION['type'] = $type;
-			if ($result['type'] === 'S')
+			if ($type === 'S')
 			{
 				$_SESSION['validated'] = false;
 			}
