@@ -3,7 +3,7 @@ namespace CPMF\Controller;
 
 use CPMF\Models\UserManager;
 
-class ConnectedController extends Controller
+class GeneralController extends Controller
 {
 	public function homePage(): void
 	{
