@@ -3,6 +3,8 @@ namespace CPMF\Controller;
 
 use \CPMF\Models\StudentManager;
 use \CPMF\Models\StepManager;
+use \CPMF\Models\ClassManager;
+use \CPMF\Models\DecorationManager;
 
 class StudentController extends Controller
 {
