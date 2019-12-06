@@ -16,7 +16,7 @@ class Student extends User
 		parent::__construct($data);
 	}
 
-    protected function callFunction(string $methodName, string $value = ""): void
+    protected function callFunction(string $methodName, ?string $value = ""): void
     {
         if(method_exists($this, $methodName)) {
             $this->$methodName($value);
