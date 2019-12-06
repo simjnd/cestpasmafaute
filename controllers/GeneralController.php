@@ -80,4 +80,10 @@ class GeneralController extends Controller
 			parent::redirect('/');
 		}
 	}
+
+	public function signout(): void
+	{
+		session_destroy();
+		parent::redirect('/');
+	}
 }

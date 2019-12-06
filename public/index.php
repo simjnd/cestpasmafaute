@@ -43,6 +43,10 @@ Router::post('/signin', 'General@postSignin');
 Router::view('/signup', 'general-signup');
 Router::post('/signup', 'General@postSignup');
 
+// SIGNOUT
+
+Router::get('/signout', 'General@signout');
+
 // STUDENT PAGES
 
 Router::get('/class', 'Student@seeClass');

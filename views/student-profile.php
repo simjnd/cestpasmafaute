@@ -9,7 +9,7 @@
 	<h1>Mon profil</h1>
 	<img src="<?= $avatar ?>">
 	<img src="<?= $avatar ?>">
-
+	<p><a href="/signout">Déconnexion</a></p>
 	<p>Nom : <?= $student->getLastName() ?></p>
 	<p>Prénom : <?= $student->getFirstName() ?></p>
 	<p>email : <?= $student->getEmail() ?></p>
