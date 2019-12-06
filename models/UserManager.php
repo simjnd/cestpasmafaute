@@ -75,6 +75,13 @@ class UserManager
 
 	public static function addStudent(array $informations): int
 	{
+		// TODO: Décomposer la fonction userExists en checkLogin et userExists
+		if(self::userExists($informations['email'], $informations['password']) !== 0) {
+			// L'utilisateur existe déjà
+			return -1;
+		}
+
+		// Insertion de l'étudiant dans la table Login
 		$addRequest = Manager::getDatabase()->prepare('insert into Login values(NULL, :email, :password, :firstName, :lastName, "S")');
 		if (!$addRequest) return -1;
 		$addRequest->execute([
@@ -83,6 +90,15 @@ class UserManager
 			'firstName' => $informations['firstName'],
 			'lastName' => $informations['lastName']
 		]);
-		return Manager::getDatabase()->lastInsertId();
+		$idLogin = Manager::getDatabase()->lastInsertId();
+
+		// Insertion de l'étudiant dans la table Student (avec les valeurs par défaut)
+		$addStudentRequest = Manager::getDatabase()->prepare('insert into Student values(:idLogin, NULL, 1, 1, 1, 0, NOW(), 0)');
+		if(!$addStudentRequest) return -1;
+		$addStudentRequest->execute([
+			'idLogin' => $idLogin
+		]);
+
+		return $idLogin;
 	}
 }
