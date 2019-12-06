@@ -16,7 +16,7 @@
 		</header>
 
 		<div>
-			<a href="#attenteValidation"> <?php $numberStudent ?> en attente de validation </a>
+			<a href="#attenteValidation"> <?php $numberWaitingStudent ?> en attente de validation </a>
 		</div> <br>
 
 		<table>
