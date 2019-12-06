@@ -18,16 +18,6 @@ class Group extends Model
     {
         $this->name = $name;
     }
-    
-    private function setStudents(array $students): void
-    {
-        $this->students = $students;
-    }
-    
-    private function setCourse(Course $course): void
-    {
-        $this->course = $course;
-    }
 
 	public function getName(): string
 	{
