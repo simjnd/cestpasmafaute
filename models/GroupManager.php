@@ -5,12 +5,12 @@ use \CPMF\Models\Entities\Group;
 
 class GroupManager
 {
-    public static function getByID(int $idClass): Class
+    public static function getByID(int $idClass): Group
     {
         $query = Manager::getDatabase()->prepare('SELECT * FROM Class WHERE idClass = :idClass');
         $query->execute(['idClass' => $idClass]);
         $rawClass = $query->fetch();
-        return new Class($rawClass);
+        return new Group($rawClass);
     }
 
 	public static function getStudents(int $idClass): array
