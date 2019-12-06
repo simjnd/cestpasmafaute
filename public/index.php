@@ -29,8 +29,6 @@ Router::setDefault('NotFound');
 
 // GLOBAL PAGES
 
-Router::get('/signout', 'Global@signOut');
-
 Router::get('/', 'General@homePage');
 
 // SIGNIN
