@@ -70,9 +70,9 @@ class GeneralController extends Controller
 
 		$resultCode = UserManager::addStudent($informations);
 		
-		if($resultCode === -1) {
+		if($resultCode < 0) {
 			// ERROR
-			die('Erreur lors de l\'ajout');
+			die('Erreur lors de l\'ajout: ('.$resultCode.')');
 		} else {
 			$_SESSION['idLogin'] = intval($resultCode);
 			$_SESSION['type'] = 'S';

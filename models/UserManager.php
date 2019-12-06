@@ -58,7 +58,7 @@ class UserManager
 		$userRequest = Manager::getDatabase()->prepare('select idLogin, password, type from Login where email = :email');
 		$userRequest->execute(['email' => $email]);
 
-		if ($userRequest->rowCount() == 0) return -1;
+		if ($userRequest->rowCount() === 0) return -1;
 
 		$result = $userRequest->fetch();
 		$hashedPassword = $result['password'];
@@ -74,7 +74,7 @@ class UserManager
 
 	public static function userExists(string $email): bool
 	{
-		$userRequest = Manager::getDatabase()->prepare('select count(*) from Login where email = :email');
+		$userRequest = Manager::getDatabase()->prepare('select idLogin from Login where email = :email');
 		$userRequest->execute(['email' => $email]);
 
 		return $userRequest->rowCount() !== 0;
@@ -89,7 +89,7 @@ class UserManager
 
 		// Insertion de l'étudiant dans la table Login
 		$addRequest = Manager::getDatabase()->prepare('insert into Login values(NULL, :email, :password, :firstName, :lastName, "S")');
-		if (!$addRequest) return -1;
+		if (!$addRequest) return -2;
 		$addRequest->execute([
 			'email' => $informations['email'],
 			'password' => password_hash($informations['password'], PASSWORD_DEFAULT),
