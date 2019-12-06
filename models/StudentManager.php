@@ -38,6 +38,16 @@ class StudentManager
         
     }
 
+    public static function isVerified(int $idLogin): bool
+    {
+    	$validatedRequest = Manager::getDatabase()->prepare('select verified from Student where idLogin = :idLogin');
+    	$validatedRequest->execute(['idLogin' => $idLogin]);
+
+    	$verified = $validatedRequest->fetch()['verified'];
+
+    	return $verified === "1";
+    }
+
     public static function getWaitingStudents(): array
     {
     	$waitingStudents = [];

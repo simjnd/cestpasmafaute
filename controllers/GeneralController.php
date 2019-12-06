@@ -41,7 +41,7 @@ class GeneralController extends Controller
 		$idLogin = 0;
 		$type = "";
 		$result = UserManager::checkLogin($_POST['email'], $_POST['password'], $idLogin, $type);
-
+		$verified = StudentManager::isVerified($idLogin);
 		if($id == -1) {
 			parent::view('general-signin', ['error' => 'Compte inexistant']);
 		} elseif($id == -2) {
@@ -51,7 +51,7 @@ class GeneralController extends Controller
 			$_SESSION['type'] = $type;
 			if ($type === 'S')
 			{
-				$_SESSION['validated'] = false;
+				$_SESSION['validated'] = $verified;
 			}
 			parent::redirect('/');
 		}
