@@ -7,7 +7,7 @@
 </head>
 <body>
     <p><?= $teacher->getFirstName() ?> <?= $teacher->getLastName() ?></p>
-    <h2><?= $class->getName() ?></h2>
+    <h2><?= $group->getName() ?></h2>
     <h1><?= $student->getFirstName().' '.$student->getLastName() ?></h1>
     <!-- Student's picture -->
     

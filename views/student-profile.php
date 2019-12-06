@@ -26,14 +26,14 @@
 	</div>
 
 	<div id="Portrait">
-		<?php foreach ($frames as $frame) { ?>
-			<img src="<?= $frame->getFilePath() ?>">
+		<?php foreach ($portraits as $portrait) { ?>
+			<img src="<?= $portrait->getFilePath() ?>">
 		<?php } ?>
 	</div>
 
 	<div id="Accessory">
-		<?php foreach ($frames as $frame) { ?>
-			<img src="<?= $frame->getFilePath() ?>">
+		<?php foreach ($accessories as $accessory) { ?>
+			<img src="<?= $accessory->getFilePath() ?>">
 		<?php } ?>
 	</div>
 
