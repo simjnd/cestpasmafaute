@@ -38,6 +38,19 @@ class StudentManager
         
     }
 
+    public static function getWaitingStudents(): array
+    {
+    	$waitingStudents = [];
+
+    	$query = Manager::getDatabase()->query('SELECT * FROM Student WHERE verified = 0');
+
+    	foreach ($query->fetchAll() as $waiting) {
+    		$waitingStudents[] = new Student($waiting)
+    	}
+
+    	return $waitingStudents;
+    }
+
 	public static function setIdClass(int $idLogin, int $idClass): void
 	{
 		$query = Manager::getDatabase()->prepare('UPDATE Student SET idClass = :idClass WHERE idLogin = idLogin');
