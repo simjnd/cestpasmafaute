@@ -20,16 +20,9 @@ class StudentController extends Controller
      public function seeProfile(): void
     {
         $student = StudentManager::getById($_SESSION['idLogin']);
-        if($student->getIdClass() !== NULL) $class = GroupManager::getById($student->getIdClass());
-        else $class = NULL;
-        // $frames = DecorationManager::unlockedFrame($student->getIdLogin());
-        // $portraits = DecorationManager::unlockedPortrait($student->getIdLogin());
-        // $accessories = DecorationManager::unlockedAccessory($student->getIdLogin());
-        $frames = NULL;
-        $portraits = NULL;
-        $accessories = NULL;
+        $student->fill();
 
-        parent::view('student-profile', ['student' => $student, 'class' => $class, 'frames' => $frames, 'protraits' => $portraits, 'accessories' => $accessories]);
+        parent::view('student-profile', ['student' => $student, 'class' => $student->getGroup(), 'frames' => $frames, 'protraits' => $portraits, 'accessories' => $accessories]);
     }
 
     public function seeHomepage(): void
