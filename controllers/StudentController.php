@@ -3,7 +3,7 @@ namespace CPMF\Controller;
 
 use \CPMF\Models\StudentManager;
 use \CPMF\Models\StepManager;
-use \CPMF\Models\ClassManager;
+use \CPMF\Models\GroupManager;
 use \CPMF\Models\DecorationManager;
 
 class StudentController extends Controller
@@ -20,8 +20,7 @@ class StudentController extends Controller
      public function seeProfile(): void
     {
         $student = StudentManager::getById($_SESSION['idLogin']);
-        //$class = ClassManager::getById($student->getIdClass());
-        $class = NULL;
+        $class = GroupManager::getById($student->getIdClass());
         // $frames = DecorationManager::unlockedFrame($student->getIdLogin());
         // $portraits = DecorationManager::unlockedPortrait($student->getIdLogin());
         // $accessories = DecorationManager::unlockedAccessory($student->getIdLogin());

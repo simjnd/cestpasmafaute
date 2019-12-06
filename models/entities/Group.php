@@ -1,7 +1,7 @@
 <?php
 namespace CPMF\Models\Entities;
 
-class Class extends Model
+class Group extends Model
 {
 	private $name;
 	private $students;

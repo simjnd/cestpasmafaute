@@ -1,11 +1,9 @@
 <?php
 namespace CPMF\Models;
 
-use \CPMF\Models\Entities\Class;
+use \CPMF\Models\Entities\Group;
 
-// Le mot Class est réservé
-
-class ClassManager
+class GroupManager
 {
     public static function getByID(int $idClass): Class
     {
