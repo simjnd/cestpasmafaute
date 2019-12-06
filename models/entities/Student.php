@@ -83,7 +83,7 @@ class Student extends User
 		return $this->totalTimeConnected;
 	}
 	
-	public function getIdClass(): int
+	public function getIdClass(): ?int
 	{
     	return $this->idClass;
 	}
