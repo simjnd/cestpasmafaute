@@ -54,8 +54,7 @@ class UserManager
 		return $typeRequest->fetch()['type'];
 	}
 
-	public static function userExists(string $email, string $password, int &$idLogin, string &$type): int
-	{
+	public static function checkLogin(string $email, string $password, int &$idLogin, string &$type) {
 		$userRequest = Manager::getDatabase()->prepare('select idLogin, password, type from Login where email = :email');
 		$userRequest->execute(['email' => $email]);
 
@@ -70,13 +69,20 @@ class UserManager
 			return 0;
 		} 
 
-		return -2;
+		return -2;	
+	}
+
+	public static function userExists(string $email): bool
+	{
+		$userRequest = Manager::getDatabase()->prepare('select count(*) from Login where email = :email');
+		$userRequest->execute(['email' => $email]);
+
+		return $userRequest->rowCount() !== 0;
 	}
 
 	public static function addStudent(array $informations): int
 	{
-		// TODO: Décomposer la fonction userExists en checkLogin et userExists
-		if(self::userExists($informations['email'], $informations['password']) !== 0) {
+		if(self::userExists($informations['email'])) {
 			// L'utilisateur existe déjà
 			return -1;
 		}

@@ -40,7 +40,7 @@ class GeneralController extends Controller
 	{
 		$idLogin = 0;
 		$type = "";
-		$result = UserManager::userExists($_POST['email'], $_POST['password'], $idLogin, $type);
+		$result = UserManager::checkLogin($_POST['email'], $_POST['password'], $idLogin, $type);
 
 		if($id == -1) {
 			parent::view('general-signin', ['error' => 'Compte inexistant']);
