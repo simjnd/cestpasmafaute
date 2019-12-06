@@ -98,25 +98,44 @@ class DecorationManager
 		$req->execute(['idDecoration' => $idDecoration, 'points' => $points]);
 	}
 
-	public function unlockedAccessory(int $studentID): Decoration
+	public function unlockedAccessory(int $studentID): array
 	{
+		$accessories = [];
+
 		$req = Manager::getDatabase()->prepare('SELECT * FROM Accessory, Student WHERE Accessory.idAccessory = Student.idStudent AND Accessory.pointsRequired < :nbPoints');
 		$req->execute(['nbPoints' => StudentManager::getTotalPoints($studentID)]);
-		return new Accessory($req->fetch());
+
+		foreach($req->fetchAll() as $accessory) {
+			$accessories[] = new Accessory($accessory);
+		}
+		return $accessories;
+		
 	}
 
-	public function unlockedFrame(int $studentID): Decoration
+	public function unlockedFrame(int $studentID): array
 	{
+		$frames = [];
+
 		$req = Manager::getDatabase()->prepare('SELECT * FROM Frame, Student WHERE Frame.idFrame = Student.idStudent AND Frame.pointsRequired < :nbPoints');
 		$req->execute(['nbPoints' => StudentManager::getTotalPoints($studentID)]);
-		return new Frame($req->fetch());
+		
+		foreach($req->fetchAll() as $frame) {
+			$frames[] = new Frame($frame);
+		}
+		return $frames;
 	}
 
-	public function unlockedPortrait(int $studentID): Decoration
+	public function unlockedPortrait(int $studentID): array
 	{
+		$portraits = [];
+
 		$req = Manager::getDatabase()->prepare('SELECT * FROM Portrait, Student WHERE Portrait.idPortrait = Student.idStudent AND Portrait.pointsRequired < :nbPoints');
 		$req->execute(['nbPoints' => StudentManager::getTotalPoints($studentID)]);
-		return new Portrait($req->fetch());
+
+		foreach($req->fetchAll() as $portrait) {
+			$portraits[] = new Portrait($portrait);
+		}
+		return $portraits;
 	}
 }
 
