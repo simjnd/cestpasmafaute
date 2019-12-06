@@ -48,7 +48,7 @@ class Student extends User
         $this->totalTimeConnected = $totalTimeConnected;
     }
     
-    private function setIdClass(int $idClass): void
+    private function setIdClass(?int $idClass): void
     {
         $this->idClass = $idClass;
     }
