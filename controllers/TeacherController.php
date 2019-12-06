@@ -8,7 +8,7 @@ class TeacherController extends Controller
 	{
 		$teacher = TeacherManager::getByID($_SESSION['idLogin']);
 		$numberWaitingStudents = StudentManager::getWaitingStudents();
-		$classes = ClassManager::getByID($_SESSION['idLogin']);
+		$classes = GroupManager::getByID($_SESSION['idLogin']);
 
 		parent::view('teacher-home', 'teacher' => $teacher, 'numberWaitingStudents' => $numberWaitingStudents, 'classes' => $classes);
 	}

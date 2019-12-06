@@ -13,6 +13,20 @@ class GroupManager
         return new Group($rawClass);
     }
 
+    public static function getTeacherGroups(int $idTeacher): array 
+    {
+    	$groups = [];
+		
+		$query = Manager::getDatabase()->prepare('SELECT * from Class where idTeacher = :idTeacher');
+		$query->execute(['idTeacher' => $idTeacher]);
+
+		foreach($query->fetchAll() as $group) {
+			$groups[] = new Group($group);
+		}
+
+		return $groups;
+    }
+
 	public static function getStudents(int $idClass): array
 	{
 		$students = [];
