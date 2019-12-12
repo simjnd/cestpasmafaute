@@ -7,7 +7,7 @@
 	<h1><?= $stepTitle ?></h1>
 	<img src="<?= $avatar ?>">
 	<p><?= $studentClass ?></p>
-	<p><?= $studentTotalPoint ?></p>
+	<p><?= $totalPoints ?></p>
 	<p><?= $currentLesson ?></p>
 	<p>Exercice facile</p>
 	<p>Exercice intermediate</p>
