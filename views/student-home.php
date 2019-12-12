@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-
+    <p><a href="/signout">Déconnexion</a></p>
     <p><a href="#">Mon profil</a></p>
     <p><a href="#">Ma classe</a></p>
 

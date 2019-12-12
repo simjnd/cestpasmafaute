@@ -1,6 +1,10 @@
 <?php
 namespace CPMF\Models\Entities;
 
+use \CPMF\Models\StudentManager;
+use \CPMF\Models\GroupManager;
+use \CPMF\Models\DecorationManager;
+
 class Student extends User
 {
 	private $frame;
@@ -10,13 +14,14 @@ class Student extends User
 	private $lastConnection;
 	private $totalTimeConnected;
 	private $idClass;
+	private $group;
 
 	public function __construct(array $data)
 	{
 		parent::__construct($data);
 	}
 
-    protected function callFunction(string $methodName, string $value = ""): void
+    protected function callFunction(string $methodName, ?string $value = ""): void
     {
         if(method_exists($this, $methodName)) {
             $this->$methodName($value);
@@ -48,7 +53,7 @@ class Student extends User
         $this->totalTimeConnected = $totalTimeConnected;
     }
     
-    private function setIdClass(int $idClass): void
+    private function setIdClass(?int $idClass): void
     {
         $this->idClass = $idClass;
     }
@@ -83,8 +88,31 @@ class Student extends User
 		return $this->totalTimeConnected;
 	}
 	
-	public function getIdClass(): int
+	public function getIdClass(): ?int
 	{
     	return $this->idClass;
+	}
+
+	public function setGroup(?Group $group): void
+	{
+		$this->group = $group;
+	}
+
+	public function getGroup(): ?Group
+	{
+		return $this->group;
+	}
+
+	public function fill(): void
+	{
+		if($this->getIdClass() !== NULL) {
+			$this->setGroup(GroupManager::getById($this->getIdClass()));
+		} else {
+			$this->setGroup(NULL);	
+		} 
+		// TODO: fill les frames, portraits et accessoires
+        // $frames = DecorationManager::unlockedFrame($student->getIdLogin());
+        // $portraits = DecorationManager::unlockedPortrait($student->getIdLogin());
+        // $accessories = DecorationManager::unlockedAccessory($student->getIdLogin());
 	}
 }

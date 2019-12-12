@@ -3,14 +3,16 @@ namespace CPMF\Controller;
 
 use \CPMF\Models\StudentManager;
 use \CPMF\Models\StepManager;
+use \CPMF\Models\GroupManager;
+use \CPMF\Models\DecorationManager;
 
 class StudentController extends Controller
 {
     public function seeClass(): void
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);
-        $class = ClassManager::getByID($student->getIdClass());
-        $classmates = ClassManager::getStudents($student->getIdClass());
+        $class = GroupManager::getByID($student->getIdClass());
+        $classmates = GroupManager::getStudents($student->getIdClass());
 
         parent::view('student-see-class', ['student' => $student, 'class' => $class, 'classmates' => $classmates]);
     }
@@ -18,12 +20,9 @@ class StudentController extends Controller
      public function seeProfile(): void
     {
         $student = StudentManager::getById($_SESSION['idLogin']);
-        $class = ClassManager::getById($student->getIdClass());
-        $frames = DecorationManager::unlockedFrame($student->getIdLogin());
-        $portraits = DecorationManager::unlockedPortrait($student->getIdLogin());
-        $accessories = DecorationManager::unlockedAccessory($student->getIdLogin());
+        $student->fill();
 
-        parent::view('student-profile', ['student' => $student, 'class' => $class, 'frames' => $frames, 'protraits' => $portraits, 'accessories' => $accessories]);
+        parent::view('student-profile', ['student' => $student, 'class' => $student->getGroup(), 'frames' => $frames, 'protraits' => $portraits, 'accessories' => $accessories]);
     }
 
     public function seeHomepage(): void

@@ -54,12 +54,11 @@ class UserManager
 		return $typeRequest->fetch()['type'];
 	}
 
-	public static function userExists(string $email, string $password, int &$idLogin, string &$type): int
-	{
+	public static function checkLogin(string $email, string $password, int &$idLogin, string &$type) {
 		$userRequest = Manager::getDatabase()->prepare('select idLogin, password, type from Login where email = :email');
 		$userRequest->execute(['email' => $email]);
 
-		if ($userRequest->rowCount() == 0) return -1;
+		if ($userRequest->rowCount() === 0) return -1;
 
 		$result = $userRequest->fetch();
 		$hashedPassword = $result['password'];
@@ -70,19 +69,42 @@ class UserManager
 			return 0;
 		} 
 
-		return -2;
+		return -2;	
+	}
+
+	public static function userExists(string $email): bool
+	{
+		$userRequest = Manager::getDatabase()->prepare('select idLogin from Login where email = :email');
+		$userRequest->execute(['email' => $email]);
+
+		return $userRequest->rowCount() !== 0;
 	}
 
 	public static function addStudent(array $informations): int
 	{
+		if(self::userExists($informations['email'])) {
+			// L'utilisateur existe déjà
+			return -1;
+		}
+
+		// Insertion de l'étudiant dans la table Login
 		$addRequest = Manager::getDatabase()->prepare('insert into Login values(NULL, :email, :password, :firstName, :lastName, "S")');
-		if (!$addRequest) return -1;
+		if (!$addRequest) return -2;
 		$addRequest->execute([
 			'email' => $informations['email'],
 			'password' => password_hash($informations['password'], PASSWORD_DEFAULT),
 			'firstName' => $informations['firstName'],
 			'lastName' => $informations['lastName']
 		]);
-		return Manager::getDatabase()->lastInsertId();
+		$idLogin = Manager::getDatabase()->lastInsertId();
+
+		// Insertion de l'étudiant dans la table Student (avec les valeurs par défaut)
+		$addStudentRequest = Manager::getDatabase()->prepare('insert into Student values(:idLogin, NULL, 1, 1, 1, 0, NOW(), 0)');
+		if(!$addStudentRequest) return -1;
+		$addStudentRequest->execute([
+			'idLogin' => $idLogin
+		]);
+
+		return $idLogin;
 	}
 }

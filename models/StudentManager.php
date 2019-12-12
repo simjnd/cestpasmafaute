@@ -1,6 +1,9 @@
 <?php
 namespace CPMF\Models;
 
+use \CPMF\Models\Entities\User;
+use \CPMF\Models\Entities\Student;
+
 class StudentManager
 {
     public static function getByID(int $idLogin): Student
@@ -9,14 +12,12 @@ class StudentManager
         $loginQuery->execute(['idLogin' => $idLogin]);
 
         $loginData = $loginQuery->fetch();
-        $loginQuery->closeCursor();
 
-        $studentQuery = Manager::getDatabase()->prepare('SELECT * FROM Student WHERE idLogin = :idLogin');
+        $studentQuery = Manager::getDatabase()->prepare('select * from Student where idLogin = :idLogin');
         $studentQuery->execute(['idLogin' => $idLogin]);
         
         $studentData = $studentQuery->fetch();
-		$studentQuery->closeCursor();
-
+        
         $studentData = array_merge($loginData, $studentData);
 
         return new Student($studentData);
@@ -35,6 +36,29 @@ class StudentManager
         
         return $students;
         
+    }
+
+    public static function isVerified(int $idLogin): bool
+    {
+    	$validatedRequest = Manager::getDatabase()->prepare('select verified from Student where idLogin = :idLogin');
+    	$validatedRequest->execute(['idLogin' => $idLogin]);
+
+    	$verified = $validatedRequest->fetch()['verified'];
+
+    	return $verified === "1";
+    }
+
+    public static function getWaitingStudents(): array
+    {
+    	$waitingStudents = [];
+
+    	$query = Manager::getDatabase()->query('SELECT * FROM Student WHERE verified = 0');
+
+    	foreach ($query->fetchAll() as $waiting) {
+    		$waitingStudents[] = new Student($waiting)
+    	}
+
+    	return $waitingStudents;
     }
 
 	public static function setIdClass(int $idLogin, int $idClass): void
@@ -94,7 +118,7 @@ class StudentManager
 	{
 		$query = Manager::getDatabase()->prepare('SELECT SUM(points) AS totalPoints FROM Student_Exercise WHERE idLogin = :idLogin GROUP BY idLogin');
 		$query->execute(array('idLogin' => $idLogin));
-		return $query->fetch()['totalPoints'];
+		return $query->fetch()['totalPoints'] ?? 0;
 	}
 	
 	public static function getGlobalAverage(int $idLogin): float

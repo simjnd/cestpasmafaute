@@ -17,7 +17,7 @@ class Difficulty
 		return $this->id;
 	}
 
-	public function getLabel(): string
+	public function getName(): string
 	{
 		return $this->label;
 	}

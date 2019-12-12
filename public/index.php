@@ -29,8 +29,6 @@ Router::setDefault('NotFound');
 
 // GLOBAL PAGES
 
-Router::get('/signout', 'Global@signOut');
-
 Router::get('/', 'General@homePage');
 
 // SIGNIN
@@ -43,17 +41,22 @@ Router::post('/signin', 'General@postSignin');
 Router::view('/signup', 'general-signup');
 Router::post('/signup', 'General@postSignup');
 
+// SIGNOUT
+
+Router::get('/signout', 'General@signout');
+
 // STUDENT PAGES
 
 Router::get('/class', 'Student@seeClass');
 
-Router::get('/profile/{idLogin}', 'Student@seeProfile');
+Router::get('/profile', 'Student@seeProfile');
 Router::post('/profile', 'Student@saveProfileChanges');
 
 // TEACHER PAGES
 
 Router::get('/approval', 'Teacher@seeWaitingStudents');
 Router::get('/approval', 'Teacher@seeWaitingStudents');
+Router::get('/profile/{id}', 'Teacher@seeStudent');
 
 // TEST
 

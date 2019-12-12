@@ -40,18 +40,18 @@ class GeneralController extends Controller
 	{
 		$idLogin = 0;
 		$type = "";
-		$result = UserManager::userExists($_POST['email'], $_POST['password'], $idLogin, $type);
-
+		$result = UserManager::checkLogin($_POST['email'], $_POST['password'], $idLogin, $type);
+		$verified = StudentManager::isVerified($idLogin);
 		if($id == -1) {
 			parent::view('general-signin', ['error' => 'Compte inexistant']);
 		} elseif($id == -2) {
 			parent::view('general-signin', ['error' => 'Email / Mot de passe incorrect']);
 		} else {
-			$_SESSION['idLogin'] = $idLogin;
+			$_SESSION['idLogin'] = intval($idLogin);
 			$_SESSION['type'] = $type;
 			if ($type === 'S')
 			{
-				$_SESSION['validated'] = false;
+				$_SESSION['validated'] = $verified;
 			}
 			parent::redirect('/');
 		}
@@ -70,14 +70,20 @@ class GeneralController extends Controller
 
 		$resultCode = UserManager::addStudent($informations);
 		
-		if($resultCode === -1) {
+		if($resultCode < 0) {
 			// ERROR
-			die('Erreur lors de l\'ajout');
+			die('Erreur lors de l\'ajout: ('.$resultCode.')');
 		} else {
-			$_SESSION['idLogin'] = $resultCode;
+			$_SESSION['idLogin'] = intval($resultCode);
 			$_SESSION['type'] = 'S';
 			$_SESSION['validated'] = false;
 			parent::redirect('/');
 		}
+	}
+
+	public function signout(): void
+	{
+		session_destroy();
+		parent::redirect('/');
 	}
 }

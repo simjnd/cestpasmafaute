@@ -1,14 +1,30 @@
 <?php
 namespace CPMF\Models;
 
-class ClassManager
+use \CPMF\Models\Entities\Group;
+
+class GroupManager
 {
-    public static function getByID(int $idClass): Class
+    public static function getByID(int $idClass): Group
     {
         $query = Manager::getDatabase()->prepare('SELECT * FROM Class WHERE idClass = :idClass');
         $query->execute(['idClass' => $idClass]);
         $rawClass = $query->fetch();
-        return new Class($rawClass);
+        return new Group($rawClass);
+    }
+
+    public static function getTeacherGroups(int $idTeacher): array 
+    {
+    	$groups = [];
+		
+		$query = Manager::getDatabase()->prepare('SELECT * from Class where idTeacher = :idTeacher');
+		$query->execute(['idTeacher' => $idTeacher]);
+
+		foreach($query->fetchAll() as $group) {
+			$groups[] = new Group($group);
+		}
+
+		return $groups;
     }
 
 	public static function getStudents(int $idClass): array

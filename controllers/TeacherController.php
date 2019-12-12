@@ -3,6 +3,16 @@ namespace CPMF\Controller;
 
 class TeacherController extends Controller
 {
+
+	public function seeHome(): void
+	{
+		$teacher = TeacherManager::getByID($_SESSION['idLogin']);
+		$numberWaitingStudents = StudentManager::getWaitingStudents();
+		$classes = GroupManager::getByID($_SESSION['idLogin']);
+
+		parent::view('teacher-home', 'teacher' => $teacher, 'numberWaitingStudents' => $numberWaitingStudents, 'classes' => $classes);
+	}
+
 	public function seeWaitingStudents(): void
 	{
 		parent::view('teacher-approve', [
@@ -14,4 +24,16 @@ class TeacherController extends Controller
 			]
 		]);
 	}
+
+	public function seeStudent(int $id): void
+    {
+        $teacher = TeacherManager::getById($_SESSION['idLogin']);
+        $student = StudentManager::getById($id);
+        $totalPoints = StudentManager::getTotalPoints($id);
+        $globalAverage = StudentManager::getGlobalAverage($id);
+        $group = GroupManager::getById($student->getIdClass());
+
+
+        parent::view('teacher-see-student', ['student' => $student, 'teacher' => $teacher, 'group' => $group, 'totalPoints' => $totalPoints, 'globalAverage' => $globalAverage]);
+    }
 }

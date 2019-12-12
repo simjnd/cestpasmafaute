@@ -1,7 +1,7 @@
 <?php
 namespace CPMF\Models\Entities;
 
-class Class extends Model
+class Group extends Model
 {
 	private $name;
 	private $students;
@@ -17,16 +17,6 @@ class Class extends Model
     private function setName(string $name): void
     {
         $this->name = $name;
-    }
-    
-    private function setStudents(array $students): void
-    {
-        $this->students = $students;
-    }
-    
-    private function setCourse(Course $course): void
-    {
-        $this->course = $course;
     }
 
 	public function getName(): string
