@@ -55,7 +55,7 @@ class StudentManager
     	$query = Manager::getDatabase()->query('SELECT * FROM Student WHERE verified = 0');
 
     	foreach ($query->fetchAll() as $waiting) {
-    		$waitingStudents[] = new Student($waiting)
+    		$waitingStudents[] = new Student($waiting);
     	}
 
     	return $waitingStudents;
