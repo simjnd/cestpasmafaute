@@ -7,7 +7,7 @@
 </head>
 <body>
     <p><a href="/signout">Déconnexion</a></p>
-    <p><a href="/student/profile">Mon profil</a></p>
+    <p><a href="/profile">Mon profil</a></p>
     <p><a href="#">Ma classe</a></p>
 
     <!-- Student's avatar -->
