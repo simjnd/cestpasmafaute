@@ -2,6 +2,7 @@
 namespace CPMF\Controller;
 
 use CPMF\Models\UserManager;
+use CPMF\Models\StudentManager;
 
 class GeneralController extends Controller
 {
