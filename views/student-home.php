@@ -8,7 +8,7 @@
 <body>
     <p><a href="/signout">Déconnexion</a></p>
     <p><a href="/profile">Mon profil</a></p>
-    <p><a href="#">Ma classe</a></p>
+    <p><a href="/class">Ma classe</a></p>
 
     <!-- Student's avatar -->
     <h1><?= $totalPoints ?> points</h1>
