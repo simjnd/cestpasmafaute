@@ -45,6 +45,10 @@ Router::post('/signup', 'General@postSignup');
 
 Router::get('/signout', 'General@signout');
 
+// CHANGE PASSWORD
+
+Router::post('/change-password', 'General@changePassword');
+
 // STUDENT PAGES
 
 Router::get('/class', 'Student@seeClass');
