@@ -107,4 +107,9 @@ class UserManager
 
 		return $idLogin;
 	}
+
+	public static function updatePassword(int $idLogin, varchar $password): void
+	{
+		// TODO Arnaud
+	}
 }

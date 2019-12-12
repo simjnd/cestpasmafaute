@@ -96,11 +96,17 @@ class GeneralController extends Controller
 	{
 		$informations = $_POST;
 
-		
+		$actualPassword = UserManager::getPassword($_SESSION['idLogin']);
 
-		if (condition) {
-			# code...
+		if ($informations['actualPassword'] === $actualPassword) {
+			if ($informations['password'] === $informations['passwordConfirmation']) {
+				UserManager::
+			}
+		} else {
+			die("Le mot de passe actuel n'est pas correct");
 		}
+
+		// TODO Arnaud
 	}
 
 }
