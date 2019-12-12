@@ -8,5 +8,7 @@
 	<body>
 		<h1>C'est pas ma faute.</h1>
 		<p>Le site à la pédagogie révolutionnaire</p>
+		<a href="/signin">Se connecter</a>
+		<a href="/signup">S'inscrire</a>
 	</body>
 </html>
