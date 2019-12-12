@@ -29,6 +29,10 @@
 				<label for="password">Mot de passe: </label>
 				<input type="password" name="password">
 			</p>
+			<p>
+				<label for="password">Confirmer le mot de passe: </label>
+				<input type="password" name="passwordConfirmation">
+			</p>
 			<input type="submit" value="S'inscrire">
 		</form>
 	</body>

@@ -69,7 +69,11 @@ class GeneralController extends Controller
 
 		$informations = $_POST;
 
-		$resultCode = UserManager::addStudent($informations);
+		if ($informations['password'] = $informations['passwordConfirmation']) {
+			$resultCode = UserManager::addStudent($informations);
+		} else {
+			die("Le mot de passe n'est pas vérifié");
+		}
 		
 		if($resultCode < 0) {
 			// ERROR
