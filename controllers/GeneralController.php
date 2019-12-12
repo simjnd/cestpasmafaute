@@ -86,4 +86,9 @@ class GeneralController extends Controller
 		session_destroy();
 		parent::redirect('/');
 	}
+	
+	public function testView(): void
+	{
+    	parent::view('test-view');
+	}
 }
