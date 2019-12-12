@@ -60,7 +60,7 @@ Router::get('/profile/{id}', 'Teacher@seeStudent');
 
 // TEST
 
-Router::get('/test', 'General@testView');
+Router::view('/test', 'test-view');
 
 session_start();
 
