@@ -54,7 +54,7 @@ class GeneralController extends Controller
 			{
 				$_SESSION['validated'] = $verified;
 			}
-			parent::redirect('/');
+			parent::redirect('/profile');
 		}
 	}
 
