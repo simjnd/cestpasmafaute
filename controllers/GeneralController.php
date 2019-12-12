@@ -72,6 +72,7 @@ class GeneralController extends Controller
 		if ($informations['password'] === $informations['passwordConfirmation']) {
 			$resultCode = UserManager::addStudent($informations);
 		} else {
+			parent::redirect('/signin');
 			die("Le mot de passe n'est pas vérifié");
 		}
 		
