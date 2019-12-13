@@ -112,6 +112,6 @@ class UserManager
 	{
 		// TODO Arnaud
 		$changePasswordRequest = Manager::getDatabase()->prepare('UPDATE Login SET password = :password WHERE idLogin = :idLogin');
-		$changePasswordRequest->execute(['password' => $password, 'idLogin' => $idLogin]);
+		$changePasswordRequest->execute(['password' => password_hash($password, PASSWORD_DEFAULT), 'idLogin' => $idLogin]);
 	}
 }

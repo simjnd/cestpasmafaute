@@ -37,6 +37,6 @@
 		<?php } ?>
 	</div>
 
-	<a href="#">Modifier mot de passe</a>
+	<a href="/change-password">Modifier mot de passe</a>
 </body>
 </html>
