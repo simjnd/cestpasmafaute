@@ -99,7 +99,7 @@ class UserManager
 		$idLogin = Manager::getDatabase()->lastInsertId();
 
 		// Insertion de l'étudiant dans la table Student (avec les valeurs par défaut)
-		$addStudentRequest = Manager::getDatabase()->prepare('insert into Student values(:idLogin, NULL, 1, 1, 1, 0, NOW(), 0)');
+		$addStudentRequest = Manager::getDatabase()->prepare('INSERT INTO Student VALUES(:idLogin, NULL, 1, 1, 1, 0, NOW(), 0)');
 		if(!$addStudentRequest) return -1;
 		$addStudentRequest->execute([
 			'idLogin' => $idLogin
@@ -111,5 +111,7 @@ class UserManager
 	public static function updatePassword(int $idLogin, varchar $password): void
 	{
 		// TODO Arnaud
+		$changePasswordRequest = Manager::getDatabase()->prepare('UPDATE Login SET password = :password WHERE idLogin = :idLogin');
+		$changePasswordRequest->execute(['password' => $password, 'idLogin' => $idLogin]);
 	}
 }
