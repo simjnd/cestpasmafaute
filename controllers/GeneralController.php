@@ -41,7 +41,7 @@ class GeneralController extends Controller
 	{
 		$idLogin = 0;
 		$type = "";
-		$result = UserManager::checkLogin($_POST['email'], $_POST['password'], $idLogin, $type);
+		$id = UserManager::checkLogin($_POST['email'], $_POST['password'], $idLogin, $type);
 		$verified = StudentManager::isVerified($idLogin);
 		if($id == -1) {
 			parent::view('general-signin', ['error' => 'Compte inexistant']);
@@ -96,9 +96,9 @@ class GeneralController extends Controller
 	{
 		$informations = $_POST;
 
-		$actualPassword = UserManager::getPassword($_SESSION['idLogin']);
+		$hashedPassword = UserManager::getPassword($_SESSION['idLogin']);
 
-		if (password_hash($informations['actualPassword'], PASSWORD_DEFAULT) === $actualPassword) {
+		if (password_verify($informations['actualPassword'], $hashedPassword)) {
 			if ($informations['password'] === $informations['passwordConfirmation']) {
 				UserManager::updatePassword($_SESSION['idLogin'], $password);
 			}
