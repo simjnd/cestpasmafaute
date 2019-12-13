@@ -98,8 +98,8 @@ class GeneralController extends Controller
 
 		$actualPassword = UserManager::getPassword($_SESSION['idLogin']);
 
-		// Vérifier la correspondance avec le hashage
-		if (password_hash($informations['actualPassword'], PASSWORD_DEFAULT) === $actualPassword) {
+
+		if (password_hash($informations['actualPassword'], PASSWORD_DEFAULT) === $password) {
 			if ($informations['password'] === $informations['passwordConfirmation']) {
 				UserManager::updatePassword($_SESSION['idLogin'], $password);
 			}
