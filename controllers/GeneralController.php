@@ -100,11 +100,11 @@ class GeneralController extends Controller
 
 		if (password_verify($informations['actualPassword'], $hashedPassword)) {
 			if ($informations['password'] === $informations['passwordConfirmation']) {
-				UserManager::updatePassword($_SESSION['idLogin'], $password);
+				UserManager::updatePassword($_SESSION['idLogin'], $informations['password']);
 			}
 		} else {
 			echo "actualPassword (clai)" . $informations['actualPassword'] . "\n";
-			echo "actualPassword (Form) : " . $actualPassword . "\n";
+			echo "actualPassword (Form) : " . $hashedPassword . "\n";
 			echo "actualPassword (BDD) : " . password_hash($informations['actualPassword'], PASSWORD_DEFAULT) ."\n";
 			die("Le mot de passe actuel n'est pas correct");
 		}
