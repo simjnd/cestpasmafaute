@@ -108,7 +108,7 @@ class UserManager
 		return $idLogin;
 	}
 
-	public static function updatePassword(int $idLogin, varchar $password): void
+	public static function updatePassword(int $idLogin, string $password): void
 	{
 		// TODO Arnaud
 		$changePasswordRequest = Manager::getDatabase()->prepare('UPDATE Login SET password = :password WHERE idLogin = :idLogin');
