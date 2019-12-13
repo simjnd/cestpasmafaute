@@ -109,7 +109,7 @@ class GeneralController extends Controller
 		} else {
 			echo "actualPassword (clai)" . $informations['actualPassword'] . "\n";
 			echo "actualPassword (Form) : " . $actualPassword . "\n";
-			echo "actualPassword (BDD) : " password_hash($informations['actualPassword'], PASSWORD_DEFAULT) ."\n";
+			echo "actualPassword (BDD) : " . password_hash($informations['actualPassword'], PASSWORD_DEFAULT) ."\n";
 			die("Le mot de passe actuel n'est pas correct");
 		}
 
