@@ -47,6 +47,7 @@ Router::get('/signout', 'General@signout');
 
 // CHANGE PASSWORD
 
+Router::view('/change-password', 'general-change-password');
 Router::post('/change-password', 'General@changePassword');
 
 // STUDENT PAGES
