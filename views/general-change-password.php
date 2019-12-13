@@ -5,7 +5,7 @@
 </head>
 <body>
 	<h1>Changer votre mot de passe</h1>
-	<form action="/profile" action="POST">
+	<form action="/change-password" method="POST">
 		<p>
 			<label>Mot de passe actuel: </label>
 			<input type="password" name="actualPassword">
