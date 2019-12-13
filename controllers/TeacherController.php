@@ -15,14 +15,7 @@ class TeacherController extends Controller
 
 	public function seeWaitingStudents(): void
 	{
-		parent::view('teacher-approve', [
-			'waitingStudents' => [
-				'Arnaud',
-				'Guillaume',
-				'Pierre', 
-				'Simon'
-			]
-		]);
+		// TODO Arnaud
 	}
 
 	public function seeStudent(int $id): void

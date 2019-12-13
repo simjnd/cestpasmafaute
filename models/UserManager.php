@@ -110,7 +110,6 @@ class UserManager
 
 	public static function updatePassword(int $idLogin, string $password): void
 	{
-		// TODO Arnaud
 		$changePasswordRequest = Manager::getDatabase()->prepare('UPDATE Login SET password = :password WHERE idLogin = :idLogin');
 		$changePasswordRequest->execute(['password' => password_hash($password, PASSWORD_DEFAULT), 'idLogin' => $idLogin]);
 	}

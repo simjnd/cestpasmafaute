@@ -8,12 +8,12 @@ class TeacherManager
 {
 	public static function getByID(int $idLogin): Teacher
 	{
-		$loginQuery = Manager::getDatabase()->prepare('select * from Login where idLogin = :idLogin');
+    	$loginQuery = Manager::getDatabase()->prepare('SELECT * FROM Login WHERE idLogin = :idLogin');
         $loginQuery->execute(['idLogin' => $idLogin]);
 
         $loginData = $loginQuery->fetch();
 
-        $teacherQuery = Manager::getDatabase()->prepare('select * from Teacher where idLogin = :idLogin');
+        $teacherQuery = Manager::getDatabase()->prepare('SELECT * FROM Teacher WHERE idLogin = :idLogin');
         $teacherQuery->execute(['idLogin' => $idLogin]);
         
         $teacherData = $studentQuery->fetch();
@@ -22,5 +22,11 @@ class TeacherManager
 
         return new Teacher($teacherData);
 	}
+
+    public static function getWaitingStudents(): array
+    {
+        // TODO Arnaud
+        Manager::getDatabase()->query('SELECT ')
+    }
 
 }
