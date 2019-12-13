@@ -106,6 +106,7 @@ class GeneralController extends Controller
 		} else {
 			die("Le mot de passe actuel n'est pas correct");
 		}
-	}
 
+		parent::view('general-change-password');
+	}
 }
