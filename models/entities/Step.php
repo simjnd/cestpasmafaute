@@ -57,14 +57,35 @@ class Step
 		return $this->name;
 	}
 
-	public function getLesson(): string
+	public function getLessons(): array
 	{
-		return $this->lesson;
+		$lessons[];
+
+		$lessons[] = $this->lessonEasy;
+		$lessons[] = $this->lessonMedium;
+		$lessons[] = $this->lessonHard;
+
+		return $lessons;
 	}
 
 	public function getExercices(): array
 	{
 		return $this->exercices;
+	}
+
+	public function fill(): void
+	{
+		if ($this->getIdStep !== NULL) {
+			$this->setLessonEasy(StepManager::getLessonEasyByStepID($this->getIdStep()));
+			$this->setLessonMedium(StepManager::getLessonMediumByStepID($this->getIdStep()));
+			$this->setLessonHard(StepManager::getLessonHardByStepID($this->getIdStep()));
+		} else {
+			$this->setLessonEasy(NULL);
+			$this->setLessonMedium(NULL);
+			$this->setLessonHard(NULL);
+		}
+
+
 	}
 	
 }

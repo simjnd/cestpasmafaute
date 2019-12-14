@@ -3,7 +3,8 @@ namespace CPMF\Models\Entities;
 
 class Exercise
 {
-    private $id;
+    private $idExercice;
+    private $idDifficulty;
     
     public function
 }
