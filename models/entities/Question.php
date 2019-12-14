@@ -21,5 +21,5 @@ abstract class Question
 		return $this->sentence;
 	}
 
-	public abstract function answer(): void;
+	public abstract function getAnswer(): void;
 }
