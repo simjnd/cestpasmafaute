@@ -19,7 +19,7 @@ class Route
 
 	public function verifyOptions(): bool
 	{
-		if (key_exists($this->options['user_type'])) {
+		if (key_exists('user_type', $this->options)) {
 			if ($this->options['user_type'] == 'none') {
 				if (isset($_SESSION['type'])) {
 					return false;
