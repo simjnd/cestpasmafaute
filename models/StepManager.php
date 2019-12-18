@@ -30,7 +30,7 @@ class StepManager
 
     public static function getExercicesByStepID(int $idStep): array
     {
-        $exercices[];
+        $exercices = [];
 
         $query = Manager::getDatabase()->prepare('SELECT Exercice.idExercice AS idExercice, Exercice.idDifficulty AS idDifficulty FROM Step, Step_Exercice, Exercice, Difficulty WHERE Step.idStep = :idStep AND Step.idStep = Step_Exercice.idStep AND Exercice.idExercice = Step_Exercice.idExercice AND Difficulty.idDifficulty = Exercice.idDifficulty');
         $query->execute(['idStep' => $idStep]);
