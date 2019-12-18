@@ -50,6 +50,7 @@ class Router
         
         foreach (self::$routes[$_SERVER['REQUEST_METHOD']] as $route) {
             if (self::isMatchingRoute($route, self::$url)) {
+                var_dump($route);
                 return $route->call();
             }
         }
