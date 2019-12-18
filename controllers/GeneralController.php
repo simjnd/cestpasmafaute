@@ -6,35 +6,9 @@ use CPMF\Models\StudentManager;
 
 class GeneralController extends Controller
 {
-	public function homePage(): void
+	public function seeHomePage(): void
 	{
-		$type = $_SESSION['type'] ?? NULL;
-
-		if (isset($_SESSION['type'])) 
-		{
-			if ($_SESSION['type'] === 'S') // Cas d'un étudiant
-			{
-				$idStudent = $_SESSION['idLogin'] ?? NULL;
-				$validated = $_SESSION['validated'] ?? NULL;
-				if ($validated) // Étudiant validé
-				{
-					parent::view('student-home');
-				}
-				else // Étudiant en attente de validation
-				{
-					parent::view('student-home-validation');	
-				}		
-			}
-			elseif ($_SESSION['type'] === 'T') // Cas d'un professeur
-			{
-				$idTeacher = $_SESSION['idLogin'] ?? NULL;
-				parent::view('teacher-home');
-			}
-		} 
-		else
-		{
-			parent::view('general-home');
-		}
+		parent::view('general-home');
 	}
 
 	public function postSignin(): void

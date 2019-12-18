@@ -27,7 +27,7 @@ Router::init();
 Router::setDefault('NotFound');
 
 // GLOBAL ROUTES
-Router::get('/', 'General@homePage');
+Router::get('/', 'General@seeHomePage', ['user_type' => 'none']);
 
 Router::view('/signin', 'general-signin');
 Router::post('/signin', 'General@postSignin');
@@ -42,12 +42,14 @@ Router::post('/change-password', 'General@changePassword', ['user_type' => 'eith
 
 
 // STUDENT ROUTES
+Router::get('/', 'Student@seeHomePage', ['user_type' => 'S']);
 Router::get('/class', 'Student@seeClass', ['user_type' => 'S']);
 Router::get('/profile', 'Student@seeProfile', ['user_type' => 'S']);
 Router::post('/profile', 'Student@saveProfileChanges', ['user_type' => 'S']);
 
 
 // TEACHER ROUTES
+Router::get('/', 'Teacher@seeHomePage', ['user_type' => 'T']);
 Router::get('/approval', 'Teacher@seeWaitingStudents', ['user_type' => 'T']);
 Router::get('/approval', 'Teacher@seeWaitingStudents', ['user_type' => 'T']);
 Router::get('/profile/{id}', 'Teacher@seeStudent', ['user_type' => 'T']);

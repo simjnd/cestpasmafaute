@@ -8,6 +8,16 @@ use \CPMF\Models\DecorationManager;
 
 class StudentController extends Controller
 {
+    public function seeHomePage(): void
+    {
+        $validated = $_SESSION['validated'] ?? NULL;
+        if ($validated) {
+            parent::view('student-home');
+        } else {
+            parent::view('student-home-validation');    
+        }   
+    }
+
     public function seeClass(): void
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);

@@ -17,31 +17,20 @@ class Route
 		$this->options = $options;
 	}
 
-	public function execute()
+	public function verifyOptions(): bool
 	{
-		if (count($this->options) === 0) {
-			$this->call();
-		} else if (key_exists('user_type', $this->options)) {
-			if ($this->options['user_type'] === 'either') {
-				if (isset($_SESSION['type'])) {
-					$this->call();
-				} else {
-					header('Locaton: /signin');
-				}
-			} else if ($this->options['user_type'] === $_SESSION['type']) {
-				if (key_exists('verified', $this->options)) {
-					if ($this->options['verified'] === isset($_SESSION['verified'])) {
-						$this->call();
-					} else {
-						header('Location: /');
-					}
-				} else {
-					$this->call();
-				}
+		if (isset($this->options['user_type'])) {
+			if ($this->options['user_type'] === 'none' && isset($_SESSION['type'])) {
+				return false;
+			} elseif (!isset($_SESSION['type'])) {
+				return false;
 			} else {
-				header('Location: /signin');
+				if ($this->options['user_type'] != 'either' && $this->options['user_type'] != $_SESSION['type']) {
+					return false;
+				}
 			}
 		}
+		return true;
 	}
 
 	public function call()

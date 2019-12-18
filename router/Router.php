@@ -66,6 +66,6 @@ class Router
         }
         array_shift($matches);
         $route->setMatches($matches);
-        return true;
+        return $route->verifyOptions();
     }
 }
