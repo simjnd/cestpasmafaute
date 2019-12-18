@@ -24,12 +24,11 @@ class Route
 				if (isset($_SESSION['type'])) {
 					return false;
 				}
-			}
-			if ($this->options['user_type'] != 'none' && !isset($_SESSION['type'])) {
-				return false;
-			}
-			if ($this->options['user_type'] != 'either' && $this->options['user_type'] != $_SESSION['type']) {
-				echo "COND 3";
+			} elseif ($this->options['user_type' === 'either']) {
+				if (!isset($_SESSION['type'])) {
+					return false;
+				}
+			} elseif ($this->options['user_type'] != $_SESSION['type']) {
 				return false;
 			}
 		}
