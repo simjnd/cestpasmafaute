@@ -20,7 +20,7 @@ class StepManager
 
     public static function getStepByID(int $idStep): Step
     {
-        $queryStep = Manager::getDatabase()->prepare('SELECT Step.idStep AS idStep, Step.name AS name FROM Step WHERE Step.idStep = :idStep');
+        $queryStep = Manager::getDatabase()->prepare('SELECT idStep, name FROM Step WHERE idStep = :idStep');
         $queryStep->execute(['idStep' => $idStep]);
 
         $stepData = $queryStep->fetch();
@@ -76,7 +76,7 @@ class StepManager
     public static function getClickableQuestionByID(int $idClickableQuestion): Question 
     {
         $query = Manager::getDatabase()->prepare('SELECT idClickableQuestion, sentence FROM ClickableQuestion WHERE idClickableQuestion = :idClickableQuestion');
-        $query->execute(['idClickableQuestion'] => $idClickableQuestion);
+        $query->execute(['idClickableQuestion' => $idClickableQuestion]);
 
         $questionData = $query->fecth();
         return new Question($questionData);
@@ -85,7 +85,7 @@ class StepManager
     public static function getMultipleQuestionByID(int $idMultipleQuestion): Question 
     {
         $query = Manager::getDatabase()->prepare('SELECT idMultipleQuestion, sentence FROM MultipleQuestion WHERE idMultipleQuestion = :idMultipleQuestion');
-        $query->execute(['idMultipleQuestion'] => $idMultipleQuestion);
+        $query->execute(['idMultipleQuestion' => $idMultipleQuestion]);
 
         $questionData = $query->fecth();
         return new Question($questionData);
@@ -94,7 +94,7 @@ class StepManager
     public static function getPuzzleQuestionByID(int $idPuzzleQuestion): Question 
     {
         $query = Manager::getDatabase()->prepare('SELECT idPuzzleQuestion, sentence FROM PuzzleQuestion WHERE idPuzzleQuestion = :idPuzzleQuestion');
-        $query->execute(['idPuzzleQuestion'] => $idPuzzleQuestion);
+        $query->execute(['idPuzzleQuestion' => $idPuzzleQuestion]);
 
         $questionData = $query->fecth();
         return new Question($questionData);
