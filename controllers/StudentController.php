@@ -12,7 +12,11 @@ class StudentController extends Controller
     {
         $validated = $_SESSION['validated'] ?? NULL;
         if ($validated) {
-            parent::view('student-home');
+            $steps = StepManager::getStepsByStudentID($_SESSION['idLogin']);
+            $student = StudentManager::getByID($_SESSION['idLogin']);
+            $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
+
+            parent::view('student-home', ['steps' => $steps, 'student' => $student, 'totalPoints' => $totalPoints]);
         } else {
             parent::view('student-home-validation');    
         }   
@@ -27,21 +31,12 @@ class StudentController extends Controller
         parent::view('student-see-class', ['student' => $student, 'class' => $class, 'classmates' => $classmates]);
     }
 
-     public function seeProfile(): void
+    public function seeProfile(): void
     {
         $student = StudentManager::getById($_SESSION['idLogin']);
         $student->fill();
 
         parent::view('student-profile', ['student' => $student, 'class' => $student->getGroup(), 'frames' => $frames, 'protraits' => $portraits, 'accessories' => $accessories]);
-    }
-
-    public function seeHomepage(): void
-    {
-        $steps = StepManager::getStepsByStudentID($_SESSION['idLogin']);
-        $student = StudentManager::getByID($_SESSION['idLogin']);
-        $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
-
-        parent::view('student-home', ['steps' => $steps, 'student' => $student, 'totalPoints' => $totalPoints]);
     }
 
     public function seeStep(int $id): void

@@ -49,7 +49,6 @@ class Router
         }
         
         foreach (self::$routes[$_SERVER['REQUEST_METHOD']] as $route) {
-            var_dump($route);
             if (self::isMatchingRoute($route, self::$url)) {
                 return $route->call();
             }

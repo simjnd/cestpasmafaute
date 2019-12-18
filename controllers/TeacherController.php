@@ -1,5 +1,6 @@
 <?php
 namespace CPMF\Controller;
+use CPMF\Models\TeacherManager;
 
 class TeacherController extends Controller
 {
