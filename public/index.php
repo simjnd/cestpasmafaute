@@ -24,47 +24,36 @@ spl_autoload_register(function($name) {
 });
 
 Router::init();
-
 Router::setDefault('NotFound');
 
-// GLOBAL PAGES
-
+// GLOBAL ROUTES
 Router::get('/', 'General@homePage');
-
-// SIGNIN
 
 Router::view('/signin', 'general-signin');
 Router::post('/signin', 'General@postSignin');
 
-// SIGNUP
-
 Router::view('/signup', 'general-signup');
 Router::post('/signup', 'General@postSignup');
 
-// SIGNOUT
-
 Router::get('/signout', 'General@signout');
 
-// CHANGE PASSWORD
+Router::view('/change-password', 'general-change-password', ['user_type' => 'either']);
+Router::post('/change-password', 'General@changePassword', ['user_type' => 'either']);
 
-Router::view('/change-password', 'general-change-password');
-Router::post('/change-password', 'General@changePassword');
 
-// STUDENT PAGES
+// STUDENT ROUTES
+Router::get('/class', 'Student@seeClass', ['user_type' => 'S']);
+Router::get('/profile', 'Student@seeProfile', ['user_type' => 'S']);
+Router::post('/profile', 'Student@saveProfileChanges', ['user_type' => 'S']);
 
-Router::get('/class', 'Student@seeClass');
 
-Router::get('/profile', 'Student@seeProfile');
-Router::post('/profile', 'Student@saveProfileChanges');
+// TEACHER ROUTES
+Router::get('/approval', 'Teacher@seeWaitingStudents', ['user_type' => 'T']);
+Router::get('/approval', 'Teacher@seeWaitingStudents', ['user_type' => 'T']);
+Router::get('/profile/{id}', 'Teacher@seeStudent', ['user_type' => 'T']);
 
-// TEACHER PAGES
 
-Router::get('/approval', 'Teacher@seeWaitingStudents');
-Router::get('/approval', 'Teacher@seeWaitingStudents');
-Router::get('/profile/{id}', 'Teacher@seeStudent');
-
-// TEST
-
+// TEST ROUTES
 Router::view('/test', 'test-view');
 
 session_start();

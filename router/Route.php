@@ -1,71 +1,72 @@
 <?php
-namespace CPMF\Router;
+namespace Medical\Router;
+require_once('../conf.php');
 
 class Route
 {
 	private $path;
-	private $callable;
+	private $callback;
 	private $matches;
-	private $params;
+	private $options;
 
-	public function __construct(string $path, $callable) 
+	public function __construct(string $path, $callback, array $options) 
 	{
 		$this->path = trim($path, '/');
-		$this->callable = $callable;
+		$this->callback = $callback;
 		$this->matches = [];
-		$this->params = [];
+		$this->options = $options;
 	}
 
-	public function match(string $url): bool
+	public function execute()
 	{
-		$url = trim($url, '/');
-		$path = preg_replace('#{([a-zA-Z0-9]+)*}#', '([^/]+)', $this->path);
-		$regex = '#^'. $path. '$#i';
-		if(!preg_match($regex, $url, $matches)){
-			return false;
+		if (count($this->options) === 0) {
+			$this->call();
+		} else if (key_exists('user_type', $this->options)) {
+			if ($this->options['user_type'] === 'either') {
+				if (isset($_SESSION['type'])) {
+					$this->call();
+				} else {
+					header('Locaton: /signin');
+				}
+			} else if ($this->options['user_type'] === $_SESSION['type']) {
+				if (key_exists('verified', $this->options)) {
+					if ($this->options['verified'] === isset($_SESSION['verified'])) {
+						$this->call();
+					} else {
+						header('Location: /');
+					}
+				} else {
+					$this->call();
+				}
+			} else {
+				header('Location: /signin');
+			}
 		}
-		array_shift($matches);
-		$this->matches = $matches;
-		return true;
-	}
-
-	public function with(string $param, string $regex): Route
-	{
-		$this->params[$param] = str_replace('(', '(?:', $regex);
-		return $this;
-	}
-
-	private function paramMatch(array $match): string
-	{
-		if(isset($this->params[$match[1]])) {
-			return '('. $this->params[$match[1]] .')';
-		}
-		return '([^/]+)';
-	}
-
-	public function getUrl(array $params): string
-	{
-		$path = $this->path;
-		foreach($params as $k => $v){
-			$path = str_replace('{'.$k.'}', $v, $path);
-		}
-		return $path;
 	}
 
 	public function call()
 	{
-		if(is_string($this->callable)){
-    		require_once '../conf.php';
-			$params = explode('@', $this->callable);
+		if (is_string($this->callback)) {
+			$params = explode('@', $this->callback);
 			$controller = APPNAME.'\\Controller\\'. $params[0] .'Controller';
 			$controller = new $controller();
 			if (count($params) > 1) {
-                return call_user_func_array(array($controller, $params[1]), $this->matches);
+                return call_user_func_array([$controller, $params[1]], $this->matches);
 			} else {
-    			return call_user_func_array(array($controller, 'show'), $this->matches);
+    			return call_user_func_array([$controller, 'show'], $this->matches);
 			}
 		} else {
-			return call_user_func_array($this->callable, $this->matches);
+			return call_user_func_array($this->callback, $this->matches);
 		}
+	}
+	
+	public function getPath(): string
+	{
+    	return $this->path;
+	}
+	
+	public function setMatches(array $matches): void
+	{
+    	$this->matches = $matches;
 	}
 }
