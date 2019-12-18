@@ -20,11 +20,11 @@ class Route
 	public function verifyOptions(): bool
 	{
 		if (key_exists('user_type', $this->options)) {
-			if ($this->options['user_type'] == 'none') {
+			if ($this->options['user_type'] === 'none') {
 				if (isset($_SESSION['type'])) {
 					return false;
 				}
-			} elseif ($this->options['user_type' == 'either']) {
+			} elseif ($this->options['user_type'] === 'either') {
 				if (!isset($_SESSION['type'])) {
 					return false;
 				}
