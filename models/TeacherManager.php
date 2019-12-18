@@ -16,7 +16,7 @@ class TeacherManager
         $teacherQuery = Manager::getDatabase()->prepare('SELECT * FROM Teacher WHERE idLogin = :idLogin');
         $teacherQuery->execute(['idLogin' => $idLogin]);
         
-        $teacherData = $studentQuery->fetch();
+        $teacherData = $teacherQuery->fetch();
         
         $teacherData = array_merge($loginData, $teacherData);
 
