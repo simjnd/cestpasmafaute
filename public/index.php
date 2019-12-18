@@ -27,7 +27,7 @@ Router::init();
 Router::setDefault('NotFound');
 
 // GLOBAL ROUTES
-Router::view('/', 'General@seeHomePage', ['user_type' => 'none']);
+Router::get('/', 'General@seeHomePage', ['user_type' => 'none']);
 
 Router::view('/signin', 'general-signin');
 Router::post('/signin', 'General@postSignIn');
