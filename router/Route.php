@@ -22,7 +22,7 @@ class Route
 		if (isset($this->options['user_type'])) {
 			if ($this->options['user_type'] === 'none' && isset($_SESSION['type'])) {
 				return false;
-			} elseif (!isset($_SESSION['type'])) {
+			} elseif (!isset($_SESSION['type'])) {
 				return false;
 			} else {
 				if ($this->options['user_type'] != 'either' && $this->options['user_type'] != $_SESSION['type']) {
