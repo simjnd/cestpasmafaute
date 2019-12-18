@@ -11,7 +11,7 @@ class GeneralController extends Controller
 		parent::view('general-home');
 	}
 
-	public function postSignin(): void
+	public function postSignIn(): void
 	{
 		$idLogin = 0;
 		$type = "";
@@ -32,7 +32,7 @@ class GeneralController extends Controller
 		}
 	}
 
-	public function postSignup(): void
+	public function postSignUp(): void
 	{
 		// TODO: Check de la validation des informations
 
@@ -60,7 +60,7 @@ class GeneralController extends Controller
 		}
 	}
 
-	public function signout(): void
+	public function signOut(): void
 	{
 		session_destroy();
 		parent::redirect('/');

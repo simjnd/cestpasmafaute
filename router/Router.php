@@ -50,7 +50,7 @@ class Router
         
         foreach (self::$routes[$_SERVER['REQUEST_METHOD']] as $route) {
             if (self::isMatchingRoute($route, self::$url)) {
-                return $route->execute();
+                return $route->call();
             }
         }
         return self::$defaultRoute->call();

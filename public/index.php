@@ -27,15 +27,15 @@ Router::init();
 Router::setDefault('NotFound');
 
 // GLOBAL ROUTES
-Router::get('/', 'General@seeHomePage', ['user_type' => 'none']);
+Router::view('/', 'General@seeHomePage', ['user_type' => 'none']);
 
 Router::view('/signin', 'general-signin');
-Router::post('/signin', 'General@postSignin');
+Router::post('/signin', 'General@postSignIn');
 
 Router::view('/signup', 'general-signup');
-Router::post('/signup', 'General@postSignup');
+Router::post('/signup', 'General@postSignUp');
 
-Router::get('/signout', 'General@signout');
+Router::get('/signout', 'General@signOut');
 
 Router::view('/change-password', 'general-change-password', ['user_type' => 'either']);
 Router::post('/change-password', 'General@changePassword', ['user_type' => 'either']);
