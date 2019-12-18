@@ -26,7 +26,7 @@ class TeacherManager
     public static function getWaitingStudents(): array
     {
         // TODO Arnaud
-        Manager::getDatabase()->query('SELECT ')
+        Manager::getDatabase()->query('SELECT ');
     }
 
 }

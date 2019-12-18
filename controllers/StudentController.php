@@ -19,7 +19,7 @@ class StudentController extends Controller
             parent::view('student-home', ['steps' => $steps, 'student' => $student, 'totalPoints' => $totalPoints]);
         } else {
             parent::view('student-home-validation');    
-        }   
+        }
     }
 
     public function seeClass(): void
