@@ -21,11 +21,14 @@ class Route
 	{
 		if (key_exists($this->options['user_type'])) {
 			if ($this->options['user_type'] === 'none' && isset($_SESSION['type'])) {
+				echo "COND 1";
 				return false;
 			} elseif (!isset($_SESSION['type'])) {
+				echo "COND 2";
 				return false;
 			} else {
 				if ($this->options['user_type'] != 'either' && $this->options['user_type'] != $_SESSION['type']) {
+					echo "COND 3";
 					return false;
 				}
 			}
