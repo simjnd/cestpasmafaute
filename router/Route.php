@@ -1,5 +1,5 @@
 <?php
-namespace Medical\Router;
+namespace CPMF\Router;
 require_once('../conf.php');
 
 class Route

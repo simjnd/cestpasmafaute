@@ -1,5 +1,5 @@
 <?php
-namespace Medical\Router;
+namespace CPMF\Router;
 
 class Router
 {
