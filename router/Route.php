@@ -42,7 +42,7 @@ class Route
 			if (count($params) > 1) {
                 return call_user_func_array([$controller, $params[1]], $this->matches);
 			} else {
-    			return call_user_func_array([$controller, 'show'], $this->matches);
+    			return call_user_func_array([$controller, 'seePage'], $this->matches);
 			}
 		} else {
 			return call_user_func_array($this->callback, $this->matches);
