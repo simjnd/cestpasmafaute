@@ -51,8 +51,8 @@ Router::post('/profile', 'Student@saveProfileChanges', ['user_type' => 'S']);
 // TEACHER ROUTES
 Router::get('/', 'Teacher@seeHomePage', ['user_type' => 'T']);
 Router::get('/approval', 'Teacher@seeWaitingStudents', ['user_type' => 'T']);
-Router::get('/approval', 'Teacher@seeWaitingStudents', ['user_type' => 'T']);
 Router::get('/profile/{id}', 'Teacher@seeStudent', ['user_type' => 'T']);
+Router::get('approval/accept/{idLogin}', 'Teacher@acceptWaitingStudent');
 
 
 // TEST ROUTES

@@ -14,7 +14,7 @@
 		<p>
 			<?= $waitingStudent->getFirstName() . ' ' . $waitingStudent->getLastName() ?><br>
 			<?= $waitingStudent->getEmail() ?><br>
-			<a href="#">Valider</a>		<a href="#">Supprimer</a>
+			<a href="/approval/accept/<?= $waitingStudent->getIdLogin() ?>">Valider</a><a href="#">Supprimer</a>
 		</p>
 	<?php } ?>
 

@@ -24,7 +24,16 @@ class TeacherController extends Controller
 		$waitingStudents = StudentManager::getWaitingStudents();
 
 		parent::view('teacher-see-waiting-students', ['waitingStudents' => $waitingStudents, 'teacher' => $teacher]);
+	}
 
+	/**
+	* Accepts a student on hold.
+	*/
+	public function acceptWaitingStudent(int $idStudent): void
+	{
+		StudentManager::acceptWaitingStudent($idStudent);
+
+		parent::redirect('/approval');
 	}
 
 	public function seeStudent(int $id): void

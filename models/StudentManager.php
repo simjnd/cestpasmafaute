@@ -66,6 +66,15 @@ class StudentManager
     	return $waitingStudents;
     }
 
+    /**
+	* Accepts a student on hold.
+	*/
+    public static function acceptWaitingStudent(int $idStudent): void
+    {
+    	$acceptWaitingStudentRequest = Manager::getDatabase()->prepare('UPDATE Student SET verified = 1 WHERE idLogin = :idStudent');
+    	$acceptWaitingStudentRequest->execute(['idStudent' => $idStudent]);
+    }
+
 	public static function setIdClass(int $idLogin, int $idClass): void
 	{
 		$query = Manager::getDatabase()->prepare('UPDATE Student SET idClass = :idClass WHERE idLogin = idLogin');
