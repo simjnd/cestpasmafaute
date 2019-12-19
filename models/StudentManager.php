@@ -82,6 +82,9 @@ class StudentManager
     {
     	$deleteWaitingStudentRequest = Manager::getDatabase()->prepare('DELETE FROM Student WHERE idLogin = :idStudent');
     	$deleteWaitingStudentRequest->execute(['idStudent' => $idStudent]);
+
+    	$deleteWaitingStudentRequest = Manager::getDatabase()->prepare('DELETE FROM Login WHERE idLogin = :idStudent');
+    	$deleteWaitingStudentRequest->execute(['idStudent' => $idStudent]);
     }
 
 	public static function setIdClass(int $idLogin, int $idClass): void
