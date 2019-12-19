@@ -86,9 +86,12 @@ class GeneralController extends Controller
 		parent::redirect('/profile');
 	}
 
-	public function sendPasswordEmail(string $email): void
+	/**
+	* Send an email to change your forgotten password
+	*/
+	public function sendPasswordEmail(): void
 	{
-		$to = $email;
+		$to = $_POST['email'];
 		$subject = 'Changer mot de passe';
 		$from = 'noreply@cestpasmafaute.com';
 
