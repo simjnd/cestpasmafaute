@@ -76,39 +76,58 @@ class StudentExerciceManager
     public static function getAllQuestionsByExerciceID(int $idExercice): array 
     {
 
-        // memo: select tt les id des questions associés à l'exercice, et retourner les différents types de questions
+        $idsSimple = [];
+        $idsPuzzle = [];
+        $idsMultiple = [];
+        $idsClickable = [];
 
-        /*$questions = [];
+        $allQuestions = [];
 
-        $simpleQuery = Manager::getDatabase()->prepare('SELECT SimpleQuestion.idSimpleQuestion, SimpleQuestion.sentence FROM SimpleQuestion, Exercice_SimpleQuest, Exercice WHERE Exercice = :idExercice AND Exercice.idExercice = Exercice_SimpleQuest.idExercice AND SimpleQuestion.idSimpleQuestion = Exercice_SimpleQuest.idSimpleQuestion');
+        $simpleQuery = Manager::getDatabase()->prepare('SELECT SimpleQuestion.idSimpleQuestion FROM SimpleQuestion, Exercice_SimpleQuest, Exercice WHERE Exercice = :idExercice AND Exercice.idExercice = Exercice_SimpleQuest.idExercice AND SimpleQuestion.idSimpleQuestion = Exercice_SimpleQuest.idSimpleQuestion');
         $simpleQuery->execute(['idExercice' => $idExercice]);
 
-        foreach ($simpleQuery->fecthAll() as $rawSimpleQuestion) {
-            $questions[] = new Question($rawSimpleQuestion);
+        foreach ($simpleQuery->fecthAll() as $rawSimpleId) {
+            $idsSimple[] = $rawSimpleId;
         }
 
-        $puzzleQuery = Manager::getDatabase()->prepare('SELECT PuzzleQuestion.idPuzzleQuestion, PuzzleQuestion.sentence FROM PuzzleQuestion, Exercice_PuzzleQuest, Exercice WHERE Exercice = :idExercice AND Exercice.idExercice = Exercice_PuzzleQuest.idExercice AND PuzzleQuestion.idPuzzleQuestion = Exercice_PuzzleQuest.idPuzzleQuestion');
+        $puzzleQuery = Manager::getDatabase()->prepare('SELECT PuzzleQuestion.idPuzzleQuestion FROM PuzzleQuestion, Exercice_PuzzleQuest, Exercice WHERE Exercice = :idExercice AND Exercice.idExercice = Exercice_PuzzleQuest.idExercice AND PuzzleQuestion.idPuzzleQuestion = Exercice_PuzzleQuest.idPuzzleQuestion');
         $puzzleQuery->execute(['idExercice' => $idExercice]);
 
-        foreach ($puzzleQuery->fecthAll() as $rawPuzzleQuestion) {
-            $questions[] = new Question($rawPuzzleQuestion);
+        foreach ($puzzleQuery->fecthAll() as $rawPuzzleId) {
+            $idsPuzzle[] = $rawPuzzleId;
         }
 
-        $multipleQuery = Manager::getDatabase()->prepare('SELECT MultipleQuestion.idMultipleQuestion, MultipleQuestion.sentence FROM MultipleQuestion, Exercice_MultipleQuest, Exercice WHERE Exercice = :idExercice AND Exercice.idExercice = Exercice_MultipleQuest.idExercice AND MultipleQuestion.idMultipleQuestion = Exercice_MultipleQuest.idMultipleQuestion');
+        $multipleQuery = Manager::getDatabase()->prepare('SELECT MultipleQuestion.idMultipleQuestion FROM MultipleQuestion, Exercice_MultipleQuest, Exercice WHERE Exercice = :idExercice AND Exercice.idExercice = Exercice_MultipleQuest.idExercice AND MultipleQuestion.idMultipleQuestion = Exercice_MultipleQuest.idMultipleQuestion');
         $multipleQuery->execute(['idExercice' => $idExercice]);
 
-        foreach ($multipleQuery->fecthAll() as $rawMultipleQuestion) {
-            $questions[] = new Question($rawMultipleQuestion);
+        foreach ($multipleQuery->fecthAll() as $rawMultipleId) {
+            $idsMultiple[] = $rawMultipleId;
         }
 
-        $clickableQuery = Manager::getDatabase()->prepare('SELECT ClickableQuestion.idClickableQuestion, ClickableQuestion.sentence FROM ClickableQuestion, Exercice_ClickableQuest, Exercice WHERE Exercice = :idExercice AND Exercice.idExercice = Exercice_ClickableQuest.idExercice AND ClickableQuestion.idClickableQuestion = Exercice_ClickableQuest.idClickableQuestion');
+        $clickableQuery = Manager::getDatabase()->prepare('SELECT ClickableQuestion.idClickableQuestion FROM ClickableQuestion, Exercice_ClickableQuest, Exercice WHERE Exercice = :idExercice AND Exercice.idExercice = Exercice_ClickableQuest.idExercice AND ClickableQuestion.idClickableQuestion = Exercice_ClickableQuest.idClickableQuestion');
         $clickableQuery->execute(['idExercice' => $idExercice]);
 
-        foreach ($clickableQuery->fecthAll() as $rawClickableQuestion) {
-            $questions[] = new Question($rawClickableQuestion);
+        foreach ($clickableQuery->fecthAll() as $rawClickableId) {
+            $idsClickable[] = $rawClickableId;
         }
 
-        return $questions;*/
+        foreach ($idsSimple as $idSimple) {
+            $questions[] = StudentExerciceManager::getSimpleQuestionByID($idSimple);
+        }
+
+        foreach ($idsPuzzle as $idPuzzle) {
+           $questions[] = StudentExerciceManager::getPuzzleQuestionByID($idPuzzle);
+        }
+
+        foreach ($idsMultiple as $idMultiple) {
+            $questions[] = StudentExerciceManager::getMultipleQuestionByID($idMultiple);
+        }
+
+        foreach ($idsClickable as $idClickable) {
+            $questions[] = StudentExerciceManager::getClickableQuestionByID($idClickable);
+        }
+
+        return $questions;
     }
 
     public static function getClickableQuestionByID(int $idQuestion): ClickableQuestion 
