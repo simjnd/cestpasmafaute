@@ -11,7 +11,7 @@ class TeacherManager
     	$query = Manager::getDatabase()->prepare('SELECT * FROM Login WHERE idLogin = :idLogin');
         $query->execute(['idLogin' => $idLogin]);
 
-        $loginData = $loginQuery->fetch();
+        $loginData = $query->fetch();
 
         return new Teacher($loginData);
 	}
