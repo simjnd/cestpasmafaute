@@ -40,7 +40,7 @@ class Exercise
     public function fill(): void
     {
         if ($this->getID() !== NULL) {
-            $this->setQuestion(StepManager::getAllQuestionsByExerciceID($this->getId()));
+            $this->setQuestion(StudentExerciceManager::getAllQuestionsByExerciceID($this->getId()));
         } else {
             $this->setQuestion(NULL);
         }
