@@ -23,7 +23,7 @@ class TeacherController extends Controller
 		$teacher = TeacherManager::getByID($_SESSION['idLogin']);
 		$waitingStudents = StudentManager::getWaitingStudents();
 
-		parent::view('teacher-see-waiting-students', ['$waitingStudents' => $waitingStudents, 'teacher' => $teacher]);
+		parent::view('teacher-see-waiting-students', ['waitingStudents' => $waitingStudents, 'teacher' => $teacher]);
 
 	}
 
