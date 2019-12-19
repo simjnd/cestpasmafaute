@@ -14,15 +14,22 @@ class TeacherController extends Controller
 		parent::view('teacher-home', ['teacher' => $teacher, 'numberWaitingStudents' => $numberWaitingStudents, 'classes' => $classes]);
 	}
 
+	/**
+    * Displays the list of students awaiting validation
+    */
 	public function seeWaitingStudents(): void
 	{
-		// TODO Arnaud
+		$teacher = TeacherManager::getByID($_SESSION['idLogin']);
+		$waitingStudents = TeacherManager::getWaitingStudents();
+
+		parent::view('teacher-see-waiting-students', ['$waitingStudents' => $waitingStudents, 'teacher' => $teacher]);
+
 	}
 
 	public function seeStudent(int $id): void
     {
-        $teacher = TeacherManager::getById($_SESSION['idLogin']);
-        $student = StudentManager::getById($id);
+        $teacher = TeacherManager::getByID($_SESSION['idLogin']);
+        $student = StudentManager::getByID($id);
         $totalPoints = StudentManager::getTotalPoints($id);
         $globalAverage = StudentManager::getGlobalAverage($id);
         $group = GroupManager::getById($student->getIdClass());
