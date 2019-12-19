@@ -114,22 +114,56 @@ class StudentExerciceManager
         $questionQuery->execute(['idQuestion' => $idQuestion]);
 
         $questionData = $questionQuery->fetch();
+
         return new ClickableQuestion($questionData);
     }
 
     public static function getMultipleQuestionByID(int $idQuestion): MultipleQuestion 
     {
-        // TODO
+        $choices = [];
+
+        $questionQuery = Manager::getDatabase()->prepare('SELECT idMultipleQuestion, sentence FROM MultipleQuestion WHERE idMultipleQuestion = :idQuestion');
+        $questionQuery->execute(['idQuestion' => $idQuestion]);
+
+        $questionData = $questionQuery->fetch();
+
+        $choicesQuery = Manager::getDatabase()->prepare('SELECT Choice.idChoice, Choice.label, Choice.isCorrectAnswer, Choice.idMultipleQuestion FROM Choice WHERE Choice.idMultipleQuestion = :idQuestion');
+        $choicesQuery->execute(['idQuestion' => $idQuestion]);
+
+        foreach ($choicesQuery->fetchAll() as $rawChoice) {
+            $choices[] = new Choice($rawChoice);
+        }
+
+        $multipleData = array_merge($questionData, $choices);
+
+        return new MultipleQuestion($multipleData);
     }
 
     public static function getPuzzleQuestionByID(int $idQuestion): PuzzleQuestion
     {
-       // TODO
+       $questionQuery = Manager::getDatabase()->prepare('SELECT idPuzzleQuestion, sentence FROM PuzzleQuestion WHERE idPuzzleQuestion = :idQuestion');
+       $questionQuery->execute(['idQuestion' => $idQuestion]);
+
+       $questionData = $questionQuery->fetch();
+
+       $puzzleQuery = Manager::getDatabase()->prepare('SELECT PuzzleQuest_Role.idRole FROM PuzzleQuest_Role WHERE PuzzleQuest_Role.idPuzzleQuestion = :idQuestion');
+       $puzzleQuery->execute(['idQuestion' => $idQuestion]);
+
+       $puzzleData = $puzzleQuery->fetch();
+
+       $puzzleData = array_merge($questionData, $puzzleData);
+
+       return new PuzzleQuestion($puzzleData);
     }
 
     public static function getSimpleQuestionByID(int $idQuestion): SimpleQuestion
     {
-        // TODO
+        $questionQuery = Manager::getDatabase()->prepare('SELECT idSimpleQuestion, sentence, correctAnswer, wordToWrite FROM SimpleQuestion WHERE idSimpleQuestion = :idQuestion');
+        $questionQuery->execute(['idQuestion' => $idQuestion]);
+
+        $questionData = $questionQuery->fetch();
+
+        return new SimpleQuestion($questionData);
     }
 
 
