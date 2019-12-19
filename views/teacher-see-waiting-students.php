@@ -10,7 +10,6 @@
 	<p>
 		Prof : <?= $teacher->getFirstName() . ' ' . $teacher->getLastName() ?>
 	</p>
-	<?= var_dump($waitingStudents) ?>
 	<?php foreach ($waitingStudents as $waitingStudent) { ?>
 		<p>
 			<?= $waitingStudent->getFirstName() . ' ' . $waitingStudent->getLastName() ?><br>
