@@ -75,7 +75,10 @@ class StudentExerciceManager
 
     public static function getAllQuestionsByExerciceID(int $idExercice): array 
     {
-        $questions = [];
+
+        // memo: select tt les id des questions associés à l'exercice, et retourner les différents types de questions
+
+        /*$questions = [];
 
         $simpleQuery = Manager::getDatabase()->prepare('SELECT SimpleQuestion.idSimpleQuestion, SimpleQuestion.sentence FROM SimpleQuestion, Exercice_SimpleQuest, Exercice WHERE Exercice = :idExercice AND Exercice.idExercice = Exercice_SimpleQuest.idExercice AND SimpleQuestion.idSimpleQuestion = Exercice_SimpleQuest.idSimpleQuestion');
         $simpleQuery->execute(['idExercice' => $idExercice]);
@@ -105,7 +108,7 @@ class StudentExerciceManager
             $questions[] = new Question($rawClickableQuestion);
         }
 
-        return $questions;
+        return $questions;*/
     }
 
     public static function getClickableQuestionByID(int $idQuestion): ClickableQuestion 

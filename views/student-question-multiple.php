@@ -23,7 +23,7 @@
 
 		<div>
 			<?php foreach ($multipleQuestions as $mQuestion) { ?>
-				<p> <?php $mQuestion->getAnswer(); ?></p>
+				<p> <?php $mQuestion->getChoices(); ?></p>
 			<?php } ?>
 		</div>
 	</body>
