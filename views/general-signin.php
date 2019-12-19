@@ -22,7 +22,7 @@
 			<p>
 				<label for="password">Mot de passe: </label>
 				<input type="password" name="password">
-				<a href="#">Mot de passe oublié</a>
+				<a href="/forgot-password">Mot de passe oublié</a>
 			</p>
 			<input type="submit" value="Se Connecter">
 		</form>
