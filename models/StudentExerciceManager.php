@@ -112,22 +112,22 @@ class StudentExerciceManager
         }
 
         foreach ($idsSimple as $idSimple) {
-            $questions[] = StudentExerciceManager::getSimpleQuestionByID($idSimple);
+            $allQuestions[] = StudentExerciceManager::getSimpleQuestionByID($idSimple);
         }
 
         foreach ($idsPuzzle as $idPuzzle) {
-           $questions[] = StudentExerciceManager::getPuzzleQuestionByID($idPuzzle);
+           $allQuestions[] = StudentExerciceManager::getPuzzleQuestionByID($idPuzzle);
         }
 
         foreach ($idsMultiple as $idMultiple) {
-            $questions[] = StudentExerciceManager::getMultipleQuestionByID($idMultiple);
+            $allQuestions[] = StudentExerciceManager::getMultipleQuestionByID($idMultiple);
         }
 
         foreach ($idsClickable as $idClickable) {
-            $questions[] = StudentExerciceManager::getClickableQuestionByID($idClickable);
+            $allQuestions[] = StudentExerciceManager::getClickableQuestionByID($idClickable);
         }
 
-        return $questions;
+        return $allQuestions;
     }
 
     public static function getClickableQuestionByID(int $idQuestion): ClickableQuestion 
