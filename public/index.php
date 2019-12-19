@@ -53,6 +53,7 @@ Router::get('/', 'Teacher@seeHomePage', ['user_type' => 'T']);
 Router::get('/approval', 'Teacher@seeWaitingStudents', ['user_type' => 'T']);
 Router::get('/profile/{id}', 'Teacher@seeStudent', ['user_type' => 'T']);
 Router::get('approval/accept/{idLogin}', 'Teacher@acceptWaitingStudent');
+Router::get('/approval/delete/{idLogin}', 'Teacher@deleteWaitingStudent');
 
 
 // TEST ROUTES
