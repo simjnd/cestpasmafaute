@@ -13,8 +13,8 @@
 	<?php foreach ($waitingStudents as $waitingStudent) { ?>
 		<p>
 			<?= $waitingStudent->getFirstName() . ' ' . $waitingStudent->getLastName() ?><br>
-			<?= $waitingStudent->getEmail() ?>
-			<a href="#">Valider</a>	<a href="#">Supprimer</a>
+			<?= $waitingStudent->getEmail() ?><br>
+			<a href="#">Valider</a>		<a href="#">Supprimer</a>
 		</p>
 	<?php } ?>
 
