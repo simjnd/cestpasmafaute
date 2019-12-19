@@ -25,7 +25,7 @@ class TeacherManager
     {
         $query = Manager::getDatabase()->query('SELECT * FROM Login l, Student s WHERE s.verified = 0 AND l.idLogin = s.idLogin ORDER BY l.lastName');
 
-        $waitingStudents[];
+        $waitingStudents = array();
 
         while ($student = $query->fetch()) {
             array_push($waitingStudents, new Student($data));
