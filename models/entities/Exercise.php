@@ -32,9 +32,18 @@ class Exercise
     	$this->idDifficulty = $idDifficulty;
     }
 
-    public function setQuestion(Question $question): void 
+    public function setQuestion(array $questions): void 
     {
     	$this->questions = $question;
+    }
+
+    public function fill(): void
+    {
+        if ($this->getID() !== NULL) {
+            $this->setQuestion(StepManager::getAllQuestionsByExerciceID($this->getId()));
+        } else {
+            $this->setQuestion(NULL);
+        }
     }
     
     

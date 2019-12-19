@@ -3,20 +3,42 @@ namespace CPMF\Models\Entities;
 
 class PuzzleQuestion extends Question
 {
-	private $choices;
+	private $idRole;
+	private $startMarker;
+	private $endMarker;
 
 	public function __construct(int $id, string $sentence)
 	{
 		parent::__construct($id, $sentence);
 	}
 
-	public function getChoices(): array
+	public function getIdRole(): int
 	{
-		return $this->choices;
+		return $this->idRole;
 	}
 
-	public function setChoices(array $choices): void 
+	public function getStartMarker(): int
 	{
-		$this->choices = $choices;
+		return $this->startMarker;
+	}
+
+	public function getEndMarker(): int
+	{
+		return $this->endMarker;
+	}
+
+	public function setIdRole(int $idRole): void 
+	{
+		$this->idRole = $idRole;
+	}
+
+	public function setStartMarker(int $startMarker): void 
+	{
+		$this->startMarker = $startMarker;
+	}
+
+	public function setEndMarker(int $endMarker): void 
+	{
+		$this->endMarker = $endMarker;
 	}
 }

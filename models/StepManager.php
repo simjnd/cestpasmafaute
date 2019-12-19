@@ -28,21 +28,6 @@ class StepManager
         return new Step($stepData);
     }
 
-    public static function getExercicesByStepID(int $idStep): array
-    {
-        $exercices = [];
-
-        $query = Manager::getDatabase()->prepare('SELECT Exercice.idExercice AS idExercice, Exercice.idDifficulty AS idDifficulty FROM Step, Step_Exercice, Exercice, Difficulty WHERE Step.idStep = :idStep AND Step.idStep = Step_Exercice.idStep AND Exercice.idExercice = Step_Exercice.idExercice AND Difficulty.idDifficulty = Exercice.idDifficulty');
-        $query->execute(['idStep' => $idStep]);
-
-        foreach ($query->fetchAll() as $rawExercice) {
-            $exercices[] = new Exercice($rawExercice);
-        }
-
-        return $exercices;
-
-    }
-
     public static function getLessonEasyByStepID(int $idStep): string
     {
         $query = Manager::getDatabase()->prepare('SELECT Step_Difficulty.lesson AS lessonEasy FROM Step_Difficulty WHERE Step_Difficulty.idStep = :idStep AND Step_Difficulty.idDifficulty = 0');
@@ -71,6 +56,56 @@ class StepManager
         $lessonData = $query->fetch();
 
         return $lessonData;
+    }
+
+    public static function getExercicesByStepID(int $idStep): array
+    {
+        $exercices = [];
+
+        $query = Manager::getDatabase()->prepare('SELECT Exercice.idExercice AS idExercice, Exercice.idDifficulty AS idDifficulty FROM Step, Step_Exercice, Exercice, Difficulty WHERE Step.idStep = :idStep AND Step.idStep = Step_Exercice.idStep AND Exercice.idExercice = Step_Exercice.idExercice AND Difficulty.idDifficulty = Exercice.idDifficulty');
+        $query->execute(['idStep' => $idStep]);
+
+        foreach ($query->fetchAll() as $rawExercice) {
+            $exercices[] = new Exercice($rawExercice);
+        }
+
+        return $exercices;
+
+    }
+
+    public static function getAllQuestionsByExerciceID(int $idExercice): array 
+    {
+        $questions = [];
+
+        $query = Manager::getDatabase()->prepare('SELECT SimpleQuestion.idSimpleQuestion, SimpleQuestion.sentence FROM SimpleQuestion, Exercice_SimpleQuest, Exercice WHERE Exercice = :idExercice AND Exercice.idExercice = Exercice_SimpleQuest.idExercice AND SimpleQuestion.idSimpleQuestion = Exercice_SimpleQuest.idSimpleQuestion');
+        $query->execute(['idExercice' => $idExercice]);
+
+        foreach ($query->fecthAll() as $rawSimpleQuestion) {
+            $questions[] = new Question($rawSimpleQuestion);
+        }
+
+        $query = Manager::getDatabase()->prepare('SELECT PuzzleQuestion.idPuzzleQuestion, PuzzleQuestion.sentence FROM PuzzleQuestion, Exercice_PuzzleQuest, Exercice WHERE Exercice = :idExercice AND Exercice.idExercice = Exercice_PuzzleQuest.idExercice AND PuzzleQuestion.idPuzzleQuestion = Exercice_PuzzleQuest.idPuzzleQuestion');
+        $query->execute(['idExercice' => $idExercice]);
+
+        foreach ($query->fecthAll() as $rawPuzzleQuestion) {
+            $questions[] = new Question($rawPuzzleQuestion);
+        }
+
+        $query = Manager::getDatabase()->prepare('SELECT MultipleQuestion.idMultipleQuestion, MultipleQuestion.sentence FROM MultipleQuestion, Exercice_MultipleQuest, Exercice WHERE Exercice = :idExercice AND Exercice.idExercice = Exercice_MultipleQuest.idExercice AND MultipleQuestion.idMultipleQuestion = Exercice_MultipleQuest.idMultipleQuestion');
+        $query->execute(['idExercice' => $idExercice]);
+
+        foreach ($query->fecthAll() as $rawMultipleQuestion) {
+            $questions[] = new Question($rawMultipleQuestion);
+        }
+
+        $query = Manager::getDatabase()->prepare('SELECT ClickableQuestion.idClickableQuestion, ClickableQuestion.sentence FROM ClickableQuestion, Exercice_ClickableQuest, Exercice WHERE Exercice = :idExercice AND Exercice.idExercice = Exercice_ClickableQuest.idExercice AND ClickableQuestion.idClickableQuestion = Exercice_ClickableQuest.idClickableQuestion');
+        $query->execute(['idExercice' => $idExercice]);
+
+        foreach ($query->fecthAll() as $rawClickableQuestion) {
+            $questions[] = new Question($rawClickableQuestion);
+        }
+
+        return $questions;
     }
 
     public static function getClickableQuestionByID(int $idClickableQuestion): Question 
@@ -108,5 +143,7 @@ class StepManager
         $questionData = $query->fecth();
         return new Question($questionData);
     }
+
+
 	
 }
