@@ -48,11 +48,16 @@ class StudentManager
     	return $verified === "1";
     }
 
+	/**
+    * Returns the list of students awaiting validation
+    * @return array
+    *   List of students
+    */
     public static function getWaitingStudents(): array
     {
     	$waitingStudents = [];
 
-    	$query = Manager::getDatabase()->query('SELECT * FROM Student WHERE verified = 0');
+    	$query = Manager::getDatabase()->query('SELECT * FROM Login l, Student s WHERE s.verified = 0 AND l.idLogin = s.idLogin ORDER BY l.lastName');
 
     	foreach ($query->fetchAll() as $waiting) {
     		$waitingStudents[] = new Student($waiting);

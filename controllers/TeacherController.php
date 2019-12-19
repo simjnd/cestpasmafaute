@@ -1,6 +1,7 @@
 <?php
 namespace CPMF\Controller;
 use CPMF\Models\TeacherManager;
+use CPMF\Models\StudentManager;
 
 class TeacherController extends Controller
 {
@@ -20,7 +21,7 @@ class TeacherController extends Controller
 	public function seeWaitingStudents(): void
 	{
 		$teacher = TeacherManager::getByID($_SESSION['idLogin']);
-		$waitingStudents = TeacherManager::getWaitingStudents();
+		$waitingStudents = StudentManager::getWaitingStudents();
 
 		parent::view('teacher-see-waiting-students', ['$waitingStudents' => $waitingStudents, 'teacher' => $teacher]);
 

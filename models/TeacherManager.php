@@ -15,23 +15,4 @@ class TeacherManager
 
         return new Teacher($loginData);
 	}
-
-    /**
-    * Returns the list of students awaiting validation
-    * @return array
-    *   List of students
-    */
-    public static function getWaitingStudents(): array
-    {
-        $query = Manager::getDatabase()->query('SELECT * FROM Login l, Student s WHERE s.verified = 0 AND l.idLogin = s.idLogin ORDER BY l.lastName');
-
-        $waitingStudents = array();
-
-        while ($student = $query->fetch()) {
-            array_push($waitingStudents, new Student($data));
-        }
-
-        return $waitingStudents;
-    }
-
 }
