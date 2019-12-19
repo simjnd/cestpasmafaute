@@ -67,12 +67,21 @@ class StudentManager
     }
 
     /**
-	* Accepts a student on hold.
+	* Accepts a student awaiting validation
 	*/
     public static function acceptWaitingStudent(int $idStudent): void
     {
     	$acceptWaitingStudentRequest = Manager::getDatabase()->prepare('UPDATE Student SET verified = 1 WHERE idLogin = :idStudent');
     	$acceptWaitingStudentRequest->execute(['idStudent' => $idStudent]);
+    }
+
+    /**
+    * Delete a awaiting validation student
+    */
+    public function deleteWaitingStudent(int $idStudent):void
+    {
+    	$deleteWaitingStudentRequest = Manager::getDatabase()->prepare('DELETE FROM Student WHERE idLogin = :idStudent');
+    	$deleteWaitingStudentRequest->execute(['idStudent' => $idStudent]);
     }
 
 	public static function setIdClass(int $idLogin, int $idClass): void

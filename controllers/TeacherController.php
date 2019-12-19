@@ -36,6 +36,13 @@ class TeacherController extends Controller
 		parent::redirect('/approval');
 	}
 
+	public function deleteWaitingStudent(int $idStudent): void
+	{
+		StudentManager::deleteWaitingStudent($idStudent);
+
+		parent::redirect('/approval');
+	}
+
 	public function seeStudent(int $id): void
     {
         $teacher = TeacherManager::getByID($_SESSION['idLogin']);
