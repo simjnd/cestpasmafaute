@@ -85,4 +85,31 @@ class GeneralController extends Controller
 
 		parent::redirect('/profile');
 	}
+
+	public function sendPasswordEmail(string $email): void
+	{
+		$to = $email;
+		$subject = 'Changer mot de passe';
+		$from = 'noreply@cestpasmafaute.com';
+
+		// To send HTML mail, the Content-type header must be set
+		$headers = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+		// Create email headers
+		$headers .= 'From: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+		 
+		// Compose a simple HTML email message
+		$message = '<html><body>';
+		$message .= '<h1">Liens pour changer votre mot de passe</h1>';
+		$message .= '<a href="#">Changer votre mot de passe</a>';
+		$message .= '</body></html>';
+		 
+		// Sending email
+		if(mail($to, $subject, $message, $headers)){
+		    echo 'Votre mail a bien était envoyé.';
+		} else{
+		    echo 'Impossible d\'envoyer un e-mail. Veuillez réessayer.';
+		}
+	}
 }

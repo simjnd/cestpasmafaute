@@ -40,6 +40,8 @@ Router::get('/signout', 'General@signOut');
 Router::view('/change-password', 'general-change-password', ['user_type' => 'either']);
 Router::post('/change-password', 'General@changePassword', ['user_type' => 'either']);
 
+Router::view('/forgot-password', 'general-forgot-password');
+
 
 // STUDENT ROUTES
 Router::get('/', 'Student@seeHomePage', ['user_type' => 'S']);
