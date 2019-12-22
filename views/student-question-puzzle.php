@@ -9,7 +9,7 @@
 		<header>
 			<img src="#logoDuSite">
 			<h2> <?php $step->getName(); ?> </h2>
-			<h1> <?php $question->getQuestionTypeName(); ?> </h1>
+			<h1> Question n° </h1>
 			<img src="#profil">
 			<p> <?php $student->getFirstName(); 
 				$student->getClass(); ?> 
@@ -17,18 +17,13 @@
 		</header>
 
 		<div>
-			<h3> <?php $question->getInstruction(); ?> </h3>
-			<h2> <?php foreach($puzzleQuestion->getParts() as $part) { ?>
-				<?php $part ?>
-				<input type="" name="">
-				<?php } ?>
-			</h2>
-		</div> <br>
+			<h3> Deplace les mots dans les cadres correspondant ! </h3>
+			<h2> <?php $puzzleQuestion->getSentence(); ?> </h2>
+			<!-- Traitement avec start et end marker -->
+		</div> 
 
 		<div>
-			<?php foreach ($puzzleQuestions as $pQuestion) { ?>
-				<p> <?php $pQuestion->getAnswer(); ?></p>
-			<?php } ?>
+			<input type="submit" name="Question suivante">
 		</div>
 	</body>
 </html>

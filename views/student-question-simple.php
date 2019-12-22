@@ -9,7 +9,7 @@
 		<header>
 			<img src="#logoDuSite">
 			<h2> <?php $step->getName(); ?> </h2>
-			<h1> <?php $question->getQuestionTypeName(); ?> </h1>
+			<h1> Question n° </h1>
 			<img src="#profil">
 			<p> <?php $student->getFirstName(); 
 				$student->getClass(); ?> 
@@ -17,10 +17,14 @@
 		</header>
 
 		<div>
-			<h3> <?php $question->getInstruction(); ?> </h3>
+			<h3> Saisis le bon mot ! </h3>
 			<h2> <?php $simpleQuestion->getFirstHalf(); ?> </h2>
-			<input type="text" name="">
+			<input type="text" name="answer"> <!-- Where you input your answer -->
 			<h2> <?php $simpleQuestion->getSecondHalf(); ?> </h2>
 		</div> 
+
+		<div>
+			<input type="submit" name="Question suivante">
+		</div>
 	</body>
 </html>

@@ -9,7 +9,7 @@
 		<header>
 			<img src="#logoDuSite">
 			<h2> <?php $step->getName(); ?> </h2>
-			<h1> <?php $question->getQuestionTypeName(); ?> </h1>
+			<h1> Question n° </h1>
 			<img src="#profil">
 			<p> <?php $student->getFirstName(); 
 				$student->getClass(); ?> 
@@ -17,14 +17,18 @@
 		</header>
 
 		<div>
-			<h3> <?php $question->getInstruction(); ?> </h3>
-			<h2> <?php $question->getSentence(); ?> </h2>
+			<h3> Choisis la bonne réponse  </h3>
+			<h2> <?php $multipleQuestion->getSentence(); ?> </h2>
 		</div> <br>
 
 		<div>
-			<?php foreach ($multipleQuestions as $mQuestion) { ?>
-				<p> <?php $mQuestion->getChoices(); ?></p>
+			<?php foreach ($choices as $choice) { ?>
+				<p> <input type="radio" name="<?php $choice->getLabel(); ?>"> </p>
 			<?php } ?>
+		</div>
+
+		<div>
+			<input type="submit" name="Question suivante">
 		</div>
 	</body>
 </html>

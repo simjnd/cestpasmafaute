@@ -46,16 +46,20 @@ Router::post('forgot-password', 'General@sendPasswordEmail');
 
 // STUDENT ROUTES
 Router::get('/', 'Student@seeHomePage', ['user_type' => 'S']);
+
 Router::get('/class', 'Student@seeClass', ['user_type' => 'S']);
+
 Router::get('/profile', 'Student@seeProfile', ['user_type' => 'S']);
 Router::post('/profile', 'Student@saveProfileChanges', ['user_type' => 'S']);
+
+Router::get('/step/{id}', 'Student@seeStep', ['user_type' => 'S']);
 
 
 // TEACHER ROUTES
 Router::get('/', 'Teacher@seeHomePage', ['user_type' => 'T']);
 Router::get('/approval', 'Teacher@seeWaitingStudents', ['user_type' => 'T']);
 Router::get('/profile/{id}', 'Teacher@seeStudent', ['user_type' => 'T']);
-Router::get('approval/accept/{idLogin}', 'Teacher@acceptWaitingStudent');
+Router::get('/approval/accept/{idLogin}', 'Teacher@acceptWaitingStudent');
 Router::get('/approval/delete/{idLogin}', 'Teacher@deleteWaitingStudent');
 
 

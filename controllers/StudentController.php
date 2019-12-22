@@ -42,11 +42,12 @@ class StudentController extends Controller
     public function seeStep(int $id): void
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);
-        $step = StepManager::getStepByID($id);
-        $exercices = StepManager::getExercicesByStepID($id);
+        $step = StudentExerciceManager::getStepByID($id);
+        $step->fill();
+        $exercices = $step->getExercices();
+        $lessons = $step->getLessons();
         $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
         $class = GroupManager::getByID($student->getIdClass());
-        //TODO
-        parent::view('studen-step', ['']);
+        parent::view('student-step', ['student' => $student, 'step' => $step, 'exercices' = $exercices, 'lessons' => $lessons, 'totalPoints' = $totalPoints, 'class' = $class]);
     }
 }
