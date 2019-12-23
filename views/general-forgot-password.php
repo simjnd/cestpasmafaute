@@ -6,7 +6,7 @@
 <body>
 	<h1>Mot de passe oublié</h1>
 	<p>Entrer votre email pour changer votre mot de passe</p>
-	<form method="" action="POST">
+	<form method="/forgot-password" action="POST">
 		<label for="email">Adresse E-mail: </label>
 		<input type="email" name="email">
 		<input type="submit" value="Envoyer">

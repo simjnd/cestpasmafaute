@@ -111,6 +111,7 @@ class GeneralController extends Controller
 		// Sending email
 		if(mail($to, $subject, $message, $headers)){
 		    echo 'Votre mail a bien était envoyé.';
+		    parent::redirect('/email-sended');
 		} else{
 		    echo 'Impossible d\'envoyer un e-mail. Veuillez réessayer.';
 		}
