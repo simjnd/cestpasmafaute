@@ -117,9 +117,7 @@ class GeneralController extends Controller
 			$message .= '</body></html>';
 			 
 			// Sending email
-			$sendMail = mail($to, $subject, $message, $headers);
-			var_dump(mail($to, $subject, $message, $headers));
-			if($sendMail){
+			if(mail($to, $subject, $message, $headers)){
 			    echo 'Votre mail a bien était envoyé.';
 			    parent::redirect('/email-sended');
 			} else{
