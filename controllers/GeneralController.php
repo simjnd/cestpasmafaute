@@ -101,7 +101,7 @@ class GeneralController extends Controller
 
 			$to = $email;
 			$subject = 'Changer mot de passe';
-			$from = 'noreply@cestpasmafaute.com';
+			$from = 'climent.arnaud@gmail.com';
 
 			// To send HTML mail, the Content-type header must be set
 			$headers = 'MIME-Version: 1.0' . "\r\n";
@@ -117,7 +117,9 @@ class GeneralController extends Controller
 			$message .= '</body></html>';
 			 
 			// Sending email
-			if(mail($to, $subject, $message, $headers)){
+			$sendMail = mail($to, $subject, $message, $headers);
+			var_dump(mail($to, $subject, $message, $headers));
+			if($sendMail){
 			    echo 'Votre mail a bien était envoyé.';
 			    parent::redirect('/email-sended');
 			} else{
