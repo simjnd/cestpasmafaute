@@ -94,7 +94,7 @@ class GeneralController extends Controller
 		if ($userExists) {
 			$idLogin = UserManager::getIdByEmail($email);
 
-			$token = bin2hex(random_bytes(16));
+			$token = random_bytes(16);
 			var_dump($token);
 
 			UserManager::addToken($idLogin, $token);
