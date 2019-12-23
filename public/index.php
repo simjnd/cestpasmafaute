@@ -67,6 +67,7 @@ Router::get('/approval/delete/{idLogin}', 'Teacher@deleteWaitingStudent');
 
 // TEST ROUTES
 Router::view('/test', 'test-view');
+Router::view('/info', 'info');
 
 session_start();
 
