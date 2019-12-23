@@ -20,7 +20,6 @@ spl_autoload_register(function($name) {
 			break;
 	}
 
-	require league/oauth2-server;
     require '../'. $subdir . end($exploded) .'.php';
 });
 
