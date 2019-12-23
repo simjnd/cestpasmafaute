@@ -19,6 +19,15 @@ class UserManager
 		return NULL;
 	}
 
+	public static function getIdByEmail(string $email): int
+	{
+		$idRequest = Manager::getDatabase()->prepare('SELECT idLogin FROM Login WHERE email = :email');
+		if (condition) {
+			# code...
+		}
+		$idRequest->execute(['email' => $email]);
+	}
+
 	public static function getEmailAddress(int $idLogin): string
 	{
 		$emailRequest = Manager::getDatabase()->prepare('select email from Login where idLogin = :idLogin');

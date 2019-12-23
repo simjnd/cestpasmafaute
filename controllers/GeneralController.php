@@ -88,7 +88,10 @@ class GeneralController extends Controller
 	*/
 	public function sendPasswordEmail(): void
 	{
-
+		$userExist = UserManager::userExists($_POST['email']);
+		if ($userExist) {
+			# code...
+		}
 
 		$to = $_POST['email'];
 		$subject = 'Changer mot de passe';
