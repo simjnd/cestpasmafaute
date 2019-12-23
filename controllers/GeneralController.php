@@ -93,8 +93,7 @@ class GeneralController extends Controller
 		if ($userExists) {
 			$idLogin = UserManager::getIdByEmail($email);
 
-			$OAP = new OAuthProvider();
-			$token = $OAP->generateToken(32);
+			$token = random_bytes(32);
 
 			UserManager::addToken($idLogin, $token);
 
