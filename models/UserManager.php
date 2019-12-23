@@ -128,6 +128,9 @@ class UserManager
 
 	public static function addToken(int $idLogin, string $token): void
 	{
+		echo "Dans addToken";
+		echo "idLogin : " . $idLogin;
+		echo "token : " . $token;
 		$addToken = Manager::getDatabase()->query('INSERT INTO Token VALUES ($idLogin, $token, NOW())');
 	}
 }
