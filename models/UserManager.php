@@ -19,13 +19,16 @@ class UserManager
 		return NULL;
 	}
 
+	/**
+	* Returns the user's idLogin from their email address
+	* @return int
+	*	user idLogin
+	*/
 	public static function getIdByEmail(string $email): int
 	{
 		$idRequest = Manager::getDatabase()->prepare('SELECT idLogin FROM Login WHERE email = :email');
-		if (condition) {
-			# code...
-		}
 		$idRequest->execute(['email' => $email]);
+		return $idRequest->fetch()['idLogin'];
 	}
 
 	public static function getEmailAddress(int $idLogin): string
@@ -121,5 +124,10 @@ class UserManager
 	{
 		$changePasswordRequest = Manager::getDatabase()->prepare('UPDATE Login SET password = :password WHERE idLogin = :idLogin');
 		$changePasswordRequest->execute(['password' => password_hash($password, PASSWORD_DEFAULT), 'idLogin' => $idLogin]);
+	}
+
+	public static function addToken(int $idLogin, string $token): void
+	{
+		$addToken = Manager::getDatabase()->query('INSERT INTO Token VALUES ($idLogin, $token, NOW())');
 	}
 }

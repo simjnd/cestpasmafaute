@@ -88,34 +88,42 @@ class GeneralController extends Controller
 	*/
 	public function sendPasswordEmail(): void
 	{
-		$userExist = UserManager::userExists($_POST['email']);
-		if ($userExist) {
-			# code...
-		}
+		$email = $_POST['email'];
+		$userExists = UserManager::userExists($email);
+		if ($userExists) {
+			$idLogin = UserManager::getIdByEmail($email);
 
-		$to = $_POST['email'];
-		$subject = 'Changer mot de passe';
-		$from = 'noreply@cestpasmafaute.com';
+			$OAP = new OAuthProvider();
+			$token = $OAP->generateToken(32);
 
-		// To send HTML mail, the Content-type header must be set
-		$headers = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			UserManager::addToken($idLogin, $token);
 
-		// Create email headers
-		$headers .= 'From: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion();
-		 
-		// Compose a simple HTML email message
-		$message = '<html><body>';
-		$message .= '<h1">Liens pour changer votre mot de passe</h1>';
-		$message .= '<a href="#">Changer votre mot de passe</a>';
-		$message .= '</body></html>';
-		 
-		// Sending email
-		if(mail($to, $subject, $message, $headers)){
-		    echo 'Votre mail a bien était envoyé.';
-		    parent::redirect('/email-sended');
-		} else{
-		    echo 'Impossible d\'envoyer un e-mail. Veuillez réessayer.';
+			$to = $email;
+			$subject = 'Changer mot de passe';
+			$from = 'noreply@cestpasmafaute.com';
+
+			// To send HTML mail, the Content-type header must be set
+			$headers = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+			// Create email headers
+			$headers .= 'From: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+			 
+			// Compose a simple HTML email message
+			$message = '<html><body>';
+			$message .= '<h1">Liens pour changer votre mot de passe</h1>';
+			$message .= '<a href="#">Changer votre mot de passe</a>';
+			$message .= '</body></html>';
+			 
+			// Sending email
+			if(mail($to, $subject, $message, $headers)){
+			    echo 'Votre mail a bien était envoyé.';
+			    parent::redirect('/email-sended');
+			} else{
+			    echo 'Impossible d\'envoyer un e-mail. Veuillez réessayer.';
+			}
+		} else {
+			die("L'utilisateur n'existe pas");
 		}
 	}
 }
