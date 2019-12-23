@@ -93,10 +93,10 @@ class GeneralController extends Controller
 		if ($userExists) {
 			$idLogin = UserManager::getIdByEmail($email);
 
-			$OAP = new OAuthProvider();
-			$token = $OAP->generateToken(32);
+			// $OAP = new OAuthProvider();
+			// $token = $OAP->generateToken(32);
 
-			UserManager::addToken($idLogin, $token);
+			// UserManager::addToken($idLogin, $token);
 
 			$to = $email;
 			$subject = 'Changer mot de passe';
