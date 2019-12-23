@@ -77,9 +77,6 @@ class GeneralController extends Controller
 				UserManager::updatePassword($_SESSION['idLogin'], $informations['password']);
 			}
 		} else {
-			echo "actualPassword (clai)" . $informations['actualPassword'] . "\n";
-			echo "actualPassword (Form) : " . $hashedPassword . "\n";
-			echo "actualPassword (BDD) : " . password_hash($informations['actualPassword'], PASSWORD_DEFAULT) ."\n";
 			die("Le mot de passe actuel n'est pas correct");
 		}
 
@@ -91,6 +88,8 @@ class GeneralController extends Controller
 	*/
 	public function sendPasswordEmail(): void
 	{
+
+
 		$to = $_POST['email'];
 		$subject = 'Changer mot de passe';
 		$from = 'noreply@cestpasmafaute.com';
