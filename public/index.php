@@ -41,7 +41,7 @@ Router::view('/change-password', 'general-change-password', ['user_type' => 'eit
 Router::post('/change-password', 'General@changePassword', ['user_type' => 'either']);
 
 Router::view('/forgot-password', 'general-forgot-password');
-Router::post('forgot-password', 'General@sendPasswordEmail');
+Router::post('/forgot-password', 'General@sendPasswordEmail');
 
 Router::view('/email-sended', 'general-email-sended');
 
