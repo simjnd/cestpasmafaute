@@ -12,7 +12,7 @@ class Step
 	private $lessonHard;
 	private $exercices;
 
-	protected function callFunction(string $methodName, string $value = ""): void
+	protected function callFunction(string $methodName, ?string $value = ""): void
     {
         if(method_exists($this, $methodName)) {
             $this->$methodName($value);
