@@ -15,6 +15,8 @@
 	<p><?= $lessons[2] ?></p>
 	<p>Exercice expert</p>
 
-	<a href="<?= $pathCurrentExercise ?>">Faire l'exercice</a>
+	<a href="/exercice/0">Faire l'exercice facile</a>
+	<a href="/exercice/1">Faire l'exercice intermediaire</a>
+	<a href="/exercice/2">Faire l'exercice difficile</a>
 </body>
 </html>

@@ -1,6 +1,9 @@
 <?php
 namespace CPMF\Models;
 
+use \CPMF\Models\Entities\User;
+use \CPMF\Models\Entities\Student;
+
 class StudentExerciceManager
 {
 	
@@ -28,30 +31,10 @@ class StudentExerciceManager
         return new Step($stepData);
     }
 
-    public static function getLessonEasyByStepID(int $idStep): string
+    public static function getLessonByStepAndDifficultyID(int $idStep, int $idDifficulty): string
     {
-        $query = Manager::getDatabase()->prepare('SELECT Step_Difficulty.lesson AS lessonEasy FROM Step_Difficulty WHERE Step_Difficulty.idStep = :idStep AND Step_Difficulty.idDifficulty = 0');
-        $query->execute(['idStep' => $idStep]);
-
-        $lessonData = $query->fetch();
-
-        return $lessonData;
-    }
-
-    public static function getLessonMediumByStepID(int $idStep): string
-    {
-        $query = Manager::getDatabase()->prepare('SELECT Step_Difficulty.lesson AS lessonEasy FROM Step_Difficulty WHERE Step_Difficulty.idStep = :idStep AND Step_Difficulty.idDifficulty = 1');
-        $query->execute(['idStep' => $idStep]);
-
-        $lessonData = $query->fetch();
-
-        return $lessonData;
-    }
-
-    public static function getLessonHardByStepID(int $idStep): string
-    {
-        $query = Manager::getDatabase()->prepare('SELECT Step_Difficulty.lesson AS lessonEasy FROM Step_Difficulty WHERE Step_Difficulty.idStep = :idStep AND Step_Difficulty.idDifficulty = 2');
-        $query->execute(['idStep' => $idStep]);
+        $query = Manager::getDatabase()->prepare('SELECT Step_Difficulty.lesson AS lesson FROM Step_Difficulty WHERE Step_Difficulty.idStep = :idStep AND Step_Difficulty.idDifficulty = :idDifficulty');
+        $query->execute(['idStep' => $idStep, 'idDifficulty' => $idDifficulty]);
 
         $lessonData = $query->fetch();
 
