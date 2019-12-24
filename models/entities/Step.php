@@ -1,6 +1,8 @@
 <?php
 namespace CPMF\Models\Entities;
 
+use \CPMF\Models\StudentExerciceManager;
+
 class Step
 {
 	private $idStep;
