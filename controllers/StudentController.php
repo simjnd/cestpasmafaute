@@ -12,7 +12,7 @@ class StudentController extends Controller
     {
         $validated = $_SESSION['validated'] ?? NULL;
         if ($validated) {
-            $steps = StepManager::getStepsByStudentID($_SESSION['idLogin']);
+            $steps = StudentExerciceManager::getStepsByStudentID($_SESSION['idLogin']);
             $student = StudentManager::getByID($_SESSION['idLogin']);
             $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
 
