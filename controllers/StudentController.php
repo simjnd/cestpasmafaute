@@ -2,7 +2,7 @@
 namespace CPMF\Controller;
 
 use \CPMF\Models\StudentManager;
-use \CPMF\Models\StepManager;
+use \CPMF\Models\StudentExerciceManager;
 use \CPMF\Models\GroupManager;
 use \CPMF\Models\DecorationManager;
 
