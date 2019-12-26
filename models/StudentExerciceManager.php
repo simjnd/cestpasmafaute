@@ -1,8 +1,13 @@
 <?php
 namespace CPMF\Models;
 
-use \CPMF\Models\Entities\User;
-use \CPMF\Models\Entities\Student;
+use \CPMF\Models\Entities\Step;
+use \CPMF\Models\Entities\ClickableQuestion;
+use \CPMF\Models\Entities\MultipleQuestion;
+use \CPMF\Models\Entities\PuzzleQuestion;
+use \CPMF\Models\Entities\SimpleQuestion;
+use \CPMF\Models\Entities\Question;
+use \CPMF\Models\Entities\Exercice;
 
 class StudentExerciceManager
 {
