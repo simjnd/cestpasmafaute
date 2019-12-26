@@ -109,6 +109,8 @@ class GeneralController extends Controller
 
 			// Create email headers
 			$headers .= 'From: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+
+			$link = 
 			 
 			// Compose a simple HTML email message
 			$message = '<html><body>';

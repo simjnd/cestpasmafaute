@@ -45,6 +45,9 @@ Router::post('/forgot-password', 'General@sendPasswordEmail');
 
 Router::view('/email-sended', 'general-email-sended');
 
+Router::view('/change-forgot-password', 'general-change-forgot-password');
+Router::post('/change-forgot-password', 'General@changeForgotPassword');
+
 
 // STUDENT ROUTES
 Router::get('/', 'Student@seeHomePage', ['user_type' => 'S']);
