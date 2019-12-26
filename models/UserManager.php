@@ -126,9 +126,31 @@ class UserManager
 		$changePasswordRequest->execute(['password' => password_hash($password, PASSWORD_DEFAULT), 'idLogin' => $idLogin]);
 	}
 
+	/**
+	* Add a token in the database
+	* @param int $idLogin
+	*	User id
+	* @param string $token
+	*	Token allowing user identification
+	*/
 	public static function addToken(int $idLogin, string $token): void
 	{
 		$addToken = Manager::getDatabase()->prepare('INSERT INTO Token VALUES (:idLogin, :token, NOW())');
 		$addToken->execute(['idLogin' => $idLogin, 'token' => $token]);
+	}
+
+	/**
+	* Check that the token matches the correct user id
+	* @param int $idLogin
+	*	User id
+	* @param string $token
+	*	Token allowing user identification
+	*/
+	public static function userVerification(int $idLogin, string $token):: bool
+	{
+		$userVerificationRequest = Manager::getDatabase()->prepare('SELECT idLogin FROM Token WHERE idLogin = :idLogin AND token = :token');
+		$userVerificationRequest->execute(['idLogin' => $idLogin, 'token' => $token]);
+
+		return $userVerificationRequest->rowCount !== 0;
 	}
 }
