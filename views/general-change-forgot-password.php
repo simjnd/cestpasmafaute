@@ -5,7 +5,7 @@
 </head>
 <body>
 	<h1>Changer votre mot de passe</h1>
-	<form action="/change-forgot-password/<?= $_GET['idLogin'] ?>/<?= $_GET['token'] ?>" method="POST">
+	<form action="/change-forgot-password/<?= $idLogin ?>/<?= $token ?>" method="POST">
 		<p>
 			<label for="newPassword">Entrer votre votre nouveau mot de passe</label>
 			<input type="password" name="newPassword">

@@ -132,6 +132,11 @@ class GeneralController extends Controller
 		}
 	}
 
+	public function changeForgotPasswordInfo(int $idLogin, string $token): void
+	{
+		parent::view('general-change-forgot-password', ['idLogin' => $idLogin, 'token' => $token];
+	}
+
 	/**
 	* Allows you to change your password when you have forgotten the previous one
 	* @param int $idLogin
