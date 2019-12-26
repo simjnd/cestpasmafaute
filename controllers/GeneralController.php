@@ -148,7 +148,7 @@ class GeneralController extends Controller
 				die("Le mot de passe n'est pas identique au mot de passe de vérification");
 			}
 		} else {
-			die("L'utilisateur n'est pas authentifié par le token");
+			die("Le token est expiré");
 		}
 	}
 }
