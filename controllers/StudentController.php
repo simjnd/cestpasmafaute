@@ -41,7 +41,7 @@ class StudentController extends Controller
 
     public function seeStep(int $id): void
     {
-        $student = StudentManager::getByID($_SESSION['idLogin']);
+        $student = StudentManager::getById($_SESSION['idLogin']);
         $step = StudentExerciceManager::getStepByID($id);
         $step->fill();
         $lessons = $step->getLessons();
