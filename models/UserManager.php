@@ -120,6 +120,13 @@ class UserManager
 		return $idLogin;
 	}
 
+	/**
+	* Change a user's password based on their id
+	* @param int $idLogin
+	*	User id
+	* @param string $password
+	*	New password to write to the database
+	*/
 	public static function updatePassword(int $idLogin, string $password): void
 	{
 		$changePasswordRequest = Manager::getDatabase()->prepare('UPDATE Login SET password = :password WHERE idLogin = :idLogin');
