@@ -134,7 +134,7 @@ class GeneralController extends Controller
 
 	public function changeForgotPasswordInfo(int $idLogin, string $token): void
 	{
-		parent::view('general-change-forgot-password', ['idLogin' => $idLogin, 'token' => $token];
+		parent::view('general-change-forgot-password', ['idLogin' => $idLogin, 'token' => $token]);
 	}
 
 	/**
