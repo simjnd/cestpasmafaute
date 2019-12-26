@@ -110,7 +110,7 @@ class GeneralController extends Controller
 			// Create email headers
 			$headers .= 'From: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion();
 
-			$link = 
+			$link = ;
 			 
 			// Compose a simple HTML email message
 			$message = '<html><body>';
@@ -119,14 +119,28 @@ class GeneralController extends Controller
 			$message .= '</body></html>';
 			 
 			// Sending email
-			if(mail($to, $subject, $message, $headers)){
+			if(mail($to, $subject, $message, $headers)) {
 			    echo 'Votre mail a bien était envoyé.';
 			    parent::redirect('/email-sended');
-			} else{
+			} else {
 			    echo 'Impossible d\'envoyer un e-mail. Veuillez réessayer.';
 			}
 		} else {
 			die("L'utilisateur n'existe pas");
 		}
+	}
+
+	/**
+	* Allows you to change your password when you have forgotten the previous one
+	* @param int $idLogin
+	*	User idLogin
+	* @param string $token
+	*	Token allowing user identification
+	*/
+	public function changeForgotPassword(int $idLogin, string $token):void
+	{
+		if (UserManager::userVerification($idLogin, $token)) {
+				
+		}	
 	}
 }

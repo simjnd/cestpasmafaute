@@ -45,8 +45,8 @@ Router::post('/forgot-password', 'General@sendPasswordEmail');
 
 Router::view('/email-sended', 'general-email-sended');
 
-Router::view('/change-forgot-password', 'general-change-forgot-password');
-Router::post('/change-forgot-password', 'General@changeForgotPassword');
+Router::view('/change-forgot-password/{idlogin}/{token}', 'general-change-forgot-password');
+Router::post('/change-forgot-password/{idLogin}/{token]', 'General@changeForgotPassword');
 
 
 // STUDENT ROUTES
