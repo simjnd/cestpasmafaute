@@ -90,7 +90,6 @@ class GeneralController extends Controller
 	{
 		$email = $_POST['email'];
 		$userExists = UserManager::userExists($email);
-		var_dump($userExists);
 		if ($userExists) {
 			$idLogin = UserManager::getIdByEmail($email);
 
