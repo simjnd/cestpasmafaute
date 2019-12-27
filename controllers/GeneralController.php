@@ -106,7 +106,6 @@ class GeneralController extends Controller
 			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
 			// Create email headers
-			$headers .= 'To: ' . $to ."\r\n";
 			$headers .= 'From: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion();
 
 			$link = 'https://cpmf.janda.gq/change-forgot-password/' . $idLogin . '/' . $token;
