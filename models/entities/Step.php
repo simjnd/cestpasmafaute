@@ -3,7 +3,7 @@ namespace CPMF\Models\Entities;
 
 use \CPMF\Models\StudentExerciceManager;
 
-class Step
+class Step 
 {
 	private $idStep;
 	private $name;
@@ -11,6 +11,12 @@ class Step
 	private $lessonMedium;
 	private $lessonHard;
 	private $exercices;
+
+	public function __construct(int $idStep, string $name)
+	{
+		$this->idStep = $idStep;
+		$this->name = $name;
+	}
 
 	protected function callFunction(string $methodName, ?string $value = ""): void
     {
