@@ -149,24 +149,15 @@ class GeneralController extends Controller
 			if ($_POST['newPassword'] === $_POST['verificationNewPassword']) {
 				UserManager::updatePassword($idLogin, $_POST['newPassword']);
 				UserManager::deleteToken($idLogin, $token);
-				echo "<script>Mot de passe modifié, vous allez être redirigé (5 sec).</script>";
-				if (sleep(5) != 0) {
-					die("echec sleep");
-				}
+				echo "Mot de passe modifié, vous allez être redirigé (5 sec).";
 				parent::redirect('/');
 			} else {
-				echo "Le mot de passe n'est pas identique au mot de passe de vérification, vous allez être redirigé (5 sec).";
-				if (sleep(5) != 0) {
-					die("echec sleep");
-				}
+				// echo "Le mot de passe n'est pas identique au mot de passe de vérification, vous allez être redirigé (5 sec).";
 				parent::redirect('/change-forgot-password/' . $idLogin . '/' . $token);
 			}
 		} else {
-			echo "Le lien est expiré. Il faut en générer un nouveau, vous allez être redirigé (5 sec).";
+			// echo "Le lien est expiré. Il faut en générer un nouveau, vous allez être redirigé (5 sec).";
 			UserManager::deleteToken($idLogin, $token);
-			if (sleep(5) != 0) {
-				die("echec sleep");
-			}
 			parent::redirect('/email-sended');
 		}
 	}
