@@ -151,7 +151,7 @@ class GeneralController extends Controller
 				UserManager::deleteToken($idLogin, $token);
 				echo "Mot de passe modifié, vous allez être redirigé (5 sec).";
 				sleep(5);
-				parent::redirect('/');
+				// parent::redirect('/');
 			} else {
 				// echo "Le mot de passe n'est pas identique au mot de passe de vérification, vous allez être redirigé (5 sec).";
 				parent::redirect('/change-forgot-password/' . $idLogin . '/' . $token);
