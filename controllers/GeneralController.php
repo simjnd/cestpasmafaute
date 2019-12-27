@@ -94,12 +94,12 @@ class GeneralController extends Controller
 			$idLogin = UserManager::getIdByEmail($email);
 
 			$token = bin2hex(random_bytes(16));
-			
+
 			UserManager::addToken($idLogin, $token);
 
 			$to = $email;
 			$subject = 'Changer mot de passe';
-			$from = 'climent.arnaud@gmail.com';
+			$from = 'no-reply@cestpasmafaute.fr';
 
 			// To send HTML mail, the Content-type header must be set
 			$headers = 'MIME-Version: 1.0' . "\r\n";
@@ -118,7 +118,6 @@ class GeneralController extends Controller
 			 
 			// Sending email
 			if(mail($to, $subject, $message, $headers)) {
-			    echo 'Votre mail a bien était envoyé.';
 			    parent::redirect('/email-sended');
 			} else {
 			    echo 'Impossible d\'envoyer un e-mail. Veuillez réessayer.';
