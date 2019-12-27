@@ -34,6 +34,10 @@
 
     <a id="path" href=""> <a>
 
+    <p> <?= $lessons[0] ?> </p>
+    <p> <?= $lessons[1] ?> </p>
+    <p> <?= $lessons[2] ?> </p>
+
     <script type="text/javascript">
         var path = document.getElementById('path');
         var lesson = document.getElementById('lesson');
