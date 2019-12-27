@@ -58,7 +58,7 @@ Router::get('/class', 'Student@seeClass', ['user_type' => 'S']);
 Router::get('/profile', 'Student@seeProfile', ['user_type' => 'S']);
 Router::post('/profile', 'Student@saveProfileChanges', ['user_type' => 'S']);
 
-Router::get('/step/{id}', 'Student@seeStep');
+Router::get('/step/{id}', 'Student@seeStep', ['user_type' => 'S']);
 
 
 // TEACHER ROUTES
