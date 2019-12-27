@@ -168,7 +168,7 @@ class GeneralController extends Controller
 			if (sleep(5) != 0) {
 				die("echec sleep");
 			}
-			parent::redirect('') // A terminer
+			parent::redirect(''); // A terminer
 		}
 	}
 }
