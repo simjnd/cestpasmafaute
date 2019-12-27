@@ -149,6 +149,7 @@ class GeneralController extends Controller
 		if (UserManager::userVerification($idLogin, $token)) {
 			if ($_POST['newPassword'] === $_POST['verificationNewPassword']) {
 				UserManager::updatePassword($idLogin, $_POST['newPassword']);
+				parent::redirect('/');
 			} else {
 				die("Le mot de passe n'est pas identique au mot de passe de vérification");
 			}
