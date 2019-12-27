@@ -32,7 +32,6 @@ class StudentExerciceManager
         $queryStep->execute(['idStep' => $idStep]);
 
         $stepData = $queryStep->fetch();
-        print_r($stepData);
 
         return new Step($stepData);
     }
@@ -42,8 +41,7 @@ class StudentExerciceManager
         $query = Manager::getDatabase()->prepare('SELECT Step_Difficulty.lesson AS lesson FROM Step_Difficulty WHERE Step_Difficulty.idStep = :idStep AND Step_Difficulty.idDifficulty = :idDifficulty');
         $query->execute(['idStep' => $idStep, 'idDifficulty' => $idDifficulty]);
 
-        $lessonData = $query->fetch();
-        print_r($lessonData);
+        $lessonData = $query->fetch()['lesson'];
 
         return $lessonData;
     }
