@@ -33,7 +33,7 @@ class StudentController extends Controller
 
     public function seeProfile(): void
     {
-        $student = StudentManager::getById($_SESSION['idLogin']);
+        $student = StudentManager::getByID($_SESSION['idLogin']);
         $student->fill();
 
         parent::view('student-profile', ['student' => $student, 'class' => $student->getGroup(), 'frames' => $frames, 'protraits' => $portraits, 'accessories' => $accessories]);
@@ -41,9 +41,9 @@ class StudentController extends Controller
 
     public function seeStep(int $id): void
     {
-        $student = StudentManager::getById($_SESSION['idLogin']);
+        $student = StudentManager::getByID($_SESSION['idLogin']);
         $step = StudentExerciceManager::getStepByID($id);
-        //echo $step->getIdStep();
+        echo $step->getIdStep();
         echo $step->getName();
         $step->fill();
         $lessons = $step->getLessons();
