@@ -158,6 +158,6 @@ class UserManager
 		$userVerificationRequest = Manager::getDatabase()->prepare('SELECT idLogin FROM Token WHERE idLogin = :idLogin AND token = :token AND creationDate <= ADDTIME(NOW(), "1800")');
 		$userVerificationRequest->execute(['idLogin' => $idLogin, 'token' => $token]);
 
-		return $userVerificationRequest->rowCount !== 0;
+		return $userVerificationRequest->rowCount() !== 0;
 	}
 }
