@@ -20,8 +20,8 @@
     <!-- Student's avatar -->
     <h1> <?= $totalPoints ?> points </h1>
     <progress id="file" max="100" value="<?= $totalPoints % 100 ?>"></progress>
-    <p> <?= $student->getName() ?> </p>
-    <p> <?= $class->getName() ?> </p>
+    <p> <?= $student->getFirstName() ?> </p>
+    <p> <?= $group->getName() ?> </p>
 
     <button id="easy" class="button" > Exercice facile </button>
     <button id="medium" class="button" > Exercice intermediaire </button>

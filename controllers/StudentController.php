@@ -46,7 +46,7 @@ class StudentController extends Controller
         $step->fill();
         $lessons = $step->getLessons();
         $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
-        $class = GroupManager::getByID($student->getIdClass());
-        parent::view('student-step', ['student' => $student, 'step' => $step, 'lessons' => $lessons, 'totalPoints' => $totalPoints, 'class' => $class]);
+        $group = GroupManager::getByID($student->getIdClass());
+        parent::view('student-step', ['student' => $student, 'step' => $step, 'lessons' => $lessons, 'totalPoints' => $totalPoints, 'group' => $group]);
     }
 }
