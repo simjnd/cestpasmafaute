@@ -108,12 +108,12 @@ class GeneralController extends Controller
 			// Create email headers
 			$headers .= 'From: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion();
 
-			$link = '/change-forgot-password/' . $idLogin . '/' . $token;
+			$link = 'https://cpmf.janda.gq/change-forgot-password/' . $idLogin . '/' . $token;
 			 
 			// Compose a simple HTML email message
 			$message = '<html><body>';
 			$message .= '<h1">Liens pour changer votre mot de passe : </h1>';
-			$message .= '<a href=\"' . $link . '\">Changer votre mot de passe</a>';
+			$message .= '<a href="' . $link . '">Changer votre mot de passe</a>';
 			$message .= '</body></html>';
 			 
 			// Sending email
