@@ -34,10 +34,6 @@
 
     <a id="path" href=""> <a>
 
-    <p> <?= $lessons[0] ?> </p>
-    <p> <?= $lessons[1] ?> </p>
-    <p> <?= $lessons[2] ?> </p>
-
     <script type="text/javascript">
         var path = document.getElementById('path');
         var lesson = document.getElementById('lesson');
@@ -64,17 +60,17 @@
                 case 'easy':
                     path.setAttribute('href', currentLink + '/exercice/0');
                     path.innerHTML = "Faire l'exercice facile";
-                    lesson.innerHTML = <?= $lessons[0] ?>;
+                    lesson.innerHTML = <?= json_encode($lessons[0], JSON_HEX_TAG) ?>;
                     break;
                 case 'medium':
                     path.setAttribute('href', currentLink + '/exercice/1');
                     path.innerHTML = "Faire l'exercice intermediaire";
-                    lesson.innerHTML = <?= $lessons[1] ?>;
+                    lesson.innerHTML = <?= json_encode($lessons[1], JSON_HEX_TAG) ?>;
                     break;
                 case 'hard':
                     path.setAttribute('href', currentLink + '/exercice/2');
                     path.innerHTML = "Faire l'exercice avancé";
-                    lesson.innerHTML = <?= $lessons[2] ?>;
+                    lesson.innerHTML = <?= json_encode($lessons[2], JSON_HEX_TAG) ?>;
                     break;
                 default:
                     break;
