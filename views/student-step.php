@@ -58,17 +58,17 @@
             let id = this.id;
             switch (id) {
                 case 'easy':
-                    path.setAttribute('href', '/exercice/0');
+                    path.setAttribute('href', currentLink + '/exercice/0');
                     path.innerHTML = "Faire l'exercice facile"
                     lesson.innerHTML = "test";
                     break;
                 case 'medium':
-                    path.setAttribute('href', '/exercice/1');
+                    path.setAttribute('href', currentLink + '/exercice/1');
                     path.innerHTML = "Faire l'exercice intermediaire"
                     lesson.innerHTML = "test2";
                     break;
                 case 'hard':
-                    path.setAttribute('href', '/exercice/2');
+                    path.setAttribute('href', currentLink + '/exercice/2');
                     path.innerHTML = "Faire l'exercice avancé"
                     lesson.innerHTML = "test3";
                     break;
