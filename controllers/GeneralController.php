@@ -114,6 +114,7 @@ class GeneralController extends Controller
 			$message = '<html><body>';
 			$message .= '<h1">Liens pour changer votre mot de passe</h1>';
 			$message .= '<a href="' . $link . '">Changer votre mot de passe</a>';
+			$message .= $link;
 			$message .= '</body></html>';
 			 
 			// Sending email
