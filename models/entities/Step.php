@@ -75,7 +75,7 @@ class Step
 
 	public function fill(): void
 	{
-		if ($this->idStep !== NULL) {
+		if ($this->idStep != NULL) {
 			$this->setLessonEasy(StudentExerciceManager::getLessonByStepAndDifficultyID($this->idStep, 0));
 			$this->setLessonMedium(StudentExerciceManager::getLessonByStepAndDifficultyID($this->idStep, 1));
 			$this->setLessonHard(StudentExerciceManager::getLessonByStepAndDifficultyID($this->idStep, 2));
