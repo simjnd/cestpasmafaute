@@ -61,8 +61,6 @@ class Step
 
 	public function getLessons(): array
 	{
-		$lessons[];
-
 		$lessons[] = $this->lessonEasy;
 		$lessons[] = $this->lessonMedium;
 		$lessons[] = $this->lessonHard;
