@@ -28,7 +28,7 @@ class StudentExerciceManager
 
     public static function getStepByID(int $idStep): Step
     {
-        $queryStep = Manager::getDatabase()->prepare('SELECT idStep AS idStep, name AS name FROM Step WHERE idStep = :idStep');
+        $queryStep = Manager::getDatabase()->prepare('SELECT idStep, name FROM Step WHERE idStep = :idStep');
         $queryStep->execute(['idStep' => $idStep]);
 
         $stepData = $queryStep->fetch();
