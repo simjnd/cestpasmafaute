@@ -1,3 +1,6 @@
+<?php
+    $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+?>
 <!doctype html>
 <html>
 <head>
@@ -35,6 +38,7 @@
         var path = document.getElementById('path');
         var lesson = document.getElementById('lesson');
         var button = document.getElementsByClassName('button');
+        var currentLink = window.location.href;
 
         for (var i = 0; i < button.length; i++) {
             button[i].addEventListener('click', showLesson);
