@@ -29,17 +29,17 @@ class Step
         $this->name = $name;
     }
     
-    private function setLessonEasy(): void
+    private function setLessonEasy(string $lessonEasy): void
     {
         $this->lessonEasy = $lessonEasy;
     }
     
-    private function setLessonMedium(): void
+    private function setLessonMedium(string $lessonMedium): void
     {
         $this->lessonMedium = $lessonMedium;
     }
     
-    private function setLessonHard(): void
+    private function setLessonHard(string $lessonHard): void
     {
         $this->lessonHard = $lessonHard;
     }
