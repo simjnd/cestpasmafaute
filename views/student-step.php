@@ -29,7 +29,7 @@
 
     <p id="lesson"> </p>
 
-    <a id="path" href="">Faire l'exercice <a>
+    <a id="path" href=""> <a>
 
     <script type="text/javascript">
         var path = document.getElementById('path');
@@ -55,18 +55,18 @@
             switch (id) {
                 case 'easy':
                     path.setAttribute('href', '/exercice/0');
-                    path.innerHTML += " facile"
+                    path.innerHTML = "Faire l'exercice facile"
                     lesson.innerHTML = "test";
                     break;
                 case 'medium':
                     path.setAttribute('href', '/exercice/1');
-                    path.innerHTML += " intermediaire"
+                    path.innerHTML += "Faire l'exercice intermediaire"
                     lesson.innerHTML = "test2";
                     break;
                 case 'hard':
                     path.setAttribute('href', '/exercice/2');
                     path.innerHTML += " avancé"
-                    lesson.innerHTML = "test3";
+                    lesson.innerHTML = "Faire l'exercice avancé";
                     break;
                 default:
                     break;
