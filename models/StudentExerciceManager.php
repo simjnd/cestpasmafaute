@@ -43,6 +43,8 @@ class StudentExerciceManager
 
         $lessonData = $query->fetch();
 
+        echo $lessonData;
+
         return $lessonData;
     }
 
