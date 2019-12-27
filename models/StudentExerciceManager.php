@@ -32,6 +32,7 @@ class StudentExerciceManager
         $queryStep->execute(['idStep' => $idStep]);
 
         $stepData = $queryStep->fetch();
+        print_r($stepData);
 
         return new Step($stepData);
     }
@@ -42,8 +43,7 @@ class StudentExerciceManager
         $query->execute(['idStep' => $idStep, 'idDifficulty' => $idDifficulty]);
 
         $lessonData = $query->fetch();
-
-        echo $lessonData;
+        print_r($lessonData);
 
         return $lessonData;
     }
