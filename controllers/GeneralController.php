@@ -149,12 +149,26 @@ class GeneralController extends Controller
 		if (UserManager::userVerification($idLogin, $token)) {
 			if ($_POST['newPassword'] === $_POST['verificationNewPassword']) {
 				UserManager::updatePassword($idLogin, $_POST['newPassword']);
+				UserManager::deleteToken($idLogin, $token);
+				echo "Mot de passe modifié";
+				if (sleep(5) != 0) {
+					die("echec sleep");
+				}
 				parent::redirect('/');
 			} else {
-				die("Le mot de passe n'est pas identique au mot de passe de vérification");
+				echo "Le mot de passe n'est pas identique au mot de passe de vérification";
+				if (sleep(5) != 0) {
+					die("echec sleep");
+				}
+				parent::redirect('/change-forgot-password/' . $idLogin . '/' . $token);
 			}
 		} else {
-			die("Le token est expiré");
+			echo "Le lien est expiré. Il faut en générer un nouveau";
+			UserManager::deleteToken($idLogin, $token);
+			if (sleep(5) != 0) {
+				die("echec sleep");
+			}
+			parent::redirect('') // A terminer
 		}
 	}
 }
