@@ -56,17 +56,17 @@
                 case 'easy':
                     path.setAttribute('href', '/exercice/0');
                     path.innerHTML += " facile"
-                    lesson.innerHTML = <?= $lessons[0]; ?>;
+                    lesson.innerHTML = "test";
                     break;
                 case 'medium':
                     path.setAttribute('href', '/exercice/1');
                     path.innerHTML += " intermediaire"
-                    lesson.innerHTML = <?= $lessons[1]; ?>;
+                    lesson.innerHTML = "test2";
                     break;
                 case 'hard':
                     path.setAttribute('href', '/exercice/2');
                     path.innerHTML += " avancé"
-                    lesson.innerHTML = <?= $lessons[0]; ?>;
+                    lesson.innerHTML = "test3";
                     break;
                 default:
                     break;
