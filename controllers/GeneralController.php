@@ -104,7 +104,7 @@ class GeneralController extends Controller
 			$headers[] = 'MIME-Version: 1.0';
 			$headers[] = 'Content-type: text/html; charset=iso-8859-1';
 
-			$headers[] = 'From: no-reply <no-reply@cestpasmafaute.fr>';
+ 			$headers[] = 'From: no-reply <no-reply@cestpasmafaute.fr>';
 
 			$link = 'https://cpmf.janda.gq/change-forgot-password/' . $idLogin . '/' . $token;
 			 
