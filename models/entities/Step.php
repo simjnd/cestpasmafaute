@@ -80,10 +80,10 @@ class Step extends Model
 
 	public function fill(): void
 	{
-		if ($this->idStep != NULL) {
-			$this->setLessonEasy(StudentExerciceManager::getLessonByStepAndDifficultyID(0, 0));
-			$this->setLessonMedium(StudentExerciceManager::getLessonByStepAndDifficultyID(0, 1));
-			$this->setLessonHard(StudentExerciceManager::getLessonByStepAndDifficultyID(0, 2));
+		if ($this->getIdStep() !== NULL) {
+			$this->setLessonEasy(StudentExerciceManager::getLessonByStepAndDifficultyID($this->getIdStep(), 0));
+			$this->setLessonMedium(StudentExerciceManager::getLessonByStepAndDifficultyID($this->getIdStep(), 1));
+			$this->setLessonHard(StudentExerciceManager::getLessonByStepAndDifficultyID($this->getIdStep(), 2));
 			//$this->setExercices(StudentExerciceManager::getExercicesByStepID($this->getIdStep()));
 		} else {
 			$this->setLessonEasy(NULL);

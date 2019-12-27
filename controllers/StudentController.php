@@ -43,8 +43,6 @@ class StudentController extends Controller
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);
         $step = StudentExerciceManager::getStepByID($id);
-        echo $step->getIdStep();
-        echo $step->getName();
         $step->fill();
         $lessons = $step->getLessons();
         $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
