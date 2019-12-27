@@ -94,8 +94,7 @@ class GeneralController extends Controller
 			$idLogin = UserManager::getIdByEmail($email);
 
 			$token = bin2hex(random_bytes(16));
-			var_dump($token);
-
+			
 			UserManager::addToken($idLogin, $token);
 
 			$to = $email;
@@ -110,8 +109,6 @@ class GeneralController extends Controller
 			$headers .= 'From: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion();
 
 			$link = '/change-forgot-password/' . $idLogin . '/' . $token;
-
-			echo '<a href="' . $link . '">Changer votre mot de passe</a>';
 			 
 			// Compose a simple HTML email message
 			$message = '<html><body>';
