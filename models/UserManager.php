@@ -142,8 +142,21 @@ class UserManager
 	*/
 	public static function addToken(int $idLogin, string $token): void
 	{
-		$addToken = Manager::getDatabase()->prepare('INSERT INTO Token VALUES (:idLogin, :token, NOW())');
-		$addToken->execute(['idLogin' => $idLogin, 'token' => $token]);
+		$addTokenRequest = Manager::getDatabase()->prepare('INSERT INTO Token VALUES (:idLogin, :token, NOW())');
+		$addTokenRequest->execute(['idLogin' => $idLogin, 'token' => $token]);
+	}
+
+	/**
+	* Allows you to delete a token
+	* @param int $idLogin
+	*	User id
+	* @param string $token
+	*	Token allowing user identification
+	*/
+	public static function deleteToken(int $idLogin, string $token): void
+	{
+		$deleteTokenRequest = Manager::getDatabase()->prepare('DELETE FROM Token WHERE idLogin = :idLogin AND token = :token');
+		$deleteTokenRequest->execute(['idLogin' => $idLogin, "token" => $token]);
 	}
 
 	/**
