@@ -51,7 +51,7 @@ class Step
 
 	public function getIdStep(): int
 	{
-		return $this->id;
+		return $this->idStep;
 	}
 
 	public function getName(): string
