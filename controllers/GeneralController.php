@@ -149,8 +149,8 @@ class GeneralController extends Controller
 			if ($_POST['newPassword'] === $_POST['verificationNewPassword']) {
 				UserManager::updatePassword($idLogin, $_POST['newPassword']);
 				UserManager::deleteToken($idLogin, $token);
-				echo "Mot de passe modifié, vous allez être redirigé (5 sec).";
 				sleep(5);
+				echo "Mot de passe modifié, vous allez être redirigé (5 sec).";
 				// parent::redirect('/');
 			} else {
 				// echo "Le mot de passe n'est pas identique au mot de passe de vérification, vous allez être redirigé (5 sec).";
