@@ -59,17 +59,17 @@
             switch (id) {
                 case 'easy':
                     path.setAttribute('href', currentLink + '/exercice/0');
-                    path.innerHTML = "Faire l'exercice facile"
+                    path.innerHTML = "Faire l'exercice facile";
                     lesson.innerHTML = <?= echo json_encode($lessons[0], JSON_HEX_TAG); ?>;
                     break;
                 case 'medium':
                     path.setAttribute('href', currentLink + '/exercice/1');
-                    path.innerHTML = "Faire l'exercice intermediaire"
+                    path.innerHTML = "Faire l'exercice intermediaire";
                     lesson.innerHTML = <?= echo json_encode($lessons[1], JSON_HEX_TAG); ?>;
                     break;
                 case 'hard':
                     path.setAttribute('href', currentLink + '/exercice/2');
-                    path.innerHTML = "Faire l'exercice avancé"
+                    path.innerHTML = "Faire l'exercice avancé";
                     lesson.innerHTML = <?= echo json_encode($lessons[2], JSON_HEX_TAG); ?>;
                     break;
                 default:
