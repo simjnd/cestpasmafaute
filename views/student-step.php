@@ -4,7 +4,7 @@
     <title></title>
     <style type="text/css">
         .button {
-            background-color: #4CAF50; /* Green */
+            background-color: #4CAF50; 
             border: none;
             color: white;
             padding: 15px 32px;
@@ -23,9 +23,9 @@
     <p> <?= $student->getName() ?> </p>
     <p> <?= $class->getName() ?> </p>
 
-    <button id="easy" class="button" onclick="showEasyLesson()"> Exercice facile </button>
-    <button id="medium" class="button" onclick="showMediumLesson()"> Exercice intermediaire </button>
-    <button id="hard" class="button" onclick="showHardLesson()"> Exercice avancée </button>
+    <button id="easy" class="button" > Exercice facile </button>
+    <button id="medium" class="button" > Exercice intermediaire </button>
+    <button id="hard" class="button" > Exercice avancé </button>
 
     <p id="lesson"> </p>
 
@@ -36,6 +36,10 @@
         var lesson = document.getElementById('lesson');
         var button = document.getElementsByClassName('button');
 
+        for (var i = 0; i < button.length; i++) {
+            button[i].addEventListener('click', showLesson);
+        }
+
 
         function resetButtons()
         {
@@ -44,28 +48,30 @@
             }
         }
 
-        function showEasyLesson()
+        function showLesson()
         {
-            path.setAttribute('href', '/exercice/0');
             resetButtons();
-            document.getElementById('easy').style.opacity = 0.3;
-            lesson.innerHTML = <?= echo $lessons[0]; ?>;
-        }
-
-        function showMediumLesson()
-        {
-            path.setAttribute('href', '/exercice/1');
-            resetButtons();
-            document.getElementById('medium').style.opacity = 0.3;
-            lesson.innerHTML = <?= echo $lessons[1]; ?>;
-        }
-
-        function showHardLesson()
-        {
-            path.setAttribute('href', '/exercice/2');
-            resetButtons();
-            document.getElementById('hard').style.opacity = 0.3;
-            lesson.innerHTML = <?= echo $lessons[2]; ?>;
+            let id = this.id;
+            switch (id) {
+                case 'easy':
+                    path.setAttribute('href', '/exercice/0');
+                    path.innerHTML += " facile"
+                    lesson.innerHTML = <?= echo $lessons[0]; ?>;
+                    break;
+                case 'medium':
+                    path.setAttribute('href', '/exercice/1');
+                    path.innerHTML += " intermediaire"
+                    lesson.innerHTML = <?= echo $lessons[1]; ?>;
+                    break;
+                case 'hard':
+                    path.setAttribute('href', '/exercice/2');
+                    path.innerHTML += " avancé"
+                    lesson.innerHTML = <?= echo $lessons[0]; ?>;
+                    break;
+                default:
+                    break;
+            }
+            document.getElementById(id).style.opacity = 0.3;       
         }
     </script>
 </body>
