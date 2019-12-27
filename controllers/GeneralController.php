@@ -99,14 +99,13 @@ class GeneralController extends Controller
 
 			$to = $email;
 			$subject = 'Changer votre mot de passe';
-			$from = 'no-reply@cestpasmafaute.fr';
 
 			// To send HTML mail, the Content-type header must be set
-			$headers = 'MIME-Version: 1.0' . "\r\n";
-			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			$headers[] = 'MIME-Version: 1.0';
+			$headers[] = 'Content-type: text/html; charset=iso-8859-1';
 
-			// Create email headers
-			$headers .= 'From: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+			$headers[] = 'To: ' . $email;
+			$headers[] = 'From: no-reply <no-reply@cestpasmafaute.fr>';
 
 			$link = 'https://cpmf.janda.gq/change-forgot-password/' . $idLogin . '/' . $token;
 			 
@@ -117,7 +116,7 @@ class GeneralController extends Controller
 			$message .= '</body></html>';
 			 
 			// Sending email
-			if(mail($to, $subject, $message, $headers)) {
+			if(mail($to, $subject, $message, implode("\r\n", $headers))) {
 			    parent::redirect('/email-sended');
 			} else {
 			    echo 'Impossible d\'envoyer un e-mail. Veuillez réessayer.';
