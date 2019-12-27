@@ -98,7 +98,7 @@ class GeneralController extends Controller
 			UserManager::addToken($idLogin, $token);
 
 			$to = $email;
-			$subject = 'Changer mot de passe';
+			$subject = 'Changer votre mot de passe';
 			$from = 'no-reply@cestpasmafaute.fr';
 
 			// To send HTML mail, the Content-type header must be set
@@ -112,9 +112,8 @@ class GeneralController extends Controller
 			 
 			// Compose a simple HTML email message
 			$message = '<html><body>';
-			$message .= '<h1">Liens pour changer votre mot de passe</h1>';
-			$message .= '<a href="' . $link . '">Changer votre mot de passe</a>';
-			$message .= $link;
+			$message .= '<h1">Liens pour changer votre mot de passe : </h1>';
+			$message .= '<a href=\"' . $link . '\">Changer votre mot de passe</a>';
 			$message .= '</body></html>';
 			 
 			// Sending email
