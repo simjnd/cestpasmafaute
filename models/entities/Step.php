@@ -10,7 +10,7 @@ class Step extends Model
 	private $lessonEasy;
 	private $lessonMedium;
 	private $lessonHard;
-	private $Exercises;
+	private $exercises;
 
 	public function __construct(array $data)
     {
@@ -49,7 +49,7 @@ class Step extends Model
         $this->lessonHard = $lessonHard;
     }
     
-    private function setExercises(array $Exercises): void
+    private function setExercises(array $exercises): void
 	{
 		$this->Exercises = $Exercises;
 	}
@@ -75,7 +75,7 @@ class Step extends Model
 
 	public function getExercises(): array
 	{
-		return $this->Exercises;
+		return $this->exercises;
 	}
 
 	public function fillLessons(): void

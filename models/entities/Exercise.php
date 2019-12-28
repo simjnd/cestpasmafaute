@@ -3,11 +3,16 @@ namespace CPMF\Models\Entities;
 
 use \CPMF\Models\StudentExerciseManager;
 
-class Exercise
+class Exercise extends Model
 {
     private $idExercise;
     private $idDifficulty;
     private $questions;
+
+    public function __construct(array $data)
+    {
+        parent::__construct($data);
+    } 
 
     public function getId(): int
     {
@@ -24,17 +29,17 @@ class Exercise
     	return $this->questions;
     }
 
-    public function setId(int $idExercise): void
+    private function setId(int $idExercise): void
     {
     	$this->idExercise = $idExercise;
     }
 
-    public function setDifficulty(int $idDifficulty): void
+    private function setDifficulty(int $idDifficulty): void
     {
     	$this->idDifficulty = $idDifficulty;
     }
 
-    public function setQuestion(array $questions): void 
+    private function setQuestions(array $questions): void 
     {
     	$this->questions = $question;
     }
@@ -42,9 +47,9 @@ class Exercise
     public function fill(): void
     {
         if ($this->getID() !== NULL) {
-            $this->setQuestion(StudentExerciseManager::getAllQuestionsByExerciseID($this->getId()));
+            $this->setQuestions(StudentExerciseManager::getAllQuestionsByExerciseID($this->getId()));
         } else {
-            $this->setQuestion(NULL);
+            $this->setQuestions(NULL);
         }
     }
     
