@@ -21,7 +21,7 @@ class Exercise extends Model
         }   
     }
 
-    public function getId(): int
+    public function getIdExercise(): int
     {
     	return $this->idExercise;
     }
@@ -36,7 +36,7 @@ class Exercise extends Model
     	return $this->questions;
     }
 
-    private function setId(int $idExercise): void
+    private function setIdExercise(int $idExercise): void
     {
     	$this->idExercise = $idExercise;
     }
@@ -53,8 +53,8 @@ class Exercise extends Model
 
     public function fill(): void
     {
-        if ($this->getID() !== NULL) {
-            $this->setQuestions(StudentExerciseManager::getAllQuestionsByExerciseID($this->getId()));
+        if ($this->getIdExercise() !== NULL) {
+            $this->setQuestions(StudentExerciseManager::getAllQuestionsByExerciseID($this->getIdExercise()));
         } else {
             $this->setQuestions(NULL);
         }
