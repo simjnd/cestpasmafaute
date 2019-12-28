@@ -1,6 +1,8 @@
 <?php
 namespace CPMF\Models\Entities;
 
+use \CPMF\Models\StudentExerciseManager;
+
 class Exercise
 {
     private $idExercise;

@@ -58,17 +58,17 @@
             let id = this.id;
             switch (id) {
                 case 'easy':
-                    path.setAttribute('href', currentLink + '/exercice/0');
+                    path.setAttribute('href', currentLink + '/exercise/0');
                     path.innerHTML = "Faire l'exercice facile";
                     lesson.innerHTML = <?= json_encode($lessons[0], JSON_HEX_TAG) ?>;
                     break;
                 case 'medium':
-                    path.setAttribute('href', currentLink + '/exercice/1');
+                    path.setAttribute('href', currentLink + '/exercise/1');
                     path.innerHTML = "Faire l'exercice intermediaire";
                     lesson.innerHTML = <?= json_encode($lessons[1], JSON_HEX_TAG) ?>;
                     break;
                 case 'hard':
-                    path.setAttribute('href', currentLink + '/exercice/2');
+                    path.setAttribute('href', currentLink + '/exercise/2');
                     path.innerHTML = "Faire l'exercice avancé";
                     lesson.innerHTML = <?= json_encode($lessons[2], JSON_HEX_TAG) ?>;
                     break;
