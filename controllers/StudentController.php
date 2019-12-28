@@ -49,4 +49,12 @@ class StudentController extends Controller
         $group = GroupManager::getByID($student->getIdClass());
         parent::view('student-step', ['student' => $student, 'step' => $step, 'lessons' => $lessons, 'totalPoints' => $totalPoints, 'group' => $group]);
     }
+
+    public function seeExercice(int $idStep, int $idDifficulty): void
+    {
+        $step = StudentExerciceManager::getStepByID($idStep);
+        $step->fill();
+        $exercices = $step->getExercices();
+        print_r($exercices);
+    }
 }

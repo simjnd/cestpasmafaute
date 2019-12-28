@@ -16,19 +16,19 @@
 			</p>
 		</header>
 
-		<div>
-			<h3> Choisis la bonne réponse  </h3>
+		<div id="question">
+			<h3> Séléctionner le mot qui correspond au trou de la phrase.  </h3>
 			<h2> <?php $multipleQuestion->getSentence(); ?> </h2>
 		</div> <br>
 
-		<div>
+		<div id="answers">
 			<?php foreach ($choices as $choice) { ?>
 				<p> <input type="radio" name="<?php $choice->getLabel(); ?>"> </p>
 			<?php } ?>
 		</div>
 
-		<div>
-			<input type="submit" name="Question suivante">
+		<div id="confirm">
+			<input type="submit" name="Valider">
 		</div>
 	</body>
 </html>

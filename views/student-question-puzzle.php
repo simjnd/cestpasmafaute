@@ -16,14 +16,14 @@
 			</p>
 		</header>
 
-		<div>
-			<h3> Deplace les mots dans les cadres correspondant ! </h3>
+		<div id="question">
+			<h3> Faire glisser les étiquettes décrivant le segment de la phrase correspondant. </h3>
 			<h2> <?php $puzzleQuestion->getSentence(); ?> </h2>
 			<!-- Traitement avec start et end marker -->
 		</div> 
 
-		<div>
-			<input type="submit" name="Question suivante">
+		<div id="confirm">
+			<input type="submit" name="Valider">
 		</div>
 	</body>
 </html>

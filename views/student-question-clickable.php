@@ -16,13 +16,13 @@
 			</p>
 		</header>
 
-		<div>
-			<h3> Selectionnes le mot qui contient une faute ! </h3>
+		<div id="question">
+			<h3> Cliquer sur la faute ou sur "Il n'y a pas de faute". </h3>
 			<h2> <?php $clickableQuestion->getSentence(); ?> </h2>
 		</div> <br>
 
-		<div>
-			<input type="submit" name="Il n'y a pas de fautes">
+		<div id="confirm">
+			<input type="submit" name="Il n'y a pas de faute">
 		</div>
 	</body>
 </html>

@@ -17,14 +17,14 @@
 		</header>
 
 		<div>
-			<h3> Saisis le bon mot ! </h3>
+			<h3> Taper le mot qui correspond à la bonne conugaison ou accord. </h3>
 			<h2> <?php $simpleQuestion->getFirstHalf(); ?> </h2>
 			<input type="text" name="answer"> <!-- Where you input your answer -->
 			<h2> <?php $simpleQuestion->getSecondHalf(); ?> </h2>
 		</div> 
 
-		<div>
-			<input type="submit" name="Question suivante">
+		<div id="confirm">
+			<input type="submit" name="Valider">
 		</div>
 	</body>
 </html>

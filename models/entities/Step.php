@@ -84,7 +84,7 @@ class Step extends Model
 			$this->setLessonEasy(StudentExerciceManager::getLessonByStepAndDifficultyID($this->getIdStep(), 0));
 			$this->setLessonMedium(StudentExerciceManager::getLessonByStepAndDifficultyID($this->getIdStep(), 1));
 			$this->setLessonHard(StudentExerciceManager::getLessonByStepAndDifficultyID($this->getIdStep(), 2));
-			//$this->setExercices(StudentExerciceManager::getExercicesByStepID($this->getIdStep()));
+			$this->setExercices(StudentExerciceManager::getExercicesByStepID($this->getIdStep()));
 		} else {
 			$this->setLessonEasy(NULL);
 			$this->setLessonMedium(NULL);
