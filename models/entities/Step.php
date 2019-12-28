@@ -1,7 +1,7 @@
 <?php
 namespace CPMF\Models\Entities;
 
-use \CPMF\Models\StudentExerciceManager;
+use \CPMF\Models\StudentExerciseManager;
 
 class Step extends Model
 {
@@ -10,7 +10,7 @@ class Step extends Model
 	private $lessonEasy;
 	private $lessonMedium;
 	private $lessonHard;
-	private $exercices;
+	private $Exercises;
 
 	public function __construct(array $data)
     {
@@ -49,9 +49,9 @@ class Step extends Model
         $this->lessonHard = $lessonHard;
     }
     
-    private function setExercices(array $exercices): void
+    private function setExercises(array $Exercises): void
 	{
-		$this->exercices = $exercices;
+		$this->Exercises = $Exercises;
 	}
 
 	public function getIdStep(): int
@@ -73,17 +73,17 @@ class Step extends Model
 		return $lessons;
 	}
 
-	public function getExercices(): array
+	public function getExercises(): array
 	{
-		return $this->exercices;
+		return $this->Exercises;
 	}
 
 	public function fillLessons(): void
 	{
 		if ($this->getIdStep() !== NULL) {
-			$this->setLessonEasy(StudentExerciceManager::getLessonByStepAndDifficultyID($this->getIdStep(), 0));
-			$this->setLessonMedium(StudentExerciceManager::getLessonByStepAndDifficultyID($this->getIdStep(), 1));
-			$this->setLessonHard(StudentExerciceManager::getLessonByStepAndDifficultyID($this->getIdStep(), 2));
+			$this->setLessonEasy(StudentExerciseManager::getLessonByStepAndDifficultyID($this->getIdStep(), 0));
+			$this->setLessonMedium(StudentExerciseManager::getLessonByStepAndDifficultyID($this->getIdStep(), 1));
+			$this->setLessonHard(StudentExerciseManager::getLessonByStepAndDifficultyID($this->getIdStep(), 2));
 		} else {
 			$this->setLessonEasy(NULL);
 			$this->setLessonMedium(NULL);
@@ -91,12 +91,12 @@ class Step extends Model
 		}
 	}
 
-	public function fillExercices(): void
+	public function fillExercises(): void
 	{
 		if ($this->getIdStep() !== NULL) {
-			$this->setExercices(StudentExerciceManager::getExercicesByStepID($this->getIdStep()));
+			$this->setExercises(StudentExerciseManager::getExercisesByStepID($this->getIdStep()));
 		} else {
-			$this->setExercices(NULL);
+			$this->setExercises(NULL);
 		}
 	}
 	

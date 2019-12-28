@@ -3,13 +3,13 @@ namespace CPMF\Models\Entities;
 
 class Exercise
 {
-    private $idExercice;
+    private $idExercise;
     private $idDifficulty;
     private $questions;
 
     public function getId(): int
     {
-    	return $this->idExercice;
+    	return $this->idExercise;
     }
 
     public function getDifficulty(): int 
@@ -22,9 +22,9 @@ class Exercise
     	return $this->questions;
     }
 
-    public function setId(int $idExercice): void
+    public function setId(int $idExercise): void
     {
-    	$this->idExercice = $idExercice;
+    	$this->idExercise = $idExercise;
     }
 
     public function setDifficulty(int $idDifficulty): void
@@ -40,7 +40,7 @@ class Exercise
     public function fill(): void
     {
         if ($this->getID() !== NULL) {
-            $this->setQuestion(StudentExerciceManager::getAllQuestionsByExerciceID($this->getId()));
+            $this->setQuestion(StudentExerciseManager::getAllQuestionsByExerciseID($this->getId()));
         } else {
             $this->setQuestion(NULL);
         }

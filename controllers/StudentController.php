@@ -2,7 +2,7 @@
 namespace CPMF\Controller;
 
 use \CPMF\Models\StudentManager;
-use \CPMF\Models\StudentExerciceManager;
+use \CPMF\Models\StudentExerciseManager;
 use \CPMF\Models\GroupManager;
 use \CPMF\Models\DecorationManager;
 
@@ -12,7 +12,7 @@ class StudentController extends Controller
     {
         $validated = $_SESSION['validated'] ?? NULL;
         if ($validated) {
-            $steps = StudentExerciceManager::getStepsByStudentID($_SESSION['idLogin']);
+            $steps = StudentExerciseManager::getStepsByStudentID($_SESSION['idLogin']);
             $student = StudentManager::getByID($_SESSION['idLogin']);
             $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
 
@@ -42,7 +42,7 @@ class StudentController extends Controller
     public function seeStep(int $id): void
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);
-        $step = StudentExerciceManager::getStepByID($id);
+        $step = StudentExerciseManager::getStepByID($id);
         $step->fillLessons();
         $lessons = $step->getLessons();
         $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
@@ -50,11 +50,18 @@ class StudentController extends Controller
         parent::view('student-step', ['student' => $student, 'step' => $step, 'lessons' => $lessons, 'totalPoints' => $totalPoints, 'group' => $group]);
     }
 
-    public function seeExercice(int $idStep, int $idDifficulty): void
+    public function seeExercise(int $idStep, int $idDifficulty): void
     {
-        $step = StudentExerciceManager::getStepByID($idStep);
-        $step->fillExercices();
-        $exercices = $step->getExercices();
-        print_r($exercices);
+        $step = StudentExerciseManager::getStepByID($idStep);
+        $step->fillExercises();
+        $Exercises = $step->getExercises();
+        print_r($Exercises);
+        foreach ($Exercises as $Exercise) {
+            if ($Exercise->getDifficulty() === $idDifficulty) {
+                $Exercise->fill(); // Récupère toutes les questions de l'Exercise
+                // Transférer les valeurs vers la vue qui gère les vues de tous les types de question
+            }
+            exit;
+        }
     }
 }

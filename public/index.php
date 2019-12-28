@@ -60,7 +60,7 @@ Router::post('/profile', 'Student@saveProfileChanges', ['user_type' => 'S']);
 
 Router::get('/step/{id}', 'Student@seeStep', ['user_type' => 'S']);
 
-Router::get('/step/{idStep}/exercice/{idDifficulty}', 'Student@seeExercice', ['user_type' => 'S']);
+Router::get('/step/{idStep}/exercise/{idDifficulty}', 'Student@seeExercise', ['user_type' => 'S']);
 
 
 // TEACHER ROUTES
