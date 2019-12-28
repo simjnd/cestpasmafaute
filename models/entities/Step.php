@@ -78,17 +78,24 @@ class Step extends Model
 		return $this->exercices;
 	}
 
-	public function fill(): void
+	public function fillLessons(): void
 	{
 		if ($this->getIdStep() !== NULL) {
 			$this->setLessonEasy(StudentExerciceManager::getLessonByStepAndDifficultyID($this->getIdStep(), 0));
 			$this->setLessonMedium(StudentExerciceManager::getLessonByStepAndDifficultyID($this->getIdStep(), 1));
 			$this->setLessonHard(StudentExerciceManager::getLessonByStepAndDifficultyID($this->getIdStep(), 2));
-			$this->setExercices(StudentExerciceManager::getExercicesByStepID($this->getIdStep()));
 		} else {
 			$this->setLessonEasy(NULL);
 			$this->setLessonMedium(NULL);
 			$this->setLessonHard(NULL);
+		}
+	}
+
+	public function fillExercices(): void
+	{
+		if ($this->getIdStep() !== NULL) {
+			$this->setExercices(StudentExerciceManager::getExercicesByStepID($this->getIdStep()));
+		} else {
 			$this->setExercices(NULL);
 		}
 	}

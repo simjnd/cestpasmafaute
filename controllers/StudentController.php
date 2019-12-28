@@ -43,7 +43,7 @@ class StudentController extends Controller
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);
         $step = StudentExerciceManager::getStepByID($id);
-        $step->fill();
+        $step->fillLessons();
         $lessons = $step->getLessons();
         $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
         $group = GroupManager::getByID($student->getIdClass());
@@ -53,7 +53,7 @@ class StudentController extends Controller
     public function seeExercice(int $idStep, int $idDifficulty): void
     {
         $step = StudentExerciceManager::getStepByID($idStep);
-        $step->fill();
+        $step->fillExercices();
         $exercices = $step->getExercices();
         print_r($exercices);
     }
