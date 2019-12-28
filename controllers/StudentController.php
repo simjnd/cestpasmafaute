@@ -54,11 +54,11 @@ class StudentController extends Controller
     {
         $step = StudentExerciseManager::getStepByID($idStep);
         $step->fillExercises();
-        $Exercises = $step->getExercises();
-        print_r($Exercises);
-        foreach ($Exercises as $Exercise) {
-            if ($Exercise->getDifficulty() === $idDifficulty) {
-                $Exercise->fill(); // Récupère toutes les questions de l'Exercise
+        $exercises = $step->getExercises();
+        print_r($exercises);
+        foreach ($exercises as $exercise) {
+            if ($exercise->getDifficulty() === $idDifficulty) {
+                $exercise->fill(); // Récupère toutes les questions de l'Exercise
                 // Transférer les valeurs vers la vue qui gère les vues de tous les types de question
             }
             exit;

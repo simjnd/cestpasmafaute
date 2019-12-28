@@ -54,6 +54,7 @@ class StudentExerciseManager
         $query->execute(['idStep' => $idStep]);
 
         foreach ($query->fetchAll() as $rawExercise) {
+            print_r($rawExercise);
             $exercises[] = new Exercise($rawExercise);
         }
 
