@@ -14,6 +14,13 @@ class Exercise extends Model
         parent::__construct($data);
     } 
 
+    protected function callFunction(string $methodName, ?string $value = ""): void
+    {
+        if(method_exists($this, $methodName)) {
+            $this->$methodName($value);
+        }   
+    }
+
     public function getId(): int
     {
     	return $this->idExercise;
