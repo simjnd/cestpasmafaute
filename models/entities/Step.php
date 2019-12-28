@@ -51,7 +51,7 @@ class Step extends Model
     
     private function setExercises(array $exercises): void
 	{
-		$this->Exercises = $Exercises;
+		$this->exercises = $exercises;
 	}
 
 	public function getIdStep(): int
