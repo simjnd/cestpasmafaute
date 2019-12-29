@@ -10,6 +10,7 @@ use \CPMF\Models\Entities\MultipleQuestion;
 use \CPMF\Models\Entities\PuzzleQuestion;
 use \CPMF\Models\Entities\SimpleQuestion;
 use \CPMF\Models\Entities\Role;
+use \CPMF\Models\Entities\Choice;
 
 class StudentExerciseManager
 {
