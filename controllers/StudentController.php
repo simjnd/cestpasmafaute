@@ -71,7 +71,7 @@ class StudentController extends Controller
 
         header('Content-type: application/json; charset=utf-8');
 
-        $questions = [];
+        $questions = ['questions' => []];
 
         // echo '<pre>';
         // print_r($exercise->getQuestions());
@@ -79,7 +79,7 @@ class StudentController extends Controller
 
         foreach($exercise->getQuestions() as $question) {
             if ($question instanceof \CPMF\Models\Entities\ClickableQuestion) {
-                $questions[] = [
+                $questions['questions'][] = [
                     'id' => $question->getIdQuestion(),
                     'type' => 'ClickableQuestion',
                     'sentence' => $question->getSentence()
@@ -90,7 +90,7 @@ class StudentController extends Controller
                     $choices[] = $choice->getLabel();
                 }
 
-                $questions[] = [
+                $questions['questions'][] = [
                     'id' => $question->getIdQuestion(),
                     'type' => 'MultipleQuestion',
                     'sentence' => $question->getSentence(),
@@ -105,7 +105,7 @@ class StudentController extends Controller
                     $positions[] = [$role->getStartMarker(), $role->getEndMarker()];
                 }
 
-                $questions[] = [
+                $questions['questions'][] = [
                     'id' => $question->getIdQuestion(),
                     'type' => 'PuzzleQuestion',
                     'sentence' => $question->getSentence(),
@@ -117,7 +117,7 @@ class StudentController extends Controller
                 $sentence = $question->getSentence();
 
                 $sentence = str_replace('<cpmf>', '<cpmf> '.$wordToWrite, $sentence);
-                $questions[] = [
+                $questions['questions'][] = [
                     'id' => $question->getIdQuestion(),
                     'type' => 'SimpleQuestion', 
                     'sentence' => $sentence
@@ -133,7 +133,6 @@ class StudentController extends Controller
         header('Content-type: application/json; charset=utf-8');
 
         $questions = [
-            'currentQuestion' => 0,
             'questions' => [
                 [
                     'id' => 4,

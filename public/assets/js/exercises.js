@@ -34,7 +34,8 @@ $(function() {
 	$(document).ready(function() {
 		$.get('/exercises/0', function(response) {
 			questionsData = response;
-
+			questionsData.currentQuestion = 0;
+			
 			let currentQuestion = questionsData.currentQuestion;
 			let questions = questionsData.questions;
 
