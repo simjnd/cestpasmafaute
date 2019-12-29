@@ -74,10 +74,10 @@ class StudentController extends Controller
         if ($infos['pointsLastTry'] > $recquiredValue) {
             if ($infos['hasCompletedOnce'] !== 1) {
                 StudentExerciseManager::hasCompleted($infos['idLogin'], $infos['idExercise']);
-                StudentExerciseManager::updatePointsLastTry();
+                StudentExerciseManager::updatePointsLastTry($infos['pointsLastTry'], $infos['idLogin'], $infos['idExercise']);
                 parent::redirect('/');
             } else {
-                StudentExerciseManager::updatePointsLastTry();
+                StudentExerciseManager::updatePointsLastTry($infos['pointsLastTry'], $infos['idLogin'], $infos['idExercise']);
                 parent::redirect('/'); 
             }
         } else {
