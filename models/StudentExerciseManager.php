@@ -176,7 +176,7 @@ class StudentExerciseManager
             $roles[] = new Role([
                 'idRole' => $rawRole['idRole'],
                 'startMarker' => $rawRole['startMarker'],
-                'endRole' => $rawRole['endMarker'],
+                'endMarker' => $rawRole['endMarker'],
                 'label' => $roleLabel
             ]);
         }
