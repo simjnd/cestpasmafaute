@@ -207,19 +207,15 @@ class StudentController extends Controller
                     if($type) {
                         if($type === 'ClickableQuestion') {
                             $rate = StudentExerciseManager::getClickableQuestionSuccessRate($answer);
-                            var_dump(StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type));
                             $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
                         } elseif($type === 'MultipleQuestion') {
                             $rate = StudentExerciseManager::getMultipleQuestionSuccessRate($answer);
-                            var_dump(StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type));
                             $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
                         } elseif($type === 'PuzzleQuestion') {
                             $rate = StudentExerciseManager::getPuzzleQuestionSuccessRate($answer);
-                            var_dump(StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type));
                             $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
                         } elseif($type === 'SimpleQuestion') {
                             $rate = StudentExerciseManager::getSimpleQuestionSuccessRate($answer);
-                            var_dump(StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type));
                             $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
                         }
                     }

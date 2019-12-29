@@ -217,7 +217,7 @@ class StudentExerciseManager
         if($clickedWord && $idQuestion) {
             $realQuestion = self::getClickableQuestionById($idQuestion);
             // Checker si il y a bien une question à cet id
-            if($realQuestion->getCorrectAnswer() == strtolower($clickedWord)) {
+            if($realQuestion->getAnswerIndex() == $clickedWord) {
                 return 1.0;
             }
         }
