@@ -5,6 +5,11 @@
 </head>
 <body>
 	<h1>Changer votre mot de passe</h1>
+	<?php if (isset($message)) { ?>
+		<p>
+			<p>Attention: <?= $message ?></p>
+		</p>
+	<?php } ?>
 	<form action="/change-forgot-password/<?= $idLogin ?>/<?= $token ?>" method="POST">
 		<p>
 			<label for="newPassword">Entrer votre votre nouveau mot de passe</label>
