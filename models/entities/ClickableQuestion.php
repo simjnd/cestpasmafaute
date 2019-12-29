@@ -5,19 +5,25 @@ class ClickableQuestion extends Question
 {
 	private $answerIndex;
 
-	public function __construct(int $id, string $sentence, int $answerIndex)
+	public function __construct(array $data)
 	{
-		parent::__construct($id, $sentence);
+		parent::__construct($data);
+	}
+
+	protected function callFunction(string $methodName, $value = null): void
+    {
+        if(method_exists($this, $methodName)) {
+            $this->$methodName($value);
+        }   
+    }
+
+	public function getAnswerIndex(): int
+	{
+		return $this->answerIndex;
+	}
+
+	public function setAnswerIndex(int $answerIndex): void
+	{
 		$this->answerIndex = $answerIndex;
-	}
-
-	public function getCorrectAnswer(): string
-	{
-		return $this->correctAnswer;
-	}
-
-	public function getWord(): string
-	{
-		return $this->word;
 	}
 }

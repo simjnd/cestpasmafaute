@@ -6,7 +6,7 @@ use \CPMF\Models\StudentExerciseManager;
 class Exercise extends Model
 {
     private $idExercise;
-    private $idDifficulty;
+    private $difficulty;
     private $questions;
 
     public function __construct(array $data)
@@ -26,7 +26,7 @@ class Exercise extends Model
     	return $this->idExercise;
     }
 
-    public function getDifficulty(): int 
+    public function getDifficulty(): ?Difficulty 
     {
     	return $this->idDifficulty;
     }
@@ -41,7 +41,7 @@ class Exercise extends Model
     	$this->idExercise = $idExercise;
     }
 
-    private function setDifficulty(int $idDifficulty): void
+    private function setDifficulty(?Difficulty $idDifficulty): void
     {
     	$this->idDifficulty = $idDifficulty;
     }
@@ -52,6 +52,13 @@ class Exercise extends Model
     }
 
     public function fill(): void
+    {
+        if($this->idDifficulty !== NULL) {
+            $this->setDifficulty(DifficultyManager::getDifficultyById($this->idDifficulty));
+        }
+    }
+
+    public function deepFill(): void
     {
         if ($this->getIdExercise() !== NULL) {
             $this->setQuestions(StudentExerciseManager::getAllQuestionsByExerciseID($this->getIdExercise()));

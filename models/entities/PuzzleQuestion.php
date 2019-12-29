@@ -3,42 +3,27 @@ namespace CPMF\Models\Entities;
 
 class PuzzleQuestion extends Question
 {
-	private $idRole;
-	private $startMarker;
-	private $endMarker;
+	private $roles;
 
-	public function __construct(int $id, string $sentence)
+	public function __construct(array $data)
 	{
-		parent::__construct($id, $sentence);
+		parent::__construct($data);
 	}
 
-	public function getIdRole(): int
+	protected function callFunction(string $methodName, $value = null): void
+    {
+        if(method_exists($this, $methodName)) {
+            $this->$methodName($value);
+        }   
+    }
+
+	public function getRoles(): array
 	{
-		return $this->idRole;
+		return $this->roles;
 	}
 
-	public function getStartMarker(): int
+	public function setRoles(array $roles): void
 	{
-		return $this->startMarker;
-	}
-
-	public function getEndMarker(): int
-	{
-		return $this->endMarker;
-	}
-
-	public function setIdRole(int $idRole): void 
-	{
-		$this->idRole = $idRole;
-	}
-
-	public function setStartMarker(int $startMarker): void 
-	{
-		$this->startMarker = $startMarker;
-	}
-
-	public function setEndMarker(int $endMarker): void 
-	{
-		$this->endMarker = $endMarker;
+		$this->roles = $roles;
 	}
 }

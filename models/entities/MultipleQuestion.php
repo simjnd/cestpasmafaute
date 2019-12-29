@@ -5,10 +5,17 @@ class MultipleQuestion extends Question
 {
 	private $choices;
 
-	public function __construct(int $id, string $sentence)
+	public function __construct(array $data)
 	{
-		parent::__construct($id, $sentence);
+		parent::__construct($data);
 	}
+
+	protected function callFunction(string $methodName, $value = null): void
+    {
+        if(method_exists($this, $methodName)) {
+            $this->$methodName($value);
+        }   
+    }
 
 	public function getChoices(): array
 	{

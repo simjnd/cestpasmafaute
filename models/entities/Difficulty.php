@@ -1,16 +1,22 @@
 <?php
 namespace CPMF\Models\Entities;
 
-class Difficulty
+class Difficulty extends Model
 {
-	private $id;
+	private $idDifficulty;
 	private $label;
 
-	public function __construct($id, $label)
-	{
-		$this->id = $id;
-		$this->label = $label;
-	}
+	public function __construct(array $data)
+    {
+        parent::__construct($data);
+    } 
+
+    protected function callFunction(string $methodName, ?string $value = ""): void
+    {
+        if(method_exists($this, $methodName)) {
+            $this->$methodName($value);
+        }   
+    }
 
 	public function getId(): int
 	{
@@ -20,5 +26,15 @@ class Difficulty
 	public function getName(): string
 	{
 		return $this->label;
+	}
+
+	public function setId(int $idDifficulty): void
+	{
+		$this->idDifficulty = $idDifficulty;
+	}
+
+	public function setLabel(string $label): void
+	{
+		$this->label = $label;
 	}
 }

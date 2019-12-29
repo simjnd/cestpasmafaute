@@ -62,8 +62,20 @@ class StudentExerciseManager
 
     }
 
+    public static function getExerciseById(int $idExercise, bool $fill = true): Exercise
+    {
+        $exerciseReq = Manager::getDatabase()->prepare('SELECT * FROM Exercise WHERE idExercise = :idExercise');
+        $exerciseReq->execute(['idExercise' => $idExercise]);
+        $exerciseData = $exerciseReq->fetch();
+
+        $exercise = new Exercise($exerciseData);
+        if($fill) $exercise->fill();
+        return $exercise;
+    }
+
     public static function getAllQuestionsByExerciseID(int $idExercise): array 
     {
+        $exercise = self::getExerciseById($idExercise);
 
         $idsSimple = [];
         $idsPuzzle = [];
@@ -119,64 +131,83 @@ class StudentExerciseManager
         return $allQuestions;
     }
 
-    public static function getClickableQuestionByID(int $idQuestion): ClickableQuestion 
+    public static function getClickableQuestionByID(int $idClickableQuestion): ClickableQuestion 
     {
-        $questionQuery = Manager::getDatabase()->prepare('SELECT idClickableQuestion, sentence, answerIndex FROM ClickableQuestion WHERE idClickableQuestion = :idQuestion');
-        $questionQuery->execute(['idQuestion' => $idQuestion]);
+        $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM ClickableQuestion WHERE idClickableQuestion = :idQuestion');
+        $questionQuery->execute(['idClickableQuestion' => $idQuestion]);
 
         $questionData = $questionQuery->fetch();
 
         return new ClickableQuestion($questionData);
     }
 
-    public static function getMultipleQuestionByID(int $idQuestion): MultipleQuestion 
+    public static function getMultipleQuestionByID(int $idMultipleQuestion): MultipleQuestion 
     {
         $choices = [];
 
-        $questionQuery = Manager::getDatabase()->prepare('SELECT idMultipleQuestion, sentence FROM MultipleQuestion WHERE idMultipleQuestion = :idQuestion');
-        $questionQuery->execute(['idQuestion' => $idQuestion]);
+        $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM MultipleQuestion WHERE idMultipleQuestion = :idQuestion');
+        $questionQuery->execute(['idMultipleQuestion' => $idMultipleQuestion]);
 
         $questionData = $questionQuery->fetch();
 
-        $choicesQuery = Manager::getDatabase()->prepare('SELECT Choice.idChoice, Choice.label, Choice.isCorrectAnswer, Choice.idMultipleQuestion FROM Choice WHERE Choice.idMultipleQuestion = :idQuestion');
-        $choicesQuery->execute(['idQuestion' => $idQuestion]);
+        $multipleQuestion = new MultipleQuestion($questionData);
+
+        $choicesQuery = Manager::getDatabase()->prepare('SELECT * FROM Choice WHERE idMultipleQuestion = :idMultipleQuestion');
+        $choicesQuery->execute(['idMultipleQuestion' => $idMultipleQuestion]);
 
         foreach ($choicesQuery->fetchAll() as $rawChoice) {
             $choices[] = new Choice($rawChoice);
         }
 
-        $multipleData = array_merge($questionData, $choices);
+        $multipleQuestion->setChoices($choices);
 
-        return new MultipleQuestion($multipleData);
+        return $multipleQuestion;
     }
 
-    public static function getPuzzleQuestionByID(int $idQuestion): PuzzleQuestion
+    public static function getPuzzleQuestionByID(int $idPuzzleQuestion): PuzzleQuestion
     {
-       $questionQuery = Manager::getDatabase()->prepare('SELECT idPuzzleQuestion, sentence FROM PuzzleQuestion WHERE idPuzzleQuestion = :idQuestion');
-       $questionQuery->execute(['idQuestion' => $idQuestion]);
+        $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM PuzzleQuestion WHERE idPuzzleQuestion = :idPuzzleQuestion');
+        $questionQuery->execute(['idPuzzleQuestion' => $idPuzzleQuestion]);
 
-       $questionData = $questionQuery->fetch();
+        $questionData = $questionQuery->fetch();
 
-       $puzzleQuery = Manager::getDatabase()->prepare('SELECT PuzzleQuest_Role.idRole FROM PuzzleQuest_Role WHERE PuzzleQuest_Role.idPuzzleQuestion = :idQuestion');
-       $puzzleQuery->execute(['idQuestion' => $idQuestion]);
+        $puzzleQuestion = new PuzzleQuestion($questionData);
 
-       $puzzleData = $puzzleQuery->fetch();
+        $roles = [];
 
-       $puzzleData = array_merge($questionData, $puzzleData);
+        $puzzleQuery = Manager::getDatabase()->prepare('SELECT * FROM PuzzleQuest_Role WHERE idPuzzleQuestion = :idPuzzleQuestion');
+        $puzzleQuery->execute(['idPuzzleQuestion' => $idPuzzleQuestion]);
 
-       return new PuzzleQuestion($puzzleData);
+        foreach($puzzleQuery->fetchAll() as $rawRole) {
+            $startMarker = $rawRole['startMarker'];
+            $endMarker = $rawRole['endMarker'];
+
+            $roleQuery = Manager::getDatabase()->prepare('SELECT label FROM Role WHERE idRole = :idRole');
+            $roleQuery->execute(['idRole' => $rawRole['idRole']]);
+            $roleLabel = $roleQuery->fetch()['label'];
+
+            $roleQuery->closeCursor();
+            
+            $roles[] = new Role([
+                'idRole' =>
+                'startMarker' => $rawRole['startMarker'],
+                'endRole' => $rawRole['endMarker'],
+                'label' => $roleLabel
+            ]);
+        }
+
+        $puzzleQuestion->setRoles($roles);
+
+        return $puzzleQuestion;
     }
 
-    public static function getSimpleQuestionByID(int $idQuestion): SimpleQuestion
+    public static function getSimpleQuestionByID(int $idSimpleQuestion): SimpleQuestion
     {
-        $questionQuery = Manager::getDatabase()->prepare('SELECT idSimpleQuestion, sentence, correctAnswer, wordToWrite FROM SimpleQuestion WHERE idSimpleQuestion = :idQuestion');
-        $questionQuery->execute(['idQuestion' => $idQuestion]);
+        $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM SimpleQuestion WHERE idSimpleQuestion = :idSimpleQuestion');
+        $questionQuery->execute(['idSimpleQuestion' => $idSimpleQuestion]);
 
         $questionData = $questionQuery->fetch();
 
         return new SimpleQuestion($questionData);
     }
-
-
-	
 }
