@@ -62,76 +62,60 @@ class StudentExerciseManager
 
     }
 
-    public static function getExerciseById(int $idExercise, bool $fill = true): Exercise
+    public static function getExerciseById(int $idExercise, bool $fill = false): Exercise
     {
         $exerciseReq = Manager::getDatabase()->prepare('SELECT * FROM Exercise WHERE idExercise = :idExercise');
         $exerciseReq->execute(['idExercise' => $idExercise]);
         $exerciseData = $exerciseReq->fetch();
 
         $exercise = new Exercise($exerciseData);
-        if($fill) $exercise->fill();
+        $exercise->fill();
+
+        if($fill) {
+            $exercise->setQuestions(self::getAllQuestionsByExerciseId($idExercise));
+        }
+
         return $exercise;
     }
 
-    public static function getAllQuestionsByExerciseID(int $idExercise): array 
+    public static function getAllQuestionsByExerciseId(int $idExercise): array 
     {
         $exercise = self::getExerciseById($idExercise);
 
-        $idsSimple = [];
-        $idsPuzzle = [];
-        $idsMultiple = [];
-        $idsClickable = [];
+        $questions = [];
 
-        $allQuestions = [];
-
-        $simpleQuery = Manager::getDatabase()->prepare('SELECT SimpleQuestion.idSimpleQuestion FROM SimpleQuestion, Exercise_SimpleQuest, Exercise WHERE Exercise = :idExercise AND Exercise.idExercise = Exercise_SimpleQuest.idExercise AND SimpleQuestion.idSimpleQuestion = Exercise_SimpleQuest.idSimpleQuestion');
+        $simpleQuery = Manager::getDatabase()->prepare('SELECT idSimpleQuestion FROM Exercise_SimpleQuest WHERE idExercise = :idExercise');
         $simpleQuery->execute(['idExercise' => $idExercise]);
 
-        foreach ($simpleQuery->fecthAll() as $rawSimpleId) {
-            $idsSimple[] = $rawSimpleId;
+        foreach ($simpleQuery->fecthAll() as $rawSimple) {
+            $questions[] = self::getSimpleQuestionById($rawSimple['idSimpleQuestion']);
         }
 
-        $puzzleQuery = Manager::getDatabase()->prepare('SELECT PuzzleQuestion.idPuzzleQuestion FROM PuzzleQuestion, Exercise_PuzzleQuest, Exercise WHERE Exercise = :idExercise AND Exercise.idExercise = Exercise_PuzzleQuest.idExercise AND PuzzleQuestion.idPuzzleQuestion = Exercise_PuzzleQuest.idPuzzleQuestion');
+        $puzzleQuery = Manager::getDatabase()->prepare('SELECT idPuzzleQuestion FROM Exercise_PuzzleQuest WHERE idExercise = :idExercise');
         $puzzleQuery->execute(['idExercise' => $idExercise]);
 
-        foreach ($puzzleQuery->fecthAll() as $rawPuzzleId) {
-            $idsPuzzle[] = $rawPuzzleId;
+        foreach ($puzzleQuery->fecthAll() as $rawPuzzle) {
+            $questions[] = self::getPuzzleQuestionById($rawPuzzle['idPuzzleQuestion']);
         }
 
-        $multipleQuery = Manager::getDatabase()->prepare('SELECT MultipleQuestion.idMultipleQuestion FROM MultipleQuestion, Exercise_MultipleQuest, Exercise WHERE Exercise = :idExercise AND Exercise.idExercise = Exercise_MultipleQuest.idExercise AND MultipleQuestion.idMultipleQuestion = Exercise_MultipleQuest.idMultipleQuestion');
+        $multipleQuery = Manager::getDatabase()->prepare('SELECT idMultipleQuestion FROM Exercise_MultipleQuest WHERE idExercise = :idExercise');
         $multipleQuery->execute(['idExercise' => $idExercise]);
 
-        foreach ($multipleQuery->fecthAll() as $rawMultipleId) {
-            $idsMultiple[] = $rawMultipleId;
+        foreach ($multipleQuery->fecthAll() as $rawMultiple) {
+            $questions[] = self::getMultipleQuestionById($rawMultiple['idMultipleQuestion']);
         }
 
-        $clickableQuery = Manager::getDatabase()->prepare('SELECT ClickableQuestion.idClickableQuestion FROM ClickableQuestion, Exercise_ClickableQuest, Exercise WHERE Exercise = :idExercise AND Exercise.idExercise = Exercise_ClickableQuest.idExercise AND ClickableQuestion.idClickableQuestion = Exercise_ClickableQuest.idClickableQuestion');
+        $clickableQuery = Manager::getDatabase()->prepare('SELECT idClickableQuestion FROM Exercise_ClickableQuest WHERE idExercise = :idExercise');
         $clickableQuery->execute(['idExercise' => $idExercise]);
 
-        foreach ($clickableQuery->fecthAll() as $rawClickableId) {
-            $idsClickable[] = $rawClickableId;
+        foreach ($clickableQuery->fecthAll() as $rawClickable) {
+            $questions[] = self::getClickableQuestionById($rawClickable['idClickableQuestion']);
         }
 
-        foreach ($idsSimple as $idSimple) {
-            $allQuestions[] = StudentExerciseManager::getSimpleQuestionByID($idSimple);
-        }
-
-        foreach ($idsPuzzle as $idPuzzle) {
-           $allQuestions[] = StudentExerciseManager::getPuzzleQuestionByID($idPuzzle);
-        }
-
-        foreach ($idsMultiple as $idMultiple) {
-            $allQuestions[] = StudentExerciseManager::getMultipleQuestionByID($idMultiple);
-        }
-
-        foreach ($idsClickable as $idClickable) {
-            $allQuestions[] = StudentExerciseManager::getClickableQuestionByID($idClickable);
-        }
-
-        return $allQuestions;
+        return $questions;
     }
 
-    public static function getClickableQuestionByID(int $idClickableQuestion): ClickableQuestion 
+    public static function getClickableQuestionById(int $idClickableQuestion): ClickableQuestion 
     {
         $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM ClickableQuestion WHERE idClickableQuestion = :idQuestion');
         $questionQuery->execute(['idClickableQuestion' => $idQuestion]);
@@ -141,7 +125,7 @@ class StudentExerciseManager
         return new ClickableQuestion($questionData);
     }
 
-    public static function getMultipleQuestionByID(int $idMultipleQuestion): MultipleQuestion 
+    public static function getMultipleQuestionById(int $idMultipleQuestion): MultipleQuestion 
     {
         $choices = [];
 
@@ -164,7 +148,7 @@ class StudentExerciseManager
         return $multipleQuestion;
     }
 
-    public static function getPuzzleQuestionByID(int $idPuzzleQuestion): PuzzleQuestion
+    public static function getPuzzleQuestionById(int $idPuzzleQuestion): PuzzleQuestion
     {
         $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM PuzzleQuestion WHERE idPuzzleQuestion = :idPuzzleQuestion');
         $questionQuery->execute(['idPuzzleQuestion' => $idPuzzleQuestion]);
@@ -201,7 +185,7 @@ class StudentExerciseManager
         return $puzzleQuestion;
     }
 
-    public static function getSimpleQuestionByID(int $idSimpleQuestion): SimpleQuestion
+    public static function getSimpleQuestionById(int $idSimpleQuestion): SimpleQuestion
     {
         $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM SimpleQuestion WHERE idSimpleQuestion = :idSimpleQuestion');
         $questionQuery->execute(['idSimpleQuestion' => $idSimpleQuestion]);
