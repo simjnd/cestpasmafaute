@@ -32,7 +32,7 @@ $(function() {
 	}
 
 	$(document).ready(function() {
-		$.get('/exercises/template', function(response) {
+		$.get('/exercises/0', function(response) {
 			questionsData = response;
 
 			let currentQuestion = questionsData.currentQuestion;
