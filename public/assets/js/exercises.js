@@ -58,14 +58,8 @@ $(function() {
 
 						console.log(ctx);
 						// TODO: ENVOYER LES DONNEES AU SERVEUR
-						$.ajax({
-							type: 'POST',
-							data: { 
-								context: ctx
-							},
-							success: (response) => {
-								console.log(response);
-							}
+						$.post('/exercises/0', data: { context: ctx }, (response) => {
+							console.log(response);
 						});
 				});
 				}
