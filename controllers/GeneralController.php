@@ -118,7 +118,7 @@ class GeneralController extends Controller
 			if(mail($to, $subject, $message, implode("\r\n", $headers))) {
 			    parent::redirect('/email-sended');
 			} else {
-			    echo 'Impossible d\'envoyer un e-mail. Veuillez réessayer.';
+			    echo 'Impossible d\'envoyer un e-mail. Veuillez réessayer plus tard.';
 			}
 		} else {
 			die("L'utilisateur n'existe pas");

@@ -168,7 +168,7 @@ class UserManager
 	*/
 	public static function userVerification(int $idLogin, string $token): bool
 	{
-		$userVerificationRequest = Manager::getDatabase()->prepare('SELECT idLogin FROM Token WHERE idLogin = :idLogin AND token = :token AND NOW() <= ADDTIME(creationDate, "60")');
+		$userVerificationRequest = Manager::getDatabase()->prepare('SELECT idLogin FROM Token WHERE idLogin = :idLogin AND token = :token AND NOW() <= ADDTIME(creationDate, "120")');
 		$userVerificationRequest->execute(['idLogin' => $idLogin, 'token' => $token]);
 
 		return $userVerificationRequest->rowCount() !== 0;
