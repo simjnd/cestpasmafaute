@@ -203,10 +203,15 @@ class StudentController extends Controller
             $points = 0.0;
             if($context && is_array($context)) {
                 foreach($context as $answer) {
+                    echo '<pre>';
+                    print_r($answer);
+                    echo '</pre>';
+
                     $type = $answer['type'] ?? NULL;
                     if($type) {
                         if($type === 'ClickableQuestion') {
                             $rate = StudentExerciseManager::getClickableQuestionSuccessRate($answer);
+                            var_dump($rate);
                             $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
                         } elseif($type === 'MultipleQuestion') {
                             $rate = StudentExerciseManager::getMultipleQuestionSuccessRate($answer);
