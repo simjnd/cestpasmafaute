@@ -200,13 +200,32 @@ class StudentController extends Controller
     {
         $context = $_POST['context'] ?? NULL;
         if($context) {
-            try {
-                echo '<pre>';
-                print_r($context);
-                echo '</pre>';
-            } catch(Exception $e) {
-                die('Erreur: '.$e->getMessage);
+            $questions = $context['questions'] ?? NULL;
+            $points = 0.0;
+            if($questions && is_array($questions)) {
+                foreach($questions as $question) {
+                    $type = $question['type'] ?? NULL;
+                    if($type) {
+                        if($type === 'ClickableQuestion') {
+                            $rate = StudentExerciseManager::getClickableQuestionSuccessRate($question);
+                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $question['id'], $type);
+                        } elseif($type === 'MultipleQuestion') {
+                            $rate = StudentExerciseManager::getMultipleQuestionSuccessRate($question);
+                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $question['id'], $type);
+                        } elseif($type === 'PuzzleQuestion') {
+                            $rate = StudentExerciseManager::getPuzzleQuestionSuccessRate($question);
+                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $question['id'], $type);
+                        } elseif($type === 'SimpleQuestion') {
+                            $rate = StudentExerciseManager::getSimpleQuestionSuccessRate($question);
+                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $question['id'], $type);
+                        }
+                    }
+                }
             }
+
+            $totalPoints = StudentExerciseManager::getExerciseTotalPoints($idExercise);
+
+            echo '<p>Exercice réussi à '.($points * 100.0 / $totalPoints).' % ( +'.$points.' points)</p>';
         }
     }
 }

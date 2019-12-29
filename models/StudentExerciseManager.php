@@ -207,4 +207,69 @@ class StudentExerciseManager
         $query = Manager::getDatabase()->prepare('UPDATE Student_Exercise SET pointsLastTry = :points WHERE idLogin = :idLogin AND idExercise = :idExercise');
         $query->execute(['pointsLastTry' => $points, 'idLogin' => $idLogin, 'idExercise' => $idExercise]); 
     }
+
+    // Vérification des exercices
+
+    public static function getClickableQuestionSuccessRate(array $answerData): float
+    {
+        $clickedWord = $answerData['clickedWord'] ?? NULL;
+        $idQuestion = $answerData['id'] ?? NULL;
+        if($clickedWord && $idQuestion) {
+            $realQuestion = self::getClickableQuestionById($idQuestion);
+            // Checker si il y a bien une question à cet id
+            if($realQuestion->getCorrectAnswer() === strtolower($clickedWord)) {
+                return 1.0;
+            }
+        }
+
+        return 0.0;
+    }
+
+    public static function getMultipleQuestionSuccessRate(array $answerData): float
+    {
+        $choice = $answerData['choice'] ?? NULL;
+        $idQuestion = $answerData['id'] ?? NULL;
+        if($choice && $idQuestion) {
+            $realQuestion = self::getMultipleQuestionById($idQuestion);
+            // Checker si il y a bien une question à cet id
+            foreach($realQuestion->getChoices() as $choice) {
+                if($choice->getLabel() === $choice) {
+                    if($choice->isCorrectAnswer()) {
+                        return 1.0;
+                    }
+                }
+            }
+        }
+
+        return 0.0;
+    }
+
+    // TODO
+    public static function getPuzzleQuestionSuccessRate(array $answerData): float
+    {
+        return 0.0;
+    }
+
+    public static function getSimpleQuestionSuccessRate(array $answerData): float
+    {
+        $answer = $answerData['answer'] ?? NULL;
+        $idQuestion = $answerData['id'] ?? NULL;
+        if($answer && $idQuestion) {
+            $realQuestion = self::getSimpleQuestionById($idQuestion);
+            // Checker si il y a bien une question à cet id
+            if($realQuestion->getCorrectAnswer() === strtolower($answer)) {
+                return 1.0;
+            }
+        }
+
+        return 0.0;
+    }
+
+    public static function getExerciseTotalPoints(int $idExercise): float
+    {
+        $sumQuery = Manager::getDatabase()->prepare('SELECT SUM(Res.points) nbPoints FROM (SELECT points FROM Exercise_SimpleQuest WHERE idExercise = :idExercise UNION ALL SELECT points FROM Exercise_PuzzleQuest WHERE idExercise = :idExercise UNION ALL SELECT points FROM Exercise_MultipleQuest WHERE idExercise = :idExercise UNION ALL SELECT points FROM Exercise_ClickableQuest WHERE idExercise = :idExercise) Res');
+        $sumQuery->execute(['idExercise' => $idExercise]);
+
+        return $sumQuery->fetch()['nbPoints'];
+    }
 }
