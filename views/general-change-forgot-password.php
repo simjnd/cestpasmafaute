@@ -5,9 +5,9 @@
 </head>
 <body>
 	<h1>Changer votre mot de passe</h1>
-	<?php if (isset($message)) { ?>
+	<?php if (isset($error)) { ?>
 		<p>
-			<p>Attention: <?= $message ?></p>
+			<p>Attention: <?= $error ?></p>
 		</p>
 	<?php } ?>
 	<form action="/change-forgot-password/<?= $idLogin ?>/<?= $token ?>" method="POST">

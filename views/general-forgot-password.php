@@ -5,9 +5,9 @@
 </head>
 <body>
 	<h1>Mot de passe oublié</h1>
-	<?php if (isset($message)) { ?>
+	<?php if (isset($error)) { ?>
 		<p>
-			<p>Attention: <?= $message ?></p>
+			<p>Attention: <?= $error ?></p>
 		</p>
 	<?php } ?>
 	<p>Entrer votre email pour changer votre mot de passe</p>
