@@ -200,24 +200,23 @@ class StudentController extends Controller
     {
         $context = $_POST['context'] ?? NULL;
         if($context) {
-            $questions = $context['questions'] ?? NULL;
             $points = 0.0;
-            if($questions && is_array($questions)) {
-                foreach($questions as $question) {
-                    $type = $question['type'] ?? NULL;
+            if($context && is_array($context)) {
+                foreach($context as $answer) {
+                    $type = $answer['type'] ?? NULL;
                     if($type) {
                         if($type === 'ClickableQuestion') {
-                            $rate = StudentExerciseManager::getClickableQuestionSuccessRate($question);
-                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $question['id'], $type);
+                            $rate = StudentExerciseManager::getClickableQuestionSuccessRate($answer);
+                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
                         } elseif($type === 'MultipleQuestion') {
-                            $rate = StudentExerciseManager::getMultipleQuestionSuccessRate($question);
-                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $question['id'], $type);
+                            $rate = StudentExerciseManager::getMultipleQuestionSuccessRate($answer);
+                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
                         } elseif($type === 'PuzzleQuestion') {
-                            $rate = StudentExerciseManager::getPuzzleQuestionSuccessRate($question);
-                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $question['id'], $type);
+                            $rate = StudentExerciseManager::getPuzzleQuestionSuccessRate($answer);
+                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
                         } elseif($type === 'SimpleQuestion') {
-                            $rate = StudentExerciseManager::getSimpleQuestionSuccessRate($question);
-                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $question['id'], $type);
+                            $rate = StudentExerciseManager::getSimpleQuestionSuccessRate($answer);
+                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
                         }
                     }
                 }
