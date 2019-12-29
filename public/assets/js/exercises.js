@@ -92,7 +92,7 @@ $(function() {
 		let currentQuestion = questionsData.currentQuestion;
 		let question = questionsData.questions[currentQuestion];
 
-		let formattedSentence = question.sentence.replace('{word}', '<input type="text" class="word">');
+		let formattedSentence = question.sentence.replace('<cpmf>', '<input type="text" class="word">');
 		$('.question .sentence').html(formattedSentence);
 
 		$('.word').keyup(function() {
