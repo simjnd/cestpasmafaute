@@ -71,8 +71,8 @@ class StudentController extends Controller
 
         //$recquiredValue = ?;
 
-        if ($_POST['nbPoints'] > $recquiredValue) {
-            StudentExerciseManager::hasCompleted($_POST['idLogin'], $_POST['idExercise']);
+        if ($infos['nbPoints'] > $recquiredValue) {
+            StudentExerciseManager::hasCompleted($infos['idLogin'], $infos['idExercise']);
             parent::redirect('/');
         } else {
             parent::redirect('/');
