@@ -16,7 +16,7 @@ class DifficultyManager extends Manager
 
 	public static function getDifficultyById(int $idDifficulty): Difficulty
 	{
-		$difficultyQuery = Managet::getDatabase()->prepare('SELECT * FROM Difficulty WHERE idDifficulty = :idDifficulty');
+		$difficultyQuery = Manager::getDatabase()->prepare('SELECT * FROM Difficulty WHERE idDifficulty = :idDifficulty');
 		$difficultyQuery->execute(['idDifficulty' => $idDifficulty]);
 		$difficultyData = $difficultyQuery->fetch();
 
