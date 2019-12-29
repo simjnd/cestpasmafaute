@@ -49,6 +49,6 @@ class Exercise extends Model
 
     public function setQuestions(array $questions): void 
     {
-    	$this->questions = $question;
+    	$this->questions = $questions;
     }
 }
