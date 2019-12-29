@@ -148,7 +148,7 @@ class GeneralController extends Controller
 				// echo "Le mot de passe n'est pas identique au mot de passe de vérification, vous allez être redirigé (5 sec).";
 				// , ['error' => 'Les mots de passe ne sont pas identiques, veuillez entrer à nouveau vos mots de passe.']
 				// parent::view('/change-forgot-password/' . $idLogin . '/' . $token);
-				parent::view('general-change-forgot-password', ['idLogin' => $idLogin, 'token' => $token, 'error' => 'Les mots de passe ne sont pas identiques, veuillez entrer à nouveau vos mots de passe.'])
+				parent::view('general-change-forgot-password', ['idLogin' => $idLogin, 'token' => $token, 'error' => 'Les mots de passe ne sont pas identiques, veuillez entrer à nouveau vos mots de passe.']);
 			}
 		} else {
 			UserManager::deleteToken($idLogin, $token);
