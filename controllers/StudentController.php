@@ -201,8 +201,6 @@ class StudentController extends Controller
         $context = $_POST['context'] ?? NULL;
         if($context) {
             try {
-                $context = json_decode($context);
-
                 echo '<pre>';
                 print_r($context);
                 echo '</pre>';
