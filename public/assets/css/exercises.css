@@ -1,0 +1,126 @@
+body {
+	font-family: Open Sans;
+	box-sizing: border-box;
+}
+
+.question {
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; 
+}
+
+.question .choices {
+	display: flex;	
+	justify-content: center;
+}
+
+.question .choices li {
+	display: inline-block;
+	width: 200px;
+	height: 50px;
+	margin: 10px;
+	border: 1px solid black;
+	border-radius: 25px;
+	text-align: center;
+	line-height: 50px;
+	vertical-align: middle;
+	cursor: pointer;
+
+	transition: transform .2s ease-in-out, background .2s ease-in-out;
+}
+
+.question .choices li.selected {
+	background: #8ECF7D;
+	color: white;
+}
+
+.question .choices li:hover {
+	transform: scale(1.05);
+}
+
+:root {
+	--red: #E17774;
+	--blue: #9CA4F0;
+	--green: #8ECF7D;
+	--dark-red: #CD6161;
+	--dark-blue: #7A85E7;
+	--dark-green: #5AAA67;
+	--black: #1E1E1E;
+}
+
+.red {
+	background: var(--red);
+	border: 2px solid var(--dark-red);
+}
+
+.blue {
+	background: var(--blue);
+	border: 2px solid var(--dark-blue);
+}
+
+.green {
+	background: var(--green);
+	border: 2px solid var(--dark-green);
+}
+
+.box {
+	position: relative;
+	/*min-width: 100px;*/
+	height: 50px;
+	margin: 50px;
+	border-radius: 25px;
+	font-family: Open Sans;
+	font-size: 20px;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+	line-height: 50px;
+	vertical-align: middle;
+
+	transition: ease;
+}
+
+.box.draggable {
+	cursor: pointer;
+	z-index: 1;
+	border-radius: 20px;
+	padding: 0 10px;
+}
+
+.box.draggable:hover {
+	opacity: 0.8;
+}
+
+.box.droppable {
+	display: inline-block;
+	background: white;
+	border-width: 6px;
+	/*min-width: 100px;*/
+	margin: 0;
+	margin-right: 80px;
+}
+
+.dropzone {
+	display: flex;
+	align-items: center;
+}
+
+.dragzone {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+	min-height: 154px;
+	margin: auto;
+	margin-top: 30px;
+	border-radius: 50px;
+	background: #DFDFDF;
+}
+
+.sentence-part {
+	display: inline-block;
+	margin-right: 80px;
+}

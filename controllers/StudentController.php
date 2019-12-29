@@ -64,4 +64,51 @@ class StudentController extends Controller
             exit;
         }
     }
+
+    public function getTemplateExercises(): void
+    {
+        $questions = [
+            'currentQuestion' => 0,
+            'questions' => [
+                [
+                    'id' => 4,
+                    'type' => 'ClickableQuestion',
+                    'sentence' => 'Clique sur le troisième mot'
+                ],
+                [
+                    'id' => 3,
+                    'type' => 'PuzzleQuestion',
+                    'sentence' => 'Je suis là pour vous jouer un mauvais tour',
+                    'positions' => [
+                        [0, 10],
+                        [10, 20],
+                        [29, 41]
+                    ],
+                    'roles' => [
+                        'Adj',
+                        'Adverbe',
+                        'Complément'
+                    ]
+                ],
+                [
+                    'id' => 1,
+                    'type' => 'MultipleQuestion',
+                    'sentence' => 'Les pommes que nous avons [...]',
+                    'choices' => [
+                        'mangé',
+                        'mangés',
+                        'manger',
+                        'mangées'
+                    ]
+                ],
+                [
+                    'id' => 2,
+                    'type' => 'SimpleQuestion',
+                    'sentence' => 'Ils {word} (manger) à Burger King',
+                ]
+            ]   
+        ];
+
+        echo json_encode($questions);
+    }
 }
