@@ -65,6 +65,20 @@ class StudentController extends Controller
         }
     }
 
+    public function postExercise(): void 
+    {
+        $infos = $_POST;
+
+        //$recquiredValue = ?;
+
+        if ($_POST['nbPoints'] > $recquiredValue) {
+            StudentExerciseManager::hasCompleted($_POST['idLogin'], $_POST['idExercise']);
+            parent::redirect('/');
+        } else {
+            parent::redirect('/');
+        }
+    }
+
     // DEBUG (TEMPORAIRE)
     public function getExerciseData(int $idExercise) {
         $exercise = StudentExerciseManager::getExerciseById($idExercise, true);
