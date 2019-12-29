@@ -213,7 +213,7 @@ class StudentExerciseManager
     public static function getClickableQuestionSuccessRate(array $answerData): float
     {
         $clickedWord = $answerData['clickedWord'] ?? NULL;
-        $idQuestion = $answerData['id'] ?? NULL;
+        $idQuestion = $answerData['id'];// ?? NULL;
         if($clickedWord && $idQuestion) {
             $realQuestion = self::getClickableQuestionById($idQuestion);
             // Checker si il y a bien une question à cet id
@@ -228,7 +228,7 @@ class StudentExerciseManager
     public static function getMultipleQuestionSuccessRate(array $answerData): float
     {
         $choice = $answerData['choice'] ?? NULL;
-        $idQuestion = $answerData['id'] ?? NULL;
+        $idQuestion = $answerData['id']; // ?? NULL;
         if($choice && $idQuestion) {
             $realQuestion = self::getMultipleQuestionById($idQuestion);
             // Checker si il y a bien une question à cet id
@@ -253,7 +253,7 @@ class StudentExerciseManager
     public static function getSimpleQuestionSuccessRate(array $answerData): float
     {
         $answer = $answerData['answer'] ?? NULL;
-        $idQuestion = $answerData['id'] ?? NULL;
+        $idQuestion = $answerData['id'];// ?? NULL;
         if($answer && $idQuestion) {
             $realQuestion = self::getSimpleQuestionById($idQuestion);
             // Checker si il y a bien une question à cet id
