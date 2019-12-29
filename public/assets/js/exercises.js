@@ -12,7 +12,7 @@ $(function() {
 
 		switch(questions[currentQuestion].type) {
 			case 'MultipleQuestion':
-			handleQuestion = handleQCM;
+			handleQuestion = handleMultipleQuestion;
 			break;
 			case 'SimpleQuestion':
 			handleQuestion = handleSimpleQuestion;
@@ -35,7 +35,7 @@ $(function() {
 		$.get('/exercises/0', function(response) {
 			questionsData = response;
 			questionsData.currentQuestion = 0;
-			
+
 			let currentQuestion = questionsData.currentQuestion;
 			let questions = questionsData.questions;
 
@@ -65,7 +65,7 @@ $(function() {
 		});
 	});
 
-	function handleQCM() {
+	function handleMultipleQuestion() {
 		let currentQuestion = questionsData.currentQuestion;
 		let question = questionsData.questions[currentQuestion];
 
@@ -76,7 +76,7 @@ $(function() {
 		});
 
 		$('.question .choices').on('click', 'li', function() {
-			let idChoice = $(this).attr('data-id');
+			let choice = $(this).text()
 
 			$('.question .choices li').removeClass('selected');
 			$(this).addClass('selected');
@@ -84,7 +84,7 @@ $(function() {
 			ctx[currentQuestion] = {
 				id: question.id,
 				type: question.type,
-				choice: idChoice
+				choice: choice
 			};
 		})
 	}
@@ -100,7 +100,7 @@ $(function() {
 			ctx[currentQuestion] = {
 				id: question.id,
 				type: question.type,
-				word: $(this).val()
+				answer: $(this).val()
 			}
 		});
 	}
@@ -126,10 +126,10 @@ $(function() {
 			for(let i = 0; i < positions.length; i++) {
 				$('.dropzone .droppable').each(function(index) {
 					let width = $($('.sentence-part').get(i)).width();
-					$($('.dropzone .droppable').get(i)).width($($('.sentence-part').get(i)).outerWidth());
+					$($('.dropzone .droppable').get(i)).css('min-width', ($($('.sentence-part').get(i)).outerWidth()) + 'px');
 				});
 			}
-		}, 1);
+		}, 0);
 
 		question.roles.forEach((role, index) => {
 			$('.question .dragzone').append(`<div class="box red draggable" draggable="true" data-id="${index}">${role}</div>`);

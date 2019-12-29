@@ -160,7 +160,7 @@ class StudentExerciseManager
 
         $roles = [];
 
-        $puzzleQuery = Manager::getDatabase()->prepare('SELECT * FROM PuzzleQuest_Role WHERE idPuzzleQuestion = :idPuzzleQuestion');
+        $puzzleQuery = Manager::getDatabase()->prepare('SELECT * FROM PuzzleQuest_Role WHERE idPuzzleQuestion = :idPuzzleQuestion ORDER BY startMarker');
         $puzzleQuery->execute(['idPuzzleQuestion' => $idPuzzleQuestion]);
 
         foreach($puzzleQuery->fetchAll() as $rawRole) {
