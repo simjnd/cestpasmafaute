@@ -12,6 +12,11 @@
 			<p>Erreur: <?= $error ?></p>
 		</p>
 		<?php } ?>
+		<?php if (isset($message)) { ?>
+			<p>
+				<p><?= $message ?></p>
+			</p>
+		<?php } ?>
 		<a href="/signup">S'inscrire</a>
 		<h2>J'ai un compte</h2>
 		<form action="/signin" method="post">

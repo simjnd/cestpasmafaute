@@ -144,7 +144,7 @@ class GeneralController extends Controller
 				UserManager::updatePassword($idLogin, $_POST['newPassword']);
 				UserManager::deleteToken($idLogin, $token);
 				// echo "Mot de passe modifié, vous allez être redirigé (5 sec).";
-				parent::view('general-signin', ['error' => 'Votre mot de passe a été modifié avec succès.']);
+				parent::view('general-signin', ['message' => 'Votre mot de passe a été modifié avec succès.']);
 			} else {
 				// echo "Le mot de passe n'est pas identique au mot de passe de vérification, vous allez être redirigé (5 sec).";
 				parent::view('change-forgot-password/' . $idLogin . '/' . $token, ['error' => 'Les mots de passe ne sont pas identiques, veuillez entrer à nouveau vos mots de passe.']);
