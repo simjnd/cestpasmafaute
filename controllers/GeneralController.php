@@ -152,7 +152,7 @@ class GeneralController extends Controller
 		} else {
 			// echo "Le lien est expiré. Il faut en générer un nouveau, vous allez être redirigé (5 sec).";
 			UserManager::deleteToken($idLogin, $token);
-			parent::redirect('/email-sended');
+			parent::redirect('/forgot-password');
 		}
 	}
 }
