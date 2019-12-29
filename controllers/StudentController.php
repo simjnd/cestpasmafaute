@@ -69,9 +69,59 @@ class StudentController extends Controller
     public function getExerciseData(int $idExercise) {
         $exercise = StudentExerciseManager::getExerciseById($idExercise, true);
 
-        echo '<pre>';
-        print_r($exercise);
-        echo '</pre>';
+        header('Content-type: application/json; charset=utf-8');
+
+        $questions = [];
+
+        foreach($exercise->getQuestions() as $question) {
+            if ($question instanceof ClickableQuestion) {
+                $questions[] = [
+                    'id' => $question->getIdQuestion(),
+                    'type' => 'ClickableQuestion',
+                    'sentence' => $question->getSentence()
+                ];
+            } elseif ($question instanceof MultipleQuestion) {
+                $choices = [];
+                foreach($question->getChoices() as $choice) {
+                    $choices[] = $choice->getLabel();
+                }
+
+                $questions[] = [
+                    'id' => $question->getIdQuestion(),
+                    'type' => 'MultipleQuestion',
+                    'sentence' => $question->getSentence(),
+                    'choices' => $choices
+                ];
+            } elseif ($question instanceof PuzzleQuestion) {
+                $roles = [];
+                $positions = [];
+
+                foreach($question->getRoles() as $role) {
+                    $roles[] = $role->getLabel();
+                    $positions[] = [$role->getStartMaker(), $role->getEndMarker()];
+                }
+
+                $questions[] = [
+                    'id' => $question->getIdQuestion(),
+                    'type' => 'PuzzleQuestion',
+                    'sentence' => $question->getSentence(),
+                    'positions' => $positions,
+                    'roles' => $roles
+                ];
+            } elseif ($question instanceof SimpleQuestion) {
+                $wordToWrite = $question->getWordToWrite();
+                $sentence = $question->getSentence();
+
+                $sentence = str_replace('<cpmf>', '<cpmf> '.$wordToWrite, $sentence);
+                $questions[] = [
+                    'id' => $question->getIdQuestion(),
+                    'type' => 'SimpleQuestion', 
+                    'sentence' => $sentence
+                ];
+            }
+        }
+
+        echo json_encode($questions);
     }
 
     public function getTemplateExercises(): void
@@ -115,7 +165,7 @@ class StudentController extends Controller
                 [
                     'id' => 2,
                     'type' => 'SimpleQuestion',
-                    'sentence' => 'Ils {word} (manger) à Burger King',
+                    'sentence' => 'Ils <cpmf> (manger) à Burger King',
                 ]
             ]   
         ];
