@@ -1,6 +1,8 @@
 <?php
 namespace CPMF\Models;
 
+use \CPMF\Models\Entities\Difficulty;
+
 class DifficultyManager extends Manager
 {
 	public static function getIdDifficulties(): array
