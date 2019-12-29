@@ -67,6 +67,8 @@ class StudentController extends Controller
 
     public function getTemplateExercises(): void
     {
+        header('Content-type: application/json; charset=utf-8');
+
         $questions = [
             'currentQuestion' => 0,
             'questions' => [
