@@ -117,7 +117,7 @@ $(function() {
 		let roles = question.roles;
 
 		for(let i = 0; i < positions.length; i++) {
-			$('.question .sentence').append(`<span class="sentence-part">${sentence.substr(positions[i][0], positions[i][1])}</span>`);
+			$('.question .sentence').append(`<span class="sentence-part">${sentence.substring(positions[i][0], positions[i][1])}</span>`);
 			$('.dropzone').append('<div class="box red droppable"></div>');
 		}
 
