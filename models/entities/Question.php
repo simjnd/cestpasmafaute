@@ -18,7 +18,7 @@ abstract class Question extends Model
         }   
     }
 
-	public function getId(): int
+	public function getIdQuestion(): int
 	{
 		return $this->idQuestion;
 	}
@@ -28,7 +28,7 @@ abstract class Question extends Model
 		return $this->sentence;
 	}
 
-	public function setId(int $idQuestion): void
+	public function setIdQuestion(int $idQuestion): void
 	{
 		$this->idQuestion = $idQuestion;
 	}
