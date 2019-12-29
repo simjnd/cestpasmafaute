@@ -265,6 +265,42 @@ class StudentExerciseManager
         return 0.0;
     }
 
+    public static function getQuestionPoints(int $idExercise, int $idQuestion, string $type): float
+    {
+        $tableName = '';
+        $idColumnName = '';
+        switch($type) {
+            case 'ClickableQuestion':
+                $tableName = 'Exercise_ClickableQuest';
+                $idColumnName = 'idClickableQuestion';
+                break;
+            case 'MultipleQuestion':
+                $tableName = 'Exercise_MultipleQuest';
+                $idColumnName = 'idMultipleQuestion';
+                break;
+            case 'PuzzleQuestion':
+                $tableName = 'Exercise_PuzzleQuest';
+                $idColumnName = 'idPuzzleQuestion';
+                break;
+            case 'SimpleQuestion':
+                $tableName = 'Exercise_SimpleQuest';
+                $idColumnName = 'idSimpleQuestion';
+                break;
+            default:
+                return 0.0;
+        }
+
+        $pointsQuery = Manager::getDatabase()->prepare('SELECT points FROM :tableName WHERE idExercise = :idExercise AND :idColumnName = :idQuestion');
+        $pointsQuery->execute([
+            'tableName' => $tableName,
+            'idColumnName' => $idColumnName
+            'idExercise' => $idExercise,
+            'idQuestion' => $idQuestion
+        ]);
+
+        return $pointsQuery->fetch()['points'];
+    }
+
     public static function getExerciseTotalPoints(int $idExercise): float
     {
         $sumQuery = Manager::getDatabase()->prepare('SELECT SUM(Res.points) nbPoints FROM (SELECT points FROM Exercise_SimpleQuest WHERE idExercise = :idExercise UNION ALL SELECT points FROM Exercise_PuzzleQuest WHERE idExercise = :idExercise UNION ALL SELECT points FROM Exercise_MultipleQuest WHERE idExercise = :idExercise UNION ALL SELECT points FROM Exercise_ClickableQuest WHERE idExercise = :idExercise) Res');
