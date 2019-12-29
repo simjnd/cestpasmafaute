@@ -214,7 +214,7 @@ class StudentExerciseManager
     {
         $clickedWord = $answerData['clickedWord'] ?? NULL;
         $idQuestion = $answerData['id'];// ?? NULL;
-        if($clickedWord && $idQuestion) {
+        if($clickedWord) {
             $realQuestion = self::getClickableQuestionById($idQuestion);
             // Checker si il y a bien une question à cet id
             if($realQuestion->getAnswerIndex() == $clickedWord) {
@@ -229,7 +229,7 @@ class StudentExerciseManager
     {
         $choice = $answerData['choice'] ?? NULL;
         $idQuestion = $answerData['id']; // ?? NULL;
-        if($choice && $idQuestion) {
+        if($choice) {
             $realQuestion = self::getMultipleQuestionById($idQuestion);
             // Checker si il y a bien une question à cet id
             foreach($realQuestion->getChoices() as $choice) {
@@ -254,7 +254,7 @@ class StudentExerciseManager
     {
         $answer = $answerData['answer'] ?? NULL;
         $idQuestion = $answerData['id'];// ?? NULL;
-        if($answer && $idQuestion) {
+        if($answer) {
             $realQuestion = self::getSimpleQuestionById($idQuestion);
             // Checker si il y a bien une question à cet id
             if($realQuestion->getCorrectAnswer() == strtolower($answer)) {
