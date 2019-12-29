@@ -195,4 +195,20 @@ class StudentController extends Controller
 
         echo json_encode($questions);
     }
+
+    public function checkExercise(int $idExercise): void
+    {
+        $context = $_POST['context'] ?? NULL;
+        if($context) {
+            try {
+                $context = json_decode($context);
+
+                echo '<pre>';
+                print_r($context);
+                echo '</pre>';
+            } catch(Exception $e) {
+                die('Erreur: '.$e->getMessage);
+            }
+        }
+    }
 }

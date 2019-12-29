@@ -57,8 +57,16 @@ $(function() {
 						$(this).fadeIn(200);
 
 						console.log(ctx);
-
-					// TODO: ENVOYER LES DONNEES AU SERVEUR
+						// TODO: ENVOYER LES DONNEES AU SERVEUR
+						$.ajax({
+							type: 'POST',
+							data: { 
+								context: ctx
+							},
+							success: (response) => {
+								console.log(response);
+							}
+						});
 				});
 				}
 			});	
