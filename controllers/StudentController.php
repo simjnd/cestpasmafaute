@@ -69,29 +69,22 @@ class StudentController extends Controller
     public function getExerciseData(int $idExercise) {
         $exercise = StudentExerciseManager::getExerciseById($idExercise, true);
 
-        //header('Content-type: application/json; charset=utf-8');
+        header('Content-type: application/json; charset=utf-8');
 
         $questions = [];
 
-        echo '<pre>';
-        print_r($exercise->getQuestions());
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r($exercise->getQuestions());
+        // echo '</pre>';
 
         foreach($exercise->getQuestions() as $question) {
-            echo 'Classe: '.get_class($question).'<br>';
-            echo 'ClickableQuestion: '.($question instanceof ClickableQuestion ? 1 : 0).'<br>';
-            echo 'MultipleQuestion: '.($question instanceof MultipleQuestion ? 1 : 0).'<br>';
-            echo 'PuzzleQuestion: '.($question instanceof PuzzleQuestion ? 1 : 0).'<br>';
-            echo 'SimpleQuestion: '.($question instanceof SimpleQuestion ? 1 : 0).'<br>';
-            echo '<p>--------------------------------</p>';
-            
-            if ($question instanceof ClickableQuestion) {
+            if ($question instanceof \CPMF\Models\Entities\ClickableQuestion) {
                 $questions[] = [
                     'id' => $question->getIdQuestion(),
                     'type' => 'ClickableQuestion',
                     'sentence' => $question->getSentence()
                 ];
-            } elseif ($question instanceof MultipleQuestion) {
+            } elseif ($question instanceof \CPMF\Models\Entities\MultipleQuestion) {
                 $choices = [];
                 foreach($question->getChoices() as $choice) {
                     $choices[] = $choice->getLabel();
@@ -103,7 +96,7 @@ class StudentController extends Controller
                     'sentence' => $question->getSentence(),
                     'choices' => $choices
                 ];
-            } elseif ($question instanceof PuzzleQuestion) {
+            } elseif ($question instanceof \CPMF\Models\Entities\PuzzleQuestion) {
                 $roles = [];
                 $positions = [];
 
@@ -119,7 +112,7 @@ class StudentController extends Controller
                     'positions' => $positions,
                     'roles' => $roles
                 ];
-            } elseif ($question instanceof SimpleQuestion) {
+            } elseif ($question instanceof \CPMF\Models\Entities\SimpleQuestion) {
                 $wordToWrite = $question->getWordToWrite();
                 $sentence = $question->getSentence();
 
