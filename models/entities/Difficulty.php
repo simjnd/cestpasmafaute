@@ -18,9 +18,9 @@ class Difficulty extends Model
         }   
     }
 
-	public function getId(): int
+	public function getIdDifficulty(): int
 	{
-		return $this->id;
+		return $this->idDifficulty;
 	}
 
 	public function getName(): string
@@ -28,7 +28,7 @@ class Difficulty extends Model
 		return $this->label;
 	}
 
-	public function setId(int $idDifficulty): void
+	public function setIdDifficulty(int $idDifficulty): void
 	{
 		$this->idDifficulty = $idDifficulty;
 	}
