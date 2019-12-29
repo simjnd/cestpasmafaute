@@ -199,7 +199,7 @@ class StudentExerciseManager
     public static function hasCompleted(int $idLogin, int $idExercise): void
     {
         $query = Manager::getDatabase()->prepare('UPDATE Student_Exercise SET hasCompletedOnce = 1 WHERE idLogin = :idLogin AND idExercise = :idExercise');
-        $query->execute(['idLogin' => $idLogin, 'idExercise' = $idExercise]);
+        $query->execute(['idLogin' => $idLogin, 'idExercise' => $idExercise]);
     }
 
     public static function updatePointsLastTry(int $points, int $idLogin, $idExercise): void 
