@@ -118,7 +118,7 @@ class StudentExerciseManager
 
     public static function getClickableQuestionById(int $idClickableQuestion): ClickableQuestion 
     {
-        $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM ClickableQuestion WHERE idClickableQuestion = :idClickableQuestion');
+        $questionQuery = Manager::getDatabase()->prepare('SELECT idClickableQuestion AS idQuestion, sentence, answerIndex FROM ClickableQuestion WHERE idClickableQuestion = :idClickableQuestion');
         $questionQuery->execute(['idClickableQuestion' => $idClickableQuestion]);
 
         $questionData = $questionQuery->fetch();
@@ -130,7 +130,7 @@ class StudentExerciseManager
     {
         $choices = [];
 
-        $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM MultipleQuestion WHERE idMultipleQuestion = :idMultipleQuestion');
+        $questionQuery = Manager::getDatabase()->prepare('SELECT idMultipleQuestion AS idQuestion, sentence FROM MultipleQuestion WHERE idMultipleQuestion = :idMultipleQuestion');
         $questionQuery->execute(['idMultipleQuestion' => $idMultipleQuestion]);
 
         $questionData = $questionQuery->fetch();
@@ -151,7 +151,7 @@ class StudentExerciseManager
 
     public static function getPuzzleQuestionById(int $idPuzzleQuestion): PuzzleQuestion
     {
-        $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM PuzzleQuestion WHERE idPuzzleQuestion = :idPuzzleQuestion');
+        $questionQuery = Manager::getDatabase()->prepare('SELECT idPuzzleQuestion AS idQuestion, sentence FROM PuzzleQuestion WHERE idPuzzleQuestion = :idPuzzleQuestion');
         $questionQuery->execute(['idPuzzleQuestion' => $idPuzzleQuestion]);
 
         $questionData = $questionQuery->fetch();
@@ -188,7 +188,7 @@ class StudentExerciseManager
 
     public static function getSimpleQuestionById(int $idSimpleQuestion): SimpleQuestion
     {
-        $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM SimpleQuestion WHERE idSimpleQuestion = :idSimpleQuestion');
+        $questionQuery = Manager::getDatabase()->prepare('SELECT idSimpleQuestion AS idQuestion, sentence, correctAnswer, wordToWrite FROM SimpleQuestion WHERE idSimpleQuestion = :idSimpleQuestion');
         $questionQuery->execute(['idSimpleQuestion' => $idSimpleQuestion]);
 
         $questionData = $questionQuery->fetch();
