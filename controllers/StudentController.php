@@ -102,7 +102,7 @@ class StudentController extends Controller
 
                 foreach($question->getRoles() as $role) {
                     $roles[] = $role->getLabel();
-                    $positions[] = [$role->getStartMaker(), $role->getEndMarker()];
+                    $positions[] = [$role->getStartMarker(), $role->getEndMarker()];
                 }
 
                 $questions[] = [
