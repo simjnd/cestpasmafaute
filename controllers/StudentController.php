@@ -65,6 +65,15 @@ class StudentController extends Controller
         }
     }
 
+    // DEBUG (TEMPORAIRE)
+    public function getExerciseData(int $idExercise) {
+        $exercise = StudentExerciseManager::getExerciseById($idExercise, true);
+
+        echo '<pre>'
+        print_r($exercise);
+        echo '</pre>';
+    }
+
     public function getTemplateExercises(): void
     {
         header('Content-type: application/json; charset=utf-8');

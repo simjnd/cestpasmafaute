@@ -65,7 +65,5 @@ class Exercise extends Model
         } else {
             $this->setQuestions(NULL);
         }
-    }
-    
-    
+    }  
 }
