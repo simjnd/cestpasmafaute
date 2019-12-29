@@ -13,7 +13,6 @@ use \CPMF\Models\Entities\Role;
 
 class StudentExerciseManager
 {
-	
 	public static function getStepsByStudentID(int $idLogin): array
 	{
     	$steps = [];
@@ -118,7 +117,7 @@ class StudentExerciseManager
 
     public static function getClickableQuestionById(int $idClickableQuestion): ClickableQuestion 
     {
-        $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM ClickableQuestion WHERE idClickableQuestion = :idQuestion');
+        $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM ClickableQuestion WHERE idClickableQuestion = :idClickableQuestion');
         $questionQuery->execute(['idClickableQuestion' => $idQuestion]);
 
         $questionData = $questionQuery->fetch();
@@ -130,7 +129,7 @@ class StudentExerciseManager
     {
         $choices = [];
 
-        $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM MultipleQuestion WHERE idMultipleQuestion = :idQuestion');
+        $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM MultipleQuestion WHERE idMultipleQuestion = :idMultipleQuestion');
         $questionQuery->execute(['idMultipleQuestion' => $idMultipleQuestion]);
 
         $questionData = $questionQuery->fetch();
