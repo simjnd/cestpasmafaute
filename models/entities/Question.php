@@ -11,7 +11,7 @@ abstract class Question extends Model
 		parent::__construct($data);
 	}
 
-	protected function callFunction(string $methodName, string $value): void
+	protected function callFunction(string $methodName, $value = null): void
     {
         if(method_exists($this, $methodName)) {
             $this->$methodName($value);
