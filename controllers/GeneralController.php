@@ -41,7 +41,7 @@ class GeneralController extends Controller
 		// email
 		// password
 
-		$informations = $_POST;redirect
+		$informations = $_POST;
 
 		if ($informations['password'] === $informations['passwordConfirmation']) {
 			$resultCode = UserManager::addStudent($informations);
