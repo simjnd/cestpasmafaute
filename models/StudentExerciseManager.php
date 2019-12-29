@@ -202,7 +202,7 @@ class StudentExerciseManager
         $query->execute(['idLogin' => $idLogin, 'idExercise' = $idExercise]);
     }
 
-    public static function updateStudentInfo(): void 
+    public static function updatePointsLastTry(): void 
     {
         $query->
     }
