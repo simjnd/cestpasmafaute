@@ -205,6 +205,6 @@ class StudentExerciseManager
     public static function updatePointsLastTry(int $points, int $idLogin, $idExercise): void 
     {
         $query = Manager::getDatabase()->prepare('UPDATE Student_Exercise SET pointsLastTry = :points WHERE idLogin = :idLogin AND idExercise = :idExercise');
-        $query->execute(['pointsLastTry' => $points, 'idLogin' => $idLogin, 'idExercise' = $idExercise]); 
+        $query->execute(['pointsLastTry' => $points, 'idLogin' => $idLogin, 'idExercise' => $idExercise]); 
     }
 }
