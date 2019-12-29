@@ -66,7 +66,7 @@ class StudentExerciseManager
 
     public static function getExerciseById(int $idExercise, bool $fill = false): Exercise
     {
-        $exerciseReq = Manager::getDatabase()->prepare('SELECT * FROM Exercise WHERE idExercise = :idExercise');
+        $exerciseReq = Manager::getDatabase()->prepare('SELECT idExercise, idDifficulty AS Difficulty FROM Exercise WHERE idExercise = :idExercise');
         $exerciseReq->execute(['idExercise' => $idExercise]);
         $exerciseData = $exerciseReq->fetch();
 
