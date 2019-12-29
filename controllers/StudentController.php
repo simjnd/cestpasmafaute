@@ -69,9 +69,13 @@ class StudentController extends Controller
     public function getExerciseData(int $idExercise) {
         $exercise = StudentExerciseManager::getExerciseById($idExercise, true);
 
-        header('Content-type: application/json; charset=utf-8');
+        //header('Content-type: application/json; charset=utf-8');
 
         $questions = [];
+
+        echo '<pre>';
+        print_r($exercise->getQuestions());
+        echo '</pre>';
 
         foreach($exercise->getQuestions() as $question) {
             if ($question instanceof ClickableQuestion) {
