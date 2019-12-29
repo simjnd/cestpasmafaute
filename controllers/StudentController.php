@@ -78,11 +78,13 @@ class StudentController extends Controller
         echo '</pre>';
 
         foreach($exercise->getQuestions() as $question) {
+            echo 'Classe: '.get_class($question).'<br>';
             echo 'ClickableQuestion: '.($question instanceof ClickableQuestion ? 1 : 0).'<br>';
             echo 'MultipleQuestion: '.($question instanceof MultipleQuestion ? 1 : 0).'<br>';
             echo 'PuzzleQuestion: '.($question instanceof PuzzleQuestion ? 1 : 0).'<br>';
             echo 'SimpleQuestion: '.($question instanceof SimpleQuestion ? 1 : 0).'<br>';
-
+            echo '<p>--------------------------------</p>';
+            
             if ($question instanceof ClickableQuestion) {
                 $questions[] = [
                     'id' => $question->getIdQuestion(),
