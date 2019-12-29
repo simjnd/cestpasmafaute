@@ -147,10 +147,10 @@ class GeneralController extends Controller
 			} else {
 				// echo "Le mot de passe n'est pas identique au mot de passe de vérification, vous allez être redirigé (5 sec).";
 				// , ['error' => 'Les mots de passe ne sont pas identiques, veuillez entrer à nouveau vos mots de passe.']
-				parent::view('/change-forgot-password/' . $idLogin . '/' . $token);
+				// parent::view('/change-forgot-password/' . $idLogin . '/' . $token);
+				parent::view('general-change-forgot-password', ['idLogin' => $idLogin, 'token' => $token, 'error' => 'Les mots de passe ne sont pas identiques, veuillez entrer à nouveau vos mots de passe.']);
 			}
 		} else {
-			// echo "Le lien est expiré. Il faut en générer un nouveau, vous allez être redirigé (5 sec).";
 			UserManager::deleteToken($idLogin, $token);
 			parent::view('general-forgot-password', ['error' => 'Le lien est expiré. Veuillez en générer un nouveau.']);
 		}

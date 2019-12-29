@@ -14,7 +14,7 @@
 		<?php } ?>
 		<?php if (isset($message)) { ?>
 			<p>
-				<p><?= $message ?></p>
+				<p>Message: <?= $message ?></p>
 			</p>
 		<?php } ?>
 		<a href="/signup">S'inscrire</a>
