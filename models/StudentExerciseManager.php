@@ -290,10 +290,8 @@ class StudentExerciseManager
                 return 0.0;
         }
 
-        $pointsQuery = Manager::getDatabase()->prepare('SELECT points FROM :tableName WHERE idExercise = :idExercise AND :idColumnName = :idQuestion');
+        $pointsQuery = Manager::getDatabase()->prepare('SELECT points FROM '.$tableName.' WHERE idExercise = :idExercise AND '.$idColumnName.' = :idQuestion');
         $pointsQuery->execute([
-            'tableName' => $tableName,
-            'idColumnName' => $idColumnName,
             'idExercise' => $idExercise,
             'idQuestion' => $idQuestion
         ]);
