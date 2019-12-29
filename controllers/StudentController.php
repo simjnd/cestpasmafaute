@@ -69,7 +69,7 @@ class StudentController extends Controller
     public function getExerciseData(int $idExercise) {
         $exercise = StudentExerciseManager::getExerciseById($idExercise, true);
 
-        echo '<pre>'
+        echo '<pre>';
         print_r($exercise);
         echo '</pre>';
     }
