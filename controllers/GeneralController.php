@@ -147,7 +147,7 @@ class GeneralController extends Controller
 				parent::view('general-signin', ['message' => 'Votre mot de passe a été modifié avec succès.']);
 			} else {
 				// echo "Le mot de passe n'est pas identique au mot de passe de vérification, vous allez être redirigé (5 sec).";
-				parent::view('change-forgot-password/' . $idLogin . '/' . $token, ['error' => 'Les mots de passe ne sont pas identiques, veuillez entrer à nouveau vos mots de passe.']);
+				parent::view('/change-forgot-password/' . $idLogin . '/' . $token, ['error' => 'Les mots de passe ne sont pas identiques, veuillez entrer à nouveau vos mots de passe.']);
 			}
 		} else {
 			// echo "Le lien est expiré. Il faut en générer un nouveau, vous allez être redirigé (5 sec).";
