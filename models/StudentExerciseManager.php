@@ -69,7 +69,6 @@ class StudentExerciseManager
         $exerciseData = $exerciseReq->fetch();
 
         $exercise = new Exercise($exerciseData);
-        $exercise->fill();
 
         if($fill) {
             $exercise->setQuestions(self::getAllQuestionsByExerciseId($idExercise));
