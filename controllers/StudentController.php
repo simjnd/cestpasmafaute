@@ -203,24 +203,23 @@ class StudentController extends Controller
             $points = 0.0;
             if($context && is_array($context)) {
                 foreach($context as $answer) {
-                    echo '<pre>';
-                    print_r($answer);
-                    echo '</pre>';
-
                     $type = $answer['type'] ?? NULL;
                     if($type) {
                         if($type === 'ClickableQuestion') {
                             $rate = StudentExerciseManager::getClickableQuestionSuccessRate($answer);
-                            var_dump($rate);
+                            var_dump(StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type));
                             $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
                         } elseif($type === 'MultipleQuestion') {
                             $rate = StudentExerciseManager::getMultipleQuestionSuccessRate($answer);
+                            var_dump(StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type));
                             $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
                         } elseif($type === 'PuzzleQuestion') {
                             $rate = StudentExerciseManager::getPuzzleQuestionSuccessRate($answer);
+                            var_dump(StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type));
                             $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
                         } elseif($type === 'SimpleQuestion') {
                             $rate = StudentExerciseManager::getSimpleQuestionSuccessRate($answer);
+                            var_dump(StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type));
                             $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
                         }
                     }
@@ -229,7 +228,7 @@ class StudentController extends Controller
 
             $totalPoints = StudentExerciseManager::getExerciseTotalPoints($idExercise);
 
-            echo '<p>Exercice réussi à '.($points * 100.0 / $totalPoints).' % ( +'.$points.' points)</p>';
+            echo '<p>Exercice réussi à '.($points * 100.0 / $totalPoints).' % ( +'.$points.' points / '.$totalPoints.')</p>';
         }
     }
 }
