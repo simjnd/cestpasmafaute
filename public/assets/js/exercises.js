@@ -55,6 +55,8 @@ $(function() {
 						$('.question').html('<h1>EXERCICE TERMINÉ</h1>');
 						$(this).fadeIn(200);
 
+						console.log(ctx);
+
 					// TODO: ENVOYER LES DONNEES AU SERVEUR
 				});
 				}
@@ -83,7 +85,6 @@ $(function() {
 				type: question.type,
 				choice: idChoice
 			};
-			console.log(ctx);
 		})
 	}
 
@@ -101,8 +102,6 @@ $(function() {
 				word: $(this).val()
 			}
 		});
-
-		console.log(ctx)
 	}
 
 	function handlePuzzleQuestion() {
@@ -126,7 +125,6 @@ $(function() {
 			for(let i = 0; i < positions.length; i++) {
 				$('.dropzone .droppable').each(function(index) {
 					let width = $($('.sentence-part').get(i)).width();
-					console.log(i + ' => ' + width);
 					$($('.dropzone .droppable').get(i)).width($($('.sentence-part').get(i)).outerWidth());
 				});
 			}
