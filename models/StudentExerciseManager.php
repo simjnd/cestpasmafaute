@@ -173,7 +173,7 @@ class StudentExerciseManager
             $roleQuery->closeCursor();
             
             $roles[] = new Role([
-                'idRole' =>
+                'idRole' => $rawRole['idRole'],
                 'startMarker' => $rawRole['startMarker'],
                 'endRole' => $rawRole['endMarker'],
                 'label' => $roleLabel
