@@ -58,10 +58,10 @@ $(function() {
 
 						console.log(ctx);
 						// TODO: ENVOYER LES DONNEES AU SERVEUR
-						$.post('/exercises/0', data: { context: ctx }, (response) => {
+						$.post('/exercises/0', { context: ctx }, (response) => {
 							console.log(response);
 						});
-				});
+					});
 				}
 			});	
 		});
