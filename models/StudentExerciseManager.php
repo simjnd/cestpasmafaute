@@ -119,7 +119,7 @@ class StudentExerciseManager
     public static function getClickableQuestionById(int $idClickableQuestion): ClickableQuestion 
     {
         $questionQuery = Manager::getDatabase()->prepare('SELECT * FROM ClickableQuestion WHERE idClickableQuestion = :idClickableQuestion');
-        $questionQuery->execute(['idClickableQuestion' => $idQuestion]);
+        $questionQuery->execute(['idClickableQuestion' => $idClickableQuestion]);
 
         $questionData = $questionQuery->fetch();
 
