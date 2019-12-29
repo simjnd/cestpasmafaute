@@ -231,6 +231,9 @@ class StudentExerciseManager
         $idQuestion = $answerData['id']; // ?? NULL;
         if($choice) {
             $realQuestion = self::getMultipleQuestionById($idQuestion);
+            echo '<pre>';
+            print_r($realQuestion);
+            echo '</pre>';
             // Checker si il y a bien une question à cet id
             foreach($realQuestion->getChoices() as $choice) {
                 if($choice->getLabel() == $choice) {
