@@ -205,19 +205,24 @@ class StudentController extends Controller
                 foreach($context as $answer) {
                     $type = $answer['type'] ?? NULL;
                     if($type) {
-                        if($type === 'ClickableQuestion') {
+                        switch($type) {
+                            case 'ClickableQuestion':
                             $rate = StudentExerciseManager::getClickableQuestionSuccessRate($answer);
-                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
-                        } elseif($type === 'MultipleQuestion') {
+                            break;
+                            case 'MultipleQuestion': 
                             $rate = StudentExerciseManager::getMultipleQuestionSuccessRate($answer);
-                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
-                        } elseif($type === 'PuzzleQuestion') {
+                            break;
+                            case 'PuzzleQuestion':
                             $rate = StudentExerciseManager::getPuzzleQuestionSuccessRate($answer);
-                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
-                        } elseif($type === 'SimpleQuestion') {
+                            break;
+                            case 'SimpleQuestion':
                             $rate = StudentExerciseManager::getSimpleQuestionSuccessRate($answer);
-                            $points += $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
+                            break;
                         }
+
+                        $toAdd = $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
+                        echo '<p>'.$type.': '.$toAdd.'</p>';
+                        $points += $toAdd;
                     }
                 }
             }
