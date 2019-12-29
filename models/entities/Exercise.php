@@ -36,34 +36,18 @@ class Exercise extends Model
     	return $this->questions;
     }
 
-    private function setIdExercise(int $idExercise): void
+    public function setIdExercise(int $idExercise): void
     {
     	$this->idExercise = $idExercise;
     }
 
-    private function setDifficulty(?Difficulty $idDifficulty): void
+    public function setDifficulty(?Difficulty $difficulty): void
     {
-    	$this->idDifficulty = $idDifficulty;
+    	$this->difficulty = $difficulty;
     }
 
-    private function setQuestions(array $questions): void 
+    public function setQuestions(array $questions): void 
     {
     	$this->questions = $question;
     }
-
-    public function fill(): void
-    {
-        if($this->idDifficulty !== NULL) {
-            $this->setDifficulty(DifficultyManager::getDifficultyById($this->idDifficulty));
-        }
-    }
-
-    public function deepFill(): void
-    {
-        if ($this->getIdExercise() !== NULL) {
-            $this->setQuestions(StudentExerciseManager::getAllQuestionsByExerciseID($this->getIdExercise()));
-        } else {
-            $this->setQuestions(NULL);
-        }
-    }  
 }
