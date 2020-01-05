@@ -20,11 +20,16 @@
         <?php } ?>
     </table>
     
-    <?php foreach ($students as $student) { ?>
-        <!-- Avatar de l'étudiant -->
-        <p><a href="/profile/<?= $student->getIdLogin() ?>"><?= $student->getFirstName() ?> <?= $student->getLastName() ?></a></p>
-        <p><?= $student->getEmail() ?></p>
-        <a href="#">Afficher menu contextuel (Déplacer / Supprimer)</a>
-    <?php } ?>
+    <h3>Liste des élèves de la classe</h3>
+    <table>
+        <?php foreach ($students as $student) { ?>
+            <tr>
+                <!-- Avatar de l'étudiant -->
+                <td><a href="/profile/<?= $student->getIdLogin() ?>"><?= $student->getFirstName() ?> <?= $student->getLastName() ?></a></td>
+                <td><?= $student->getEmail() ?></td>
+                <td><a href="#">Afficher menu contextuel (Déplacer / Supprimer)</a></td>
+            </tr>
+        <?php } ?>
+    </table>
 </body>
 </html>
