@@ -32,11 +32,11 @@ class GroupManager
 	{
 		$students = [];
 		
-		$query = Manager::getDatabase()->prepare('SELECT * from Student where idClass = :idClass');
+		$query = Manager::getDatabase()->prepare('SELECT idLogin from Student where idClass = :idClass');
 		$query->execute(['idClass' => $idClass]);
 
-		foreach($query->fetchAll() as $rawStudent) {
-			$students[] = new Student($rawStudent);
+		foreach($query->fetchAll() as $rawId) {
+			$students[] = StudentManager::getByID($rawId['idLogin']);
 		}
 
 		return $students;

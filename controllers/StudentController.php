@@ -35,8 +35,11 @@ class StudentController extends Controller
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);
         $student->fill();
+        $frames = NULL;
+        $portraits = NULL;
+        $accessories = NULL;
 
-        parent::view('student-profile', ['student' => $student, 'class' => $student->getGroup(), 'frames' => $frames, 'protraits' => $portraits, 'accessories' => $accessories]);
+        parent::view('student-profile', ['student' => $student, 'class' => $student->getGroup(), 'frames' => $frames, 'portraits' => $portraits, 'accessories' => $accessories]);
     }
 
     public function seeStep(int $id): void

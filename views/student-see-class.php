@@ -12,9 +12,9 @@
         <p><?= $student->getFirstName() ?> (<?= $group->getName() ?>)</p>
     </header>
 	
-    <?php foreach ($group->getStudents() as $student) { ?>
+    <?php foreach ($group->getStudents() as $classmate) { ?>
     <!-- Classmate's icon -->
-    <p><?= $student->getFirstName() ?> <?= $student->getLastName() ?></p>
+    <p><?= $classmate->getFirstName() ?> <?= $classmate->getLastName() ?></p>
     <?php } ?>
 </body>
 </html>
