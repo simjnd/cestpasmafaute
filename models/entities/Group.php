@@ -59,6 +59,6 @@ class Group extends Model
 
 	public function fill(): void
 	{
-		$this->students = GroupManager::getStudents($this->getIdClass());
+		$this->setStudents(GroupManager::getStudents($this->getIdClass()));
 	}
 }
