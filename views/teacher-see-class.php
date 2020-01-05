@@ -8,9 +8,9 @@
 <body>
     <p><?= $teacher->getFirstName() ?> <?= $teacher->getLastName() ?></p>
     <h1><?= $class->getName() ?></h1>
-    
-    <!-- <h3>Moyenne de classe <?= //$class->getAverage() ?>/20</h3> -->
-    
+
+    <!-- Ajouter la moyenne de classe -->
+
     <table>
         <?php foreach($examinations as $examination) { ?>
             <tr>
