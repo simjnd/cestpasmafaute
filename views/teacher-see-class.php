@@ -22,7 +22,7 @@
     
     <?php foreach ($students as $student) { ?>
         <!-- Avatar de l'étudiant -->
-        <p><?= $student->getFirstName() ?> <?= $student->getFirstName() ?></p>
+        <p><a href="/profile/<?= $student->getIdLogin() ?>"><?= $student->getFirstName() ?> <?= $student->getLastName() ?></a></p>
         <p><?= $student->getEmail() ?></p>
         <a href="#">Afficher menu contextuel (Déplacer / Supprimer)</a>
     <?php } ?>
