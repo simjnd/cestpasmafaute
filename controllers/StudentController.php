@@ -25,10 +25,10 @@ class StudentController extends Controller
     public function seeClass(): void
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);
-        $class = GroupManager::getByID($student->getIdClass());
-        $classmates = GroupManager::getStudents($student->getIdClass());
+        $student->fill();
+        $student->getGroup()->fill();
 
-        parent::view('student-see-class', ['student' => $student, 'class' => $class, 'classmates' => $classmates]);
+        parent::view('student-see-class', ['student' => $student, 'group' => $student->getGroup());
     }
 
     public function seeProfile(): void

@@ -1,9 +1,9 @@
 <?php
 namespace CPMF\Models\Entities;
 
-use \CPMF\Models\StudentManager;
-use \CPMF\Models\GroupManager;
-use \CPMF\Models\DecorationManager;
+use CPMF\Models\StudentManager;
+use CPMF\Models\GroupManager;
+use CPMF\Models\DecorationManager;
 
 class Student extends User
 {
