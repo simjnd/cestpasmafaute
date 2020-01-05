@@ -28,7 +28,7 @@ class StudentController extends Controller
         $student->fill();
         $student->getGroup()->fill();
 
-        parent::view('student-see-class', ['student' => $student, 'group' => $student->getGroup());
+        parent::view('student-see-class', ['student' => $student, 'group' => $student->getGroup()]);
     }
 
     public function seeProfile(): void
