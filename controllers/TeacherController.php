@@ -11,8 +11,9 @@ class TeacherController extends Controller
 	public function seeHomePage(): void
 	{
 		$teacher = TeacherManager::getByID($_SESSION['idLogin']);
-		$numberWaitingStudents = StudentManager::getWaitingStudents();
+		$numberWaitingStudents = count(StudentManager::getWaitingStudents());
 		$classes = GroupManager::getTeacherGroups($_SESSION['idLogin']);
+		foreach($classes as $class) $class->fill();
 
 		parent::view('teacher-home', ['teacher' => $teacher, 'numberWaitingStudents' => $numberWaitingStudents, 'classes' => $classes]);
 	}
