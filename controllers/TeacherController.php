@@ -12,7 +12,6 @@ class TeacherController extends Controller
 	{
 		$teacher = TeacherManager::getByID($_SESSION['idLogin']);
 		$numberWaitingStudents = StudentManager::getWaitingStudents();
-		
 		$classes = GroupManager::getTeacherGroups($_SESSION['idLogin']);
 
 		parent::view('teacher-home', ['teacher' => $teacher, 'numberWaitingStudents' => $numberWaitingStudents, 'classes' => $classes]);

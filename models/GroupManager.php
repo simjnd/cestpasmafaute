@@ -11,13 +11,14 @@ class GroupManager
         $query = Manager::getDatabase()->prepare('SELECT * FROM Class WHERE idClass = :idClass');
         $query->execute(['idClass' => $idClass]);
         $rawGroup = $query->fetch();
+        
         return new Group($rawGroup);
     }
 
     public static function getTeacherGroups(int $idTeacher): array 
     {
     	$groups = [];
-		
+
 		$query = Manager::getDatabase()->prepare('SELECT * from Class where idTeacher = :idTeacher');
 		$query->execute(['idTeacher' => $idTeacher]);
 
