@@ -1,7 +1,8 @@
 <?php
 namespace CPMF\Models;
 
-use \CPMF\Models\Entities\Group;
+use CPMF\Models\Entities\Group;
+use CPMF\Models\Entities\Student;
 
 class GroupManager
 {

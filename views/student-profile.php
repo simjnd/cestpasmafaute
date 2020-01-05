@@ -7,8 +7,8 @@
 </head>
 <body>
 	<h1>Mon profil</h1>
-	<img src="<?= $avatar ?>">
-	<img src="<?= $avatar ?>">
+	
+	<!-- <img src="<?= $avatar ?>"> -->
 	<p><a href="/signout">Déconnexion</a></p>
 	<p>Nom : <?= $student->getLastName() ?></p>
 	<p>Prénom : <?= $student->getFirstName() ?></p>
@@ -20,21 +20,21 @@
 	<a href="#">Accessoires</a>
 
 	<div id="Frame">
-		<?php foreach ($frames as $frame) { ?>
+		<!-- <?php foreach ($frames as $frame) { ?>
 			<img src="<?= $frame->getFilePath() ?>">
-		<?php } ?>
+		<?php } ?> -->
 	</div>
 
 	<div id="Portrait">
-		<?php foreach ($portraits as $portrait) { ?>
+		<!-- <?php foreach ($portraits as $portrait) { ?>
 			<img src="<?= $portrait->getFilePath() ?>">
-		<?php } ?>
+		<?php } ?> -->
 	</div>
 
 	<div id="Accessory">
-		<?php foreach ($accessories as $accessory) { ?>
+		<!-- <?php foreach ($accessories as $accessory) { ?>
 			<img src="<?= $accessory->getFilePath() ?>">
-		<?php } ?>
+		<?php } ?> -->
 	</div>
 
 	<a href="/change-password">Modifier mot de passe</a>

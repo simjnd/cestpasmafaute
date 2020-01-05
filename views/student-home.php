@@ -19,10 +19,10 @@
     <a href="step/<?= $step->getIdStep() ?>"><?= $step->getName() ?></a>
     <?php } ?>
     
-    <?php foreach ($endlessModes as $endlessMode) { ?>
+    <!-- <?php foreach ($endlessModes as $endlessMode) { ?>
     <a href="#"><?= $endlessMode->getName() ?></a>
     <?php } ?>
-
+    -->
     <br>
     <br>
     <br>
