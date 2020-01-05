@@ -151,7 +151,7 @@ class StudentManager
 	{
     	$query = Manager::getDatabase()->prepare('SELECT ROUND(AVG(pointsLastTry), 2) AS globalAverage FROM Student_Exercise WHERE idLogin = :idLogin GROUP BY idLogin');
     	$query->execute(array('idLogin' => $idLogin));
-    	return $query->fetch()['globalAverage'];
+    	return $query->fetch()['globalAverage'] ?? 0.0;
 	}
 	
 	public static function getStepAverage(int $idLogin, int $idStep): float
@@ -161,7 +161,7 @@ class StudentManager
     	    'idLogin' => $idLogin,
     	    'idStep' => $idStep
         ));
-    	return $query->fetch()['stepAverage'];
+    	return $query->fetch()['stepAverage'] ?? 0.0;
 	}
 	
 	public static function getPointsLastTry(int $idLogin, int $idExercise): int
@@ -171,7 +171,7 @@ class StudentManager
         	'idLogin' => $idLogin,
         	'idExercise' => $idExercise
     	));
-    	return $query->fetch()['pointsLastTry'];
+    	return $query->fetch()['pointsLastTry'] ?? 0;
 	}
 	
 }
