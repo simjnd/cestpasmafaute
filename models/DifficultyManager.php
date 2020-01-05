@@ -5,7 +5,7 @@ use \CPMF\Models\Entities\Difficulty;
 
 class DifficultyManager extends Manager
 {
-	public static function getIdDifficulties(): array
+	public static function getDifficulties(): array
 	{
 		$difficulties = [];
 

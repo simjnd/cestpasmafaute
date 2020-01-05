@@ -4,6 +4,7 @@ namespace CPMF\Controller;
 use CPMF\Models\TeacherManager;
 use CPMF\Models\StudentManager;
 use CPMF\Models\GroupManager;
+use CPMF\Models\DifficultyManager;
 
 class TeacherController extends Controller
 {
@@ -63,6 +64,7 @@ class TeacherController extends Controller
         $totalPoints = StudentManager::getTotalPoints($id);
         $globalAverage = StudentManager::getGlobalAverage($id);
         $group = GroupManager::getById($student->getIdClass());
+        $difficulties = DifficultyManager::getDifficulties();
 
 
         parent::view('teacher-see-student', ['student' => $student, 'teacher' => $teacher, 'group' => $group, 'totalPoints' => $totalPoints, 'globalAverage' => $globalAverage]);
