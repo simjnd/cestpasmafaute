@@ -14,7 +14,7 @@
 	</header>
 
 	<div>
-		<a href="/approval"> <?php $numberWaitingStudent ?> élèves en attente de validation </a>
+		<a href="/approval"> <?= $numberWaitingStudents ?> élèves en attente de validation </a>
 	</div> <br>
 
 	<h1>Mes classes</h1>

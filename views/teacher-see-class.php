@@ -12,23 +12,19 @@
     <h3>Moyenne de classe <?= $class->getAverage() ?>/20</h3>
     
     <table>
-        <tr>
-            <?php foreach ($examinations as $examination) { ?>
-            <th><?= $examination->getName() ?></th>
-            <?php } ?>
-        </tr>
-        <tr>
-            <?php foreach ($examinations as $examination) { ?>
-            <td><?= $examination->getPassword() ?></td>
-            <?php } ?>
-        </tr>
+        <?php foreach($examinations as $examination) { ?>
+            <tr>
+                <td><?= $examination->getName() ?></td>
+                <td><?= $examination->getPassword() ?></td>
+            </tr>   
+        <?php } ?>
     </table>
     
     <?php foreach ($students as $student) { ?>
-    <!-- Avatar de l'étudiant -->
-    <p><?= $student->getFirstName() ?> <?= $student->getFirstName() ?></p>
-    <p><?= $student->getEmail() ?></p>
-    <a href="#">Afficher menu contextuel (Déplacer / Supprimer)</a>
+        <!-- Avatar de l'étudiant -->
+        <p><?= $student->getFirstName() ?> <?= $student->getFirstName() ?></p>
+        <p><?= $student->getEmail() ?></p>
+        <a href="#">Afficher menu contextuel (Déplacer / Supprimer)</a>
     <?php } ?>
 </body>
 </html>

@@ -71,6 +71,7 @@ Router::get('/exercises/template', 'Student@getTemplateExercises');
 // TEACHER ROUTES
 Router::get('/', 'Teacher@seeHomePage', ['user_type' => 'T']);
 Router::get('/approval', 'Teacher@seeWaitingStudents', ['user_type' => 'T']);
+Router::get('/class/{idClass}', 'Teacher@seeClass', ['user_type' => 'T']);
 Router::get('/profile/{id}', 'Teacher@seeStudent', ['user_type' => 'T']);
 Router::get('/approval/accept/{idLogin}', 'Teacher@acceptWaitingStudent');
 Router::get('/approval/delete/{idLogin}', 'Teacher@deleteWaitingStudent');

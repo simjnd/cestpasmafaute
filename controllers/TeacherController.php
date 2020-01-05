@@ -29,6 +29,16 @@ class TeacherController extends Controller
 		parent::view('teacher-see-waiting-students', ['waitingStudents' => $waitingStudents, 'teacher' => $teacher]);
 	}
 
+	public function seeClass(int $idClass): void
+	{
+		// TODO: Checker si le teacher a bien le droit de consulter la classe
+		$teacher = TeacherManager::getByID($_SESSION['idLogin']);
+		$class = GroupManager::getByID($idClass);
+		$class->fill();
+		$examinations = []; // TODO
+		parent::view('teacher-see-class', ['teacher' => $teacher, 'class' => $class, 'students' => $class->getStudents(), 'examinations' => $examinations]);
+	}
+
 	/**
 	* Accepts a student on hold.
 	*/
