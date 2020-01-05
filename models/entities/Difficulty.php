@@ -23,7 +23,7 @@ class Difficulty extends Model
 		return $this->idDifficulty;
 	}
 
-	public function getName(): string
+	public function getLabel(): string
 	{
 		return $this->label;
 	}

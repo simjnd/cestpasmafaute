@@ -24,32 +24,32 @@ class Step extends Model
         }   
     }
     
-    private function setIdStep(int $idStep): void
+    public function setIdStep(int $idStep): void
     {
         $this->idStep = $idStep;
     }
     
-    private function setName(string $name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
     
-    private function setLessonEasy(string $lessonEasy): void
+    public function setLessonEasy(string $lessonEasy): void
     {
         $this->lessonEasy = $lessonEasy;
     }
     
-    private function setLessonMedium(string $lessonMedium): void
+    public function setLessonMedium(string $lessonMedium): void
     {
         $this->lessonMedium = $lessonMedium;
     }
     
-    private function setLessonHard(string $lessonHard): void
+    public function setLessonHard(string $lessonHard): void
     {
         $this->lessonHard = $lessonHard;
     }
     
-    private function setExercises(array $exercises): void
+    public function setExercises(array $exercises): void
 	{
 		$this->exercises = $exercises;
 	}

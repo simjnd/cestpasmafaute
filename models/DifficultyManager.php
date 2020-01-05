@@ -9,9 +9,9 @@ class DifficultyManager extends Manager
 	{
 		$difficulties = [];
 
-		$request = Manager::getDatabase()->query('SELECT idDifficulty FROM Difficulty');
-		foreach($request->fetchAll() as $difficulty){
-			$difficulties[] = new Difficulty($difficulty);
+		$request = Manager::getDatabase()->query('SELECT * FROM Difficulty');
+		foreach($request->fetchAll() as $difficultyRaw){
+			$difficulties[] = new Difficulty($difficultyRaw);
 		}
 		return $difficulties;
 	}
@@ -20,8 +20,7 @@ class DifficultyManager extends Manager
 	{
 		$difficultyQuery = Manager::getDatabase()->prepare('SELECT * FROM Difficulty WHERE idDifficulty = :idDifficulty');
 		$difficultyQuery->execute(['idDifficulty' => $idDifficulty]);
-		$difficultyData = $difficultyQuery->fetch();
 
-		return new Difficulty($difficultyData);
+		return new Difficulty($difficultyQuery->fetch());
 	}
 }

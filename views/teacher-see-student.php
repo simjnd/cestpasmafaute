@@ -29,15 +29,15 @@
     <?php foreach($difficulties as $difficulty) { ?>
     <table>
         <tr>
-            <th>Difficulty: <?= $difficulty->getName() ?></th>
-            <th>Average: <?= $student->getAverage($difficulty->getID()) ?></th>
+            <th>Difficulty: <?= $difficulty->getLabel() ?></th>
+            <th>Average: 0<?php /*$student->getAverage($difficulty->getID());*/ ?></th>
         </tr>
-        <?php foreach($steps as $step) { ?>
+        <?php /*foreach($steps as $step) { ?>
         <tr>
             <td><?= $step->getName() ?></td>
             <td><?= $step->getAverage($difficulty->getID()) ?></td>
         </tr>
-        <?php } ?>
+        <?php } */?>
     </table>
     <?php } ?>
     
