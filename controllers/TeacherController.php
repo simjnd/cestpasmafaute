@@ -67,6 +67,6 @@ class TeacherController extends Controller
         $difficulties = DifficultyManager::getDifficulties();
 
 
-        parent::view('teacher-see-student', ['student' => $student, 'teacher' => $teacher, 'group' => $group, 'totalPoints' => $totalPoints, 'globalAverage' => $globalAverage]);
+        parent::view('teacher-see-student', ['student' => $student, 'teacher' => $teacher, 'group' => $group, 'totalPoints' => $totalPoints, 'globalAverage' => $globalAverage, 'difficulties' => $difficulties]);
     }
 }
