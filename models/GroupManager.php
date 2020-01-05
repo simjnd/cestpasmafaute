@@ -10,8 +10,8 @@ class GroupManager
     {
         $query = Manager::getDatabase()->prepare('SELECT * FROM Class WHERE idClass = :idClass');
         $query->execute(['idClass' => $idClass]);
-        $rawClass = $query->fetch();
-        return new Group($rawClass);
+        $rawGroup = $query->fetch();
+        return new Group($rawGroup);
     }
 
     public static function getTeacherGroups(int $idTeacher): array 
