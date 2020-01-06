@@ -1,42 +1,182 @@
 <!doctype html>
 <html>
 <head>
-	<title>Mon profil</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    <title>Mon profil - C'est pas ma faute</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/student-styles.css">
 </head>
 <body>
-	<h1>Mon profil</h1>
-	
-	<!-- <img src="<?= $avatar ?>"> -->
-	<p><a href="/signout">Déconnexion</a></p>
-	<p>Nom : <?= $student->getLastName() ?></p>
-	<p>Prénom : <?= $student->getFirstName() ?></p>
-	<p>email : <?= $student->getEmail() ?></p>
-	<p>Classe : <?= $class->getName() ?></p>
+    <header>
+        <div id="logo">
+            <a href="/">
+                <picture>
+                    <source media="(max-width: 1024px)" srcset="assets/img/logo-horizontal-small.svg">
+                    <img src="assets/img/logo-horizontal.svg">
+                </picture>
+            </a>
+        </div>
+        <div id="title">
+            <p><span><?= $totalPoints ?></span> points</p>
+            <progress value="<?= $totalPoints % 100 ?>" max="100"></progress>
+        </div>
+        <div id="profile">
+            <a href="#">
+                <div></div>
+            </a>
+        </div>
+    </header>
+    <section id="content">
+        <h1>Mon profil</h1>
+        <div id="avatar-customization">
+            <div id="avatar-big">
+            </div>
+            <div id="decoration-tab">
+                <a href="#" class="show" id="show-accessory">
+                    <div><img src="assets/img/icon-accessory.svg"></div>
+                </a>
+                <a href="#" class="show" id="show-portrait">
+                    <div><img src="assets/img/icon-portrait.svg"></div>
+                </a>
+                <a href="#" class="show" id="show-frame">
+                    <div><img src="assets/img/icon-frame.svg"></div>
+                </a>
+            </div>
+            <div class="decoration-selection" id="accessory">
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+            </div>
+            <div class="decoration-selection" id="portrait">
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+            </div>
+            <div class="decoration-selection" id="frame">
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+                <a href="#">
+                    <div></div>
+                </a>
+            </div>
+        </div>
+        <h2>Informations</h2>
+        <div id="user-information">
+            <div>
+                <h3>Nom</h3>
+                <p><?= $student->getLastName() ?></p>
+            </div>
+            <div>
+                <h3>Prénom</h3>
+                <p><?= $student->getFirstName() ?></p>
+            </div>
+            <div>
+                <h3>E-Mail</h3>
+                <p><?= $student->getEmail() ?></p>
+            </div>
+            <div>
+                <h3>Classe</h3>
+                <p><?= $class->getName() ?></p>
+            </div>
+        </div>
+        <a href="/change-password" id="edit-profile">Modifier mon mot de passe</a>
+    </section>
+    <footer>
+    </footer>
+    <script>
+        function hideDecorationSelectors() {
+            document.querySelectorAll(".decoration-selection").forEach(function(currentValue) {
+                currentValue.style.display = "none";
+            });
+            document.querySelectorAll(".show").forEach(function(currentValue) {
+                currentValue.childNodes[1].style.opacity = "";
+            })
+        }
 
-	<a href="#">Cadres</a>
-	<a href="#">Portraits</a>
-	<a href="#">Accessoires</a>
+        var showAccessory = document.querySelector("#show-accessory");
+        var showPortrait = document.querySelector("#show-portrait");
+        var showFrame = document.querySelector("#show-frame");
 
-	<div id="Frame">
-		<!-- <?php foreach ($frames as $frame) { ?>
-			<img src="<?= $frame->getFilePath() ?>">
-		<?php } ?> -->
-	</div>
+        showAccessory.childNodes[1].style.opacity = 1;
 
-	<div id="Portrait">
-		<!-- <?php foreach ($portraits as $portrait) { ?>
-			<img src="<?= $portrait->getFilePath() ?>">
-		<?php } ?> -->
-	</div>
+        showAccessory.addEventListener("click", function() {
+            hideDecorationSelectors();
+            document.querySelector("#accessory").style.display = "inline-flex";
+            showAccessory.childNodes[1].style.opacity = 1;
+        });
 
-	<div id="Accessory">
-		<!-- <?php foreach ($accessories as $accessory) { ?>
-			<img src="<?= $accessory->getFilePath() ?>">
-		<?php } ?> -->
-	</div>
+        showPortrait.addEventListener("click", function() {
+            hideDecorationSelectors();
+            document.querySelector("#portrait").style.display = "inline-flex";
+            showPortrait.childNodes[1].style.opacity = 1;
+        });
 
-	<a href="/change-password">Modifier mot de passe</a>
+        showFrame.addEventListener("click", function() {
+            hideDecorationSelectors();
+            document.querySelector("#frame").style.display = "inline-flex";
+            showFrame.childNodes[1].style.opacity = 1;
+        });
+    </script>
 </body>
 </html>

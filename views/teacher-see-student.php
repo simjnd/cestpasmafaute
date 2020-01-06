@@ -1,48 +1,111 @@
 <!doctype html>
 <html>
 <head>
-    <title>Profil de <?= $student->getFirstName() ?> <?= $student->getLastName() ?></title>
+    <title>CPMF - <?= $student->getFirstName() ?> <?= $student->getLastName() ?></title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/teacher-styles.css">
 </head>
 <body>
-    <p><?= $teacher->getFirstName() ?> <?= $teacher->getLastName() ?></p>
-    <h2><?= $group->getName() ?></h2>
-    <h1><?= $student->getFirstName().' '.$student->getLastName() ?></h1>
-    <!-- Student's picture -->
-    
-    <h3><?= $totalPoints.' points' ?></h3>
-    
-    <table>
-        <tr>
-            <th>Last Connection</th>
-            <th>Total Time Spent</th>
-            <th>Global Average</th>
-        </tr>
-        <tr>
-            <td><?= $student->getLastConnection() ?></td>
-            <td><?= $student->getTotalTimeConnected() ?></td>
-            <td><?= $globalAverage ?></td>
-        </tr>
-    </table>
-    
-    <?php foreach($difficulties as $difficulty) { ?>
-    <table>
-        <tr>
-            <th>Difficulty: <?= $difficulty->getLabel() ?></th>
-            <th>Average: 0<?php /*$student->getAverage($difficulty->getID());*/ ?></th>
-        </tr>
-        <?php /*foreach($steps as $step) { ?>
-        <tr>
-            <td><?= $step->getName() ?></td>
-            <td><?= $step->getAverage($difficulty->getID()) ?></td>
-        </tr>
-        <?php } */?>
-    </table>
-    <?php } ?>
-    
-    <a href="#">Move <?= $student->getFirstName() ?> to a different class</a>
-    <a href="#">Remove from this class</a>
-    
+    <header>
+        <div id="logo">
+            <img src="assets/img/logo-horizontal.svg">
+        </div>
+        <div id="title">
+        </div>
+        <div id="profile">
+        </div>
+    </header>
+    <section id="content">
+        <div class="subsection-title">
+            <p><?= $group->getName() ?></p>
+            <h2><?= $student->getFirstName() ?> <?= $student->getLastName() ?></h2>
+        </div>
+        <div id="student-picture">
+        </div>
+        <div id="stats">
+            <p class="stat-name plus">Moyenne Générale</p>
+            <p class="stat-value plus"><?= $globalAverage ?> / 20</p>
+            <div id="more-stats">
+                <div>
+                    <p class="stat-name">Dernière connexion</p>
+                    <p class="stat-value"><?= $student->getLastConnection() ?></p>
+                </div>
+                <div>
+                    <p class="stat-name">Nombre de connexions</p>
+                    <p class="stat-value"><?= $student->getTotalTimeConnected() ?></p>
+                </div>
+                <div>
+                    <p class="stat-name">Temps passé sur le site</p>
+                    <p class="stat-value">— h — min</p>
+                </div>
+            </div>
+        </div>
+        <div class="difficulty-report">
+            <p><span class="difficulty-name">Difficulté Facile</span> <span class="average"><span class="tag">Moyenne</span> <span class="value">17,5</span> / 20</span></p>
+            <div>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+            </div>
+        </div>
+        <div class="difficulty-report">
+            <p><span class="difficulty-name">Difficulté Facile</span> <span class="average"><span class="tag">Moyenne</span> <span class="value">17,5</span> / 20</span></p>
+            <div>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+            </div>
+        </div>
+        <div class="difficulty-report">
+            <p><span class="difficulty-name">Difficulté Facile</span> <span class="average"><span class="tag">Moyenne</span> <span class="value">17,5</span> / 20</span></p>
+            <div>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+                <p><span class="step-name">Nom de l'étape</span><span class="step-average"><span class="value">17,5</span> / 20</span></p>
+            </div>
+        </div>
+        <div id="options">
+            <a href="#" id="move"><div>Changer <?= $student->getFirstName() ?> de classe</div></a>
+            <a href="#"><div>Retirer <?= $student->getFirstName() ?> de la classe</div></a>
+        </div>
+    </section>
+
+    <div id="create-class-mask">
+        <div id="create-class">
+            <h2>Changer <?= $student->getFirstName() ?> de classe</h2>
+            <p>Sélectionnez la classe dans laquelle vous souhaitez placer Guillaume.</p><br>
+            <form method="post">
+                <select name="class">
+                    <option value="1">Adapter en PHP</option>
+                </select>
+                <br>
+                <input type="submit" value="Confirmer">
+                <a href="#" id="cancel">Annuler</a>
+            </form>
+        </div>
+    </div>
+    <footer>
+    </footer>
+    <script>
+        var addButton = document.querySelector("#move");
+        addButton.addEventListener("click", function() {
+            document.querySelector("#create-class-mask").style.display = "flex";
+        });
+
+        var cancelButton = document.querySelector("#cancel");
+        cancelButton.addEventListener("click", function() {
+            document.querySelector("#create-class-mask").style.display = "none";
+        });
+    </script>
 </body>
 </html>

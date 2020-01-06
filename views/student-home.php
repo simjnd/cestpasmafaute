@@ -1,39 +1,69 @@
 <!doctype html>
 <html>
 <head>
-    <title>Accueil</title>
+    <title>C'est pas ma faute !</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/student-styles.css">
 </head>
 <body>
-    <p><a href="/signout">Déconnexion</a></p>
-    <p><a href="/profile">Mon profil</a></p>
-    <p><a href="/class">Ma classe</a></p>
-
-    <!-- Student's avatar -->
-    <h1><?= $totalPoints ?> points</h1>
-    <progress id="file" max="100" value="<?= $totalPoints % 100 ?>"></progress>
-
-    <?php foreach ($steps as $step) { ?>
-    <!-- Step's image -->
-    <a href="step/<?= $step->getIdStep() ?>"><?= $step->getName() ?></a>
-    <?php } ?>
-    
-    <!-- <?php foreach ($endlessModes as $endlessMode) { ?>
-    <a href="#"><?= $endlessMode->getName() ?></a>
-    <?php } ?>
-    -->
-    <br>
-    <br>
-    <br>
-    
-    <h5>Examination</h5>
-    <p>Type in your password to participate in an examination</p>
-    
-    <form action="/examination" method="post">
-        <input type="text" name="examination-password">
-        <input type="submit" value="Commencer l'examen">
-    </form>
-    
+    <header>
+        <div id="logo">
+            <a href="/">
+                <picture>
+                    <source media="(max-width: 1024px)" srcset="assets/img/logo-horizontal-small.svg">
+                    <img src="assets/img/logo-horizontal.svg">
+                </picture>
+            </a>
+        </div>
+        <div id="title">
+            <p><span><?= $totalPoints ?></span> points</p>
+            <progress value="<?= $totalPoints % 100 ?>" max="100"></progress>
+        </div>
+        <div id="profile">
+            <a href="/profile">
+                <div></div>
+            </a>
+        </div>
+    </header>
+    <section id="content">
+        <?php $alternate = 0; $tilt = 'tilt-right'; ?>
+        <div id="step-choice">
+            <?php foreach ($steps as $step) { ?>
+                <?php $tilt = ($alternate === 0) ? 'tilt-right' : 'tilt-left'; ?>
+                <a href="step/<?= $step->getIdStep() ?>" class="step <?= $tilt ?>">
+                    <img src="assets/img/step-<?= $step->getImage() ?>">
+                </a>
+                <?php $alternate++; $alternate = $alternate % 2; ?>
+            <?php } ?>
+        </div>
+        <div id="endless-modes">
+            <a href="#" class="easy">
+                <div>
+                    <p>Mode Sans-Fin Facile</p>
+                </div>
+            </a>
+            <a href="#" class="medium">
+                <div>
+                    <p>Mode Sans-Fin Moyen</p>
+                </div>
+            </a>
+            <a href="#" class="hard">
+                <div>
+                    <p>Mode Sans-Fin Difficile</p>
+                </div>
+            </a>
+        </div>
+        <div id="register-examination">
+            <h3>S'enregistrer pour un Examen</h3>
+            <p>Saisissez le code indiqué par votre enseignant pour commencer l'examen.</p>
+            <form action="/examination" method="post">
+                <input type="text" name="examination-password" placeholder="Code de l'examen">
+                <input type="submit" value="Commencer l'examen">
+            </form>
+        </div>
+    </section>
+    <footer>
+    </footer>
 </body>
 </html>

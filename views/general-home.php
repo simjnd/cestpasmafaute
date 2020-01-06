@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>C'est pas ma faute</title>
+    <title>C'est pas ma faute !</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <link rel="stylesheet" href="assets/css/inter.css">
@@ -84,6 +84,11 @@
             color: rgba(0, 0, 0, .6);
             cursor: pointer;
         }
+
+        .error {
+        	color: rgba(255, 0, 0, 1);
+        	font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -93,6 +98,12 @@
                 <img src="assets/img/logo-vertical-big.svg">
             </div>
         </header>
+        <?php if (isset($error)) { ?>
+			<p class="error">Erreur : <?= $error ?></p>
+		<?php } ?>
+		<?php if (isset($message)) { ?>
+			<p>Message : <?= $message ?></p>
+		<?php } ?>
         <section id="content">
             <div id="signup" style="display:none;">
                 <div id="signup-form">
