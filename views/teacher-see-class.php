@@ -4,11 +4,17 @@
     <title>CPMF - <?= $class->getName() ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
-    <link rel="stylesheet" href="assets/css/teacher-styles.css">
+    <link rel="stylesheet" href="/assets/css/teacher-styles.css">
 </head>
 <body>
     <header>
         <div id="logo">
+            <a href="/">
+                <picture>
+                    <source media="(max-width: 1024px)" srcset="assets/img/logo-horizontal-small.svg">
+                    <img src="assets/img/logo-horizontal.svg">
+                </picture>
+            </a>
         </div>
         <div id="title">
         </div>

@@ -48,24 +48,13 @@ header {
     justify-content: space-between;
 }
 
-#logo {
-    background-color: pink;
-    min-height: 10px;
-}
-
 #title {
     width: 100%;
-}
-
-#profile {
-    background-color: pink;
-    min-height: 10px;
 }
 
 /* FOOTER */
 
 footer {
-    background-color: red;
     min-height: 100px;
 }
 
