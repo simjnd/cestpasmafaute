@@ -101,17 +101,12 @@ class StudentController extends Controller
         }
     }
 
-    // DEBUG (TEMPORAIRE)
     public function getExerciseData(int $idExercise) {
         $exercise = StudentExerciseManager::getExerciseById($idExercise, true);
 
         header('Content-type: application/json; charset=utf-8');
 
         $questions = ['questions' => []];
-
-        // echo '<pre>';
-        // print_r($exercise->getQuestions());
-        // echo '</pre>';
 
         foreach($exercise->getQuestions() as $question) {
             if ($question instanceof \CPMF\Models\Entities\ClickableQuestion) {
