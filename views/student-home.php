@@ -27,14 +27,13 @@
         </div>
     </header>
     <section id="content">
-        <?php $alternate = 0; $tilt = 'tilt-right'; ?>
+        <?php $tilt = 'tilt-left'; ?>
         <div id="step-choice">
             <?php foreach ($steps as $step) { ?>
-                <?php $tilt = ($alternate === 0) ? 'tilt-right' : 'tilt-left'; ?>
+                <?php $tilt = ($tilt === 'tilt-left') ? 'tilt-right' : 'tilt-left'; ?>
                 <a href="step/<?= $step->getIdStep() ?>" class="step <?= $tilt ?>">
                     <img src="assets/img/step-<?= $step->getImage() ?>">
                 </a>
-                <?php $alternate++; $alternate = $alternate % 2; ?>
             <?php } ?>
         </div>
         <div id="endless-modes">

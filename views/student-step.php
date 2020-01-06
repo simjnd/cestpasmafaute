@@ -4,8 +4,8 @@
     <title>CPMF - <?= $step->getName() ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
-    <link rel="stylesheet" href="assets/css/student-styles.css">
-    <link rel="stylesheet" href="assets/css/<?= $step->getColor() ?>-scheme.css">
+    <link rel="stylesheet" href="/assets/css/student-styles.css">
+    <link rel="stylesheet" href="/assets/css/<?= $step->getColor() ?>-scheme.css">
 </head>
 <body>
     <header>
@@ -13,7 +13,7 @@
             <a href="/">
                 <picture>
                     <source media="(max-width: 1024px)" srcset="assets/img/logo-horizontal-small.svg">
-                    <img src="assets/img/logo-horizontal.svg">
+                    <img src="/assets/img/logo-horizontal.svg">
                 </picture>
             </a>
         </div>
@@ -28,7 +28,7 @@
         </div>
     </header>
     <section id="content">
-        <img src="assets/img/step-<?= $step->getImage() ?>">
+        <img src="/assets/img/step-<?= $step->getImage() ?>">
         <div id="step-tabs">
             <div id="show-easy" class="active">
                 Facile
