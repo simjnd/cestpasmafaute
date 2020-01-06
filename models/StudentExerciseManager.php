@@ -18,7 +18,7 @@ class StudentExerciseManager
 	{
     	$steps = [];
     	
-    	$query = Manager::getDatabase()->prepare('SELECT Step.idStep AS idStep, Step.name AS name FROM Login, Student, Class, Course_Step, Step WHERE Login.idLogin = :idLogin AND Login.idLogin = Student.idLogin AND Student.idClass = Class.idClass AND Class.idCourse = Course_Step.idCourse AND Course_Step.idStep = Step.idStep');
+    	$query = Manager::getDatabase()->prepare('SELECT Step.idStep AS idStep, Step.name AS name, Step.color AS color, Step.image as image FROM Login, Student, Class, Course_Step, Step WHERE Login.idLogin = :idLogin AND Login.idLogin = Student.idLogin AND Student.idClass = Class.idClass AND Class.idCourse = Course_Step.idCourse AND Course_Step.idStep = Step.idStep');
     	$query->execute(['idLogin' => $idLogin]);
     	
     	foreach ($query->fetchAll() as $rawStep) {
@@ -30,7 +30,7 @@ class StudentExerciseManager
 
     public static function getStepByID(int $idStep): Step
     {
-        $queryStep = Manager::getDatabase()->prepare('SELECT idStep, name FROM Step WHERE idStep = :idStep');
+        $queryStep = Manager::getDatabase()->prepare('SELECT idStep, name, color, image FROM Step WHERE idStep = :idStep');
         $queryStep->execute(['idStep' => $idStep]);
 
         $stepData = $queryStep->fetch();
