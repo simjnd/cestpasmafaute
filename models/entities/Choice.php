@@ -20,9 +20,9 @@ class Choice extends Model
 		}
 	}
 
-	public function getId(): int
+	public function getIdChoice(): int
 	{
-		return $this->id;
+		return $this->idChoice;
 	}
 
 	public function getLabel(): string

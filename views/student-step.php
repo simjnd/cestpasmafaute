@@ -1,82 +1,112 @@
-<?php
-    $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-?>
 <!doctype html>
 <html>
 <head>
-    <title></title>
-    <style type="text/css">
-        .button {
-            background-color: #4CAF50; 
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-        }
-    </style>
+    <title>CPMF - <?= $step->getName() ?></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/student-styles.css">
+    <link rel="stylesheet" href="assets/css/<?= $step->getColor() ?>-scheme.css">
 </head>
 <body>
-    <h1> <?= $step->getName() ?> </h1>
-    <!-- Student's avatar -->
-    <h1> <?= $totalPoints ?> points </h1>
-    <progress id="file" max="100" value="<?= $totalPoints % 100 ?>"></progress>
-    <p> <?= $student->getFirstName() ?> </p>
-    <p> <?= $group->getName() ?> </p>
-
-    <button id="easy" class="button" > Exercice facile </button>
-    <button id="medium" class="button" > Exercice intermediaire </button>
-    <button id="hard" class="button" > Exercice avancé </button>
-
-    <p id="lesson"> </p>
-
-    <a id="path" href=""> <a>
-
-    <script type="text/javascript">
-        var path = document.getElementById('path');
-        var lesson = document.getElementById('lesson');
-        var button = document.getElementsByClassName('button');
-        var currentLink = window.location.href;
-
-        for (var i = 0; i < button.length; i++) {
-            button[i].addEventListener('click', showLesson);
+    <header>
+        <div id="logo">
+            <a href="/">
+                <picture>
+                    <source media="(max-width: 1024px)" srcset="assets/img/logo-horizontal-small.svg">
+                    <img src="assets/img/logo-horizontal.svg">
+                </picture>
+            </a>
+        </div>
+        <div id="title">
+            <p><span><?= $totalPoints ?></span> points</p>
+            <progress value="<?= $totalPoints % 100 ?>" max="100"></progress>
+        </div>
+        <div id="profile">
+            <a href="/profile">
+                <div></div>
+            </a>
+        </div>
+    </header>
+    <section id="content">
+        <img src="assets/img/step-<?= $step->getImage() ?>">
+        <div id="step-tabs">
+            <div id="show-easy" class="active">
+                Facile
+            </div>
+            <div id="show-medium">
+                Moyen
+            </div>
+            <div id="show-hard">
+                Difficile
+            </div>
+        </div>
+        <div class="lesson" id="easy">
+            <div class="lesson-content">
+                <?= json_encode($lessons[0], JSON_HEX_TAG) ?>
+            </div>
+            <a href="<?= $_SERVER['REQUEST_URI']?>/exercise/0">
+                <div class="start-exercise">
+                    Commencer l'exercice facile
+                </div>
+            </a>
+        </div>
+        <div class="lesson" id="medium">
+            <div class="lesson-content">
+                <?= json_encode($lessons[1], JSON_HEX_TAG) ?>
+            </div>
+            <a href="<?= $_SERVER['REQUEST_URI']?>/exercise/1">
+                <div class="start-exercise">
+                    Commencer l'exercice moyen
+                </div>
+            </a>
+        </div>
+        <div class="lesson" id="hard">
+            <div class="lesson-content">
+                <?= json_encode($lessons[2], JSON_HEX_TAG) ?>
+            </div>
+            <a href="<?= $_SERVER['REQUEST_URI']?>/exercise/2">
+                <div class="start-exercise">
+                    Commencer l'exercice difficile
+                </div>
+            </a>
+        </div>
+    </section>
+    <footer>
+    </footer>
+    <script>
+        function hideLessons() {
+            document.querySelectorAll(".lesson").forEach(function(currentValue) {
+                currentValue.style.display = "none";
+            });
+            showEasy.classList.remove("active");
+            showMedium.classList.remove("active");
+            showHard.classList.remove("active");
         }
 
+        document.querySelector("#medium").style.display = "none";
+        document.querySelector("#hard").style.display = "none";
 
-        function resetButtons()
-        {
-            for (var i = 0; i < button.length; i++) {
-                button[i].style.opacity = 1;
-            }
-        }
+        var showEasy = document.querySelector("#show-easy");
+        var showMedium = document.querySelector("#show-medium");
+        var showHard = document.querySelector("#show-hard");
 
-        function showLesson()
-        {
-            resetButtons();
-            let id = this.id;
-            switch (id) {
-                case 'easy':
-                    path.setAttribute('href', currentLink + '/exercise/0');
-                    path.innerHTML = "Faire l'exercice facile";
-                    lesson.innerHTML = <?= json_encode($lessons[0], JSON_HEX_TAG) ?>;
-                    break;
-                case 'medium':
-                    path.setAttribute('href', currentLink + '/exercise/1');
-                    path.innerHTML = "Faire l'exercice intermediaire";
-                    lesson.innerHTML = <?= json_encode($lessons[1], JSON_HEX_TAG) ?>;
-                    break;
-                case 'hard':
-                    path.setAttribute('href', currentLink + '/exercise/2');
-                    path.innerHTML = "Faire l'exercice avancé";
-                    lesson.innerHTML = <?= json_encode($lessons[2], JSON_HEX_TAG) ?>;
-                    break;
-                default:
-                    break;
-            }
-            document.getElementById(id).style.opacity = 0.3;       
-        }
+        showEasy.addEventListener("click", function() {
+            hideLessons();
+            document.querySelector("#easy").style.display = "";
+            showEasy.classList.add("active");
+        });
+
+        showMedium.addEventListener("click", function() {
+            hideLessons();
+            document.querySelector("#medium").style.display = "";
+            showMedium.classList.add("active");
+        });
+
+        showHard.addEventListener("click", function() {
+            hideLessons();
+            document.querySelector("#hard").style.display = "";
+            showHard.classList.add("active");
+        });
     </script>
 </body>
 </html>

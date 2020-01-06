@@ -1,34 +1,48 @@
 <!doctype html>
 <html>
 <head>
-    <title><?= $class->getName() ?></title>
+    <title>CPMF - <?= $class->getName() ?></title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/teacher-styles.css">
 </head>
 <body>
-    <p><?= $teacher->getFirstName() ?> <?= $teacher->getLastName() ?></p>
-    <h1><?= $class->getName() ?></h1>
-    
-    <h3>Moyenne de classe <?= $class->getAverage() ?>/20</h3>
-    
-    <table>
-        <tr>
-            <?php foreach ($examinations as $examination) { ?>
-            <th><?= $examination->getName() ?></th>
-            <?php } ?>
-        </tr>
-        <tr>
-            <?php foreach ($examinations as $examination) { ?>
-            <td><?= $examination->getPassword() ?></td>
-            <?php } ?>
-        </tr>
-    </table>
-    
-    <?php foreach ($students as $student) { ?>
-    <!-- Avatar de l'étudiant -->
-    <p><?= $student->getFirstName() ?> <?= $student->getFirstName() ?></p>
-    <p><?= $student->getEmail() ?></p>
-    <a href="#">Afficher menu contextuel (Déplacer / Supprimer)</a>
-    <?php } ?>
+    <header>
+        <div id="logo">
+        </div>
+        <div id="title">
+        </div>
+        <div id="profile">
+        </div>
+    </header>
+    <section id="content">
+        <div class="subsection-title">
+            <h2><?= $class->getName() ?></h2>
+        </div>
+        <div id="exams">
+            <?php foreach($examinations as $examination) { ?>
+            <div>
+                <h3><?= $examination->getName() ?></h3>
+                <p><?= $examination->getPassword() ?></p>
+            </div>
+            <?php } ?>
+        </div>
+        <?php foreach ($students as $student) { ?>
+        <a href="/profile/<?= $student->getIdLogin() ?>">
+            <div class="block waiting-student">
+                <div>
+                    <p><span class="student-name"><?= $student->getFirstName() ?> <?= $student->getLastName() ?></span></p>
+                    <p class="student-email"><?= $student->getEmail() ?></p>
+                </div>
+            </div>
+        </a>
+        <?php } ?>
+        <div id="options">
+            <a href="#"><div>Modifier la classe</div></a>
+            <a href="#"><div>Supprimer cette classe</div></a>
+        </div>
+    </section>
+    <footer>
+    </footer>
 </body>
 </html>

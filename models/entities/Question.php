@@ -11,14 +11,14 @@ abstract class Question extends Model
 		parent::__construct($data);
 	}
 
-	protected function callFunction(string $methodName, string $value): void
+	protected function callFunction(string $methodName, $value = null): void
     {
         if(method_exists($this, $methodName)) {
             $this->$methodName($value);
         }   
     }
 
-	public function getId(): int
+	public function getIdQuestion(): int
 	{
 		return $this->idQuestion;
 	}
@@ -28,7 +28,7 @@ abstract class Question extends Model
 		return $this->sentence;
 	}
 
-	public function setId(int $idQuestion): void
+	public function setIdQuestion(int $idQuestion): void
 	{
 		$this->idQuestion = $idQuestion;
 	}

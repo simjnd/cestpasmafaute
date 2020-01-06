@@ -31,10 +31,11 @@ class StudentController extends Controller
     public function seeClass(): void
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);
-        $class = GroupManager::getByID($student->getIdClass());
-        $classmates = GroupManager::getStudents($student->getIdClass());
+        $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
+        $student->fill();
+        $student->getGroup()->fill();
 
-        parent::view('student-see-class', ['student' => $student, 'class' => $class, 'classmates' => $classmates]);
+        parent::view('student-see-class', ['student' => $student, 'group' => $student->getGroup(), 'totalPoints' => $totalPoints]);
     }
 
     /**
@@ -43,9 +44,13 @@ class StudentController extends Controller
     public function seeProfile(): void
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);
+        $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
         $student->fill();
+        $frames = NULL;
+        $portraits = NULL;
+        $accessories = NULL;
 
-        parent::view('student-profile', ['student' => $student, 'class' => $student->getGroup(), 'frames' => $frames, 'protraits' => $portraits, 'accessories' => $accessories]);
+        parent::view('student-profile', ['student' => $student, 'class' => $student->getGroup(), 'frames' => $frames, 'portraits' => $portraits, 'accessories' => $accessories, 'totalPoints' => $totalPoints]);
     }
 
     /**
@@ -77,13 +82,87 @@ class StudentController extends Controller
         }
     }
 
+    public function postExercise(): void 
+    {
+        $infos = $_POST;
+
+        $recquiredValue = $infos['points'];
+
+        if ($infos['pointsLastTry'] > $recquiredValue) {
+            if ($infos['hasCompletedOnce'] !== 1) {
+                StudentExerciseManager::hasCompleted($infos['idLogin'], $infos['idExercise']);
+                StudentExerciseManager::updatePointsLastTry($infos['pointsLastTry'], $infos['idLogin'], $infos['idExercise']);
+                parent::redirect('/');
+            } else {
+                StudentExerciseManager::updatePointsLastTry($infos['pointsLastTry'], $infos['idLogin'], $infos['idExercise']);
+                parent::redirect('/'); 
+            }
+        } else {
+            parent::redirect('/');
+        }
+    }
+
     // DEBUG (TEMPORAIRE)
     public function getExerciseData(int $idExercise) {
         $exercise = StudentExerciseManager::getExerciseById($idExercise, true);
 
-        echo '<pre>';
-        print_r($exercise);
-        echo '</pre>';
+        header('Content-type: application/json; charset=utf-8');
+
+        $questions = ['questions' => []];
+
+        // echo '<pre>';
+        // print_r($exercise->getQuestions());
+        // echo '</pre>';
+
+        foreach($exercise->getQuestions() as $question) {
+            if ($question instanceof \CPMF\Models\Entities\ClickableQuestion) {
+                $questions['questions'][] = [
+                    'id' => $question->getIdQuestion(),
+                    'type' => 'ClickableQuestion',
+                    'sentence' => $question->getSentence()
+                ];
+            } elseif ($question instanceof \CPMF\Models\Entities\MultipleQuestion) {
+                $choices = [];
+                foreach($question->getChoices() as $choice) {
+                    $choices[] = $choice->getLabel();
+                }
+
+                $questions['questions'][] = [
+                    'id' => $question->getIdQuestion(),
+                    'type' => 'MultipleQuestion',
+                    'sentence' => $question->getSentence(),
+                    'choices' => $choices
+                ];
+            } elseif ($question instanceof \CPMF\Models\Entities\PuzzleQuestion) {
+                $roles = [];
+                $positions = [];
+
+                foreach($question->getRoles() as $role) {
+                    $roles[] = $role->getLabel();
+                    $positions[] = [$role->getStartMarker(), $role->getEndMarker()];
+                }
+
+                $questions['questions'][] = [
+                    'id' => $question->getIdQuestion(),
+                    'type' => 'PuzzleQuestion',
+                    'sentence' => $question->getSentence(),
+                    'positions' => $positions,
+                    'roles' => $roles
+                ];
+            } elseif ($question instanceof \CPMF\Models\Entities\SimpleQuestion) {
+                $wordToWrite = $question->getWordToWrite();
+                $sentence = $question->getSentence();
+
+                $sentence = str_replace('<cpmf>', '<cpmf> '.$wordToWrite, $sentence);
+                $questions['questions'][] = [
+                    'id' => $question->getIdQuestion(),
+                    'type' => 'SimpleQuestion', 
+                    'sentence' => $sentence
+                ];
+            }
+        }
+
+        echo json_encode($questions);
     }
 
     public function getTemplateExercises(): void
@@ -91,7 +170,6 @@ class StudentController extends Controller
         header('Content-type: application/json; charset=utf-8');
 
         $questions = [
-            'currentQuestion' => 0,
             'questions' => [
                 [
                     'id' => 4,
@@ -127,11 +205,48 @@ class StudentController extends Controller
                 [
                     'id' => 2,
                     'type' => 'SimpleQuestion',
-                    'sentence' => 'Ils {word} (manger) à Burger King',
+                    'sentence' => 'Ils <cpmf> (manger) à Burger King',
                 ]
             ]   
         ];
 
         echo json_encode($questions);
+    }
+
+    public function checkExercise(int $idExercise): void
+    {
+        $context = $_POST['context'] ?? NULL;
+        if($context) {
+            $points = 0.0;
+            if($context && is_array($context)) {
+                foreach($context as $answer) {
+                    $type = $answer['type'] ?? NULL;
+                    if($type) {
+                        switch($type) {
+                            case 'ClickableQuestion':
+                            $rate = StudentExerciseManager::getClickableQuestionSuccessRate($answer);
+                            break;
+                            case 'MultipleQuestion': 
+                            $rate = StudentExerciseManager::getMultipleQuestionSuccessRate($answer);
+                            break;
+                            case 'PuzzleQuestion':
+                            $rate = StudentExerciseManager::getPuzzleQuestionSuccessRate($answer);
+                            break;
+                            case 'SimpleQuestion':
+                            $rate = StudentExerciseManager::getSimpleQuestionSuccessRate($answer);
+                            break;
+                        }
+
+                        $toAdd = $rate * StudentExerciseManager::getQuestionPoints($idExercise, $answer['id'], $type);
+                        echo '<p>'.$type.': '.$toAdd.'</p>';
+                        $points += $toAdd;
+                    }
+                }
+            }
+
+            $totalPoints = StudentExerciseManager::getExerciseTotalPoints($idExercise);
+
+            echo '<p>Exercice réussi à '.($points * 100.0 / $totalPoints).' % ( +'.$points.' points / '.$totalPoints.')</p>';
+        }
     }
 }

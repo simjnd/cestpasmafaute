@@ -1,7 +1,8 @@
 <?php
 namespace CPMF\Models;
 
-use \CPMF\Models\Entities\Group;
+use CPMF\Models\Entities\Group;
+use CPMF\Models\Entities\Student;
 
 class GroupManager
 {
@@ -9,14 +10,15 @@ class GroupManager
     {
         $query = Manager::getDatabase()->prepare('SELECT * FROM Class WHERE idClass = :idClass');
         $query->execute(['idClass' => $idClass]);
-        $rawClass = $query->fetch();
-        return new Group($rawClass);
+        $rawGroup = $query->fetch();
+        
+        return new Group($rawGroup);
     }
 
     public static function getTeacherGroups(int $idTeacher): array 
     {
     	$groups = [];
-		
+
 		$query = Manager::getDatabase()->prepare('SELECT * from Class where idTeacher = :idTeacher');
 		$query->execute(['idTeacher' => $idTeacher]);
 
@@ -31,11 +33,11 @@ class GroupManager
 	{
 		$students = [];
 		
-		$query = Manager::getDatabase()->prepare('SELECT * from Student where idClass = :idClass');
+		$query = Manager::getDatabase()->prepare('SELECT idLogin from Student where idClass = :idClass');
 		$query->execute(['idClass' => $idClass]);
 
-		foreach($query->fetchAll() as $rawStudent) {
-			$students[] = new Student($rawStudent);
+		foreach($query->fetchAll() as $rawId) {
+			$students[] = StudentManager::getByID($rawId['idLogin']);
 		}
 
 		return $students;

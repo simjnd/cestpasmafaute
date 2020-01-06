@@ -2,6 +2,7 @@
 namespace CPMF\Models\Entities;
 
 use \CPMF\Models\StudentExerciseManager;
+use \CPMF\Models\DifficultyManager;
 
 class Exercise extends Model
 {
@@ -41,13 +42,13 @@ class Exercise extends Model
     	$this->idExercise = $idExercise;
     }
 
-    public function setDifficulty(?Difficulty $difficulty): void
+    public function setDifficulty(int $idDifficulty): void
     {
-    	$this->difficulty = $difficulty;
+    	$this->difficulty = DifficultyManager::getDifficultyById($idDifficulty);
     }
 
     public function setQuestions(array $questions): void 
     {
-    	$this->questions = $question;
+    	$this->questions = $questions;
     }
 }

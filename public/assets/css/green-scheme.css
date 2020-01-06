@@ -1,0 +1,17 @@
+:root {
+    --background-color: #5AAA67;
+
+    --step-difficulty-tab-bg-color: #257A40;
+    --step-difficulty-tab-text-color: rgba(255, 255, 255, .5);
+    --step-difficulty-tab-hover-bg-color: #1B522E;
+    --step-difficulty-tab-active-bg-color: white;
+    --step-difficulty-tab-active-text-color: #1B522E;
+
+    --step-lesson-content-bg-color: #257A40;
+    --step-lesson-content-text-color: white;
+
+    --step-start-bg-color: #257A40;
+    --step-start-text-color: white;
+    --step-start-hover-bg-color: #1B522E;
+    --step-start-hover-text-color: white;
+}

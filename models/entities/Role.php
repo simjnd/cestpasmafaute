@@ -20,9 +20,9 @@ class Role extends Model
         }   
     }
 
-	public function getId(): int
+	public function getIdRole(): int
 	{
-		return $this->id;
+		return $this->idRole;
 	}
 
 	public function getLabel(): string
@@ -40,7 +40,7 @@ class Role extends Model
 		return $this->endMarker;
 	}
 
-	public function setId(int $idRole): void
+	public function setIdRole(int $idRole): void
 	{
 		$this->idRole = $idRole;
 	}

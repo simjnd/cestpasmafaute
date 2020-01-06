@@ -4,7 +4,7 @@ namespace CPMF\Models\Entities;
 class SimpleQuestion extends Question
 {
 	private $correctAnswer;
-	private $word;
+	private $wordToWrite;
 
 	public function __construct(array $data)
 	{
@@ -23,9 +23,9 @@ class SimpleQuestion extends Question
 		return $this->correctAnswer;
 	}
 
-	public function getWord(): string
+	public function getWordToWrite(): string
 	{
-		return $this->word;
+		return $this->wordToWrite;
 	}
 
 	public function setCorrectAnswer(string $correctAnswer): void
@@ -33,8 +33,8 @@ class SimpleQuestion extends Question
 		$this->correctAnswer = $correctAnswer;
 	}
 
-	public function setWord(string $word): void
+	public function setWordToWrite(string $wordToWrite): void
 	{
-		$this->word = $word;
+		$this->wordToWrite = $wordToWrite;
 	}
 }

@@ -1,8 +1,11 @@
 <?php
 namespace CPMF\Models\Entities;
 
+use \CPMF\Models\GroupManager;
+
 class Group extends Model
 {
+	private $idClass;
 	private $name;
 	private $students;
 	private $course;
@@ -13,8 +16,13 @@ class Group extends Model
             $this->$methodName($value);
         }   
     }
+
+    public function getIdClass(): int
+    {
+    	return $this->idClass;
+    }
     
-    private function setName(string $name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -34,6 +42,11 @@ class Group extends Model
 		return $this->course;
 	}
 
+	public function setIdClass(int $idClass): void
+	{
+		$this->idClass = $idClass;
+	}
+
 	public function setStudents(array $students): void
 	{
 		$this->students = $students;
@@ -42,5 +55,10 @@ class Group extends Model
 	public function setCourse(Course $course): void
 	{
 		$this->course = $course;
+	}
+
+	public function fill(): void
+	{
+		$this->setStudents(GroupManager::getStudents($this->getIdClass()));
 	}
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
 	<title> Ma classe </title>	
@@ -7,12 +7,12 @@
 </head>
 <body>
 	<header>
-		<h1><?= $class->getName() ?></h1>
+		<h1><?= $group->getName() ?></h1>
         <img src="#profil">
-        <p><?= $student->getFirstName() ?> <?= $student->getClass() ?></p>
+        <p><?= $student->getFirstName() ?> (<?= $group->getName() ?>)</p>
     </header>
 	
-    <?php foreach ($classmates as $classmate) { ?>
+    <?php foreach ($group->getStudents() as $classmate) { ?>
     <!-- Classmate's icon -->
     <p><?= $classmate->getFirstName() ?> <?= $classmate->getLastName() ?></p>
     <?php } ?>

@@ -65,11 +65,13 @@ Router::get('/step/{idStep}/exercise/{idDifficulty}', 'Student@seeExercise', ['u
 // Vue temporaire en attendant de synchroniser les exos avec le backend
 Router::view('/exercises', 'student-exercises');
 Router::get('/exercises/{idExercise}', 'Student@getExerciseData', ['user_type' => 'S']);
+Router::post('/exercises/{idExercise}', 'Student@checkExercise', ['user_type' => 'S']);
 Router::get('/exercises/template', 'Student@getTemplateExercises');
 
 // TEACHER ROUTES
 Router::get('/', 'Teacher@seeHomePage', ['user_type' => 'T']);
 Router::get('/approval', 'Teacher@seeWaitingStudents', ['user_type' => 'T']);
+Router::get('/class/{idClass}', 'Teacher@seeClass', ['user_type' => 'T']);
 Router::get('/profile/{id}', 'Teacher@seeStudent', ['user_type' => 'T']);
 Router::get('/approval/accept/{idLogin}', 'Teacher@acceptWaitingStudent');
 Router::get('/approval/delete/{idLogin}', 'Teacher@deleteWaitingStudent');
