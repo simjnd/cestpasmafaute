@@ -12,7 +12,7 @@
         <div id="logo">
             <a href="/">
                 <picture>
-                    <source media="(max-width: 1024px)" srcset="assets/img/logo-horizontal-small.svg">
+                    <source media="(max-width: 1024px)" srcset="/assets/img/logo-horizontal-small.svg">
                     <img src="/assets/img/logo-horizontal.svg">
                 </picture>
             </a>

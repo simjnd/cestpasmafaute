@@ -18,7 +18,6 @@ class StudentController extends Controller
             $steps = StudentExerciseManager::getStepsByStudentID($_SESSION['idLogin']);
             $student = StudentManager::getByID($_SESSION['idLogin']);
             $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
-
             parent::view('student-home', ['steps' => $steps, 'student' => $student, 'totalPoints' => $totalPoints]);
         } else {
             parent::view('student-home-validation');    

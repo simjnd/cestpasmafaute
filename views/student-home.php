@@ -27,11 +27,11 @@
         </div>
     </header>
     <section id="content">
-        <?php $tilt = 'tilt-left'; ?>
+        <?php //$tilt = 'tilt-left'; ?>
         <div id="step-choice">
-            <?php foreach ($steps as $step) { ?>
-                <?php $tilt = ($tilt === 'tilt-left') ? 'tilt-right' : 'tilt-left'; ?>
-                <a href="step/<?= $step->getIdStep() ?>" class="step <?= $tilt ?>">
+            <?php foreach ($steps as $step) { ?>
+                <?php //$tilt = ($tilt === 'tilt-left') ? 'tilt-right' : 'tilt-left'; ?>
+                <a href="step/<?= $step->getIdStep() ?>" class="step <?= //$tilt ?>">
                     <img src="assets/img/step-<?= $step->getImage() ?>">
                 </a>
             <?php } ?>
