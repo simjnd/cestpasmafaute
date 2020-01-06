@@ -31,7 +31,7 @@
         <div id="step-choice">
             <?php foreach ($steps as $step) { ?>
                 <?php //$tilt = ($tilt === 'tilt-left') ? 'tilt-right' : 'tilt-left'; ?>
-                <a href="step/<?= $step->getIdStep() ?>" class="step <?= //$tilt ?>">
+                <a href="step/<?= $step->getIdStep() ?>" class="step">
                     <img src="assets/img/step-<?= $step->getImage() ?>">
                 </a>
             <?php } ?>
