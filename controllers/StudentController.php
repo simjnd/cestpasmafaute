@@ -246,6 +246,8 @@ class StudentController extends Controller
 
             $totalPoints = StudentExerciseManager::getExerciseTotalPoints($idExercise);
 
+            
+
             echo '<p>Exercice réussi à '.($points * 100.0 / $totalPoints).' % ( +'.$points.' points / '.$totalPoints.')</p>';
         }
     }
