@@ -107,7 +107,7 @@
                         <label for="password">Mot de passe</label>
                         <input type="password" name="password">
                         <label for="password_again">Confirmer le mot de passe</label>
-                        <input type="password" name="password_again">
+                        <input type="password" name="passwordConfirmation">
                     </form>
                 </div>
                 <input type="submit" value="S'inscrire" form="signup-fields" class="button">
@@ -127,7 +127,7 @@
                     </form>
                 </div>
                 <input type="submit" value="Se connecter" form="signin-fields" class="button">
-                <a href="/forgot-password" id="reset-password">Mot de passe oublié ?</a>
+                <a href="/forgot-password " id="reset-password">Mot de passe oublié ?</a>
             </div>
         </section>
         <footer>
