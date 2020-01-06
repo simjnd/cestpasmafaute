@@ -7,6 +7,8 @@ class Step extends Model
 {
 	private $idStep;
 	private $name;
+	private $color;
+	private $image;
 	private $lessonEasy;
 	private $lessonMedium;
 	private $lessonHard;
@@ -54,6 +56,16 @@ class Step extends Model
 		$this->exercises = $exercises;
 	}
 
+	public function setColor(string $color): void
+	{
+		$this->color = $color;
+	}
+
+	public function setImage(string $image): void
+	{
+		$this->image = $image;
+	}
+
 	public function getIdStep(): int
 	{
 		return $this->idStep;
@@ -62,6 +74,16 @@ class Step extends Model
 	public function getName(): string
 	{
 		return $this->name;
+	}
+
+	public function getColor(): string
+	{
+		return $this->color;
+	}
+
+	public function getImage(): string
+	{
+		return $this->image;
 	}
 
 	public function getLessons(): array

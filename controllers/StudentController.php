@@ -25,21 +25,23 @@ class StudentController extends Controller
     public function seeClass(): void
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);
+        $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
         $student->fill();
         $student->getGroup()->fill();
 
-        parent::view('student-see-class', ['student' => $student, 'group' => $student->getGroup()]);
+        parent::view('student-see-class', ['student' => $student, 'group' => $student->getGroup(), 'totalPoints' => $totalPoints]);
     }
 
     public function seeProfile(): void
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);
+        $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
         $student->fill();
         $frames = NULL;
         $portraits = NULL;
         $accessories = NULL;
 
-        parent::view('student-profile', ['student' => $student, 'class' => $student->getGroup(), 'frames' => $frames, 'portraits' => $portraits, 'accessories' => $accessories]);
+        parent::view('student-profile', ['student' => $student, 'class' => $student->getGroup(), 'frames' => $frames, 'portraits' => $portraits, 'accessories' => $accessories, 'totalPoints' => $totalPoints]);
     }
 
     public function seeStep(int $id): void
