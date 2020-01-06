@@ -65,6 +65,7 @@ class TeacherController extends Controller
         $globalAverage = StudentManager::getGlobalAverage($id);
         $group = GroupManager::getById($student->getIdClass());
         $difficulties = DifficultyManager::getDifficulties();
+        $steps = StepMana
 
 
         parent::view('teacher-see-student', ['student' => $student, 'teacher' => $teacher, 'group' => $group, 'totalPoints' => $totalPoints, 'globalAverage' => $globalAverage, 'difficulties' => $difficulties]);
