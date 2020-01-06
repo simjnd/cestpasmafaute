@@ -8,6 +8,9 @@ use \CPMF\Models\DecorationManager;
 
 class StudentController extends Controller
 {
+    /**
+    * Displays the student's home page with their personal information, their total number of points and the steps they have unlocked.
+    */
     public function seeHomePage(): void
     {
         $validated = $_SESSION['validated'] ?? NULL;
@@ -22,6 +25,9 @@ class StudentController extends Controller
         }
     }
 
+    /**
+    * Get the class of a student and display the students of this class
+    */
     public function seeClass(): void
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);
@@ -32,6 +38,9 @@ class StudentController extends Controller
         parent::view('student-see-class', ['student' => $student, 'group' => $student->getGroup(), 'totalPoints' => $totalPoints]);
     }
 
+    /**
+    * Displays a student profile
+    */
     public function seeProfile(): void
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);
@@ -44,6 +53,9 @@ class StudentController extends Controller
         parent::view('student-profile', ['student' => $student, 'class' => $student->getGroup(), 'frames' => $frames, 'portraits' => $portraits, 'accessories' => $accessories, 'totalPoints' => $totalPoints]);
     }
 
+    /**
+    * 
+    */
     public function seeStep(int $id): void
     {
         $student = StudentManager::getByID($_SESSION['idLogin']);
