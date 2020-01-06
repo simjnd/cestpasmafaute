@@ -1,4 +1,4 @@
-<?php $tilt; ?>
+<?php $tilt = NULL; ?>
 <!doctype html>
 <html>
 <head>
