@@ -228,7 +228,7 @@ class StudentExerciseManager
     public static function getMultipleQuestionSuccessRate(array $answerData): float
     {
         $choice = $answerData['choice'] ?? NULL;
-        $idQuestion = $answerData['id']; // ?? NULL;
+        $idQuestion = isset($answerData['id']) ? $answerData['id'] : NULL; // ?? NULL;
         if($choice) {
             $realQuestion = self::getMultipleQuestionById($idQuestion);
             // Checker si il y a bien une question à cet id
@@ -244,10 +244,22 @@ class StudentExerciseManager
         return 0.0;
     }
 
-    // TODO
     public static function getPuzzleQuestionSuccessRate(array $answerData): float
     {
-        return 0.0;
+        $roles = $answerData['roles'] ?? NULL;
+        $idQuestion = isset($answerData['id']) ? $answerData['id'] : NULL;
+        $rolesQuery = Manager::getDatabase()->prepare('SELECT idRole FROM PuzzleQuest_Role WHERE idPuzzleQuestion = :idPuzzleQuestion ORDER BY startMarker');
+        $rolesQuery->execute(['idPuzzleQuestion' => $idQuestion]);
+        $rolesCount = $rolesQuery->rowCount();
+
+        $validRoles = 0;
+
+        foreach($rolesQuery->fetchAll() as $index => $idRole) {
+            if($roles[intval($index)] = $idRole) $validRoles++;
+        }
+
+        $validRoles /= $rolesCount;
+        return $validRoles;
     }
 
     public static function getSimpleQuestionSuccessRate(array $answerData): float
