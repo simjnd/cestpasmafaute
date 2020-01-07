@@ -43,45 +43,46 @@ $(function() {
 			initQuestion();
 			handleQuestion();	
 
-			$('.answer').click(function() {
-				if(questionsData.currentQuestion+1 < questions.length) {
-					questionsData.currentQuestion++;
-					$('#question').fadeOut(200, function() {
-						initQuestion();
-						handleQuestion();
-						$(this).fadeIn(200);
-					});
-				} else {
-					$('#question').fadeOut(200, function() {
-						$('.answer').hide();
-						$('#question').html('<h1>EXERCICE TERMINÉ</h1>');
-						$(this).fadeIn(200);
-
-						console.log(ctx);
-						// TODO: ENVOYER LES DONNEES AU SERVEUR
-						$.post('/exercises/0', { context: ctx }, (response) => {
-							$('#question').append(response);
-						});
-					});
-				}
-			});	
+			$('.answer#next-button').click(nextQuestion);	
 		});
 	});
+
+	function nextQuestion() {
+		if(questionsData.currentQuestion+1 < questionsData.questions.length) {
+			questionsData.currentQuestion++;
+			$('#question').fadeOut(200, function() {
+				initQuestion();
+				handleQuestion();
+				$(this).fadeIn(200);
+			});
+		} else {
+			$('#question').fadeOut(200, function() {
+				$('.answer#next-button').hide();
+				$('#question').html('<h1>EXERCICE TERMINÉ</h1>');
+				$(this).fadeIn(200);
+
+				console.log(ctx);
+				// TODO: ENVOYER LES DONNEES AU SERVEUR
+				$.post('/exercises/0', { context: ctx }, (response) => {
+					$('#question').append(response);
+				});
+			});
+		}
+	}
 
 	function handleMultipleQuestion() {
 		let currentQuestion = questionsData.currentQuestion;
 		let question = questionsData.questions[currentQuestion];
 
 		$('#question #question-content .sentence').text(question.sentence);
-		$('#question #question-content').append('<ul class="choices"></ul>');
 		question.choices.forEach((choice, index) => {
-			$('#question .choices').append(`<li data-id="${index}">${choice}</li>`);
+			$('#question').append(`<div class="answer" data-id="${index}"><p>${choice}</p></div>`);
 		});
 
-		$('#question .choices').on('click', 'li', function() {
+		$('#question').on('click', '.answer', function() {
 			let choice = $(this).text()
 
-			$('#question .choices li').removeClass('selected');
+			$('#question .answer').removeClass('selected');
 			$(this).addClass('selected');
 
 			ctx[currentQuestion] = {
@@ -89,14 +90,16 @@ $(function() {
 				type: question.type,
 				choice: choice
 			};
-		})
+
+			nextQuestion();
+		});
 	}
 
 	function handleSimpleQuestion() {
 		let currentQuestion = questionsData.currentQuestion;
 		let question = questionsData.questions[currentQuestion];
 
-		$('#question').append('<div class="answer"><p>Valider</p></div>');
+		$('#question').append('<div class="answer" id="next-question"><p>Valider</p></div>');
 
 		let formattedSentence = question.sentence.replace('<cpmf>', '<input type="text" class="word">');
 		$('#question .sentence').html(formattedSentence);
@@ -115,7 +118,7 @@ $(function() {
 		let question = questionsData.questions[currentQuestion];
 
 		$('#question').append('<div id="question-draggables"></div>');
-		$('#question').append('<div class="answer"><p>Valider</p></div>');
+		$('#question').append('<div class="answer" id="next-question"><p>Valider</p></div>');
 
 		let sentence = question.sentence;
 		let positions = question.positions;
@@ -186,7 +189,7 @@ $(function() {
 		let currentQuestion = questionsData.currentQuestion;
 		let question = questionsData.questions[currentQuestion];
 
-		$('#question').append('<div class="answer"><p>Valider</p></div>');
+		$('#question').append('<div class="answer" id="next-question"><p>Valider</p></div>');
 
 		let words = question.sentence.split(' ');
 		words.forEach((word) => {
