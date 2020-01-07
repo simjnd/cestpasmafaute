@@ -78,7 +78,7 @@ progress {
     margin-top: 4px;
 }
 
-progress[value]::-webkit-progress-bar, progress[value]::-webkit-progress-value {
+progress[value]::-webkit-progress-bar, progress[value]::-webkit-progress-value, progress[value]::-moz-progress-bar {
     border-radius: 32px;
 }
 
@@ -86,7 +86,7 @@ progress[value]::-webkit-progress-bar {
     background-color: rgba(255, 255, 255, .2);
 }
 
-progress[value]::-webkit-progress-value {
+progress[value]::-webkit-progress-value, progress[value]::-moz-progress-bar {
     background-color: rgba(255, 255, 255, .6);
 }
 
