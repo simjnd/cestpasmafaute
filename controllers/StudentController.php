@@ -242,8 +242,6 @@ class StudentController extends Controller
 
             // Ajout des informations dans la base de données
             StudentExerciseManager::completeExercise($_SESSION['idLogin'], $idExercise, $points);
-
-            parent::redirect('/');
         }
     }
 

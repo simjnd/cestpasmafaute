@@ -63,7 +63,9 @@ $(function() {
 					$(this).fadeIn(200);
 
 					console.log(ctx);
-					$.post('/exercises/0', { context: ctx });
+					$.post('/exercises/0', { context: ctx }, success: function(response) {
+						document.location = '/';
+					});
 				});
 			}
 		}
