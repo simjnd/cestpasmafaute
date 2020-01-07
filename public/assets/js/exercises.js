@@ -5,7 +5,7 @@ $(function() {
 
 	function initQuestion() {
 		$('#question').empty();
-		$('#questoin'à.append('<p>Explication sur comment répondre à ce type de question</p>');
+		$('#question').append('<p>Explication sur comment répondre à ce type de question</p>');
 			$('#question').append('<div id="question-content"></div>');
 			$('#question #question-content').append('<p class="sentence"></p>');
 
