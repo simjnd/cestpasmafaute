@@ -203,21 +203,19 @@ $(function() {
 		$('#question .sentence>span')
 		.css('cursor', 'pointer')
 		.on('click', (e) => {
-			if(typeof ctx[currentQuestion] === 'undefined') {
-				let $target = $(e.target);
-				
-				ctx[currentQuestion].clickedWord = $target.index();
+			let $target = $(e.target);
+			
+			ctx[currentQuestion].clickedWord = $target.index();
 
-				$target.css({
-					'border': '1px solid white',
-					'border-radius': '10px',
-					'padding': '5px'
-				});
+			$target.css({
+				'border': '1px solid white',
+				'border-radius': '10px',
+				'padding': '5px'
+			});
 
-				setTimeout(function() {
-					nextQuestion();
-				}, 500);
-			}
+			setTimeout(function() {
+				nextQuestion();
+			}, 500);
 		});
 	}
 });
