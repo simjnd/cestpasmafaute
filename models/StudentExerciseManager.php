@@ -337,10 +337,11 @@ class StudentExerciseManager
                 'pointsLastTry' => 0.0
             ]);
         } else {
-            $pointsLastTry = floatval($hasCompletedQuery->fetch()['pointsLastTry']);
+            $answerData = $hasCompletedQuery->fetch();
+            $pointsLastTry = floatval($answerData['pointsLastTry']);
             if($points > $pointsLastTry) {
                 $updatePointsQuery = Manager::getDatabase()->prepare('UPDATE Student_Exercise SET pointsLastTry = :points WHERE idLogin = :idLogin AND idExercise = :idExercise');
-                $updatePointsQuery->execute(['idLogin' => $idLogin, 'idExercise' => $idExercise]);
+                $updatePointsQuery->execute(['points' => $points, 'idLogin' => $idLogin, 'idExercise' => $idExercise]);
             }
         }
     }
