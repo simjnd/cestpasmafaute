@@ -18,9 +18,9 @@ class GeneralController extends Controller
 		$id = UserManager::checkLogin($_POST['email'], $_POST['password'], $idLogin, $type);
 		$verified = StudentManager::isVerified($idLogin);
 		if($id == -1) {
-			parent::view('general-signin', ['error' => 'Compte inexistant']);
+			parent::view('general-home', ['error' => 'Compte inexistant']);
 		} elseif($id == -2) {
-			parent::view('general-signin', ['error' => 'Email / Mot de passe incorrect']);
+			parent::view('general-home', ['error' => 'Email / Mot de passe incorrect']);
 		} else {
 			$_SESSION['idLogin'] = intval($idLogin);
 			$_SESSION['type'] = $type;

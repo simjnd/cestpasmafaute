@@ -11,8 +11,8 @@
         <div id="logo">
             <a href="/">
                 <picture>
-                    <source media="(max-width: 1024px)" srcset="assets/img/logo-horizontal-small.svg">
-                    <img src="assets/img/logo-horizontal.svg">
+                    <source media="(max-width: 1024px)" srcset="/assets/img/logo-horizontal-small-black.svg">
+                    <img src="/assets/img/logo-horizontal-black.svg">
                 </picture>
             </a>
         </div>

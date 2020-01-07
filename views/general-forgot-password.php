@@ -91,7 +91,7 @@
     <div id="container">
         <header>
             <div id="logo">
-                <img src="assets/img/logo-vertical-big.svg">
+                <img src="assets/img/logo-vertical-big-black.svg">
             </div>
         </header>
         <?php if (isset($error)) { ?>
