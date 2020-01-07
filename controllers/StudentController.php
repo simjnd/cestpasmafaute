@@ -243,7 +243,7 @@ class StudentController extends Controller
             // Ajout des informations dans la base de données
             StudentExerciseManager::completeExercise($_SESSION['idLogin'], $idExercise, $points);
 
-            echo '<p>Exercice réussi à '.($points * 100.0 / $totalPoints).' % ( +'.$points.' points / '.$totalPoints.')</p>';
+            parent::redirect('/');
         }
     }
 
