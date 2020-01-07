@@ -321,13 +321,15 @@ class StudentExerciseManager
 
     public static function completeExercise(int $idLogin, int $idExercise, int $points): void
     {
-        $hasCompletedQuery = Manager::getDatabase()->prepare('SELECT hasCompletedOnce, pointsLastTry as FROM Student_Exercise WHERE idLogin = :idLogin AND idExercise = :idExercise');
+        $hasCompletedQuery = Manager::getDatabase()->prepare('SELECT hasCompletedOnce, pointsLastTry FROM Student_Exercise WHERE idLogin = :idLogin AND idExercise = :idExercise');
         $hasCompletedQuery->execute(['idLogin' => $idLogin, 'idExercise' => $idExercise]);
+
+        $totalPoints = StudentExerciseManager::getExerciseTotalPoints($idExercise);
+        $successRate = $points / $totalPoints;
+        $hasCompletedOnce = $successRate >= 0.7 ? 1 : 0;
+
         if($hasCompletedQuery->rowCount() == 0) {
-            $totalPoints = StudentExerciseManager::getExerciseTotalPoints($idExercise);
-            $successRate = $points / $totalPoints;
             
-            $hasCompletedOnce = $successRate >= 0.7 ? 1 : 0;
             $completeQuery = Manager::getDatabase()->prepare('INSERT INTO Student_Exercise(idLogin, idExercise, points, hasCompletedOnce, pointsLastTry) VALUES(:idLogin, :idExercise, :points, :hasCompletedOnce, :pointsLastTry)');
             $completeQuery->execute([
                 'idLogin' => $idLogin,
@@ -338,10 +340,10 @@ class StudentExerciseManager
             ]);
         } else {
             $answerData = $hasCompletedQuery->fetch();
-            $pointsLastTry = floatval($answerData['pointsLastTry']);
+            $pointsLastTry = $answerData['pointsLastTry'];
             if($points > $pointsLastTry) {
-                $updatePointsQuery = Manager::getDatabase()->prepare('UPDATE Student_Exercise SET pointsLastTry = :points WHERE idLogin = :idLogin AND idExercise = :idExercise');
-                $updatePointsQuery->execute(['points' => $points, 'idLogin' => $idLogin, 'idExercise' => $idExercise]);
+                $updatePointsQuery = Manager::getDatabase()->prepare('UPDATE Student_Exercise SET pointsLastTry = :points, hasCompletedOnce = :hasCompletedOnce WHERE idLogin = :idLogin AND idExercise = :idExercise');
+                $updatePointsQuery->execute(['points' => $points, 'hasCompletedOnce' => $hasCompletedOnce, 'idLogin' => $idLogin, 'idExercise' => $idExercise]);
             }
         }
     }
