@@ -4,8 +4,8 @@ $(function() {
 	let questionsData = [];
 
 	function initQuestion() {
-		$('#question #question-content .sentence').empty();
-		$('#question #question-content').empty();
+		$('#question').empty();
+		$('#question').append('<div id="question-content"></div>');
 		$('#question #question-content').append('<p class="sentence"></p>');
 
 		let currentQuestion = questionsData.currentQuestion;
@@ -72,7 +72,7 @@ $(function() {
 		let currentQuestion = questionsData.currentQuestion;
 		let question = questionsData.questions[currentQuestion];
 
-		$('#question .sentence').text(question.sentence);
+		$('#question #question-content .sentence').text(question.sentence);
 		$('#question #question-content').append('<ul class="choices"></ul>');
 		question.choices.forEach((choice, index) => {
 			$('#question .choices').append(`<li data-id="${index}">${choice}</li>`);
@@ -96,6 +96,8 @@ $(function() {
 		let currentQuestion = questionsData.currentQuestion;
 		let question = questionsData.questions[currentQuestion];
 
+		$('#question').append('<div class="answer"><p>Valider</p></div>');
+
 		let formattedSentence = question.sentence.replace('<cpmf>', '<input type="text" class="word">');
 		$('#question .sentence').html(formattedSentence);
 
@@ -112,35 +114,35 @@ $(function() {
 		let currentQuestion = questionsData.currentQuestion;
 		let question = questionsData.questions[currentQuestion];
 
-		$('#question #question-content').append('<div class="dropzone"></div>');
-		$('#question #question-content').append('<div class="dragzone"></div>');
+		$('#question').append('<div id="question-draggables"></div>');
+		$('#question').append('<div class="answer"><p>Valider</p></div>');
 
 		let sentence = question.sentence;
 		let positions = question.positions;
 		let roles = question.roles;
 
 		for(let i = 0; i < positions.length; i++) {
-			$('#question .sentence').append(`<span class="sentence-part">${sentence.substring(positions[i][0], positions[i][1])}</span>`);
-			$('.dropzone').append('<div class="box red droppable"></div>');
+			$('#question #question-content .sentence').append(`<span class="sentence-part">${sentence.substring(positions[i][0], positions[i][1])}</span>`);
+			$('#question #question-content').append('<div class="placeholder droppable"></div>');
 		}
 
 		// hacky, à améliorer
 		setTimeout(function() {
 			for(let i = 0; i < positions.length; i++) {
-				$('.dropzone .droppable').each(function(index) {
+				$('#question #question-content .droppable').each(function(index) {
 					let width = $($('.sentence-part').get(i)).width();
-					$($('.dropzone .droppable').get(i)).css('min-width', ($($('.sentence-part').get(i)).outerWidth()) + 'px');
+					$($('#question #question-content .droppable').get(i)).css('min-width', ($($('.sentence-part').get(i)).outerWidth()) + 'px');
 				});
 			}
 		}, 0);
 
 		question.roles.forEach((role, index) => {
-			$('#question .dragzone').append(`<div class="box red draggable" draggable="true" data-id="${index}">${role}</div>`);
+			$('#question #question-draggables').append(`<div class="draggable" draggable="true" data-id="${index}"><p>${role}</p></div>`);
 		});
 
 		let $draggable = $('.draggable');
 		let $droppable = $('.droppable');
-		let $dragzone = $($('.dragzone')[0]);
+		let $dragzone = $($('#question-draggables')[0]);
 
 		$draggable.on('dragstart', function(e) {
 			dragElement = $(this);
@@ -153,7 +155,7 @@ $(function() {
 		}).on('drop', function(e) {
 			dragElement.css('margin', '50px');
 			dragElement.detach();
-			$('.dragzone').append(dragElement);
+			$('#question-draggables').append(dragElement);
 		});
 
 		$droppable.on('dragover', function(e) {
@@ -175,7 +177,7 @@ $(function() {
 			ctx[currentQuestion].roles[$(this).index()] = $(dragElement).attr("data-id");
 
 			dragElement.css('margin', '0');
-			$('.dragzone').remove(dragElement);
+			$('#question-draggables').remove(dragElement);
 			$(e.target).append(dragElement);
 		});
 	}
@@ -183,6 +185,8 @@ $(function() {
 	function handleClickableQuestion() {
 		let currentQuestion = questionsData.currentQuestion;
 		let question = questionsData.questions[currentQuestion];
+
+		$('#question').append('<div class="answer"><p>Valider</p></div>');
 
 		let words = question.sentence.split(' ');
 		words.forEach((word) => {
