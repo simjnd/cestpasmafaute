@@ -29,8 +29,8 @@
 	<section id="content">
         <p id="step-name">Nom de l'étape</p>
         <h1 id="question-number">Question <span class="id-question"></span></h1>
-        <p>Explication sur comment répondre à ce type de question</p>
         <div id="question">
+        	<p>Explication sur comment répondre à ce type de question</p>
             <div id="question-content">
             	<p class="sentence"></p>
             </div>
