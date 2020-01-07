@@ -34,11 +34,9 @@
             <div id="question-content">
             	<p class="sentence"></p>
             </div>
-            <a href="#">
             <div class="answer">
                 <p>Valider</p>
             </div>
-        </a>
         </div>
     </section>
 	<footer>
