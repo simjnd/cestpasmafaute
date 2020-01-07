@@ -199,7 +199,7 @@ $(function() {
 		$('#question .sentence>span')
 		.css('cursor', 'pointer')
 		.on('click', (e) => {
-			if(ctx[currentQuestion] === 'undefined') {
+			if(typeof ctx[currentQuestion] === 'undefined') {
 				let $target = $(e.target);
 				
 				ctx[currentQuestion] = {
@@ -207,7 +207,7 @@ $(function() {
 					type: question.type,
 					clickedWord: $target.index()
 				}
-				
+
 				$target.css({
 					'border': '1px solid white',
 					'border-radius': '10px',
