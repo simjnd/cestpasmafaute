@@ -43,7 +43,7 @@ $(function() {
 			initQuestion();
 			handleQuestion();	
 
-			$('.answer#next-button').click(nextQuestion);	
+			$('.answer#next-question').click(nextQuestion);	
 		});
 	});
 
@@ -57,7 +57,7 @@ $(function() {
 			});
 		} else {
 			$('#question').fadeOut(200, function() {
-				$('.answer#next-button').hide();
+				$('.answer#next-question').hide();
 				$('#question').html('<h1>EXERCICE TERMINÉ</h1>');
 				$(this).fadeIn(200);
 
