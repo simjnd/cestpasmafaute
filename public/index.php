@@ -63,7 +63,7 @@ Router::get('/step/{id}', 'Student@seeStep', ['user_type' => 'S']);
 Router::get('/step/{idStep}/exercise/{idDifficulty}', 'Student@seeExercise', ['user_type' => 'S']);
 
 // Vue temporaire en attendant de synchroniser les exos avec le backend
-Router::view('/exercises', 'student-exercises');
+Router::get('/exercises', 'Student@showTemporaryExercise');
 Router::get('/exercises/{idExercise}', 'Student@getExerciseData', ['user_type' => 'S']);
 Router::post('/exercises/{idExercise}', 'Student@checkExercise', ['user_type' => 'S']);
 Router::get('/exercises/template', 'Student@getTemplateExercises');

@@ -63,11 +63,8 @@ $(function() {
 					$(this).fadeIn(200);
 
 					console.log(ctx);
-				// TODO: ENVOYER LES DONNEES AU SERVEUR
-				$.post('/exercises/0', { context: ctx }, (response) => {
-					$('#question').append(response);
+					$.post('/exercises/0', { context: ctx });
 				});
-			});
 			}
 		}
 

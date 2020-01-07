@@ -17,8 +17,8 @@
             </a>
         </div>
         <div id="title">
-            <p><span>300</span> points</p>
-            <progress value="50" max="100"></progress>
+            <p><span><?= $totalPoints ?></span> points</p>
+            <progress value="<?= $totalPoints % 100 ?>" max="100"></progress>
         </div>
         <div id="profile">
             <a href="#">

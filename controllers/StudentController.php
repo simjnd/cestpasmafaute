@@ -246,4 +246,11 @@ class StudentController extends Controller
             echo '<p>Exercice réussi à '.($points * 100.0 / $totalPoints).' % ( +'.$points.' points / '.$totalPoints.')</p>';
         }
     }
+
+    public function showTemporaryExercise(): void
+    {
+        $totalPoints = StudentManager::getTotalPoints($_SESSION['idLogin']);
+
+        parent::view('student-exercises', ['totalPoints' => $totalPoints]);
+    }
 }
