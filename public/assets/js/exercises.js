@@ -4,8 +4,9 @@ $(function() {
 	let questionsData = [];
 
 	function initQuestion() {
-		$('#question .question-content').empty();
-		$('#question .question-content').append('<p class="sentence"></p>');
+		$('#question #question-content .sentence').empty();
+		$('#question #question-content').empty();
+		$('#question #question-content').append('<p class="sentence"></p>');
 
 		let currentQuestion = questionsData.currentQuestion;
 		let questions = questionsData.questions;
@@ -72,7 +73,7 @@ $(function() {
 		let question = questionsData.questions[currentQuestion];
 
 		$('#question .sentence').text(question.sentence);
-		$('#question .question-content').append('<ul class="choices"></ul>');
+		$('#question #question-content').append('<ul class="choices"></ul>');
 		question.choices.forEach((choice, index) => {
 			$('#question .choices').append(`<li data-id="${index}">${choice}</li>`);
 		});
@@ -111,8 +112,8 @@ $(function() {
 		let currentQuestion = questionsData.currentQuestion;
 		let question = questionsData.questions[currentQuestion];
 
-		$('#question .question-content').append('<div class="dropzone"></div>');
-		$('#question .question-content').append('<div class="dragzone"></div>');
+		$('#question #question-content').append('<div class="dropzone"></div>');
+		$('#question #question-content').append('<div class="dragzone"></div>');
 
 		let sentence = question.sentence;
 		let positions = question.positions;
