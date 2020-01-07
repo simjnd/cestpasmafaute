@@ -33,12 +33,12 @@
         <div id="question">
    			<p class="sentence"></p>
             <div id="question-content"></div>
-        </div>
-        <a href="#">
+            <a href="#">
             <div class="answer">
                 <p>Valider</p>
             </div>
         </a>
+        </div>
     </section>
 	<footer>
 	</footer>
