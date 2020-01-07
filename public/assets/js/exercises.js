@@ -5,7 +5,7 @@ $(function() {
 
 	function initQuestion() {
 		$('.question .sentence').empty();
-		$('.question .content').empty();
+		$('.question .question-content').empty();
 
 		let currentQuestion = questionsData.currentQuestion;
 		let questions = questionsData.questions;
@@ -42,7 +42,7 @@ $(function() {
 			initQuestion();
 			handleQuestion();	
 
-			$('.next-button').click(function() {
+			$('.answer').click(function() {
 				if(questionsData.currentQuestion+1 < questions.length) {
 					questionsData.currentQuestion++;
 					$('.question').fadeOut(200, function() {
@@ -52,7 +52,7 @@ $(function() {
 					});
 				} else {
 					$('.question').fadeOut(200, function() {
-						$('.next-button').hide();
+						$('.answer').hide();
 						$('.question').html('<h1>EXERCICE TERMINÉ</h1>');
 						$(this).fadeIn(200);
 
@@ -72,7 +72,7 @@ $(function() {
 		let question = questionsData.questions[currentQuestion];
 
 		$('.question .sentence').text(question.sentence);
-		$('.question .content').append('<ul class="choices"></ul>');
+		$('.question .question-content').append('<ul class="choices"></ul>');
 		question.choices.forEach((choice, index) => {
 			$('.question .choices').append(`<li data-id="${index}">${choice}</li>`);
 		});
@@ -111,8 +111,8 @@ $(function() {
 		let currentQuestion = questionsData.currentQuestion;
 		let question = questionsData.questions[currentQuestion];
 
-		$('.question .content').append('<div class="dropzone"></div>');
-		$('.question .content').append('<div class="dragzone"></div>');
+		$('.question .question-content').append('<div class="dropzone"></div>');
+		$('.question .question-content').append('<div class="dragzone"></div>');
 
 		let sentence = question.sentence;
 		let positions = question.positions;
