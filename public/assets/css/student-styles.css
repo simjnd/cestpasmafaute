@@ -312,11 +312,16 @@ footer {
         margin-top: 32px;
     }
 
+    #question input[type=text] {
+        color: black;
+    }
+
     .answer {
         min-width: 200px;
         margin: 8px;
         padding: 12px 24px 12px 24px;
         border-radius: 32px;
+        cursor: pointer;
         background-color: var(--step-start-bg-color);
         color: var(--step-start-text-color);
     }
