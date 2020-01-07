@@ -194,7 +194,11 @@ $(function() {
 			$('#question .sentence').append(`<span>${word}</span> `);
 		});
 
-		ctx[currentQuestion].clickedWord = -1;
+		ctx[currentQuestion] = {
+			id: question.id,
+			type: question.type,
+			clickedWord: -1
+		}
 
 		$('#question .sentence>span')
 		.css('cursor', 'pointer')
@@ -202,11 +206,7 @@ $(function() {
 			if(typeof ctx[currentQuestion] === 'undefined') {
 				let $target = $(e.target);
 				
-				ctx[currentQuestion] = {
-					id: question.id,
-					type: question.type,
-					clickedWord: $target.index()
-				}
+				ctx[currentQuestion].clickedWord = $target.index();
 
 				$target.css({
 					'border': '1px solid white',
