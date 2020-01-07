@@ -41,9 +41,7 @@ $(function() {
 			let questions = questionsData.questions;
 
 			initQuestion();
-			handleQuestion();	
-
-			$('.answer#next-question').click(nextQuestion);	
+			handleQuestion();
 		});
 	});
 
@@ -53,6 +51,7 @@ $(function() {
 			$('#question').fadeOut(200, function() {
 				initQuestion();
 				handleQuestion();
+				$('.answer#next-question').click(nextQuestion);
 				$(this).fadeIn(200);
 			});
 		} else {
