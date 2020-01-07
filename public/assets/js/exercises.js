@@ -4,9 +4,9 @@ $(function() {
 	let questionsData = [];
 
 	function initQuestion() {
-		$('#question .sentence').empty();
 		$('#question .question-content').empty();
-
+		$('#question .question-content').append('<p class="sentence"></p>');
+		
 		let currentQuestion = questionsData.currentQuestion;
 		let questions = questionsData.questions;
 

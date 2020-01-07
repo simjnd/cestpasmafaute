@@ -31,8 +31,9 @@
         <h1 id="question-number">Question <span class="id-question"></span></h1>
         <p>Explication sur comment répondre à ce type de question</p>
         <div id="question">
-   			<p class="sentence"></p>
-            <div id="question-content"></div>
+            <div id="question-content">
+            	<p class="sentence"></p>
+            </div>
             <a href="#">
             <div class="answer">
                 <p>Valider</p>
