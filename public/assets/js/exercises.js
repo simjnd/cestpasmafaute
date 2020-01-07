@@ -42,6 +42,7 @@ $(function() {
 
 			initQuestion();
 			handleQuestion();
+			$('.answer#next-question').click(nextQuestion);
 		});
 	});
 
