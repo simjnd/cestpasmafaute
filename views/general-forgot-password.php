@@ -107,7 +107,7 @@
                 </form>
             </div>
             <input type="submit" value="M'envoyer un e-mail" form="reset-password-fields" class="button"><br>
-            <a href="#" class="cancel">Annuler</a>
+            <a href="/" class="cancel">Annuler</a>
         </section>
         <footer>
         </footer>
